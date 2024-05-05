@@ -268,3 +268,32 @@ a:hover {
 		font-size: 75%;
 	}
 }
+.bb-item .content {
+    display: flex;
+    flex-wrap: wrap; /* Ensures content wraps on smaller screens */
+    align-items: center; /* Vertical alignment */
+    justify-content: space-between; /* Spreads content evenly */
+}
+
+.bb-item .content .image-container,
+.bb-item .content .text-container {
+    flex-basis: 50%; /* Takes half the space in the flex container */
+    flex-grow: 1; /* Allows growing to take necessary space */
+}
+
+.bb-item .content img {
+    width: 100%; /* Full width of its container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Responsive settings for mobile */
+@media (max-width: 768px) {
+    .bb-item .content {
+        flex-direction: column; /* Stacks children vertically */
+    }
+
+    .bb-item .content .image-container,
+    .bb-item .content .text-container {
+        flex-basis: 100%; /* Each child takes full width */
+    }
+}
