@@ -255,45 +255,32 @@ a:hover {
 	}
 }
 
-/* Desktop styles for .jspContainer and .jspPane, already correctly adjusting layout */
-.jspContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
+/* Add Flexbox layout for bb-item */
+#bb-bookblock .bb-item .content {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
 }
 
-.jspPane {
-    display: flex;
-    flex: 1;
+#bb-bookblock .bb-item .content .image-container,
+#bb-bookblock .bb-item .content .text-container {
+    flex: 1 1 50% !important; /* flex-grow | flex-shrink | flex-basis */
 }
 
-.bb-item .image-container,
-.bb-item .text-container {
-    flex: 1;
-    width: 50%;
-    box-sizing: border-box;
+#bb-bookblock .bb-item .content img {
+    width: 100% !important;
+    height: auto !important;
 }
 
-.bb-item .image-container img {
-    width: 100%; /* Full width of its container */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 100%; /* Prevents the image from scaling beyond its natural size */
-    transition: transform 0.3s ease; /* Smooth transition for transforms if needed */
-}
-
-
-/* Adjustments for mobile views to stack image and text vertically */
 @media (max-width: 768px) {
-    .jspContainer {
-        flex-direction: column; /* Stack children vertically */
+    #bb-bookblock .bb-item .content {
+        flex-direction: column !important;
     }
 
-    .bb-item .image-container,
-    .bb-item .text-container {
-        width: 100%; /* Each child takes full width of their container on smaller screens */
-        flex: none; /* Override the flex setting to not force equal heights */
+    #bb-bookblock .bb-item .content .image-container,
+    #bb-bookblock .bb-item .content .text-container {
+        flex-basis: 100% !important;
     }
 }
