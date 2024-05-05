@@ -164,42 +164,28 @@
 		<script src="js/page.js"></script>
 		<script>
 			function updateStyles() {
-				const coverImage = document.querySelector('#item0 .cover-image');
-				if (coverImage) {
-					// On desktop
-					if (window.innerWidth > 768) {
-						coverImage.style.height = (window.innerHeight * 0.80) + 'px';
-						coverImage.style.width = '100%'; // Ensure it covers the width
-						coverImage.style.objectFit = 'contain';
-						coverImage.style.objectPosition = 'top center'; // Focuses on the top part of the image
-					} else { // On mobile
-						// Set height to ensure the image covers the area it's supposed to
-						coverImage.style.width = '100%'; // Ensure it covers the width
-						coverImage.style.height = 'auto';  // Set height auto to maintain aspect ratio
-						coverImage.style.objectFit = 'cover';
-						coverImage.style.objectPosition = 'top center'; // Keep focus on the top
-					}
-				}
+				// Handling for the cover page image and other items' images
+				document.querySelectorAll('.bb-item img').forEach(img => {
+					const isCover = img.closest('.bb-item').id === 'item0';
+					const factor = isCover ? 0.80 : 0.75; // Cover image uses more of the viewport
 		
-				// Handling for other items' images
-				document.querySelectorAll('.bb-item:not(#item0) img').forEach(img => {
-					if (window.innerWidth > 768) {
-						img.style.width = '100%';
-						img.style.height = (window.innerHeight * 0.75) + 'px';
-						img.style.objectFit = 'contain';
-						img.style.objectPosition = 'center';
-					} else {
-						img.style.width = '';
-						img.style.height = '';
-						img.style.objectFit = '';
-						img.style.objectPosition = '';
+					if (window.innerWidth > 768) { // Desktop settings
+						img.style.width = '100%'; // Fill the width of its container
+						img.style.height = (window.innerHeight * factor) + 'px'; // Adjust height based on viewport
+						img.style.objectFit = 'contain'; // Maintain aspect ratio without cropping
+						img.style.objectPosition = isCover ? 'top center' : 'center'; // Focus on top for cover
+					} else { // Mobile settings
+						img.style.width = '100%'; // Fill the width
+						img.style.height = 'auto'; // Height auto for natural aspect ratio
+						img.style.objectFit = 'cover'; // Cover to ensure the image fills the area
+						img.style.objectPosition = 'top center'; // Keep focus on the top part
 					}
 				});
 			}
 		
 			window.addEventListener('DOMContentLoaded', updateStyles);
 			window.addEventListener('resize', updateStyles);
-		</script>				
+		</script>					
 		<script>
 			$(function() {
 
