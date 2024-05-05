@@ -250,6 +250,67 @@ a:hover {
 	text-align: justify;
 }
 
+/* Base styles for the book items */
+.bb-item {
+    display: flex;
+    flex-direction: column; /* Stacks elements vertically on mobile */
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.cover-image-container {
+    width: 100%; /* Full width on mobile */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cover-image-container img {
+    width: 100%; /* Ensures the image covers the container on mobile */
+    height: auto;
+    object-fit: cover; /* Covers the height of the container, maintain aspect ratio */
+}
+
+.cover-text {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box; /* Includes padding within the width calculation */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Media query for desktop views */
+@media (min-width: 768px) {
+    .bb-item {
+        flex-direction: row; /* Side by side layout for desktop */
+        justify-content: space-between; /* Distributes space between image and text */
+    }
+
+    .cover-image-container, .cover-text {
+        width: 50%; /* Each takes half the screen on desktop */
+        height: 100vh; /* Full height of the viewport */
+        justify-content: flex-start; /* Aligns content to the start of the flex container */
+    }
+
+    .cover-image-container img {
+        width: auto; /* Width is auto to maintain natural aspect ratio */
+        height: 100%; /* Full height to fill the container */
+        object-fit: contain; /* Ensures the image is fully visible without cropping */
+    }
+
+    .cover-text {
+        align-items: center; /* Vertically centers the text in the container */
+        justify-content: center; /* Horizontally centers the text */
+        text-align: left; /* Aligns the text to the left */
+        padding: 0 20px; /* Adds padding to the left and right */
+    }
+}
+
 
 @media screen and (max-width: 800px){
 	.no-js .menu-panel {
