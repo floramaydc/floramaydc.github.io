@@ -162,30 +162,7 @@
 		<script src="js/jquerypp.custom.js"></script>
 		<script src="js/jquery.bookblock.js"></script>
 		<script src="js/page.js"></script>
-		<script>
-			function updateStyles() {
-				// Handling for the cover page image and other items' images
-				document.querySelectorAll('.bb-item img').forEach(img => {
-					const isCover = img.closest('.bb-item').id === 'item0';
-					const factor = isCover ? 0.80 : 0.75; // Cover image uses more of the viewport
-		
-					if (window.innerWidth > 768) { // Desktop settings
-						img.style.width = '100%'; // Fill the width of its container
-						img.style.height = (window.innerHeight * factor) + 'px'; // Adjust height based on viewport
-						img.style.objectFit = 'contain'; // Maintain aspect ratio without cropping
-						img.style.objectPosition = isCover ? 'top center' : 'center'; // Focus on top for cover
-					} else { // Mobile settings
-						img.style.width = '100%'; // Fill the width
-						img.style.height = 'auto'; // Height auto for natural aspect ratio
-						img.style.objectFit = 'cover'; // Cover to ensure the image fills the area
-						img.style.objectPosition = 'top center'; // Keep focus on the top part
-					}
-				});
-			}
-		
-			window.addEventListener('DOMContentLoaded', updateStyles);
-			window.addEventListener('resize', updateStyles);
-		</script>					
+		<script src="js/image-and-text-orientation.js"></script>				
 		<script>
 			$(function() {
 
