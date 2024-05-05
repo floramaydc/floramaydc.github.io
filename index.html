@@ -166,40 +166,28 @@
 			function updateStyles() {
 				const coverImage = document.querySelector('#item0 .cover-image');
 				if (coverImage) {
-					// On desktop
-					if (window.innerWidth > 768) {
-						coverImage.style.height = '100vh';
-						coverImage.style.width = '100%'; // Ensure it covers the width
-						coverImage.style.objectFit = 'cover';
-						coverImage.style.objectPosition = 'top center'; // Focuses on the top part of the image
-					} else { // On mobile
-						// Set height to ensure the image covers the area it's supposed to
-						coverImage.style.width = '100%'; // Ensure it covers the width
-						coverImage.style.height = 'auto';  // Set height auto to maintain aspect ratio
-						coverImage.style.objectFit = 'cover';
-						coverImage.style.objectPosition = 'top center'; // Keep focus on the top
-					}
+					coverImage.style.width = '100%'; // Cover the width
+					coverImage.style.height = '100vh'; // Cover the viewport height on desktop
+					coverImage.style.objectFit = 'contain'; // Ensure the image fits without stretching
+					coverImage.style.objectPosition = 'center'; // Center the image
 				}
 		
 				// Handling for other items' images
 				document.querySelectorAll('.bb-item:not(#item0) img').forEach(img => {
+					img.style.width = '100%'; // Width is always 100% of the container
 					if (window.innerWidth > 768) {
-						img.style.width = '100%';
-						img.style.height = (window.innerHeight * 0.75) + 'px';
-						img.style.objectFit = 'cover';
-						img.style.objectPosition = 'center';
+						img.style.height = (window.innerHeight * 0.75) + 'px'; // 75% of the viewport height
 					} else {
-						img.style.width = '';
-						img.style.height = '';
-						img.style.objectFit = '';
-						img.style.objectPosition = '';
+						img.style.height = 'auto'; // On mobile, let height be auto to maintain aspect ratio
 					}
+					img.style.objectFit = 'contain'; // Image fits in the container without being cropped or stretched
+					img.style.objectPosition = 'center'; // Center the image within the container
 				});
 			}
 		
 			window.addEventListener('DOMContentLoaded', updateStyles);
 			window.addEventListener('resize', updateStyles);
-		</script>				
+		</script>		
 		<script>
 			$(function() {
 
