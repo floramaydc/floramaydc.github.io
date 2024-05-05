@@ -99,7 +99,7 @@ a:hover {
 
 .menu-toc li a:hover,
 .menu-toc li.menu-toc-current a{
-	background: #fceda1;
+	background: #565656;
 }
 
 .menu-panel div {
@@ -113,7 +113,7 @@ a:hover {
 	padding: 5px 20px;
 	display: block;
 	border: none;
-	color: #FFDF00;
+	color: #565656;
 	letter-spacing: 1px;
 	font-weight: 800;
 	text-shadow: 0 1px rgba(255,255,255,0.2);
@@ -139,7 +139,7 @@ a:hover {
 	height: 32px;
 	top: 0;
 	left: 0;
-	background: #FFDF00;
+	background: #565656;
 	border-radius: 50%;
 	color: #fff;
 	line-height: 30px;
