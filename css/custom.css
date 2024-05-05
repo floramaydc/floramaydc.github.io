@@ -88,13 +88,13 @@ a:hover {
 
 .menu-toc li a {
 	display: block;
-	color: #565656;
+	color: #ffdf00;
 	font-size: 1.1em;
 	line-height: 3.5;
 	padding: 0 20px;
 	cursor: pointer;
-	background: #ffdf00;
-	border-bottom: 1px solid #c9bd80;
+	background: #565656;
+	border-bottom: .5px solid #cfcfcf;
 }
 
 .menu-toc li a:hover,
