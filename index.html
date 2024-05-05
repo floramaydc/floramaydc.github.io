@@ -161,7 +161,25 @@
 		<script src="js/jquery.jscrollpane.min.js"></script>
 		<script src="js/jquerypp.custom.js"></script>
 		<script src="js/jquery.bookblock.js"></script>
-		<script src="js/page.js"></script>
+		<script src="js/page.js"></script>    
+		<script>
+			function styleCoverPage() {
+				const coverPage = document.getElementById('item0');
+				if (coverPage) {
+					coverPage.style.height = "100vh"; // Set height to full viewport height
+					coverPage.style.display = "flex";
+					coverPage.style.justifyContent = "center"; // Center content horizontally
+					coverPage.style.alignItems = "center"; // Center content vertically
+					coverPage.style.overflow = "hidden"; // Prevent scrolling
+				}
+			}
+	
+			window.addEventListener('DOMContentLoaded', styleCoverPage);
+			window.addEventListener('resize', styleCoverPage); // Adjust styles on window resize
+		</script>
+	</body>
+	</html>
+	
 		<script>
 			function updateImageStyles() {
 				const images = document.querySelectorAll('.bb-item img');
