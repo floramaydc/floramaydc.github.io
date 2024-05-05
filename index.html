@@ -48,11 +48,12 @@
 			<div class="bb-custom-wrapper">
 				<div id="bb-bookblock" class="bb-bookblock">
 					<div class="bb-item" id="item0">
-						<div class="content">
-							<img src="images/Cover.webp" alt="Cover of No Dream Is Too Big" style="width: auto; height: 100%;">
-							<!-- Any additional content can go here, like a title or text overlay -->
-						</div>
-					</div>					
+					<div class="content">
+						<img src="images/Cover.webp" alt="Cover of No Dream Is Too Big" class="cover-image">
+						<!-- Optional: Any overlay text or additional content -->
+					</div>
+				</div>
+									
 					<div class="bb-item" id="item1">
 						<div class="content">
 							<div class="scroller">
@@ -163,27 +164,24 @@
 		<script src="js/page.js"></script>
 		<script>
 			function updateStyles() {
-				// Select the cover page by its ID and apply specific styles
-				const coverPage = document.getElementById('item0');
-				if (coverPage) {
-					coverPage.style.height = "100vh";
-					coverPage.style.width = "100vw";
-					coverPage.style.display = "flex";
-					coverPage.style.justifyContent = "center";
-					coverPage.style.alignItems = "center";
-					coverPage.style.overflow = "hidden";
+				// Special handling for the cover page image
+				const coverImage = document.querySelector('#item0 .cover-image');
+				if (coverImage) {
+					// Ensure the image covers the height of the viewport
+					coverImage.style.height = '100vh';
+					coverImage.style.objectFit = 'cover';
+					coverImage.style.objectPosition = 'top center'; // Focuses on the top part of the image
+					coverImage.style.width = '100%'; // Ensure it covers the width
 				}
 		
-				// Select all images inside bb-item elements, excluding item0
+				// Handling for other items' images
 				document.querySelectorAll('.bb-item:not(#item0) img').forEach(img => {
-					// Apply different styles based on the window width
 					if (window.innerWidth > 768) {
 						img.style.width = '100%';
-						img.style.height = (window.innerHeight * 0.75) + 'px'; // 75% of the viewport height
+						img.style.height = (window.innerHeight * 0.75) + 'px';
 						img.style.objectFit = 'cover';
 						img.style.objectPosition = 'center';
 					} else {
-						// Reset styles for mobile views
 						img.style.width = '';
 						img.style.height = '';
 						img.style.objectFit = '';
@@ -192,7 +190,6 @@
 				});
 			}
 		
-			// Attach the function to both the DOMContentLoaded and resize events
 			window.addEventListener('DOMContentLoaded', updateStyles);
 			window.addEventListener('resize', updateStyles);
 		</script>		
