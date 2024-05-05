@@ -267,7 +267,7 @@ a:hover {
 	font-size: 6em; /* Significantly larger font size */
 	color: black; /* Color of the text */
 	font-weight: 900; /* Extra bold */
-	text-transform: uppercase; /* Uppercase text */
+	text-transform: titlecase; 
 	margin: 0;
 	padding: 0 20px; /* Adds padding to handle edge cases */
 	background: rgba(255, 255, 255, 0.5); /* Optional: Adds a slight background to enhance readability */
