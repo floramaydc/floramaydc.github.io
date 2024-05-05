@@ -94,12 +94,12 @@ a:hover {
 	padding: 0 20px;
 	cursor: pointer;
 	background: #565656;
-	border-bottom: .5px solid #cfcfcf;
+	border-bottom: .5px solid #4e4e4e;
 }
 
 .menu-toc li a:hover,
 .menu-toc li.menu-toc-current a{
-	background: #565656;
+	background: #141100;
 }
 
 .menu-panel div {
