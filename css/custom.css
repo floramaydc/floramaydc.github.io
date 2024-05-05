@@ -270,10 +270,6 @@ a:hover {
 	text-transform: titlecase; 
 	margin: 0;
 	padding: 0 20px; /* Adds padding to handle edge cases */
-	background: rgba(255, 255, 255, 0.5); /* Optional: Adds a slight background to enhance readability */
-	width: 100%; /* Ensure it spans the full width */
-	box-shadow: 2px 2px 8px rgba(0,0,0,0.2); /* Optional: Adds subtle shadow for depth */
-	text-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* Optional: Enhances text contrast against backgrounds */
 }
 
 @media screen and (max-width: 800px){
