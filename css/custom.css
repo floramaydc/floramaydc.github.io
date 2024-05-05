@@ -159,6 +159,12 @@ a:hover {
 	left: 40px;
 }
 
+.bb-item .content {
+    overflow-y: auto;  // Allows scrolling within the content area if content is too long
+    max-height: 100%;  // Prevents the content from exceeding the viewport height
+}
+
+
 .menu-button {
 	z-index: 1000;
 	left: 20px;
