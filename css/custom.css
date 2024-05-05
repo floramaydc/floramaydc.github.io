@@ -254,33 +254,3 @@ a:hover {
 		font-size: 75%;
 	}
 }
-
-/* Add Flexbox layout for bb-item */
-#bb-bookblock .bb-item .content {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-}
-
-#bb-bookblock .bb-item .content .image-container,
-#bb-bookblock .bb-item .content .text-container {
-    flex: 1 1 50% !important; /* flex-grow | flex-shrink | flex-basis */
-}
-
-#bb-bookblock .bb-item .content img {
-    width: 100% !important;
-    height: auto !important;
-}
-
-@media (max-width: 768px) {
-    #bb-bookblock .bb-item .content {
-        flex-direction: column !important;
-    }
-
-    #bb-bookblock .bb-item .content .image-container,
-    #bb-bookblock .bb-item .content .text-container {
-        flex-basis: 100% !important;
-    }
-}
