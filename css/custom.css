@@ -255,41 +255,42 @@ a:hover {
 	}
 }
 
-/* Flexbox setup for the jScrollPane elements to ensure correct layout handling */
+/* Desktop styles for .jspContainer and .jspPane, already correctly adjusting layout */
 .jspContainer {
-    display: flex; /* Establishes this element as a flex container */
-    flex-direction: row; /* Arranges children (image and text) in a row for desktop */
-    align-items: center; /* Aligns children vertically in the center */
-    justify-content: space-between; /* Distributes space between children */
-    width: 100%; /* Ensures the container takes the full width */
-    height: 100%; /* And full height */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
 }
 
 .jspPane {
-    display: flex; /* Also a flex container to ensure its children are flex items */
-    flex: 1; /* Takes the full space available in its parent */
+    display: flex;
+    flex: 1;
 }
 
 .bb-item .image-container,
 .bb-item .text-container {
-    flex: 1; /* Allows each child to take up equal space */
-    width: 50%; /* Initially sets each child to take up half the width of their parent */
-    box-sizing: border-box; /* Includes padding and border in the width and height calculations */
+    flex: 1;
+    width: 50%;
+    box-sizing: border-box;
 }
 
 .bb-item .image-container img {
-    width: 100%; /* Ensures the image scales correctly within its container */
-    height: auto; /* Maintains aspect ratio */
+    width: 100%;
+    height: auto;
 }
 
-/* Media query for mobile devices */
+/* Adjustments for mobile views to stack image and text vertically */
 @media (max-width: 768px) {
     .jspContainer {
-        flex-direction: column; /* Stacks children vertically */
+        flex-direction: column; /* Stack children vertically */
     }
 
     .bb-item .image-container,
     .bb-item .text-container {
-        width: 100%; /* Each child takes the full width of their container */
+        width: 100%; /* Each child takes full width of their container on smaller screens */
+        flex: none; /* Override the flex setting to not force equal heights */
     }
 }
