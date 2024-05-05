@@ -168,14 +168,14 @@
 				if (coverImage) {
 					// On desktop
 					if (window.innerWidth > 768) {
-						coverImage.style.height = '100%';
-						coverImage.style.width = '100vh'; // Ensure it covers the width
+						coverImage.style.height = '100vh';
+						coverImage.style.width = '100%'; // Ensure it covers the width
 						coverImage.style.objectFit = 'cover';
 						coverImage.style.objectPosition = 'top center'; // Focuses on the top part of the image
 					} else { // On mobile
 						// Set height to ensure the image covers the area it's supposed to
-						coverImage.style.width = '100%'; // Ensure it covers the width
-						coverImage.style.height = 'auto';  // Set height auto to maintain aspect ratio
+						coverImage.style.width = 'auto'; // Ensure it covers the width
+						coverImage.style.height = '100%';  // Set height auto to maintain aspect ratio
 						coverImage.style.objectFit = 'cover';
 						coverImage.style.objectPosition = 'top center'; // Keep focus on the top
 					}
