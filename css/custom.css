@@ -244,20 +244,20 @@ a:hover {
 	text-align: justify;
 }
 
-/* Image container */.imagecontainer {
+/* Image container */.img_container {
   position: relative;
   display: inline-block;
   overflow: hidden;
 }
 
-.imagecontainer img {
+..mg_container img {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.imagecontainer::before,
-.imagecontainer::after {
+.img_container::before,
+.img_container::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -265,11 +265,11 @@ a:hover {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* Adjust the colors for your fading effect */
 }
 
-.imagecontainer::before {
+.img_container::before {
   top: 0;
 }
 
-.imagecontainer::after {
+.img_container::after {
   bottom: 0;
 }
 
