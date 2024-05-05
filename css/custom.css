@@ -145,7 +145,7 @@ a:hover {
 	color: #fff;
 	line-height: 30px;
 	text-align: center;
-	speak: none;
+	/*--speak: none;--*/
 	font-weight: bold;
 	cursor: pointer;
 }
