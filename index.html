@@ -168,7 +168,7 @@
 				if (coverImage) {
 					// On desktop
 					if (window.innerWidth > 768) {
-						coverImage.style.height = '100vh';
+						coverImage.style.height = (window.innerHeight * 0.80) + 'px';
 						coverImage.style.width = '100%'; // Ensure it covers the width
 						coverImage.style.objectFit = 'contain';
 						coverImage.style.objectPosition = 'top center'; // Focuses on the top part of the image
