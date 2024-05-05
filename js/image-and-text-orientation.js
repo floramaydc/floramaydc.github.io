@@ -25,7 +25,7 @@ function updateStyles() {
             item.style.display = 'block';
             img.style.width = '100%';
             img.style.height = 'auto';
-            img.style.objectFit = 'contain';
+            img.style.objectFit = 'cover';
 
             textContent.style.width = '100%';
             textContent.style.padding = '10px';
