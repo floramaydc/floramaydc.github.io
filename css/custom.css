@@ -250,35 +250,6 @@ a:hover {
 	text-align: justify;
 }
 
-    #item0 {
-        position: relative;
-        height: 100vh; /* Full screen height */
-        width: 100vw; /* Full viewport width */
-        display: flex;
-        align-items: center; /* Centers content vertically */
-        justify-content: center; /* Centers content horizontally */
-        text-align: center; /* Ensures text within is centered */
-        overflow: hidden; /* Hides any overflow */
-    }
-
-    #item0 img {
-        height: 100%; /* Sets the image height to fill the container */
-        width: auto; /* Adjusts width automatically to maintain aspect ratio */
-        position: absolute;
-        top: -20;
-        left: 50%; /* Center the image horizontally */
-        transform: translateX(-50%); /* Ensures the image is centered regardless of width */
-    }
-
-    #item0 .content {
-        position: relative;
-        z-index: 2; /* Ensures content is above the image */
-        color: white; /* Adjust text color for visibility */
-        font-size: 2em; /* Adjust text size for visibility */
-        padding: 20px; /* Adds padding for text */
-        box-sizing: border-box; /* Includes padding in width calculations */
-    }
-
 
 @media screen and (max-width: 800px){
 	.no-js .menu-panel {
