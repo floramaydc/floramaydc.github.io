@@ -1,37 +1,33 @@
-=
 function updateStyles() {
-    const bbItems = document.querySelectorAll('.bb-item');
-
-    bbItems.forEach(item => {
-        const img = item.querySelector('img');
-        const textContent = item.querySelector('p');
-
-        // Desktop Layout
+    const coverImage = document.querySelector('#item0 .cover-image');
+    if (coverImage) {
+        // On desktop
         if (window.innerWidth > 768) {
-            item.style.display = 'flex';
-            item.style.flexDirection = 'row';  // Ensure content is side-by-side
-            item.style.alignItems = 'center';
-            item.style.justifyContent = 'flex-start'; // Aligns items to the start of the container
+            coverImage.style.height = (window.innerHeight * 0.80) + 'px';
+            coverImage.style.width = '100%'; // Ensure it covers the width
+            coverImage.style.objectFit = 'contain';
+            coverImage.style.objectPosition = 'top center'; // Focuses on the top part of the image
+        } else { // On mobile
+            // Set height to ensure the image covers the area it's supposed to
+            coverImage.style.width = '100%'; // Ensure it covers the width
+            coverImage.style.height = 'auto';  // Set height auto to maintain aspect ratio
+            coverImage.style.objectFit = 'cover';
+            coverImage.style.objectPosition = 'top center'; // Keep focus on the top
+        }
+    }
 
-            img.style.width = '60%';  // Gives image 60% width of the container
-            img.style.height = 'auto';  // Maintain aspect ratio
-            img.style.objectFit = 'contain';  // Ensures the entire image is visible without cropping
-
-            textContent.style.width = '40%';  // Gives text 40% width of the container
-            textContent.style.padding = '20px';  // Padding for text for better readability
-            textContent.style.display = 'block';
-            textContent.style.textAlign = 'left';  // Align text to the left
-        } else { // Mobile Layout
-            // Resets to stack vertically
-            item.style.display = 'block';
+    // Handling for other items' images
+    document.querySelectorAll('.bb-item:not(#item0) img').forEach(img => {
+        if (window.innerWidth > 768) {
             img.style.width = '100%';
-            img.style.height = 'auto';
-            img.style.objectFit = 'cover';
-
-            textContent.style.width = '100%';
-            textContent.style.padding = '10px';
-            textContent.style.display = 'block';
-            textContent.style.textAlign = 'center';
+            img.style.height = (window.innerHeight * 0.75) + 'px';
+            img.style.objectFit = 'contain';
+            img.style.objectPosition = 'center';
+        } else {
+            img.style.width = '';
+            img.style.height = '';
+            img.style.objectFit = '';
+            img.style.objectPosition = '';
         }
     });
 }
