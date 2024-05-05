@@ -15,7 +15,7 @@
 		<script src="js/modernizr.custom.79639.js"></script>
 	</head>
 	<body>
-		<div id="container" class="container">	
+		<div id="container" class="container">
 
 			<div class="menu-panel">
 				<h3>Table of Contents</h3>
@@ -30,6 +30,19 @@
 					<a href="https://www.floramaydc.com" style="color: #fff;">&larr; Back to FLORAMAYDC</a>
 				</div>
 			</div>
+
+			<script>
+				window.addEventListener('DOMContentLoaded', (event) => {
+					const images = document.querySelectorAll('.bb-item img');
+					images.forEach(img => {
+						img.style.width = '100%';   // Set image to fill the width
+						img.style.height = '700px'; // Set a fixed height of 700px
+						img.style.objectFit = 'cover'; // Ensure the image covers the area, cropping as needed
+						img.style.objectPosition = 'center'; // Center the image within the element
+					});
+				});
+			</script>
+			
 
 			<div class="bb-custom-wrapper">
 				<div id="bb-bookblock" class="bb-bookblock">
