@@ -250,6 +250,29 @@ a:hover {
 	text-align: justify;
 }
 
+#item0 {
+	height: 100vh; /* Full screen height */
+	width: 100vw; /* Full viewport width */
+	background-image: url('images/Cover.webp'); /* Path to your cover image */
+	background-size: cover; /* Cover ensures the image covers the div completely */
+	background-position: top center; /* Align the top part of the image centrally */
+	display: flex;
+	align-items: center; /* Centers content vertically */
+	justify-content: center; /* Centers content horizontally */
+	text-align: center; /* Ensures text within is centered */
+	overflow: hidden; /* Prevents any overflow */
+}
+
+#item0 .content {
+	width: 100%; /* Ensures content uses the full width of its container */
+	padding: 20px; /* Adds some padding around the content */
+	box-sizing: border-box; /* Includes padding in the width calculation */
+	color: white; /* Sets the text color to white or any color that suits the cover image */
+	font-size: 2em; /* Larger text for visibility */
+	font-weight: bold; /* Bold text for the title */
+	backdrop-filter: blur(5px); /* Optional: Adds a blur effect to any background content for better readability */
+}
+
 @media screen and (max-width: 800px){
 	.no-js .menu-panel {
 		display: none;
