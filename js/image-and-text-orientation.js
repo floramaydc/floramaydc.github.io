@@ -24,8 +24,8 @@ function updateStyles() {
             img.style.objectFit = 'contain';
             img.style.objectPosition = 'center';
         } else {
-            img.style.width = '';
-            img.style.height = '';
+            img.style.width = '100%';
+            img.style.height = 'auto';
             img.style.objectFit = '';
             img.style.objectPosition = '';
         }
