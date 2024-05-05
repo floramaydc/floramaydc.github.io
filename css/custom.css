@@ -258,7 +258,7 @@ a:hover {
 	width: 100vw;
 	overflow: hidden;
 	text-align: center;
-	background: url('path/to/your/background.jpg') no-repeat center center; 
+	background: url('images/Chapter1.WEBP') no-repeat center center; 
 	background-size: cover;
 	position: relative; /* Ensures the text is positioned over the background */
 }
