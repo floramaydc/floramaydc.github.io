@@ -269,3 +269,29 @@ a:hover {
 	}
 }
 
+.bb-item {
+    display: flex; /* Use flexbox to layout children side by side */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+}
+
+.bb-item .content .scroller {
+    width: 50%; /* Assign half of the space to the paragraph */
+}
+
+.bb-item .content img {
+    width: 50%; /* Assign half of the space to the image */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Cover the div without stretching */
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .bb-item {
+        display: block; /* Stack image and text on smaller screens */
+    }
+
+    .bb-item .content .scroller, .bb-item .content img {
+        width: 100%; /* Each takes full width on small screens */
+    }
+}
