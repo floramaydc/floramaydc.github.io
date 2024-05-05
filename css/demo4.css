@@ -138,6 +138,35 @@
 	transform: rotate(180deg);
 }
 
+/* Image container */
+.container {
+  width: 100%; /* Or specify your desired width */
+  height: 100vh; /* Or specify your desired height */
+  background-image: url('your-image-url.jpg');
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  position: relative; /* Allows positioning of pseudo-elements */
+}
+
+.container::before,
+.container::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 50px; /* Adjust this value for your torn paper effect */
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* Adjust the colors for your fading effect */
+}
+
+.container::before {
+  top: 0;
+}
+
+.container::after {
+  bottom: 0;
+}
+/* end of image container */
+
 /* No JS */
 .no-js .bb-custom-wrapper {
 	height: auto;
