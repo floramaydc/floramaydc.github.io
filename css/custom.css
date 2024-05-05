@@ -268,31 +268,3 @@ a:hover {
 		font-size: 75%;
 	}
 }
-.bb-item .content .scroller {
-    width: 50%; /* Sets the width for the text */
-    overflow: auto; /* Allows scrolling */
-    position: relative; /* Ensures it's positioned correctly in the flex container */
-    flex: 1; /* Flex grow to fill available space */
-}
-
-.bb-item .content .jspContainer {
-    width: 100%; /* Forces the jScrollPane container to take full width of its parent */
-    height: 100%; /* Optional, depending on your design */
-}
-
-.bb-item .content .jspPane {
-    width: 100%; /* Ensures the scrollable area doesn't collapse or align incorrectly */
-}
-.bb-item .content {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start; /* Aligns content to the left */
-    align-items: stretch; /* Stretches items to fill the container height */
-    width: 100%; /* Ensures full width */
-}
-
-.bb-item .content img {
-    width: 50%; /* Half of the container width */
-    height: auto;
-    object-fit: cover;
-}
