@@ -1,41 +1,37 @@
 
-function updateLayout() {
-    const bbItems = document.querySelectorAll('.bb-item');
+function updateStyles() {
+    const coverImage = document.querySelector('#item0 .cover-image');
+    if (coverImage) {
+        // On desktop
+        if (window.innerWidth > 768) {
+            coverImage.style.height = (window.innerHeight * 0.80) + 'px';
+            coverImage.style.width = '100%'; // Ensure it covers the width
+            coverImage.style.objectFit = 'contain';
+            coverImage.style.objectPosition = 'top center'; // Focuses on the top part of the image
+        } else { // On mobile
+            // Set height to ensure the image covers the area it's supposed to
+            coverImage.style.width = '100%'; // Ensure it covers the width
+            coverImage.style.height = 'auto';  // Set height auto to maintain aspect ratio
+            coverImage.style.objectFit = 'cover';
+            coverImage.style.objectPosition = 'top center'; // Keep focus on the top
+        }
+    }
 
-    bbItems.forEach(item => {
-        const img = item.querySelector('img');
-        const paragraphs = item.querySelectorAll('p');
-
-        if (window.innerWidth > 768) { // Desktop layout
-            item.style.display = 'flex';
-            item.style.flexDirection = 'row';
-            item.style.alignItems = 'center';
-            item.style.justifyContent = 'center';
-
-            img.style.width = '50%';
-            img.style.height = '100%';
-            img.style.objectFit = 'contain';
-
-            paragraphs.forEach(p => {
-                p.style.width = '50%';
-                p.style.padding = '0 20px';
-                p.style.boxSizing = 'border-box';
-            });
-        } else { // Mobile layout
-            item.style.display = 'block';
-
+    // Handling for other items' images
+    document.querySelectorAll('.bb-item:not(#item0) img').forEach(img => {
+        if (window.innerWidth > 768) {
             img.style.width = '100%';
-            img.style.height = 'auto';
-            img.style.objectFit = 'cover';
-
-            paragraphs.forEach(p => {
-                p.style.width = '100%';
-                p.style.padding = '0 10px';
-                p.style.boxSizing = 'border-box';
-            });
+            img.style.height = (window.innerHeight * 0.75) + 'px';
+            img.style.objectFit = 'contain';
+            img.style.objectPosition = 'center';
+        } else {
+            img.style.width = '';
+            img.style.height = '';
+            img.style.objectFit = '';
+            img.style.objectPosition = '';
         }
     });
 }
 
-window.addEventListener('DOMContentLoaded', updateLayout);
-window.addEventListener('resize', updateLayout);
+window.addEventListener('DOMContentLoaded', updateStyles);
+window.addEventListener('resize', updateStyles);
