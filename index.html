@@ -155,19 +155,28 @@
 		<script src="js/jquery.bookblock.js"></script>
 		<script src="js/page.js"></script>
 		<script>
-			window.addEventListener('DOMContentLoaded', (event) => {
-				// Check if the window width is more than 768px
-				if (window.innerWidth > 768) {
-					const images = document.querySelectorAll('.bb-item img');
+			function updateImageStyles() {
+				const images = document.querySelectorAll('.bb-item img');
+				if (window.innerWidth > 768) { // Desktop
 					images.forEach(img => {
 						img.style.width = '100%';   // Set image to fill the width
 						img.style.height = '700px'; // Set a fixed height of 700px
 						img.style.objectFit = 'cover'; // Ensure the image covers the area, cropping as needed
 						img.style.objectPosition = 'center'; // Center the image within the element
 					});
+				} else { // Mobile and Tablets
+					images.forEach(img => {
+						img.style.width = '';   // Reset width to default
+						img.style.height = ''; // Reset height to default
+						img.style.objectFit = ''; // Reset object-fit to default
+						img.style.objectPosition = ''; // Reset object-position to default
+					});
 				}
-			});
-		</script>		
+			}
+	
+			window.addEventListener('DOMContentLoaded', updateImageStyles);
+			window.addEventListener('resize', updateImageStyles); // Handle resizing
+		</script>
 		<script>
 			$(function() {
 
