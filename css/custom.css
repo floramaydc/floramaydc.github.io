@@ -88,18 +88,18 @@ a:hover {
 
 .menu-toc li a {
 	display: block;
-	color: #ffdf00;
+	color: #565656;
 	font-size: 1.1em;
 	line-height: 3.5;
 	padding: 0 20px;
 	cursor: pointer;
-	background: #565656;
-	border-bottom: .5px solid #4e4e4e;
+	background: #ffdf00;
+	border-bottom: .5px solid #ffeb62;
 }
 
 .menu-toc li a:hover,
 .menu-toc li.menu-toc-current a{
-	background: #141100;
+	background: #ffdf00;
 }
 
 .menu-panel div {
@@ -121,7 +121,7 @@ a:hover {
 
 .menu-panel div a:hover {
 	background: inherit;
-	color: #fff;
+	color: #565656;
 	text-shadow: none;
 }
 
