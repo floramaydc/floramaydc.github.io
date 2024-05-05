@@ -244,6 +244,32 @@ a:hover {
 	text-align: justify;
 }
 
+/* Assigned images */
+#item1 {
+  background-image: url('/images/Chapter1.WEBP');
+}
+
+#item2 {
+  background-image: url('/images/Chapter2.jpg');
+}
+
+#item3 {
+  background-image: url('/images/Chapter3.jpg');
+}
+
+#item4 {
+  background-image: url('/images/Chapter4.WEBP');
+}
+
+#item5 {
+  background-image: url('/images/Chapter5.WEBP');
+}
+
+#item6 {
+  background-image: url('/images/Chapter6.WEBP');
+}
+
+
 @media screen and (max-width: 800px){
 	.no-js .menu-panel {
 		display: none;
