@@ -255,32 +255,41 @@ a:hover {
 	}
 }
 
-/* Add Flexbox layout for bb-item */
-#bb-bookblock .bb-item .content {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    justify-content: space-between !important;
+/* Flexbox setup for the jScrollPane elements to ensure correct layout handling */
+.jspContainer {
+    display: flex; /* Establishes this element as a flex container */
+    flex-direction: row; /* Arranges children (image and text) in a row for desktop */
+    align-items: center; /* Aligns children vertically in the center */
+    justify-content: space-between; /* Distributes space between children */
+    width: 100%; /* Ensures the container takes the full width */
+    height: 100%; /* And full height */
 }
 
-#bb-bookblock .bb-item .content .image-container,
-#bb-bookblock .bb-item .content .text-container {
-    flex: 1 1 50% !important; /* flex-grow | flex-shrink | flex-basis */
+.jspPane {
+    display: flex; /* Also a flex container to ensure its children are flex items */
+    flex: 1; /* Takes the full space available in its parent */
 }
 
-#bb-bookblock .bb-item .content img {
-    width: 100% !important;
-    height: auto !important;
+.bb-item .image-container,
+.bb-item .text-container {
+    flex: 1; /* Allows each child to take up equal space */
+    width: 50%; /* Initially sets each child to take up half the width of their parent */
+    box-sizing: border-box; /* Includes padding and border in the width and height calculations */
 }
 
+.bb-item .image-container img {
+    width: 100%; /* Ensures the image scales correctly within its container */
+    height: auto; /* Maintains aspect ratio */
+}
+
+/* Media query for mobile devices */
 @media (max-width: 768px) {
-    #bb-bookblock .bb-item .content {
-        flex-direction: column !important;
+    .jspContainer {
+        flex-direction: column; /* Stacks children vertically */
     }
 
-    #bb-bookblock .bb-item .content .image-container,
-    #bb-bookblock .bb-item .content .text-container {
-        flex-basis: 100% !important;
+    .bb-item .image-container,
+    .bb-item .text-container {
+        width: 100%; /* Each child takes the full width of their container */
     }
 }
