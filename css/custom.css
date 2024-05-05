@@ -244,13 +244,14 @@ a:hover {
 	text-align: justify;
 }
 
-/* Image container */.img_container {
+/* Image container */
+.img_container {
   position: relative;
   display: inline-block;
   overflow: hidden;
 }
 
-..mg_container img {
+.img_container img {
   display: block;
   width: 100%;
   height: auto;
@@ -261,7 +262,7 @@ a:hover {
   content: '';
   position: absolute;
   width: 100%;
-  height: 10%; /* Adjust this percentage value for your torn paper effect */
+  height: 5%; /* Adjust this percentage value for your torn paper effect */
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* Adjust the colors for your fading effect */
 }
 
@@ -271,6 +272,13 @@ a:hover {
 
 .img_container::after {
   bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .img_container::before,
+  .img_container::after {
+    height: 8%; /* Adjust the torn paper effect height for small screens */
+  }
 }
 
 @media screen and (max-width: 800px){
