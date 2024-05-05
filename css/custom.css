@@ -247,7 +247,7 @@ a:hover {
 /* Image container */
 .container {
   width: 100%; /* Or specify your desired width */
-  height: 100vh; /* Or specify your desired height */
+  height: auto; /* Or specify your desired height */
   background-image: url('your-image-url.jpg');
   background-size: cover; /* Ensures the image covers the entire container */
   background-position: center; /* Centers the image */
