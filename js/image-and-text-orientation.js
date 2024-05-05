@@ -1,51 +1,39 @@
-function setupDesktopLayout() {
+function updateStyles() {
     const bbItems = document.querySelectorAll('.bb-item');
 
     bbItems.forEach(item => {
         const img = item.querySelector('img');
         const textContent = item.querySelector('p');
 
-        // Create a container for the text if it doesn't exist to facilitate styling
-        if (!textContent.parentElement.classList.contains('text-container')) {
-            const textContainer = document.createElement('div');
-            textContainer.classList.add('text-container');
-            textContainer.appendChild(textContent.cloneNode(true)); // Clone and append to avoid removing the original paragraph
-            item.appendChild(textContainer);
-            textContent.remove(); // Remove the original paragraph from its initial position
-        }
-
-        // Apply styles for desktop
+        // Desktop Layout
         if (window.innerWidth > 768) {
             item.style.display = 'flex';
-            item.style.flexDirection = 'row';
+            item.style.flexDirection = 'row';  // Ensure content is side-by-side
             item.style.alignItems = 'center';
-            item.style.justifyContent = 'space-between';
+            item.style.justifyContent = 'flex-start'; // Aligns items to the start of the container
 
-            img.style.width = '50%';
-            img.style.height = '100%';
-            img.style.objectFit = 'cover';
+            img.style.width = '60%';  // Gives image 60% width of the container
+            img.style.height = 'auto';  // Maintain aspect ratio
+            img.style.objectFit = 'contain';  // Ensures the entire image is visible without cropping
 
-            const textContainer = item.querySelector('.text-container');
-            textContainer.style.width = '50%';
-            textContainer.style.display = 'flex';
-            textContainer.style.flexDirection = 'column';
-            textContainer.style.justifyContent = 'center';
-            textContainer.style.padding = '0 20px';
-        } else {
-            // Ensure mobile layout remains unchanged
+            textContent.style.width = '40%';  // Gives text 40% width of the container
+            textContent.style.padding = '20px';  // Padding for text for better readability
+            textContent.style.display = 'block';
+            textContent.style.textAlign = 'left';  // Align text to the left
+        } else { // Mobile Layout
+            // Resets to stack vertically
             item.style.display = 'block';
             img.style.width = '100%';
             img.style.height = 'auto';
             img.style.objectFit = 'cover';
 
-            const textContainer = item.querySelector('.text-container');
-            textContainer.style.width = '100%';
-            textContainer.style.display = 'block';
-            textContainer.style.padding = '0 10px';
+            textContent.style.width = '100%';
+            textContent.style.padding = '10px';
+            textContent.style.display = 'block';
+            textContent.style.textAlign = 'center';
         }
     });
 }
 
-window.addEventListener('DOMContentLoaded', setupDesktopLayout);
-window.addEventListener('resize', setupDesktopLayout);
-
+window.addEventListener('DOMContentLoaded', updateStyles);
+window.addEventListener('resize', updateStyles);
