@@ -159,10 +159,10 @@ a:hover {
 	left: 40px;
 }
 
-.bb-item .content {
+/*.bb-item .content {
     overflow-y: auto;  // Allows scrolling within the content area if content is too long
     max-height: 100%;  // Prevents the content from exceeding the viewport height
-}
+}*/
 
 
 .menu-button {
