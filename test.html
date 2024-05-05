@@ -13,8 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/bookblock.css" />
     <link rel="stylesheet" type="text/css" href="css/custom.css" />
     <style>
-        #item1 {
-            background-image: url('/images/Chapter1.WEBP');
+        .bb-item {
             background-size: cover;
             background-position: center;
             width: 100%;
@@ -22,20 +21,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        #item1 .content {
-            background: rgba(255, 255, 255, 0.8);
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
             text-align: center;
         }
 
+        .bb-item h2 {
+            display: none; /* Hide the h2 element */
+        }
+
+        .bb-item .content {
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for readability */
+            color: #333;
+            padding: 10px; /* Reduced padding */
+            border-radius: 10px;
+            display: inline-block; /* Makes the container hug the content */
+            max-width: 80%; /* Limits the maximum width to prevent overly wide paragraphs */
+        }
+
         @media (min-width: 768px) {
-            #item1 .content {
-                width: 50%;
+            .bb-item .content {
+                max-width: 50%; /* More appropriate max-width on larger screens */
             }
         }
     </style>
@@ -47,19 +51,24 @@
             <h3>Table of Contents</h3>
             <ul id="menu-toc" class="menu-toc">
                 <li class="menu-toc-current"><a href="#item1">Chapter 1</a></li>
-                <!-- Other chapters -->
+                <li><a href="#item2">Chapter 2</a></li>
             </ul>
         </div>
 
         <div class="bb-custom-wrapper">
             <div id="bb-bookblock" class="bb-bookblock">
-                <div class="bb-item" id="item1">
+                <div class="bb-item" id="item1" style="background-image: url('/images/Chapter1.WEBP');">
                     <div class="content">
                         <h2>May-May's Magical World</h2>
                         <p>In a forest bright and grand, May-May sketched with gentle hand. Rainbows lingering through the day, Flowers chattering away. With her red balloon up high, A dreamer's gleam within her eye.</p>
                     </div>
                 </div>
-                <!-- Other chapters would be structured similarly -->
+                <div class="bb-item" id="item2" style="background-image: url('/images/Chapter2.WEBP');">
+                    <div class="content">
+                        <h2>The Adventure Continues</h2>
+                        <p>The story continues with May-May exploring the deep seas, swimming alongside colorful fish and curious sea creatures.</p>
+                    </div>
+                </div>
             </div>
             
             <nav>
