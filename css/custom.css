@@ -244,15 +244,16 @@ a:hover {
 	text-align: justify;
 }
 
-/* Image container */
-.container {
-  width: 100%; /* Or specify your desired width */
-  height: 100%; /* Or specify your desired height */
-  background-image: url('your-image-url.jpg');
-  background-size: cover; /* Ensures the image covers the entire container */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  position: relative; /* Allows positioning of pseudo-elements */
+/* Image container */.container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.container img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .container::before,
@@ -260,7 +261,7 @@ a:hover {
   content: '';
   position: absolute;
   width: 100%;
-  height: 50px; /* Adjust this value for your torn paper effect */
+  height: 10%; /* Adjust this percentage value for your torn paper effect */
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* Adjust the colors for your fading effect */
 }
 
@@ -271,7 +272,6 @@ a:hover {
 .container::after {
   bottom: 0;
 }
-
 
 @media screen and (max-width: 800px){
 	.no-js .menu-panel {
