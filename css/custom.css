@@ -278,9 +278,12 @@ a:hover {
 }
 
 .bb-item .image-container img {
-    width: 100%;
-    height: auto;
+    width: 100%; /* Full width of its container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Prevents the image from scaling beyond its natural size */
+    transition: transform 0.3s ease; /* Smooth transition for transforms if needed */
 }
+
 
 /* Adjustments for mobile views to stack image and text vertically */
 @media (max-width: 768px) {
