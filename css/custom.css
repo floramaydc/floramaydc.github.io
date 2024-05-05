@@ -247,26 +247,38 @@ a:hover {
 /* Assigned images */
 #item1 {
   background-image: url('/images/Chapter1.WEBP');
+  background-size: cover; /* Ensures the background image covers the entire item */
+  background-position: center; /* Centers the background image within the item */
 }
 
 #item2 {
   background-image: url('/images/Chapter2.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 #item3 {
   background-image: url('/images/Chapter3.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 #item4 {
   background-image: url('/images/Chapter4.WEBP');
+  background-size: cover;
+  background-position: center;
 }
 
 #item5 {
   background-image: url('/images/Chapter5.WEBP');
+  background-size: cover;
+  background-position: center;
 }
 
 #item6 {
   background-image: url('/images/Chapter6.WEBP');
+  background-size: cover;
+  background-position: center;
 }
 
 /* Content Flip Style */
@@ -277,6 +289,9 @@ a:hover {
   background: #fff;
   z-index: 100;
 }
+
+/* Add the rest of your CSS styles here */
+
 
 /* Add the rest of your CSS styles here */
 
