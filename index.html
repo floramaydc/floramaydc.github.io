@@ -164,14 +164,21 @@
 		<script src="js/page.js"></script>
 		<script>
 			function updateStyles() {
-				// Special handling for the cover page image
 				const coverImage = document.querySelector('#item0 .cover-image');
 				if (coverImage) {
-					// Ensure the image covers the height of the viewport
-					coverImage.style.height = '100vh';
-					coverImage.style.objectFit = 'cover';
-					coverImage.style.objectPosition = 'middle center'; // Focuses on the top part of the image
-					coverImage.style.width = '100%'; // Ensure it covers the width
+					// On desktop
+					if (window.innerWidth > 768) {
+						coverImage.style.height = '100vh';
+						coverImage.style.width = '100%'; // Ensure it covers the width
+						coverImage.style.objectFit = 'cover';
+						coverImage.style.objectPosition = 'top center'; // Focuses on the top part of the image
+					} else { // On mobile
+						// Set height to ensure the image covers the area it's supposed to
+						coverImage.style.width = '100%'; // Ensure it covers the width
+						coverImage.style.height = 'auto';  // Set height auto to maintain aspect ratio
+						coverImage.style.objectFit = 'cover';
+						coverImage.style.objectPosition = 'top center'; // Keep focus on the top
+					}
 				}
 		
 				// Handling for other items' images
@@ -192,7 +199,7 @@
 		
 			window.addEventListener('DOMContentLoaded', updateStyles);
 			window.addEventListener('resize', updateStyles);
-		</script>		
+		</script>				
 		<script>
 			$(function() {
 
