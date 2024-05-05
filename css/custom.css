@@ -265,7 +265,7 @@ a:hover {
         height: 100%; /* Sets the image height to fill the container */
         width: auto; /* Adjusts width automatically to maintain aspect ratio */
         position: absolute;
-        top: 0;
+        top: -20;
         left: 50%; /* Center the image horizontally */
         transform: translateX(-50%); /* Ensures the image is centered regardless of width */
     }
