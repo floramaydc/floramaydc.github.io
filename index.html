@@ -161,38 +161,39 @@
 		<script src="js/jquery.jscrollpane.min.js"></script>
 		<script src="js/jquerypp.custom.js"></script>
 		<script src="js/jquery.bookblock.js"></script>
-		<script src="js/page.js"></script><script>
+		<script src="js/page.js"></script>
+		<script>
 			function updateStyles() {
-				// Handling for the cover page
+				// Select the cover page by its ID and apply specific styles
 				const coverPage = document.getElementById('item0');
 				if (coverPage) {
 					coverPage.style.height = "100vh";
+					coverPage.style.width = "100vw";
 					coverPage.style.display = "flex";
 					coverPage.style.justifyContent = "center";
 					coverPage.style.alignItems = "center";
 					coverPage.style.overflow = "hidden";
-					coverPage.style.width = "100vw"; // Ensure cover page does not exceed viewport width
 				}
 		
-				// Handling for other items images
-				const images = document.querySelectorAll('.bb-item img');
-				images.forEach(img => {
-					if (img.closest('.bb-item').id !== 'item0') {
-						if (window.innerWidth > 768) {
-							img.style.width = '100%';
-							img.style.height = (window.innerHeight * 0.75) + 'px';
-							img.style.objectFit = 'cover';
-							img.style.objectPosition = 'center';
-						} else {
-							img.style.width = '';
-							img.style.height = '';
-							img.style.objectFit = '';
-							img.style.objectPosition = '';
-						}
+				// Select all images inside bb-item elements, excluding item0
+				document.querySelectorAll('.bb-item:not(#item0) img').forEach(img => {
+					// Apply different styles based on the window width
+					if (window.innerWidth > 768) {
+						img.style.width = '100%';
+						img.style.height = (window.innerHeight * 0.75) + 'px'; // 75% of the viewport height
+						img.style.objectFit = 'cover';
+						img.style.objectPosition = 'center';
+					} else {
+						// Reset styles for mobile views
+						img.style.width = '';
+						img.style.height = '';
+						img.style.objectFit = '';
+						img.style.objectPosition = '';
 					}
 				});
 			}
 		
+			// Attach the function to both the DOMContentLoaded and resize events
 			window.addEventListener('DOMContentLoaded', updateStyles);
 			window.addEventListener('resize', updateStyles);
 		</script>		
