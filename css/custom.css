@@ -164,7 +164,6 @@ a:hover {
     max-height: 100%;  // Prevents the content from exceeding the viewport height
 }*/
 
-<style>
     /* Cover Page Specific Styles */
     #item0 {
         display: flex;
@@ -186,7 +185,6 @@ a:hover {
         margin: 0; /* Removes default margin */
         padding: 20px; /* Adds padding to ensure spacing is sufficient */
     }
-</style>
 
 
 
