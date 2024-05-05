@@ -250,6 +250,32 @@ a:hover {
 	text-align: justify;
 }
 
+#item0 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	text-align: center;
+	background: url('path/to/your/background.jpg') no-repeat center center; 
+	background-size: cover;
+	position: relative; /* Ensures the text is positioned over the background */
+}
+
+#item0 h1 {
+	font-size: 6em; /* Significantly larger font size */
+	color: black; /* Color of the text */
+	font-weight: 900; /* Extra bold */
+	text-transform: uppercase; /* Uppercase text */
+	margin: 0;
+	padding: 0 20px; /* Adds padding to handle edge cases */
+	background: rgba(255, 255, 255, 0.5); /* Optional: Adds a slight background to enhance readability */
+	width: 100%; /* Ensure it spans the full width */
+	box-shadow: 2px 2px 8px rgba(0,0,0,0.2); /* Optional: Adds subtle shadow for depth */
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* Optional: Enhances text contrast against backgrounds */
+}
+
 @media screen and (max-width: 800px){
 	.no-js .menu-panel {
 		display: none;
