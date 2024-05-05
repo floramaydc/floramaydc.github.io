@@ -269,6 +269,17 @@ a:hover {
   background-image: url('/images/Chapter6.WEBP');
 }
 
+/* Content Flip Style */
+.bb-bookblock {
+  width: 400px;
+  height: 300px;
+  position: relative;
+  background: #fff;
+  z-index: 100;
+}
+
+/* Add the rest of your CSS styles here */
+
 
 @media screen and (max-width: 800px){
 	.no-js .menu-panel {
