@@ -88,12 +88,12 @@ a:hover {
 
 .menu-toc li a {
 	display: block;
-	color: #fff;
+	color: #ffdf00;
 	font-size: 1.1em;
 	line-height: 3.5;
 	padding: 0 20px;
 	cursor: pointer;
-	background: #FCEDA1;
+	background: #565656;
 	border-bottom: 1px solid #c9bd80;
 }
 
