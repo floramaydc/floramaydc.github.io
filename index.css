@@ -1,0 +1,245 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+html { height: 100%; }
+
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	background: #fff;
+	font-weight: 400;
+	font-size: 100%;
+	color: #333;
+	height: 100%;
+}
+
+.js body {
+	overflow: hidden;
+}
+
+a {
+	color: #555;
+	text-decoration: none;
+	outline: none;
+}
+
+a:hover {
+	color: #000;
+}
+
+.container,
+.bb-custom-wrapper,
+.bb-bookblock {
+	width: 100%;
+	height: 100%;
+}
+
+.slideRight {
+	left: 240px;
+}
+
+.no-js .container {
+	padding-left: 240px;
+}
+
+.menu-panel {
+	background: #000;
+	width: 240px;
+	height: 100%;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.js .menu-panel {
+	position: absolute;
+	left: -240px;
+}
+
+.menu-panel h3 {
+	font-size: 1.8em;
+	padding: 20px;
+	font-weight: 300;
+	color: #fff;
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,0.05);
+}
+
+.menu-toc {
+	list-style: none;
+}
+
+.menu-toc li a {
+	display: block;
+	color: #fff;
+	font-size: 1.1em;
+	line-height: 3.5;
+	padding: 0 20px;
+	cursor: pointer;
+	background: #000;
+	border-bottom: .5px solid #565656;
+}
+
+.menu-toc li a:hover,
+.menu-toc li.menu-toc-current a{
+	background: #898776;
+}
+
+.menu-panel div {
+	margin-top: 20px;
+}
+
+.menu-panel div a {
+	text-transform: uppercase;
+	font-size: 0.7em;
+	line-height: 1;
+	padding: 5px 20px;
+	display: block;
+	border: none;
+	color: #565656;
+	letter-spacing: 1px;
+	font-weight: 800;
+	text-shadow: 0 1px rgba(255,255,255,0.2);
+}
+
+.menu-panel div a:hover {
+	background: inherit;
+	color: #565656;
+	text-shadow: none;
+}
+
+.bb-custom-wrapper nav {
+	top: 20px;
+	left: 60px;
+	position: absolute;
+	z-index: 1000;
+}
+
+.bb-custom-wrapper nav span,
+.menu-button {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	top: 0;
+	left: 0;
+	background: #000;
+	border-radius: 50%;
+	color: #fff;
+	line-height: 30px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.bb-custom-wrapper nav span:hover,
+.menu-button:hover {
+	background: #898776;
+}
+
+.bb-custom-wrapper nav span:last-child {
+	left: 40px;
+}
+
+.menu-button {
+	z-index: 1000;
+	left: 20px;
+	top: 20px;
+	text-indent: -9000px;
+}
+
+.menu-button:after {
+	position: absolute;
+	content: '';
+	width: 50%;
+	height: 2px;
+	background: #fff;
+	top: 50%;
+	margin-top: -1px;
+	left: 25%;
+	box-shadow: 0 -4px #fff, 0 4px #fff;
+}
+
+.page {
+    height: auto;
+    overflow: auto;
+    position: absolute;
+    bottom: 0;
+    top: 64px;
+    width: 100%;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* NOTE: hide browser scrollbar without making elements unscrollable. JScrollPane will override
+    - Needed because looks ugly during page flips to have system scrollbar followed by refresh with JScrollPane
+    - TODO: solve for no js support, if we care
+*/
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+/*.page:has(> .page-narrow) {
+}*/
+
+.page-wide {
+    display: inline-block;
+    margin: 16px;
+    vertical-align: middle;
+    width: calc(50% - 34px);
+}
+
+.page-narrow {
+    display: block;
+    margin: 16px;
+    width: calc(100% - 32px);
+}
+
+img.page-wide {
+    object-fit: cover;
+}
+
+img.page-narrow {
+    object-fit: scale-down;
+}
+
+.page-text {
+    font-size: 1.4em;
+	font-weight: 300;
+	line-height: 1.8;
+    text-align: center;
+}
+
+.page-text p {
+    display: block;
+    margin-top: 24px;
+}
+
+.page-smalltext {
+    font-size: smaller;
+}
+
+@media screen and (max-width: 800px){
+	.no-js .menu-panel {
+		display: none;
+	}
+
+	.no-js .container {
+		padding: 0;
+	}
+}
+
+@media screen and (max-width: 400px){
+	.menu-panel,
+	.content {
+		font-size: 75%;
+	}
+}
