@@ -707,6 +707,17 @@ is always appreciated but never required.
       return 2;
     }
 
+    // Guard against grammatical tense/inflection swaps that are often valid
+    // words by themselves and should not be auto-corrected.
+    function isInflectionSwap(a, b) {
+      const al = a.toLowerCase();
+      const bl = b.toLowerCase();
+      return (
+        (al.endsWith('ies') && bl === `${al.slice(0, -3)}ied`) ||
+        (al.endsWith('ied') && bl === `${al.slice(0, -3)}ies`)
+      );
+    }
+
     const _fixCache = new Map();
     function fuzzyCorrectWord(word, vocabData) {
       if (!vocabData) return word;
@@ -730,7 +741,7 @@ is always appreciated but never required.
         }
         if (bestD === 1) break;
       }
-      const fixed = best && bestD <= max ? best : word;
+      const fixed = (best && bestD <= max && !isInflectionSwap(w, best)) ? best : word;
       _fixCache.set(w, fixed);
       return fixed;
     }
@@ -1657,7 +1668,7 @@ is always appreciated but never required.
       // matches as easily as "send a message".
       const MESSAGE_INTENT_RE = /\b(send|leave|drop|forward)\b.{0,30}\b(message|note)\b|\b(message|tell|write to|reach out to)\s+(her|flora|flora\s*may)\b|\bi(?:'| ?a)?d (?:like|love|want) to (?:contact|reach|message|write|leave a message|email|tell)\b/i;
       if (MESSAGE_INTENT_RE.test(clean)) {
-        addBubble('user', escapeHtml(clean));
+        addBubble('user', escapeHtml(raw));
         input.value = '';
         startMessageFlow();
         return;
@@ -1674,7 +1685,7 @@ is always appreciated but never required.
         if (AFFIRM.test(t)) {
           const target = pendingNav;
           pendingNav = null;
-          addBubble('user', escapeHtml(clean));
+          addBubble('user', escapeHtml(raw));
           input.value = '';
           addBubble('mai', `Taking you to <em>${escapeHtml(target.label)}</em>…`);
           saveTranscript();
@@ -1691,7 +1702,7 @@ is always appreciated but never required.
         }
         if (DENY.test(t)) {
           pendingNav = null;
-          addBubble('user', escapeHtml(clean));
+          addBubble('user', escapeHtml(raw));
           input.value = '';
           addBubble('mai', 'No problem — what else can I help you find?');
           // Strip the CTA from the last assistant bubble so it doesn't
@@ -1711,11 +1722,14 @@ is always appreciated but never required.
       // "packbot" → "pacbot", "vehra" → "vera", "miendelf" → "mindelf",
       // "tabloos" → "tabulas". Best-effort: if vocab isn't ready yet on
       // the very first query, BM25 retrieval will still try the raw form.
-      if (_vocabReady) clean = fuzzyCorrectQuery(clean, _vocabReady);
+      // Keep the visitor's original wording intact for display + LLM,
+      // and use corrected text only for retrieval ranking.
+      let retrievalQuery = clean;
+      if (_vocabReady) retrievalQuery = fuzzyCorrectQuery(retrievalQuery, _vocabReady);
       // First interaction collapses the topic grid — the conversation owns
       // the panel from this point on. The chips bar still surfaces topics.
       if (topicsEl && !topicsEl.hidden) topicsEl.hidden = true;
-      addBubble('user', escapeHtml(clean));
+      addBubble('user', escapeHtml(raw));
       input.value = '';
 
       // 1) Guard rails first — anything abusive, NSFW, an injection attempt,
@@ -1757,7 +1771,7 @@ is always appreciated but never required.
         // Replace the placeholder bubble in-place so it doesn't pile up.
         const bubble = document.getElementById(thinkingId);
         if (!index || !index.docs?.length) {
-          if (bubble) bubble.innerHTML = noMatchAnswer(clean);
+          if (bubble) bubble.innerHTML = noMatchAnswer(raw);
           renderChips(STARTER_CHIPS);
           saveTranscript();
           return;
@@ -1766,8 +1780,8 @@ is always appreciated but never required.
         // query race), do it now against the loaded vocab so BM25 has
         // a fair shot at matching mis-spelled proper nouns.
         if (!_vocabReady) await loadVocab();
-        if (_vocabReady) clean = fuzzyCorrectQuery(clean, _vocabReady);
-        const scored = rank(index, clean);
+        if (_vocabReady) retrievalQuery = fuzzyCorrectQuery(clean, _vocabReady);
+        const scored = rank(index, retrievalQuery);
         // Send a wider context to the LLM — it can pick the relevant bits
         // and ignore the rest. Cheaper than refusing a question we COULD have
         // answered if we'd looked further down the list.
@@ -1776,9 +1790,9 @@ is always appreciated but never required.
         // The model is grounded by the chunks and will refuse on its own if
         // none are relevant — much rarer than the old client-side cutoff.
         if (!top.length || top[0].s < 0.6) {
-          if (bubble) bubble.innerHTML = noMatchAnswer(clean);
+          if (bubble) bubble.innerHTML = noMatchAnswer(raw);
           renderChips(STARTER_CHIPS);
-          if (speakReplies) speak(stripHtml(noMatchAnswer(clean)));
+          if (speakReplies) speak(stripHtml(noMatchAnswer(raw)));
           saveTranscript();
           return;
         }
@@ -1788,14 +1802,14 @@ is always appreciated but never required.
         // always gets something useful.
         if (MAI_WORKER_URL && !aiPaused) {
           if (bubble) bubble.innerHTML = '<span class="mai-thinking text-muted">Reading the relevant pages<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>';
-          const ok = await askWorker(clean, top, bubble);
+          const ok = await askWorker(raw, top, bubble);
           if (ok) {
             renderChips(STARTER_CHIPS);
             return;
           }
           // Fell through \u2014 fall back to plain retrieval below.
         }
-        const html = renderRetrieval(top, clean);
+        const html = renderRetrieval(top, retrievalQuery);
         if (bubble) bubble.innerHTML = html;
         renderChips(STARTER_CHIPS);
         if (speakReplies) {
@@ -1874,10 +1888,12 @@ is always appreciated but never required.
 
     // ---------- Voice in (Web Speech API — SpeechRecognition) ----------
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const UA = navigator.userAgent || '';
     // iOS Safari technically exposes webkitSpeechRecognition but the
     // implementation is unreliable in the wild — frequent silent failures,
     // no recognition events on some iOS versions. Warn the user once.
-    const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const IS_IOS = /iPad|iPhone|iPod/.test(UA) && !window.MSStream;
+    const IS_ELECTRON = /\bElectron\/\d+/i.test(UA);
     let recog = null;
     let listening = false;
     // Track the "Listening…" placeholder bubble so we can clear it on result
@@ -1962,6 +1978,15 @@ is always appreciated but never required.
         addBubble(
           'mai',
           `Voice input isn't supported in this browser. It works in Chrome and Edge on desktop. You can type your question instead.`,
+        );
+        return;
+      }
+      // Embedded app browsers (including Electron-hosted webviews) often
+      // expose SpeechRecognition but fail to reach speech services.
+      if (IS_ELECTRON) {
+        addBubble(
+          'mai',
+          `Voice input is limited in embedded app browsers. Open this site in Chrome, Edge, or Safari, then try the mic again. You can type your question here anytime.`,
         );
         return;
       }
