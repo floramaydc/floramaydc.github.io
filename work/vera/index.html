@@ -1668,6 +1668,7 @@
     // no recognition events on some iOS versions. Warn the user once.
     const IS_IOS = /iPad|iPhone|iPod/.test(UA) && !window.MSStream;
     const IS_ELECTRON = /\bElectron\/\d+/i.test(UA);
+    const IS_EDGE = /\bEdg\//.test(UA);
     let recog = null;
     let listening = false;
     // Track the "Listening…" placeholder bubble so we can clear it on result
@@ -1731,7 +1732,9 @@
         const msg =
           code === 'network' && navigator.onLine === false
             ? `You're offline right now, so voice input can't start. Reconnect to the internet and try again, or type your question.`
-            : MIC_ERROR_COPY[code] || `The microphone didn't respond (${escapeHtml(code)}). You can type instead.`;
+            : code === 'network' && IS_EDGE
+              ? `Edge could not reach the speech service. In Edge, allow mic access for this site, set Tracking prevention to Balanced (not Strict), and temporarily disable ad/privacy extensions for floramaydc.com, then try again.`
+              : MIC_ERROR_COPY[code] || `The microphone didn't respond (${escapeHtml(code)}). You can type instead.`;
         addBubble('mai', msg);
       });
     }
