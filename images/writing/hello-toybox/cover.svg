@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="A simple toolbox sketch on cream">
+  <rect width="1600" height="1200" fill="#e5e3dc"/>
+  <g stroke="#303636" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Toolbox body -->
+    <rect x="430" y="520" width="740" height="430" rx="14" fill="#fff"/>
+    <!-- Lid -->
+    <rect x="430" y="430" width="740" height="100" rx="10" fill="#fff"/>
+    <!-- Handle -->
+    <path d="M 700 430 Q 700 320 800 320 Q 900 320 900 430"/>
+    <!-- Divider -->
+    <line x1="800" y1="540" x2="800" y2="940"/>
+    <!-- Tools peeking from inside left compartment -->
+    <line x1="500" y1="700" x2="620" y2="580"/>
+    <circle cx="500" cy="700" r="22" fill="#d4967d" stroke="#303636"/>
+    <line x1="560" y1="780" x2="700" y2="640"/>
+    <circle cx="560" cy="780" r="18" fill="#495a58" stroke="#303636"/>
+    <!-- Tools right compartment -->
+    <rect x="860" y="600" width="240" height="40" rx="6" fill="#d4967d"/>
+    <rect x="860" y="680" width="180" height="40" rx="6" fill="#fff"/>
+    <rect x="860" y="760" width="220" height="40" rx="6" fill="#495a58"/>
+  </g>
+  <text x="800" y="1080" text-anchor="middle"
+        font-family="Libre Baskerville, Georgia, serif"
+        font-style="italic" font-size="44" fill="#6b7373">a toybox, opened</text>
+</svg>

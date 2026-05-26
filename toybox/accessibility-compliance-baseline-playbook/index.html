@@ -1,0 +1,2194 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="The four global primitives every app owes the user, the WCAG row-by-row enforcement matrix, and the merge checklist that catches regressions before they ship. Companion to the Accessibility Annotation Playbook."><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="canonical" href="https://www.floramaydc.com/toybox/accessibility-compliance-baseline-playbook/"><link rel="alternate" type="application/rss+xml" title="Flora May dela Cruz — Writing" href="https://www.floramaydc.com/rss.xml"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Flora May dela Cruz"><meta property="og:title" content="The Accessibility Compliance Baseline Playbook — Toybox"><meta property="og:description" content="The four global primitives every app owes the user, the WCAG row-by-row enforcement matrix, and the merge checklist that catches regressions before they ship. Companion to the Accessibility Annotation Playbook."><meta property="og:url" content="https://www.floramaydc.com/toybox/accessibility-compliance-baseline-playbook/"><meta property="og:image" content="https://www.floramaydc.com/og-default.png"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Accessibility Compliance Baseline Playbook — Toybox"><meta name="twitter:description" content="The four global primitives every app owes the user, the WCAG row-by-row enforcement matrix, and the merge checklist that catches regressions before they ship. Companion to the Accessibility Annotation Playbook."><meta name="twitter:image" content="https://www.floramaydc.com/og-default.png"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&family=Almarai:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"><meta name="generator" content="Astro v5.18.1"><script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var dark = stored ? stored === 'dark' : prefersDark;
+          if (dark) document.documentElement.classList.add('dark');
+          requestAnimationFrame(function () {
+            document.documentElement.classList.add('theme-ready');
+          });
+        } catch (e) {}
+      })();
+    </script><script>
+      (function () {
+        try {
+          if (sessionStorage.getItem('mai-open') === 'true') {
+            document.documentElement.classList.add('mai-open');
+          }
+        } catch (e) {}
+      })();
+    </script><script>
+      (function () {
+        var header;
+        var ticking = false;
+        var threshold = 24;
+        function update() {
+          ticking = false;
+          if (!header) return;
+          if (window.scrollY > threshold) {
+            header.classList.add('is-scrolled');
+          } else {
+            header.classList.remove('is-scrolled');
+          }
+        }
+        function onScroll() {
+          if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+          }
+        }
+        function init() {
+          header = document.querySelector('.site-header');
+          update();
+          window.addEventListener('scroll', onScroll, { passive: true });
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script><title>The Accessibility Compliance Baseline Playbook — Toybox</title><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"The Accessibility Compliance Baseline Playbook","headline":"The Accessibility Compliance Baseline Playbook","description":"The four global primitives every app owes the user, the WCAG row-by-row enforcement matrix, and the merge checklist that catches regressions before they ship. Companion to the Accessibility Annotation Playbook.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://www.floramaydc.com/about"},"url":"https://www.floramaydc.com/toybox/accessibility-compliance-baseline-playbook/","license":"https://creativecommons.org/publicdomain/zero/1.0/","dateModified":"2026-05-23T00:00:00.000Z","keywords":"accessibility, wcag, engineering-handoff, compliance","genre":"Playbooks"}</script><link rel="stylesheet" href="/_astro/about.CL24vZJV.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave text-ink/20 dark:text-ink/[0.18]" aria-hidden="true"> <svg viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg"> <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path> <path d="M-20,192 C200,152 380,252 560,222 C740,192 900,292 1080,262 C1260,232 1440,312 1620,282"></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <header class="site-header sticky top-0 z-30"> <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5"> <a href="/" class="font-script text-3xl md:text-4xl leading-none text-ink hover:text-accent transition-colors">Flora May</a> <div class="flex items-center gap-3 md:gap-5"> <ul class="hidden md:flex items-center gap-6 text-sm"> <li><a href="/toybox" class="hover:text-accent">Toybox</a></li> <li><a href="/work" class="hover:text-accent">Work</a></li> <li><a href="/play" class="hover:text-accent">Play</a></li> <li><a href="/writing" class="hover:text-accent">Writing</a></li> <li><a href="/about" class="hover:text-accent">About</a></li> </ul> <button id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch theme" class="inline-flex h-9 w-9 items-center justify-center text-ink hover:text-accent transition-colors"> <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> <svg id="theme-icon-sun" hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <line x1="12" y1="2" x2="12" y2="5"></line> <line x1="12" y1="19" x2="12" y2="22"></line> <line x1="2" y1="12" x2="5" y2="12"></line> <line x1="19" y1="12" x2="22" y2="12"></line> <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"></line> <line x1="16.95" y1="16.95" x2="19.07" y2="19.07"></line> <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"></line> <line x1="16.95" y1="7.05" x2="19.07" y2="4.93"></line> </svg> </button> <button id="nav-toggle" class="md:hidden inline-flex h-9 w-9 items-center justify-center text-ink hover:text-accent transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="20" y2="17"></line> </svg> </button> </div> </nav> <!--
+        Mobile menu — an off-canvas drawer that overlays the page rather
+        than pushing the content. Inspired by editorial sites (Bustle et al):
+        big serif typography, generous spacing, dividers between items,
+        social links at the bottom of the panel.
+      --> <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[60] md:hidden" data-open="false" aria-hidden="true"> <button type="button" class="mobile-menu-backdrop absolute inset-0 bg-ink/40 backdrop-blur-[2px]" aria-label="Close menu" tabindex="-1"></button> <aside class="mobile-menu-panel absolute top-0 right-0 h-full w-[85%] max-w-sm bg-paper border-l border-ink/10 shadow-2xl shadow-ink/20 flex flex-col" role="dialog" aria-modal="true" aria-label="Site menu"> <div class="flex items-center justify-between px-6 py-5 border-b border-ink/10"> <span class="font-script text-3xl leading-none text-ink">Flora May</span> <button id="nav-close" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded text-ink hover:text-accent transition-colors" aria-label="Close menu"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="6" y1="6" x2="18" y2="18"></line> <line x1="6" y1="18" x2="18" y2="6"></line> </svg> </button> </div> <nav class="flex-1 overflow-y-auto px-6 py-2"> <ul class="flex flex-col divide-y divide-ink/10"> <li class="mobile-menu-item" data-expandable="true"> <div class="mobile-menu-row"> <a href="/toybox" class="mobile-menu-link">Toybox</a> <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="submenu-toybox" aria-label="Show Toybox sections"> <svg class="mobile-menu-plus" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="12" y1="5" x2="12" y2="19"></line> <line x1="5" y1="12" x2="19" y2="12"></line> </svg> </button> </div> <ul id="submenu-toybox" class="mobile-menu-submenu" hidden> <li><a href="/toybox#playbooks">Playbooks</a></li> <li><a href="/toybox#prompts">Prompts</a></li> <li><a href="/toybox#one-pagers">One-pagers</a></li> <li><a href="/toybox#patterns">Patterns</a></li> </ul> </li> <li class="mobile-menu-item" data-expandable="true"> <div class="mobile-menu-row"> <a href="/work" class="mobile-menu-link">Work</a> <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="submenu-work" aria-label="Show selected work"> <svg class="mobile-menu-plus" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="12" y1="5" x2="12" y2="19"></line> <line x1="5" y1="12" x2="19" y2="12"></line> </svg> </button> </div> <ul id="submenu-work" class="mobile-menu-submenu" hidden> <li><a href="/work/aws-code-catalyst">AWS CodeCatalyst</a></li> <li><a href="/work/pacbot">PacBot</a></li> <li><a href="/work/vera">Vera</a></li> <li><a href="/work/mindelf">Mind Elf</a></li> <li><a href="/work/ebbc">Elliott Bay Book Co.</a></li> </ul> </li> <li class="mobile-menu-item" data-expandable="true"> <div class="mobile-menu-row"> <a href="/play" class="mobile-menu-link">Play</a> <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="submenu-play" aria-label="Show play projects"> <svg class="mobile-menu-plus" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="12" y1="5" x2="12" y2="19"></line> <line x1="5" y1="12" x2="19" y2="12"></line> </svg> </button> </div> <ul id="submenu-play" class="mobile-menu-submenu" hidden> <li><a href="/play/no-dream-is-too-big">No Dream Is Too Big</a></li> <li><a href="/play/pale-and-bright">Pale &amp; Bright</a></li> <li><a href="/play/tabulas">Tabulas</a></li> <li><a href="/play/art">Art</a></li> </ul> </li> <li class="mobile-menu-item"> <div class="mobile-menu-row"> <a href="/writing" class="mobile-menu-link">Writing</a> </div> </li> <li class="mobile-menu-item"> <div class="mobile-menu-row"> <a href="/about" class="mobile-menu-link">About</a> </div> </li> </ul> </nav> <div class="border-t border-ink/10 px-6 py-5 flex items-center gap-5 text-xs uppercase tracking-[0.18em] text-muted"> <a href="https://linkedin.com/in/floramaydelacruz" class="hover:text-accent">LinkedIn</a> <a href="https://instagram.com/floramaydc" class="hover:text-accent">Instagram</a> <a href="https://github.com/floramaydc" class="hover:text-accent">GitHub</a> </div> </aside> </div> <script>
+        (function () {
+          const btn = document.getElementById('nav-toggle');
+          const menu = document.getElementById('mobile-menu');
+          if (!btn || !menu) return;
+          const closeBtn = document.getElementById('nav-close');
+          const backdrop = menu.querySelector('.mobile-menu-backdrop');
+
+          function setOpen(open) {
+            menu.dataset.open = open ? 'true' : 'false';
+            menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            document.documentElement.classList.toggle('mobile-menu-open', open);
+          }
+
+          // Restore focus to the trigger button when the drawer closes,
+          // per the Accessibility Annotation Playbook ("focus on close/
+          // dismiss returns to <trigger>"). Without this, focus lands
+          // on <body> after Escape or backdrop click.
+          const _setOpen = setOpen;
+          setOpen = function (open) {
+            const wasOpen = menu.dataset.open === 'true';
+            _setOpen(open);
+            if (wasOpen && !open) {
+              // Defer so the visibility transition starts first.
+              requestAnimationFrame(() => btn.focus());
+            }
+          };
+
+          btn.addEventListener('click', () => setOpen(menu.dataset.open !== 'true'));
+          closeBtn?.addEventListener('click', () => setOpen(false));
+          backdrop?.addEventListener('click', () => setOpen(false));
+
+          // Focus trap: while the drawer is open, keep Tab inside the
+          // panel. Without this, Tab leaks to the (visually obscured)
+          // page underneath — a WCAG 2.4.3 focus-order fail.
+          const panel = menu.querySelector('.mobile-menu-panel');
+          menu.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab' || menu.dataset.open !== 'true' || !panel) return;
+            const focusables = panel.querySelectorAll(
+              'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            );
+            const visible = Array.from(focusables).filter((el) => {
+              if (el.hasAttribute('hidden')) return false;
+              // Skip elements inside a hidden submenu.
+              const sub = el.closest('.mobile-menu-submenu');
+              if (sub && sub.hidden) return false;
+              return true;
+            });
+            if (visible.length === 0) return;
+            const first = visible[0];
+            const last = visible[visible.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          });
+
+          // Any link or button inside the drawer closes it on activation,
+          // so the user lands on the next page with no stale overlay.
+          menu.querySelectorAll('a, [data-mai-open]').forEach((el) => {
+            el.addEventListener('click', () => setOpen(false));
+          });
+
+          // Expandable sections: tap `+` to reveal the submenu, tap again
+          // (or the rotated `\u00d7`) to collapse it. The label link itself
+          // still navigates \u2014 the `+` is a separate hit target.
+          menu.querySelectorAll('.mobile-menu-toggle').forEach((toggle) => {
+            // Keep the aria-label in sync with the expanded state so
+            // screen readers say "Hide …" once the section is open.
+            const baseLabel = toggle.getAttribute('aria-label') || '';
+            const showLabel = baseLabel;
+            const hideLabel = baseLabel.replace(/^Show\b/, 'Hide');
+            toggle.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const id = toggle.getAttribute('aria-controls');
+              const sub = id && document.getElementById(id);
+              if (!sub) return;
+              const expanded = toggle.getAttribute('aria-expanded') === 'true';
+              toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+              toggle.setAttribute('aria-label', expanded ? showLabel : hideLabel);
+              sub.hidden = expanded;
+            });
+          });
+
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && menu.dataset.open === 'true') setOpen(false);
+          });
+        })();
+      </script>  </header> <main id="main-content" tabindex="-1" aria-label="The Accessibility Compliance Baseline Playbook — Toybox" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none">  <article class="max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">The Accessibility Compliance Baseline Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">The Accessibility Compliance Baseline Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">The four global primitives every app owes the user, the WCAG row-by-row enforcement matrix, and the merge checklist that catches regressions before they ship. Companion to the Accessibility Annotation Playbook.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">accessibility</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">wcag</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">engineering-handoff</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">compliance</span> </div> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
+<p>The Accessibility Annotation Playbook is about how to <em>spec</em> accessible behavior into a design. This is its companion: how to <em>prove it shipped</em>. WCAG 2.1 Level AA is the procurement bar for almost every enterprise customer, and the way teams pass it is not heroics on the last sprint — it’s four global primitives wired into the app shell once, a row-by-row matrix that names where each success criterion is enforced, and a small PR checklist that prevents regressions.</p>
+<p>This playbook is the baseline. It’s deliberately not a complete a11y guide. It’s the smallest set of moves that, applied once, make 80% of WCAG AA pass by default for every future feature.</p>
+<h2 id="when-to-use-it">When to use it</h2>
+<ul>
+<li>A new product where accessibility is a stated requirement (it almost always is for enterprise)</li>
+<li>A product being audited for the first time and you need to know what to fix first</li>
+<li>A prototype being prepared for user research that will include AT users</li>
+<li>A team adding their first accessibility-trained engineer or designer who needs a map</li>
+<li>After every feature merge, as a regression check</li>
+</ul>
+<p>Skip this for one-off marketing pages — those have their own compliance pattern (mostly contrast, alt text, and reduced-motion). This playbook is for <em>application</em> surfaces with navigation, dialogs, live updates, and data grids.</p>
+<h2 id="core-framework">Core framework</h2>
+<h3 id="the-four-global-primitives">The four global primitives</h3>
+<p>Most accessibility work scales linearly with the number of features. Four primitives don’t — wire them in once at the shell level and every future feature inherits them.</p>
+<p><strong>1. Skip-to-content link.</strong> First tabbable element on every page. Visually hidden until focused. Target: <code>#main-content</code>. Without it, keyboard users tab through the entire nav on every page load.</p>
+<p><strong>2. Programmatically focusable main region.</strong> A single <code>&#x3C;main id="main-content" tabIndex={-1}></code> per route. The skip link’s target, and the landing spot for route-transition focus moves when individual features need them.</p>
+<p><strong>3. A global polite live region.</strong> One <code>&#x3C;div id="app-live-region" role="status" aria-live="polite" aria-atomic="true"></code> mounted at the shell. Visually hidden. Any feature that needs to announce a result (toast appeared, refresh complete, copy succeeded, route changed) pushes text into it via a single imperative helper. No per-feature live regions; one is enough.</p>
+<p><strong>4. A <code>document.title</code> effect tied to routing.</strong> When the route changes, the document title updates from a small map of <code>route → title</code>. Screen readers announce title changes on most platforms; this is the cheapest, most universal route-change announcement available.</p>
+<p>Build these four once. Stop solving them per-feature.</p>
+<h3 id="the-compliance-matrix">The compliance matrix</h3>
+<p>For each WCAG 2.1 success criterion the team commits to, name <em>where it is enforced</em> — the shell, a shared component, or a per-feature requirement. The matrix doubles as both a checklist and an architecture map.</p>
+<p>A working matrix has three columns: the criterion, the title, the location of enforcement. Examples (this is the structure, not the full list):</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>SC</th><th>Title</th><th>Where enforced</th></tr></thead><tbody><tr><td>1.1.1</td><td>Non-text Content</td><td>Per-feature: decorative SVGs marked aria-hidden; meaningful icons get aria-label on their parent control</td></tr><tr><td>1.3.1</td><td>Info and Relationships</td><td>Shell: one main landmark, header/nav/aside landmarks. Per-feature: heading hierarchy starts with the page h1</td></tr><tr><td>1.4.1</td><td>Use of Color</td><td>Per-feature: status pills always include text alongside color; charts always paired with adjacent numeric label</td></tr><tr><td>1.4.3</td><td>Contrast (Minimum)</td><td>Design tokens: all text colors selected against AA contrast at default backgrounds</td></tr><tr><td>1.4.10</td><td>Reflow</td><td>Layout system (see Enterprise Reflow Playbook); data tables exempted via WCAG table exception</td></tr><tr><td>1.4.11</td><td>Non-text Contrast</td><td>Design tokens: focus ring token meets 3:1 against all surfaces</td></tr><tr><td>2.1.1</td><td>Keyboard</td><td>Per-feature: real <code>&#x3C;button></code> over <code>&#x3C;div onClick></code>; if div is required, role=button + tabIndex + onKeyDown</td></tr><tr><td>2.1.2</td><td>No Keyboard Trap</td><td>Shell: Escape closes mobile nav overlay; component library: dialogs handle Escape natively</td></tr><tr><td>2.3.3</td><td>Animation from Interactions</td><td>Global CSS rule: <code>prefers-reduced-motion: reduce</code> disables transitions and animations</td></tr><tr><td>2.4.1</td><td>Bypass Blocks</td><td>Shell: skip-to-content link</td></tr><tr><td>2.4.2</td><td>Page Titled</td><td>Shell: document.title effect</td></tr><tr><td>2.4.3</td><td>Focus Order</td><td>Shell: focus returns to trigger when overlay closes</td></tr><tr><td>2.4.7</td><td>Focus Visible</td><td>Design tokens: all interactives expose :focus-visible outlines</td></tr><tr><td>3.1.1</td><td>Language of Page</td><td>HTML lang attribute set once at the document root</td></tr><tr><td>4.1.2</td><td>Name, Role, Value</td><td>Per-feature: icon-only buttons get aria-label; disclosure buttons get aria-expanded; toggle buttons get aria-pressed</td></tr><tr><td>4.1.3</td><td>Status Messages</td><td>Shell: global polite live region + one imperative helper</td></tr></tbody></table>
+<p>The pattern: ten or so rows enforced once at the shell or via tokens, the rest enforced per feature. The shell rows are non-negotiable infrastructure. The per-feature rows are the merge-checklist material.</p>
+<h3 id="the-acceptance-checklist">The acceptance checklist</h3>
+<p>Eight lines, applied to every PR adding or modifying a user-facing feature.</p>
+<ul>
+<li>No new <code>&#x3C;div onClick></code> without <code>role="button"</code>, <code>tabIndex={0}</code>, and <code>onKeyDown</code> handling Enter and Space</li>
+<li>Every new icon-only button has an <code>aria-label</code> AND a tooltip</li>
+<li>Every new image has <code>alt</code> (empty if decorative)</li>
+<li>Every new color- or state-encoding has a non-color companion: text, icon, or pattern</li>
+<li>Every new dialog or drawer either uses the component-library dialog primitive (which handles focus trap and Escape) OR carries <code>role="dialog"</code>, <code>aria-modal</code>, Escape handling, and focus restore on close</li>
+<li>Every new animation is gated by <code>prefers-reduced-motion</code> or limited to ≤ 200ms</li>
+<li>Every new route has a matching entry in the document-title map</li>
+<li>The merged route scores ≥ 95 on an automated a11y audit</li>
+</ul>
+<p>Eight items, ten minutes per PR. The matrix tells the team <em>what compliance means</em>; the checklist is how they enforce it without a specialist on every review.</p>
+<h2 id="reusable-template">Reusable template</h2>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold"># Accessibility baseline — &#x3C;product></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Target</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> WCAG 2.1 Level AA</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Global primitives (built once at the shell)</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> [ ] Skip-to-content link, first tabbable, hidden until focused</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> [ ] &#x3C;main id="main-content" tabIndex={-1}> on every route</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> [ ] &#x3C;div id="app-live-region" role="status" aria-live="polite" aria-atomic="true"></span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> [ ] document.title effect mapping route → human-readable title</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Compliance matrix</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;paste matrix; one row per committed SC; column for where enforced></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Acceptance checklist (per PR)</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">&#x3C;paste 8-line checklist></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Testing</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Automated: lint plugin for jsx-a11y, runtime axe in dev, Lighthouse on preview deploys</span></span>
+<span class="line"><span style="color:#E36209;--shiki-dark:#FFAB70">-</span><span style="color:#24292E;--shiki-dark:#E1E4E8"> Manual: keyboard-only sweep, screen reader on macOS + Windows, reduced-motion enabled,</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">  400% zoom, forced-colors / high-contrast</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#005CC5;--shiki-light-font-weight:bold;--shiki-dark:#79B8FF;--shiki-dark-font-weight:bold">## Known gaps (with named owners and target dates)</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">| Item | Owner | Target |</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">|---|---|---|</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E1E4E8">| ...  | ...   | ...    |</span></span></code></pre>
+<p>The Known Gaps table is what separates a real baseline from a wishlist. Every gap has an owner. Every gap has a date. A baseline document with no gaps named is either lying or hasn’t been audited yet.</p>
+<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
+<h3 id="prompt-derive-the-compliance-matrix-from-a-feature-list">Prompt: derive the compliance matrix from a feature list</h3>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Below is a list of features in an enterprise app. For each WCAG 2.1</span></span>
+<span class="line"><span>Level AA success criterion, name where it should be enforced for this</span></span>
+<span class="line"><span>product. Use these three locations:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1. SHELL — built once at the application root</span></span>
+<span class="line"><span>2. DESIGN TOKENS / COMPONENT LIBRARY — enforced by shared primitives</span></span>
+<span class="line"><span>3. PER-FEATURE — must be specced and reviewed feature-by-feature</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Output: a three-column table (SC number, title, location). If the</span></span>
+<span class="line"><span>location depends on the feature, name the dependency.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;paste feature list></span></span></code></pre>
+<h3 id="prompt-audit-a-component-spec-for-compliance-gaps">Prompt: audit a component spec for compliance gaps</h3>
+<pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Below is a component spec. Identify every WCAG 2.1 Level AA gap and</span></span>
+<span class="line"><span>classify each as one of:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- "Missing semantic": role, aria-label, or landmark not specified</span></span>
+<span class="line"><span>- "Missing keyboard": no keyboard equivalent for a mouse action</span></span>
+<span class="line"><span>- "Missing state": dynamic state not exposed (aria-expanded,</span></span>
+<span class="line"><span>  aria-pressed, aria-sort, etc.)</span></span>
+<span class="line"><span>- "Color-only encoding": status conveyed only by color</span></span>
+<span class="line"><span>- "Animation harm": animation not gated by prefers-reduced-motion or</span></span>
+<span class="line"><span>  exceeding 200ms without justification</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>For each gap, suggest the minimal fix.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;paste spec></span></span></code></pre>
+<p>Both prompts are <em>checkpoint</em> tools, not generators. The matrix and the spec still need a human author. AI tightens them.</p>
+<h2 id="collaboration-considerations">Collaboration considerations</h2>
+<ul>
+<li><strong>For engineers:</strong> the four global primitives are one engineering ticket, not eight. Scope it as one. The payoff compounds across every future feature.</li>
+<li><strong>For PMs:</strong> WCAG AA is procurement-required for nearly every enterprise customer. The matrix is the most efficient artifact to hand to a customer’s accessibility team during sales — it answers “how do you ensure WCAG AA” without anyone having to write a custom response.</li>
+<li><strong>For designers:</strong> the annotation playbook describes what to spec; this describes what survives once it’s built. Read them together. The 4.1.3 status-message row in particular is something designers often spec inconsistently per feature; pointing at the one live region in the shell makes it consistent.</li>
+<li><strong>For QA:</strong> the eight-item PR checklist is more catch-rate than any one tool. Automate what you can (jsx-a11y, axe-core, Lighthouse) and treat the checklist as the thing humans verify.</li>
+<li><strong>For accessibility specialists / consultants:</strong> the matrix is the artifact to negotiate. Disagreement about “where is this enforced” is what teams should have explicit conversations about; the matrix turns those conversations from generic into concrete.</li>
+</ul>
+<h2 id="common-failure-patterns">Common failure patterns</h2>
+<ol>
+<li><strong>One live region per feature.</strong> Each toast component re-implements its own <code>aria-live</code> div. Screen readers announce stacked or competing messages. Use <em>one</em>.</li>
+<li><strong>No skip link.</strong> Easy to forget; one of the highest-leverage 30 minutes of work in any application.</li>
+<li><strong><code>&#x3C;main></code> not focusable.</strong> Skip link works on the first activation, then subsequent activations do nothing because focus has nowhere to land.</li>
+<li><strong>Document title never updates.</strong> All routes are titled “App” in the browser tab. Both confusing and a WCAG 2.4.2 fail.</li>
+<li><strong>Per-feature focus-ring re-implementation.</strong> Inconsistent focus rings across components, often with contrast failures. Put the ring in tokens.</li>
+<li><strong><code>prefers-reduced-motion</code> only respected in CSS, not in JS.</strong> A Houdini paint worklet, a canvas animation, or a JS-driven gauge keeps moving. Gate registration of the animation itself.</li>
+<li><strong>Icon-only button with <code>aria-label</code> but no tooltip.</strong> Sighted keyboard users have no idea what the button does.</li>
+<li><strong>Color-only status pill.</strong> Green badge, red badge, no text. Fail for color-blind users <em>and</em> anyone using a high-contrast theme that may render both as the same shade.</li>
+<li><strong>Hand-rolled dialog without focus trap.</strong> Tab leaks out to the background page. Use the component-library dialog whenever possible.</li>
+<li><strong>No Known Gaps table.</strong> Document claims full compliance and the auditor finds three gaps in fifteen minutes. Naming gaps openly is faster than discovering them late.</li>
+</ol>
+<h2 id="generalized-example">Generalized example</h2>
+<p>A fictional <strong>fleet-management dashboard</strong>. Application shell wired with: a skip link, a focusable <code>&#x3C;main></code>, a single polite live region, and a route-to-title map. The compliance matrix is reviewed at the start of the project; ten SCs are enforced once (shell + tokens), six are flagged per-feature. The PR checklist is added to the team’s pull-request template.</p>
+<p>Six months in, a new feature adds a “schedule recall” action. The PR checklist catches three issues the author hadn’t thought about: the icon-only “more actions” menu has an <code>aria-label</code> but no tooltip, the success toast was about to spin up its own <code>aria-live</code> div instead of calling <code>announce()</code>, and the modal’s Escape handler was missing because it was hand-rolled instead of using the dialog primitive. Fixed in fifteen minutes — instead of caught by an auditor four sprints later.</p>
+<p>That’s the whole point of the baseline. Compliance scales when most of it is invisible infrastructure and the rest is an eight-line checklist.</p>
+<hr>
+<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
+</ul> </div> <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="accessibility-compliance-baseline-playbook" data-title="The Accessibility Compliance Baseline Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="accessibility-compliance-baseline-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
+Drop your email to copy the markdown or download the file. One email unlocks every playbook in the Toybox.
+</p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-accessibility-compliance-baseline-playbook">Email address</label> <input id="pb-email-accessibility-compliance-baseline-playbook" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
+Unlock copy &amp; download
+</button> </form> <p class="form-status mt-2 text-xs text-muted" aria-live="polite"></p> <p class="mt-3 text-xs text-muted">
+No spam. Occasional notes on new playbooks. Unsubscribe in one click.
+</p> </div> <!-- UNLOCKED VIEW --> <div class="unlocked hidden"> <p class="text-sm font-medium text-ink">Yours to use</p> <p class="mt-1 text-sm text-muted">
+Free to use anywhere under <a class="underline hover:text-accent" href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0 1.0</a> — public domain, no attribution required. Author credit lives in the file's frontmatter.
+</p> <div class="mt-3 flex flex-wrap gap-2"> <button type="button" class="copy-btn rounded-md border border-ink/20 bg-paper px-4 py-2 text-sm font-medium text-ink hover:bg-cream transition-colors">
+Copy as markdown
+</button> <button type="button" class="download-btn rounded-md border border-ink/20 bg-paper px-4 py-2 text-sm font-medium text-ink hover:bg-cream transition-colors">
+Download .md
+</button> </div> <p class="action-status mt-2 text-xs text-muted" aria-live="polite"></p> </div> </section> <!-- Raw body is embedded as a non-rendered template so the script can read it
+     without escaping pitfalls. --> <template class="playbook-raw" data-for="accessibility-compliance-baseline-playbook">## Purpose
+
+The Accessibility Annotation Playbook is about how to *spec* accessible behavior into a design. This is its companion: how to *prove it shipped*. WCAG 2.1 Level AA is the procurement bar for almost every enterprise customer, and the way teams pass it is not heroics on the last sprint — it&#39;s four global primitives wired into the app shell once, a row-by-row matrix that names where each success criterion is enforced, and a small PR checklist that prevents regressions.
+
+This playbook is the baseline. It&#39;s deliberately not a complete a11y guide. It&#39;s the smallest set of moves that, applied once, make 80% of WCAG AA pass by default for every future feature.
+
+## When to use it
+
+- A new product where accessibility is a stated requirement (it almost always is for enterprise)
+- A product being audited for the first time and you need to know what to fix first
+- A prototype being prepared for user research that will include AT users
+- A team adding their first accessibility-trained engineer or designer who needs a map
+- After every feature merge, as a regression check
+
+Skip this for one-off marketing pages — those have their own compliance pattern (mostly contrast, alt text, and reduced-motion). This playbook is for *application* surfaces with navigation, dialogs, live updates, and data grids.
+
+## Core framework
+
+### The four global primitives
+
+Most accessibility work scales linearly with the number of features. Four primitives don&#39;t — wire them in once at the shell level and every future feature inherits them.
+
+**1. Skip-to-content link.** First tabbable element on every page. Visually hidden until focused. Target: `#main-content`. Without it, keyboard users tab through the entire nav on every page load.
+
+**2. Programmatically focusable main region.** A single `&lt;main id=&quot;main-content&quot; tabIndex={-1}&gt;` per route. The skip link&#39;s target, and the landing spot for route-transition focus moves when individual features need them.
+
+**3. A global polite live region.** One `&lt;div id=&quot;app-live-region&quot; role=&quot;status&quot; aria-live=&quot;polite&quot; aria-atomic=&quot;true&quot;&gt;` mounted at the shell. Visually hidden. Any feature that needs to announce a result (toast appeared, refresh complete, copy succeeded, route changed) pushes text into it via a single imperative helper. No per-feature live regions; one is enough.
+
+**4. A `document.title` effect tied to routing.** When the route changes, the document title updates from a small map of `route → title`. Screen readers announce title changes on most platforms; this is the cheapest, most universal route-change announcement available.
+
+Build these four once. Stop solving them per-feature.
+
+### The compliance matrix
+
+For each WCAG 2.1 success criterion the team commits to, name *where it is enforced* — the shell, a shared component, or a per-feature requirement. The matrix doubles as both a checklist and an architecture map.
+
+A working matrix has three columns: the criterion, the title, the location of enforcement. Examples (this is the structure, not the full list):
+
+| SC | Title | Where enforced |
+|---|---|---|
+| 1.1.1 | Non-text Content | Per-feature: decorative SVGs marked aria-hidden; meaningful icons get aria-label on their parent control |
+| 1.3.1 | Info and Relationships | Shell: one main landmark, header/nav/aside landmarks. Per-feature: heading hierarchy starts with the page h1 |
+| 1.4.1 | Use of Color | Per-feature: status pills always include text alongside color; charts always paired with adjacent numeric label |
+| 1.4.3 | Contrast (Minimum) | Design tokens: all text colors selected against AA contrast at default backgrounds |
+| 1.4.10 | Reflow | Layout system (see Enterprise Reflow Playbook); data tables exempted via WCAG table exception |
+| 1.4.11 | Non-text Contrast | Design tokens: focus ring token meets 3:1 against all surfaces |
+| 2.1.1 | Keyboard | Per-feature: real `&lt;button&gt;` over `&lt;div onClick&gt;`; if div is required, role=button + tabIndex + onKeyDown |
+| 2.1.2 | No Keyboard Trap | Shell: Escape closes mobile nav overlay; component library: dialogs handle Escape natively |
+| 2.3.3 | Animation from Interactions | Global CSS rule: `prefers-reduced-motion: reduce` disables transitions and animations |
+| 2.4.1 | Bypass Blocks | Shell: skip-to-content link |
+| 2.4.2 | Page Titled | Shell: document.title effect |
+| 2.4.3 | Focus Order | Shell: focus returns to trigger when overlay closes |
+| 2.4.7 | Focus Visible | Design tokens: all interactives expose :focus-visible outlines |
+| 3.1.1 | Language of Page | HTML lang attribute set once at the document root |
+| 4.1.2 | Name, Role, Value | Per-feature: icon-only buttons get aria-label; disclosure buttons get aria-expanded; toggle buttons get aria-pressed |
+| 4.1.3 | Status Messages | Shell: global polite live region + one imperative helper |
+
+The pattern: ten or so rows enforced once at the shell or via tokens, the rest enforced per feature. The shell rows are non-negotiable infrastructure. The per-feature rows are the merge-checklist material.
+
+### The acceptance checklist
+
+Eight lines, applied to every PR adding or modifying a user-facing feature.
+
+- No new `&lt;div onClick&gt;` without `role=&quot;button&quot;`, `tabIndex={0}`, and `onKeyDown` handling Enter and Space
+- Every new icon-only button has an `aria-label` AND a tooltip
+- Every new image has `alt` (empty if decorative)
+- Every new color- or state-encoding has a non-color companion: text, icon, or pattern
+- Every new dialog or drawer either uses the component-library dialog primitive (which handles focus trap and Escape) OR carries `role=&quot;dialog&quot;`, `aria-modal`, Escape handling, and focus restore on close
+- Every new animation is gated by `prefers-reduced-motion` or limited to ≤ 200ms
+- Every new route has a matching entry in the document-title map
+- The merged route scores ≥ 95 on an automated a11y audit
+
+Eight items, ten minutes per PR. The matrix tells the team *what compliance means*; the checklist is how they enforce it without a specialist on every review.
+
+## Reusable template
+
+```md
+# Accessibility baseline — &lt;product&gt;
+
+## Target
+- WCAG 2.1 Level AA
+
+## Global primitives (built once at the shell)
+- [ ] Skip-to-content link, first tabbable, hidden until focused
+- [ ] &lt;main id=&quot;main-content&quot; tabIndex={-1}&gt; on every route
+- [ ] &lt;div id=&quot;app-live-region&quot; role=&quot;status&quot; aria-live=&quot;polite&quot; aria-atomic=&quot;true&quot;&gt;
+- [ ] document.title effect mapping route → human-readable title
+
+## Compliance matrix
+&lt;paste matrix; one row per committed SC; column for where enforced&gt;
+
+## Acceptance checklist (per PR)
+&lt;paste 8-line checklist&gt;
+
+## Testing
+- Automated: lint plugin for jsx-a11y, runtime axe in dev, Lighthouse on preview deploys
+- Manual: keyboard-only sweep, screen reader on macOS + Windows, reduced-motion enabled,
+  400% zoom, forced-colors / high-contrast
+
+## Known gaps (with named owners and target dates)
+| Item | Owner | Target |
+|---|---|---|
+| ...  | ...   | ...    |
+```
+
+The Known Gaps table is what separates a real baseline from a wishlist. Every gap has an owner. Every gap has a date. A baseline document with no gaps named is either lying or hasn&#39;t been audited yet.
+
+## AI-assisted workflow
+
+### Prompt: derive the compliance matrix from a feature list
+
+```text
+Below is a list of features in an enterprise app. For each WCAG 2.1
+Level AA success criterion, name where it should be enforced for this
+product. Use these three locations:
+
+1. SHELL — built once at the application root
+2. DESIGN TOKENS / COMPONENT LIBRARY — enforced by shared primitives
+3. PER-FEATURE — must be specced and reviewed feature-by-feature
+
+Output: a three-column table (SC number, title, location). If the
+location depends on the feature, name the dependency.
+
+&lt;paste feature list&gt;
+```
+
+### Prompt: audit a component spec for compliance gaps
+
+```text
+Below is a component spec. Identify every WCAG 2.1 Level AA gap and
+classify each as one of:
+
+- &quot;Missing semantic&quot;: role, aria-label, or landmark not specified
+- &quot;Missing keyboard&quot;: no keyboard equivalent for a mouse action
+- &quot;Missing state&quot;: dynamic state not exposed (aria-expanded,
+  aria-pressed, aria-sort, etc.)
+- &quot;Color-only encoding&quot;: status conveyed only by color
+- &quot;Animation harm&quot;: animation not gated by prefers-reduced-motion or
+  exceeding 200ms without justification
+
+For each gap, suggest the minimal fix.
+
+&lt;paste spec&gt;
+```
+
+Both prompts are *checkpoint* tools, not generators. The matrix and the spec still need a human author. AI tightens them.
+
+## Collaboration considerations
+
+- **For engineers:** the four global primitives are one engineering ticket, not eight. Scope it as one. The payoff compounds across every future feature.
+- **For PMs:** WCAG AA is procurement-required for nearly every enterprise customer. The matrix is the most efficient artifact to hand to a customer&#39;s accessibility team during sales — it answers &quot;how do you ensure WCAG AA&quot; without anyone having to write a custom response.
+- **For designers:** the annotation playbook describes what to spec; this describes what survives once it&#39;s built. Read them together. The 4.1.3 status-message row in particular is something designers often spec inconsistently per feature; pointing at the one live region in the shell makes it consistent.
+- **For QA:** the eight-item PR checklist is more catch-rate than any one tool. Automate what you can (jsx-a11y, axe-core, Lighthouse) and treat the checklist as the thing humans verify.
+- **For accessibility specialists / consultants:** the matrix is the artifact to negotiate. Disagreement about &quot;where is this enforced&quot; is what teams should have explicit conversations about; the matrix turns those conversations from generic into concrete.
+
+## Common failure patterns
+
+1. **One live region per feature.** Each toast component re-implements its own `aria-live` div. Screen readers announce stacked or competing messages. Use *one*.
+2. **No skip link.** Easy to forget; one of the highest-leverage 30 minutes of work in any application.
+3. **`&lt;main&gt;` not focusable.** Skip link works on the first activation, then subsequent activations do nothing because focus has nowhere to land.
+4. **Document title never updates.** All routes are titled &quot;App&quot; in the browser tab. Both confusing and a WCAG 2.4.2 fail.
+5. **Per-feature focus-ring re-implementation.** Inconsistent focus rings across components, often with contrast failures. Put the ring in tokens.
+6. **`prefers-reduced-motion` only respected in CSS, not in JS.** A Houdini paint worklet, a canvas animation, or a JS-driven gauge keeps moving. Gate registration of the animation itself.
+7. **Icon-only button with `aria-label` but no tooltip.** Sighted keyboard users have no idea what the button does.
+8. **Color-only status pill.** Green badge, red badge, no text. Fail for color-blind users *and* anyone using a high-contrast theme that may render both as the same shade.
+9. **Hand-rolled dialog without focus trap.** Tab leaks out to the background page. Use the component-library dialog whenever possible.
+10. **No Known Gaps table.** Document claims full compliance and the auditor finds three gaps in fifteen minutes. Naming gaps openly is faster than discovering them late.
+
+## Generalized example
+
+A fictional **fleet-management dashboard**. Application shell wired with: a skip link, a focusable `&lt;main&gt;`, a single polite live region, and a route-to-title map. The compliance matrix is reviewed at the start of the project; ten SCs are enforced once (shell + tokens), six are flagged per-feature. The PR checklist is added to the team&#39;s pull-request template.
+
+Six months in, a new feature adds a &quot;schedule recall&quot; action. The PR checklist catches three issues the author hadn&#39;t thought about: the icon-only &quot;more actions&quot; menu has an `aria-label` but no tooltip, the success toast was about to spin up its own `aria-live` div instead of calling `announce()`, and the modal&#39;s Escape handler was missing because it was hand-rolled instead of using the dialog primitive. Fixed in fifteen minutes — instead of caught by an auditor four sprints later.
+
+That&#39;s the whole point of the baseline. Compliance scales when most of it is invisible infrastructure and the rest is an eight-line checklist.
+
+---
+
+### Public-safe review (verified before publish)
+
+- [x] No employer or client product names, codenames, or org names
+- [x] No customer names, segment sizes, or identifiable details
+- [x] No internal metrics, thresholds, OKRs, or telemetry numbers
+- [x] No roadmap, ship dates, or future plans
+- [x] No architecture, service names, API shapes, or schema fields from real systems
+- [x] No screenshots showing real chrome, real data, or recognizable surfaces
+- [x] No internal-only workflows, tools, or terminology
+- [x] Every example is fictional or abstracted; numbers are illustrative
+- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const u="fmdc-playbook-unlocked",f="fmdc-playbook-email";function m(){try{return localStorage.getItem(u)==="true"}catch{return!1}}function y(e){try{localStorage.setItem(u,"true"),e&&localStorage.setItem(f,e)}catch{}}function d(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function i(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function n(e,t,o){const a=e.querySelector(t);a&&(a.textContent=o)}function p(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),a=URL.createObjectURL(o),r=document.createElement("a");r.href=a,r.download=e,document.body.appendChild(r),r.click(),document.body.removeChild(r),setTimeout(()=>URL.revokeObjectURL(a),1e3)}function b(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",a=e.dataset.filename||`${t}.md`;d(e);const r=e.querySelector(".unlock-form");r?.addEventListener("submit",async c=>{c.preventDefault();const s=r.querySelector("input[type=email]").value.trim();if(s){if(n(e,".form-status","Saving…"),o)try{if(res=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})}),!res.ok){const l=await res.json().catch(()=>({}));if(l.error==="invalid_email"){n(e,".form-status","That email looks off — check the address and try again.");return}if(l.error==="rate_limited"){n(e,".form-status","Too many tries — wait a bit and retry.");return}console.warn("subscribe failed",res.status,l)}}catch(l){console.warn("subscribe network error",l)}y(s),d(e),n(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const c=i(t);try{await navigator.clipboard.writeText(c),n(e,".action-status","Markdown copied to clipboard.")}catch{n(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const c=i(t);p(a,c),n(e,".action-status",`Downloaded ${a}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>b(e));</script> <nav class="mt-10 grid gap-3 sm:grid-cols-2 text-sm" aria-label="More in this category"> <a href="/toybox/accessibility-annotation-playbook" class="rounded-md py-4 hover:text-accent transition-colors"> <p class="text-[10px] uppercase tracking-widest text-muted">← Previous playbook</p> <p class="mt-1 text-ink">Accessibility Annotation Playbook</p> </a> <a href="/toybox/enterprise-reflow-playbook" class="rounded-md py-4 hover:text-accent transition-colors sm:text-right"> <p class="text-[10px] uppercase tracking-widest text-muted">Next playbook →</p> <p class="mt-1 text-ink">The Enterprise Reflow Playbook</p> </a> </nav> <footer class="mt-10 border-t border-ink/10 pt-6 text-sm text-muted space-y-3"> <p>
+By Flora May dela Cruz · Released into the
+        public domain under
+<a class="underline hover:text-accent" href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0 1.0</a>.
+        Free to use anywhere — personal, team, commercial, client work —
+        no attribution required. Adapt it, remix it, ship it. A link back to
+<a class="underline hover:text-accent" href="https://floramaydc.com">floramaydc.com</a>
+is always appreciated but never required.
+</p> </footer> </article>  </main> <footer class="relative z-10 mt-24 border-t border-ink/10 bg-paper"> <div class="mx-auto flex max-w-5xl flex-col items-start gap-4 px-6 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between md:gap-0"> <span>© 2026 Flora May dela Cruz</span> <div class="flex flex-wrap gap-x-4 gap-y-2"> <a href="https://linkedin.com/in/floramaydelacruz" class="hover:text-accent">LinkedIn</a> <a href="https://instagram.com/floramaydc" class="hover:text-accent">Instagram</a> <a href="https://github.com/floramaydc" class="hover:text-accent">GitHub</a> </div> </div> </footer> <div id="mai-root" class="print:hidden"> <!-- Floating M.ai entry point — always available bottom-right.
+       The theme toggle lives next to the hamburger in the nav, so this
+       cluster only carries the assistant. Hidden when the panel opens. --> <button id="mai-fab" type="button" aria-label="Open M.ai assistant" title="Ask M.ai" class="fixed bottom-[50px] right-4 md:right-6 z-40 inline-flex items-center gap-2 rounded-full pl-6 pr-7 py-3 shadow-lg shadow-ink/30 hover:shadow-xl hover:scale-[1.03] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"> <span class="mai-fab-ask font-sans text-[11px] uppercase tracking-[0.18em]">Ask</span> <span class="mai-fab-mark font-serif italic text-2xl leading-none"> <span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span> </span> </button> <!-- Backdrop (mobile only — desktop keeps the page interactive behind the
+       panel so M.ai can guide the user through the UI bidirectionally). --> <div id="mai-backdrop" hidden class="fixed inset-0 z-40 bg-ink/30 backdrop-blur-[1px] transition-opacity md:hidden"></div> <!-- Right-side drawer panel. On mobile it floats over the page; on
+       desktop it claims a 24rem rail and the page shifts left to make
+       room (see html.mai-open rule below). --> <aside id="mai-panel" role="dialog" aria-modal="true" aria-labelledby="mai-title" hidden class="fixed top-0 right-0 z-50 h-full w-full md:w-[24rem] bg-paper border-l border-ink/10 shadow-2xl shadow-ink/20 md:shadow-none flex flex-col"> <header class="flex items-start justify-between gap-2 border-b border-ink/10 px-4 py-4 bg-cream"> <div> <h2 id="mai-title" class="mai-panel-title font-serif italic text-2xl leading-none"><span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span></h2> <p class="mt-1.5 text-[11px] text-muted">A thoughtful guide to Flora&rsquo;s work, writing, and ideas. Ask anything &mdash; I&rsquo;ll read across the site and synthesize, with citations.</p> </div> <div class="flex items-center gap-1"> <button id="mai-expand" type="button" aria-label="Expand M.AI to full screen" aria-pressed="false" title="Expand" class="rounded p-1.5 text-muted hover:text-accent transition-colors hidden md:inline-flex"> <svg id="mai-expand-icon-expand" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polyline points="15 3 21 3 21 9"></polyline> <polyline points="9 21 3 21 3 15"></polyline> <line x1="21" y1="3" x2="14" y2="10"></line> <line x1="3" y1="21" x2="10" y2="14"></line> </svg> <svg id="mai-expand-icon-collapse" hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polyline points="4 14 10 14 10 20"></polyline> <polyline points="20 10 14 10 14 4"></polyline> <line x1="14" y1="10" x2="21" y2="3"></line> <line x1="3" y1="21" x2="10" y2="14"></line> </svg> </button> <button id="mai-speak-toggle" type="button" aria-label="Read replies aloud" aria-pressed="false" title="Read replies aloud" class="rounded p-1.5 text-muted hover:text-accent transition-colors"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon> <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path> </svg> </button> <button id="mai-close" type="button" aria-label="Close M.AI" class="rounded p-1.5 text-muted hover:text-accent transition-colors"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="6" y1="6" x2="18" y2="18"></line> <line x1="6" y1="18" x2="18" y2="6"></line> </svg> </button> </div> </header> <!-- Topic grid: shown on first open, hidden after the user asks something. --> <div id="mai-topics" class="px-4 py-3 border-b border-ink/5"> <p class="text-[11px] uppercase tracking-widest text-muted">Start exploring</p> <p class="mt-1 text-[11px] text-muted italic">Ask me about ideas, frameworks, or specific work. I'll search Flora's site and synthesize with citations.</p> <div class="mt-2 grid grid-cols-2 gap-2"> <button type="button" data-q="Who is Flora?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Who is Flora</span> <span class="mt-0.5 block text-[11px] text-muted">Her design approach</span> </button> <button type="button" data-q="What playbooks exist?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Playbooks</span> <span class="mt-0.5 block text-[11px] text-muted">Thinking frameworks</span> </button> <button type="button" data-q="Show me case studies" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Case Studies</span> <span class="mt-0.5 block text-[11px] text-muted">Design in practice</span> </button> <button type="button" data-q="What's in the writing?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Essays & Writing</span> <span class="mt-0.5 block text-[11px] text-muted">Systems and trust</span> </button> <button type="button" data-q="What tools are there?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Tools & Experiments</span> <span class="mt-0.5 block text-[11px] text-muted">Interactive systems</span> </button> <button type="button" data-q="How do I contact her?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Get in Touch</span> <span class="mt-0.5 block text-[11px] text-muted">Email, LinkedIn, message</span> </button> </div> </div> <div id="mai-log" class="flex-1 overflow-y-auto px-4 py-3 space-y-3 text-sm" aria-live="polite"></div> <div id="mai-chips" class="px-4 pt-2 pb-1 flex flex-wrap gap-1.5"></div> <form id="mai-form" class="flex items-center gap-2 border-t border-ink/10 px-4 pt-3 pb-8 bg-paper"> <button id="mai-mic" type="button" aria-label="Speak your question" aria-pressed="false" title="Speak" class="rounded p-2 text-muted hover:text-accent transition-colors"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="9" y="3" width="6" height="12" rx="3"></rect> <path d="M5 11a7 7 0 0 0 14 0"></path> <line x1="12" y1="18" x2="12" y2="22"></line> </svg> </button> <label for="mai-input" class="sr-only">Ask M.AI a question</label> <input id="mai-input" type="text" autocomplete="off" placeholder="Ask about a project, an idea, or where to start…" class="flex-1 min-w-0 rounded border border-ink/15 bg-paper px-3 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent"> <button type="submit" aria-label="Send" class="rounded bg-ink px-3 py-2.5 text-paper text-xs hover:bg-accent transition-colors">Send</button> </form> </aside> </div>  <script>(function(){const base = "/";
+
+  (function () {
+    // ---------- LLM proxy (optional) ----------
+    // When set to a deployed Cloudflare Worker URL, M.AI will ask the worker
+    // to write a grounded answer using the top retrieved chunks. When empty,
+    // M.AI stays in keyword-only mode (the original behavior). See
+    // workers/mai/README.md for deploy steps.
+    const MAI_WORKER_URL = 'https://mai.floramaydc-mai.workers.dev';
+
+    // ---------- Hand-written answers ----------
+    // A short list of structured replies M.ai should answer the same way every
+    // time — contact info (needs real links) and pure greeting/thanks. Anything
+    // about who Flora is, what she does, or how M.ai works flows through to the
+    // worker so the personality + memory in workers/mai/src/ can speak.
+    const KB = [
+      {
+        id: 'contact',
+        // "contract"/"contracting" included as belt-and-braces: even if
+        // SPEECH_FIXES somehow fails to fire (stale cache, etc.) the KB
+        // still routes "how do I contract her" to the contact answer
+        // instead of falling through to search.
+        patterns: ['contact', 'contract her', 'contract flora', 'contracting her', 'contracting flora', 'email', 'reach', 'hire', 'message', 'how do i contact', 'how do i contract', 'get in touch', 'reach out', 'linkedin'],
+        answer: `Three paths, pick whichever fits:<br><br>• <a class="text-accent underline" href="https://linkedin.com/in/floramaydelacruz">LinkedIn</a> — fastest for professional intros<br>• <a class="text-accent underline" href="${base}about">About page</a> — email and Instagram at the bottom<br>• Or leave a message right here and I'll forward it to her inbox<br><br><button type="button" class="rounded border border-accent text-accent px-2 py-1 text-[11px] hover:bg-accent hover:text-paper transition-colors" data-mai-start-message>Send Flora a message</button>`,
+      },
+      {
+        id: 'hi',
+        patterns: ['hi', 'hello', 'hey', 'yo', 'sup', 'greetings'],
+        answer: `Hello. Ask about Flora's work, writing, or frameworks in the Toybox — I'll search the site and synthesize with citations.`,
+        followups: ['What playbooks exist?', 'Show me case studies', 'Explore the Toybox'],
+      },
+      {
+        id: 'thanks',
+        patterns: ['thanks', 'thank you', 'thx', 'ty', 'appreciate'],
+        answer: `Of course. I'll be here whenever a new question comes up.`,
+        followups: ['Explore the Toybox', 'Show me case studies'],
+      },
+    ];
+
+    const STARTER_CHIPS = ['What playbooks exist?', 'Show me case studies', 'Explore the Toybox', 'Send a message'];
+
+    // ---------- Speech-to-text corrections ----------
+    // Web Speech API tends to split known compound words into two tokens
+    // ("toy box" instead of "toybox") and to spell-out acronyms
+    // ("M A I"). These break BM25 retrieval and the KB matcher, so we
+    // collapse the common ones BEFORE classifying or searching. Applied
+    // to typed input too — same correction is helpful either way.
+    const SPEECH_FIXES = [
+      [/\btoy\s*box(es)?\b/gi, 'toybox$1'],
+      [/\btool\s*box\b/gi, 'toybox'], // "tool box" → "toybox" (common misshear)
+      [/\bplay\s*book(s)?\b/gi, 'playbook$1'],
+      [/\bm\s*\.?\s*a\s*\.?\s*i\b/gi, 'M.AI'],
+      [/\bmay\s*eye\b/gi, 'M.AI'],
+      [/\bmay\s*i\b/gi, 'M.AI'],
+      [/\bcode\s*catalyst\b/gi, 'CodeCatalyst'],
+      [/\bpac\s*bot\b/gi, 'PacBot'],
+      [/\bdark\s*patterns?\s*detector\b/gi, 'Dark Pattern Detector'],
+      [/\bflo\s*ra\b/gi, 'Flora'],
+      [/\bflora\s*may\b/gi, 'Flora May'],
+      // Speech-to-text and aggressive autocorrect often replace "contact"
+      // with "contract" — and because "contract" is a real word neither the
+      // SPEECH_FIXES nor the fuzzy corrector below would otherwise catch it.
+      // We disambiguate by context: only rewrite when followed by an
+      // object/pronoun that makes "contract" semantically wrong here
+      // "contract her", "contract Flora", "contract you", "contract them",
+      // and "contracting her/Flora/you/them".
+      [/\bcontract(ing)?\s+(her|him|them|you|flora|flora\s*may)\b/gi, 'contact$1 $2'],
+      // "how do i contract" / "can i contract" without an object — still
+      // overwhelmingly means contact in this site's context.
+      [/\b(how|where|can|may)\s+(do\s+)?(i|we|one)\s+contract\b/gi, '$1 $2$3 contact'],
+      // "to contract" / "want to contract" / "like to contract" — same.
+      [/\b(to|wanna|want to|like to|love to|need to|trying to|tryna)\s+contract\b/gi, '$1 contact'],
+      // "contract" appearing near contact-y words (email, message, reach,
+      // linkedin, hire) within ~30 chars — overwhelmingly autocorrect.
+      [/\bcontract\b(?=[^.?!]{0,30}\b(email|message|reach|linkedin|hire)\b)/gi, 'contact'],
+      [/\b(email|message|reach|linkedin|hire)\b(?=[^.?!]{0,30}\bcontract\b)([^.?!]{0,30})\bcontract\b/gi, '$1$2contact'],
+    ];
+    function expandSpeech(s) {
+      let out = s;
+      for (const [re, rep] of SPEECH_FIXES) out = out.replace(re, rep);
+      return out;
+    }
+
+    // ---------- Matcher (hand-written answers) ----------
+    function normalize(s) {
+      return s.toLowerCase().replace(/[^a-z0-9\s.-]/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+    // Whole-word containment. Avoids the classic "hi" inside "this" /
+    // "history" / "shipping" trap that made the old matcher trigger the
+    // greeting reply on hostile or unrelated inputs.
+    function containsPhrase(haystack, needle) {
+      const re = new RegExp(`(^|\\W)${needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\W|$)`);
+      return re.test(haystack);
+    }
+    function kbAnswerFor(input) {
+      const n = normalize(input);
+      if (!n) return null;
+      let best = { score: 0, entry: null };
+      for (const entry of KB) {
+        for (const p of entry.patterns) {
+          const np = normalize(p);
+          let score = 0;
+          if (containsPhrase(n, np)) score += 2;
+          const tokens = np.split(' ');
+          let hits = 0;
+          for (const t of tokens) {
+            if (t.length > 2 && containsPhrase(n, t)) hits++;
+          }
+          score += hits / Math.max(1, tokens.length);
+          if (score > best.score) best = { score, entry };
+        }
+      }
+      // Threshold tuned by hand \u2014 under 1.0 lets retrieval take over, which
+      // is usually better for substantive questions ("tell me about pacbot").
+      return best.score >= 1.0 ? best.entry : null;
+    }
+
+    // ---------- Retrieval over the site index ----------
+    // Loaded lazily on the first real question. The index is precomputed by
+    // scripts/build-mai-index.mjs and served from /mai-index.json. Each doc
+    // already carries a field-weighted tf map and we have global df + N \u2014
+    // so the runtime ranker is a small BM25-ish loop with no dependencies.
+    const STOP_TOKENS = new Set([
+      'the','a','an','and','or','of','to','in','for','on','with','is','are','was',
+      'were','be','been','being','this','that','these','those','it','its','at','by',
+      'as','from','but','not','no','if','then','than','so','do','does','did','i',
+      'you','he','she','we','they','them','his','her','our','your','their','my',
+      'me','us','about','into','out','up','down','over','under','also','can','will',
+      'would','could','should','have','has','had','more','most','some','any','all',
+      'what','who','how','where','when','why','show','tell','give','find',
+    ]);
+    function tokenizeQ(s) {
+      return s
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, ' ')
+        .split(/\s+/)
+        .filter((t) => t.length > 2 && !STOP_TOKENS.has(t));
+    }
+
+    let _indexPromise = null;
+    function loadIndex() {
+      if (!_indexPromise) {
+        _indexPromise = fetch(`${base}mai-index.json`)
+          .then((r) => (r.ok ? r.json() : null))
+          .catch(() => null);
+      }
+      return _indexPromise;
+    }
+
+    // ---------- Fuzzy spell-fix against the index vocabulary ----------
+    // The hand-listed SPEECH_FIXES table catches the *known* mishearings
+    // ("toy box", "M A I", "pac bot") — but it can't anticipate every way
+    // a name gets misspelled or misheard: "packbot", "vehra", "miendelf",
+    // "tabloos", "dela cruise". Instead of growing that table forever, we
+    // compare every query word against the actual indexed vocabulary (all
+    // tokens that appear in any document on the site) and silently swap
+    // an unknown word for its nearest neighbor when one is close enough.
+    //
+    // Distance: Damerau-Levenshtein (handles adjacent transposition so
+    // "pacbot" ↔ "pacbot" works even when a vowel/consonant flips). We
+    // gate by edit distance scaled to word length so short words don't
+    // collapse into noise.
+
+    let _vocabPromise = null;
+    let _vocabReady = null; // resolved value (set when the promise lands)
+    function loadVocab() {
+      if (_vocabPromise) return _vocabPromise;
+      _vocabPromise = loadIndex().then((idx) => {
+        if (!idx) return null;
+        // df keys are every term that appears anywhere on the site, already
+        // normalized by the index builder. Bucket by length for fast lookup
+        // — when correcting a word of length L we only need to scan vocab
+        // entries of length L-2 ... L+2.
+        const buckets = new Map();
+        const vocab = new Set();
+        for (const w of Object.keys(idx.df || {})) {
+          if (w.length < 3) continue;
+          vocab.add(w);
+          const L = w.length;
+          if (!buckets.has(L)) buckets.set(L, []);
+          buckets.get(L).push(w);
+        }
+        _vocabReady = { vocab, buckets };
+        return _vocabReady;
+      });
+      return _vocabPromise;
+    }
+
+    // Damerau-Levenshtein with an early-exit cap. Returns Infinity if the
+    // distance is known to exceed `max` — cheap rejection for the common
+    // case where two words are obviously different.
+    function dlDistance(a, b, max) {
+      if (a === b) return 0;
+      const al = a.length, bl = b.length;
+      if (Math.abs(al - bl) > max) return Infinity;
+      const prev2 = new Array(bl + 1);
+      const prev = new Array(bl + 1);
+      const curr = new Array(bl + 1);
+      for (let j = 0; j <= bl; j++) prev[j] = j;
+      for (let i = 1; i <= al; i++) {
+        curr[0] = i;
+        let rowMin = curr[0];
+        for (let j = 1; j <= bl; j++) {
+          const cost = a.charCodeAt(i - 1) === b.charCodeAt(j - 1) ? 0 : 1;
+          let v = Math.min(
+            curr[j - 1] + 1,        // insertion
+            prev[j] + 1,            // deletion
+            prev[j - 1] + cost      // substitution
+          );
+          // Transposition (adjacent swap).
+          if (i > 1 && j > 1 &&
+              a.charCodeAt(i - 1) === b.charCodeAt(j - 2) &&
+              a.charCodeAt(i - 2) === b.charCodeAt(j - 1)) {
+            v = Math.min(v, prev2[j - 2] + 1);
+          }
+          curr[j] = v;
+          if (v < rowMin) rowMin = v;
+        }
+        if (rowMin > max) return Infinity;
+        for (let j = 0; j <= bl; j++) { prev2[j] = prev[j]; prev[j] = curr[j]; }
+      }
+      return prev[bl];
+    }
+
+    // Allowed edit distance scaled by word length. Conservative on purpose
+    // — we'd rather miss a fix than confidently swap "vera" for "very".
+    function maxEditDist(len) {
+      if (len <= 4) return 1;
+      if (len <= 7) return 2;
+      return 2;
+    }
+
+    const _fixCache = new Map();
+    function fuzzyCorrectWord(word, vocabData) {
+      if (!vocabData) return word;
+      const w = word.toLowerCase();
+      if (w.length < 4) return word;            // too short to fix safely
+      if (STOP_TOKENS.has(w)) return word;
+      if (vocabData.vocab.has(w)) return word;  // already a known term
+      if (_fixCache.has(w)) return _fixCache.get(w);
+      const max = maxEditDist(w.length);
+      let best = null, bestD = max + 1;
+      for (let d = -max; d <= max; d++) {
+        const bucket = vocabData.buckets.get(w.length + d);
+        if (!bucket) continue;
+        for (const cand of bucket) {
+          const dist = dlDistance(w, cand, bestD - 1);
+          if (dist < bestD) {
+            bestD = dist;
+            best = cand;
+            if (dist === 1) break; // 1 is already optimal for our purposes
+          }
+        }
+        if (bestD === 1) break;
+      }
+      const fixed = best && bestD <= max ? best : word;
+      _fixCache.set(w, fixed);
+      return fixed;
+    }
+
+    function fuzzyCorrectQuery(text, vocabData) {
+      if (!vocabData) return text;
+      // Split on whitespace but preserve simple punctuation around words
+      // so "PacBot?" still corrects cleanly.
+      return text.replace(/[A-Za-z][A-Za-z'-]*/g, (m) => {
+        const fixed = fuzzyCorrectWord(m, vocabData);
+        if (fixed === m.toLowerCase()) return m; // no change → keep original casing
+        if (fixed === m) return m;
+        return fixed;
+      });
+    }
+
+    function rank(index, query) {
+      const qTokens = tokenizeQ(query);
+      if (!qTokens.length) return [];
+      const N = index.n || index.docs.length;
+      const df = index.df || {};
+      // Average chunk length \u2014 used by the BM25 length-norm term.
+      let avgLen = 0;
+      for (const d of index.docs) avgLen += d.len || 0;
+      avgLen = avgLen / Math.max(1, index.docs.length);
+
+      const k1 = 1.2;
+      const b = 0.75;
+      const scored = [];
+      for (const d of index.docs) {
+        let s = 0;
+        let matched = 0;
+        for (const t of qTokens) {
+          const f = d.tf?.[t] || 0;
+          if (!f) continue;
+          matched++;
+          const n = df[t] || 0;
+          const idf = Math.log(1 + (N - n + 0.5) / (n + 0.5));
+          const norm = 1 - b + b * ((d.len || 1) / Math.max(1, avgLen));
+          s += idf * ((f * (k1 + 1)) / (f + k1 * norm));
+        }
+        if (matched > 0) {
+          // Tiny bonus when more of the query's terms were hit \u2014 keeps
+          // multi-word queries from being out-ranked by single-term spam.
+          s *= 1 + matched / qTokens.length;
+          scored.push({ d, s });
+        }
+      }
+      scored.sort((a, b) => b.s - a.s);
+      return scored;
+    }
+
+    function dedupeByDoc(scored, max) {
+      const seen = new Set();
+      const out = [];
+      for (const r of scored) {
+        const key = `${r.d.collection}/${r.d.slug}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push(r);
+        if (out.length >= max) break;
+      }
+      return out;
+    }
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+    function stripHtml(s) {
+      const d = document.createElement('div');
+      d.innerHTML = s;
+      return d.textContent || '';
+    }
+
+    // Render the model's streamed output safely. The model is instructed
+    // to emit a small set of HTML tags (<em>, <strong>, <a href="...">)
+    // plus hyphen-prefixed lines for bullet lists. We escape EVERYTHING
+    // first, then re-allow only that tight set — so a hallucinated
+    // <script>, <iframe>, or javascript: URL never survives. Safe to call
+    // on partial streamed chunks: half-formed tags stay escaped until
+    // their closing token arrives.
+    function safeRenderModelHtml(text) {
+      let s = escapeHtml(text);
+      // Re-allow inline emphasis: <em>, </em>, <strong>, </strong>.
+      s = s.replace(/&lt;(\/?)(em|strong)&gt;/gi, '<$1$2>');
+      // Re-allow <a href="..."> for safe URLs only: site-relative paths
+      // starting with "/" OR full http(s) URLs. Everything else stays
+      // escaped — no javascript:, data:, mailto:, etc.
+      s = s.replace(
+        /&lt;a\s+href=&quot;((?:\/[^"&\s]*|https?:\/\/[^"&\s]+))&quot;&gt;([\s\S]*?)&lt;\/a&gt;/gi,
+        (_m, url, label) => `<a class="text-accent underline" href="${url}">${label}</a>`
+      );
+      // Group consecutive "- " lines into a real <ul>. Other lines get
+      // <br> joins so paragraph breaks survive.
+      const lines = s.split('\n');
+      const out = [];
+      let inList = false;
+      for (const raw of lines) {
+        const m = raw.match(/^\s*-\s+(.+)$/);
+        if (m) {
+          if (!inList) { out.push('<ul class="mai-list">'); inList = true; }
+          out.push(`<li>${m[1]}</li>`);
+        } else {
+          if (inList) { out.push('</ul>'); inList = false; }
+          out.push(raw);
+        }
+      }
+      if (inList) out.push('</ul>');
+      // Join: <li> rows are already block; non-list lines need <br>s.
+      // Simplest: join with '\n', then turn newlines OUTSIDE the <ul> into <br>.
+      return out.join('\n').replace(/\n(?![<])/g, '<br>').replace(/\n/g, '');
+    }
+
+    function snippet(text, query, maxLen = 220) {
+      const lower = text.toLowerCase();
+      const qTokens = tokenizeQ(query);
+      let pos = -1;
+      for (const t of qTokens) {
+        const i = lower.indexOf(t);
+        if (i !== -1 && (pos === -1 || i < pos)) pos = i;
+      }
+      let start = 0;
+      let end = Math.min(text.length, maxLen);
+      if (pos > 60) {
+        start = pos - 60;
+        end = Math.min(text.length, start + maxLen);
+      }
+      let out = text.slice(start, end).trim();
+      if (start > 0) out = '\u2026' + out;
+      if (end < text.length) out = out + '\u2026';
+      // Bold the matched tokens. Safe because text was sanitized at index time.
+      const escaped = escapeHtml(out);
+      let highlighted = escaped;
+      for (const t of qTokens) {
+        if (t.length < 3) continue;
+        const re = new RegExp(`(${t.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')})`, 'gi');
+        highlighted = highlighted.replace(re, '<strong>$1</strong>');
+      }
+      return highlighted;
+    }
+
+    const COLLECTION_LABEL = {
+      writing: 'Writing',
+      work: 'Work',
+      toybox: 'Toybox',
+      play: 'Play',
+    };
+
+    function renderRetrieval(results, query) {
+      const parts = results.map((r) => {
+        const d = r.d;
+        const label = COLLECTION_LABEL[d.collection] || d.collection;
+        const heading = d.heading && d.heading !== d.title
+          ? `${escapeHtml(d.title)} \u2014 <span class="text-muted">${escapeHtml(d.heading)}</span>`
+          : escapeHtml(d.title);
+        const url = `${base}${d.url.replace(/^\//, '')}`;
+        return `
+          <div class="mai-result">
+            <div class="text-[10px] uppercase tracking-widest text-muted">${label}</div>
+            <a class="block text-accent underline font-semibold mt-0.5" href="${url}">${heading}</a>
+            <p class="mt-1 text-ink/80">${snippet(d.text, query)}</p>
+          </div>`;
+      }).join('');
+      return `<p class="text-[11px] text-muted mb-2">Here's what I found on the site:</p>${parts}`;
+    }
+
+    function noMatchAnswer(query) {
+      return `I couldn't find anything for <em>${escapeHtml(query)}</em> in what Flora has published so far. Try the <a class="text-accent underline" href="${base}about">About page</a>, the <a class="text-accent underline" href="${base}toybox">Toybox</a>, or one of the chips below.`;
+    }
+
+    // ---------- LLM tier (optional) ----------
+    // If MAI_WORKER_URL is set, route the user question + top chunks through
+    // the worker for a grounded answer. The worker enforces a monthly $ cap;
+    // when it returns 402 we flip aiPaused=true, show a banner, and fall
+    // back to plain retrieval for the rest of the session. Any other failure
+    // (network, 5xx) also silently falls back \u2014 the user always gets an
+    // answer, even when the LLM tier is down.
+    // When an answer ends with a `[[NAV:n]]` marker, we surface a
+    // "Want me to take you there?" CTA pointing at chunk n. This holds
+    // the pending offer between the answer rendering and either:
+    //   - a button click ("Yes, take me" / "No thanks"), or
+    //   - the next typed input being a short affirmative ("yes/sure/please")
+    //     or negative ("no/nope/cancel").
+    // Anything else just clears it and proceeds as a normal new question.
+    let pendingNav = null; // { url, label } | null
+
+    // ---------- Message-to-Flora flow ----------
+    // Multi-turn conversation that collects name -> email -> message and
+    // POSTs to the worker's /message endpoint (which forwards via
+    // Web3Forms to floramaydelacruz@gmail.com).
+    //
+    // Stage machine (linear):
+    //   null -> 'name' -> 'email' -> 'message' -> 'confirm' -> 'sending' -> null
+    //
+    // Any input during the flow is consumed by the flow, not the LLM —
+    // EXCEPT typed cancellations ("cancel", "stop", "nevermind") which
+    // exit the flow at any stage and return control to normal handling.
+    let messageFlow = null; // { stage, data: {name, email, message} } | null
+    const MESSAGE_CANCEL_RE = /^(cancel|stop|nevermind|never mind|forget it|exit|quit|no)[.! ]*$/i;
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    function startMessageFlow() {
+      messageFlow = { stage: 'name', data: {} };
+      addBubble(
+        'mai',
+        `Happy to take a message and forward it to Flora.<br><br>What's your name? <span class="text-muted text-[11px]">(say "cancel" anytime to stop)</span>`,
+      );
+      renderChips([]);
+      saveTranscript();
+    }
+
+    // Try to advance the message flow with this input. Returns true if the
+    // flow consumed it, false if normal handling should continue.
+    async function progressMessageFlow(raw) {
+      if (!messageFlow) return false;
+      const text = (raw || '').trim();
+      if (!text) return true; // ignore empty submits while in-flow
+
+      // Universal escape hatch.
+      if (MESSAGE_CANCEL_RE.test(text)) {
+        messageFlow = null;
+        addBubble('user', escapeHtml(text));
+        input.value = '';
+        addBubble('mai', `No problem — I won't send anything. What else can I help with?`);
+        renderChips(STARTER_CHIPS);
+        saveTranscript();
+        return true;
+      }
+
+      // Render the user's input bubble first.
+      addBubble('user', escapeHtml(text));
+      input.value = '';
+
+      switch (messageFlow.stage) {
+        case 'name': {
+          if (text.length < 2 || text.length > 100) {
+            addBubble('mai', `Could I get your name? Just a couple of characters is fine.`);
+            saveTranscript();
+            return true;
+          }
+          messageFlow.data.name = text;
+          messageFlow.stage = 'email';
+          addBubble(
+            'mai',
+            `Nice to meet you, ${escapeHtml(text.split(/\s+/)[0])}. What's the best email for Flora to reply to?`,
+          );
+          saveTranscript();
+          return true;
+        }
+        case 'email': {
+          if (!EMAIL_RE.test(text) || text.length > 254) {
+            addBubble('mai', `That doesn't look like a valid email — mind double-checking?`);
+            saveTranscript();
+            return true;
+          }
+          messageFlow.data.email = text.toLowerCase();
+          messageFlow.stage = 'message';
+          addBubble('mai', `Got it. What would you like to say? (a sentence or a few — up to ~2000 characters)`);
+          saveTranscript();
+          return true;
+        }
+        case 'message': {
+          if (text.length < 5) {
+            addBubble('mai', `A little more, please — even one sentence is plenty.`);
+            saveTranscript();
+            return true;
+          }
+          if (text.length > 2000) {
+            addBubble('mai', `That's longer than I can send in one go. Mind trimming it to around 2000 characters?`);
+            saveTranscript();
+            return true;
+          }
+          messageFlow.data.message = text;
+          messageFlow.stage = 'confirm';
+          const d = messageFlow.data;
+          addBubble(
+            'mai',
+            `Here's what I'll send Flora:<br><br>` +
+              `<strong>From:</strong> ${escapeHtml(d.name)} &lt;${escapeHtml(d.email)}&gt;<br>` +
+              `<strong>Message:</strong><br>${escapeHtml(d.message).replace(/\n/g, '<br>')}<br><br>` +
+              `<div class="mai-msg-cta mt-2 flex gap-2" data-mai-msg-cta>` +
+                `<button type="button" class="rounded border border-accent text-accent px-2 py-1 text-[11px] hover:bg-accent hover:text-paper transition-colors" data-mai-msg-send>Send it</button>` +
+                `<button type="button" class="rounded border border-muted/30 text-muted px-2 py-1 text-[11px] hover:border-muted/60 transition-colors" data-mai-msg-cancel>Cancel</button>` +
+              `</div>`,
+          );
+          saveTranscript();
+          return true;
+        }
+        case 'confirm': {
+          // Accept typed yes/no in addition to the buttons.
+          const yes = /^(y|ya|ye|yes+|yea+h?|yep|yup|sure|ok(ay)?|send( it)?|please|do it|go)[.! ]*$/i;
+          if (yes.test(text)) {
+            await sendMessageFlow();
+            return true;
+          }
+          // Anything else at confirm stage we treat as "I want to edit my
+          // message" — restart from the message stage.
+          messageFlow.stage = 'message';
+          messageFlow.data.message = '';
+          addBubble('mai', `Okay — what should the message say instead?`);
+          saveTranscript();
+          return true;
+        }
+        default:
+          return false;
+      }
+    }
+
+    // Web3Forms's free tier blocks server-side callers (their classifier
+    // returns 403 / error 1106 to anything that doesn't look like a
+    // browser request), so we hit their API directly from the client.
+    // Per their docs (docs.web3forms.com), the access key is intended to
+    // be public — it only authorizes sending TO Flora's verified inbox,
+    // and Web3Forms enforces its own per-IP rate limits and spam screens.
+    // We still run our own content filters in JS before posting so the
+    // common abuse cases never reach them.
+    const WEB3FORMS_KEY = 'd2a3b55f-b53d-494f-8d3f-241a1f32875e';
+    const MSG_ABUSE_RE = /\b(fuck|shit|bitch|asshole|cunt|dick|piss|kill (you|yourself)|porn|nude|naked|horny|onlyfans|sexy|sex|boobs|penis|vagina)\b/i;
+    const MSG_INJECTION_RE = /(ignore (all |any |your |previous |prior )?(instructions|rules|prompt|system)|disregard (the |your |previous )?(above|prior|prompt|instructions)|you are (now |actually )?(dan|developer mode|jailbroken|unrestricted)|reveal (your|the) (system )?prompt)/i;
+    const MSG_SOLICITATION_RE = /\b(seo|search engine optimization|backlink|link[- ]building|guest post|guest[- ]blog|sponsored post|paid post|paid review|monetize your (site|blog|website)|increase (your )?traffic|drive traffic|rank (higher|on google|on the first page)|google rank|page one of google|first page of google|website redesign|web design services|i (visited|came across|stumbled (up)?on|noticed) your (website|site|blog)|i (have|got) an? (great |amazing |interesting )?(offer|proposition|opportunity)|business proposal|investment opportunity|crypto(currency)?|bitcoin|forex|trading bot|loan offer|make \$?\d+|earn \$?\d+|click (here|the link below)|whatsapp (me|us)|telegram (me|us|us on)|hire me to|i can (help|rank|optimize) your)\b/i;
+    function msgSpamScore(t) {
+      let score = 0;
+      const urls = (t.match(/\bhttps?:\/\/|www\./gi) || []).length;
+      if (urls >= 2) score += urls;
+      if (/\b\S{60,}\b/.test(t)) score += 2;
+      if (/[A-Z]{12,}/.test(t)) score += 1;
+      if ((t.match(/!{2,}|\?{3,}/g) || []).length >= 2) score += 1;
+      if ((t.match(/\$\d|\b\d+%/g) || []).length >= 2) score += 1;
+      return score;
+    }
+    const MESSAGE_OWNER_EMAIL = 'floramaydelacruz@gmail.com';
+
+    async function sendMessageFlow() {
+      if (!messageFlow || messageFlow.stage !== 'confirm') return;
+      const data = messageFlow.data;
+      messageFlow.stage = 'sending';
+      const pendingId = addBubble(
+        'mai',
+        `<span class="mai-thinking text-muted">Sending<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>`,
+      );
+
+      // Client-side content filtering. Bypassable if a user crafts their
+      // own fetch — Web3Forms's own spam screen + rate limit are still
+      // there as a second line of defense. Skip filters for Flora's own
+      // address so she can always test end-to-end.
+      const isOwner = (data.email || '').toLowerCase() === MESSAGE_OWNER_EMAIL;
+      if (!isOwner) {
+        const msg = data.message || '';
+        const nm = data.name || '';
+        const blocked =
+          MSG_ABUSE_RE.test(msg) ||
+          MSG_INJECTION_RE.test(msg) ||
+          MSG_ABUSE_RE.test(nm) ||
+          MSG_SOLICITATION_RE.test(msg) ||
+          MSG_SOLICITATION_RE.test(nm) ||
+          msgSpamScore(msg) >= 3 ||
+          (msg.match(/\bhttps?:\/\/|www\./gi) || []).length > 1;
+        if (blocked) {
+          const b = document.getElementById(pendingId);
+          if (b) {
+            b.innerHTML = `That message tripped one of the spam filters, so I can't forward it. If this is a real note, please email Flora directly at floramaydelacruz@gmail.com.`;
+          }
+          messageFlow = null;
+          renderChips(STARTER_CHIPS);
+          saveTranscript();
+          return;
+        }
+      }
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: `M.ai message from ${data.name}`,
+            from_name: 'M.ai (floramaydc.com)',
+            name: data.name,
+            email: data.email,
+            message: data.message,
+            botcheck: '', // Web3Forms's built-in honeypot field
+          }),
+        });
+        const pendingBubble = document.getElementById(pendingId);
+        let body = null;
+        try { body = await res.json(); } catch {}
+        if (res.ok && body && body.success) {
+          if (pendingBubble) {
+            pendingBubble.innerHTML = `Sent. Flora will see it in her inbox and get back to you at <em>${escapeHtml(data.email)}</em>. Thank you for reaching out.`;
+          }
+        } else {
+          const status = res.status;
+          const w3msg = (body && body.message) || '';
+          const human = status === 429
+            ? `Looks like a lot of messages have come from this network already. Try again in an hour, or email Flora directly at floramaydelacruz@gmail.com.`
+            : status === 403
+            ? `That message was flagged as spam by our filter. If this is a real note, please email Flora directly at floramaydelacruz@gmail.com.`
+            : `Something went wrong sending that (${w3msg || status}). You can reach Flora directly at floramaydelacruz@gmail.com.`;
+          if (pendingBubble) pendingBubble.innerHTML = human;
+        }
+      } catch {
+        const pendingBubble = document.getElementById(pendingId);
+        if (pendingBubble) {
+          pendingBubble.innerHTML = `Couldn't reach the server. You can email Flora directly at floramaydelacruz@gmail.com.`;
+        }
+      }
+      messageFlow = null;
+      renderChips(STARTER_CHIPS);
+      saveTranscript();
+    }
+
+    let aiPaused = false;
+
+    function showPausedBanner(message) {
+      if (document.getElementById('mai-paused-banner')) return;
+      const b = document.createElement('div');
+      b.id = 'mai-paused-banner';
+      b.className = 'text-[11px] text-muted bg-cream border border-muted/20 rounded px-2 py-1 mb-2';
+      b.textContent = message || 'AI mode paused for this month. Using site search instead.';
+      log.prepend(b);
+    }
+
+    // Render the "Sources" footer beneath an LLM answer so people can verify.
+    function renderSources(top) {
+      const items = top.map((r) => {
+        const d = r.d;
+        const url = `${base}${d.url.replace(/^\//, '')}`;
+        const heading = d.heading && d.heading !== d.title
+          ? `${escapeHtml(d.title)} \u2014 ${escapeHtml(d.heading)}`
+          : escapeHtml(d.title);
+        return `<li><a class="text-accent underline" href="${url}">${heading}</a></li>`;
+      }).join('');
+      return `<div class="mt-2 pt-2 border-t border-muted/20 text-[11px] text-muted"><div class="mb-1">Sources</div><ul class="space-y-0.5 list-disc list-inside">${items}</ul></div>`;
+    }
+
+    // Stream a grounded answer from the worker into the given bubble.
+    // Returns true on success, false on any failure (caller falls back).
+    async function askWorker(question, top, bubble) {
+      if (!MAI_WORKER_URL || aiPaused) return false;
+      const chunks = top.map((r) => ({
+        title: r.d.heading && r.d.heading !== r.d.title
+          ? `${r.d.title} \u2014 ${r.d.heading}`
+          : r.d.title,
+        text: r.d.text,
+        url: `${base}${r.d.url.replace(/^\//, '')}`,
+      }));
+      let res;
+      try {
+        res = await fetch(MAI_WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question, chunks }),
+        });
+      } catch {
+        return false; // network error \u2014 fall back silently
+      }
+      if (res.status === 402) {
+        aiPaused = true;
+        showPausedBanner('AI mode paused for this month. Using site search instead.');
+        return false;
+      }
+      if (res.status === 429) {
+        // Per-IP rate limit on the worker's chat tier. Don't pretend the
+        // AI answered — say plainly that the budget is reached for this
+        // window and let the caller fall through to keyword retrieval so
+        // the visitor still gets something useful to look at.
+        aiPaused = true;
+        let retry = 300_000;
+        try {
+          const body = await res.clone().json();
+          if (body && body.retry_after_sec) retry = Math.min(3_600_000, body.retry_after_sec * 1000);
+        } catch {}
+        setTimeout(() => { aiPaused = false; }, retry);
+        showPausedBanner(
+          'AI answers are paused for this window — chat limit reached. Falling back to site search below.',
+        );
+        return false; // let caller render the retrieval list under the banner
+      }
+      if (!res.ok || !res.body) return false;
+
+      if (bubble) bubble.innerHTML = '<span class="mai-stream"></span>';
+      const target = bubble?.querySelector('.mai-stream');
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let acc = '';
+      // The model ends its reply with `[[NAV:n]]` (see personality.md).
+      // We never want the marker to flash in the DOM during streaming —
+      // strip any *trailing* marker-or-partial-marker before rendering each
+      // tick. The regex matches complete markers and every intermediate
+      // partial state we'd see streaming token-by-token: `[`, `[[`, `[[N`,
+      // `[[NAV`, `[[NAV:`, `[[NAV:1`, `[[NAV:1]`, `[[NAV:1]]`, plus the
+      // single-bracket and bare-`NAV:` variants gpt-4.1 sometimes emits.
+      // It only matches at end-of-string so it can't swallow earlier text.
+      const NAV_TRAILING_RE = /\s*(?:\[\[?\s*N(?:A(?:V(?:\s*:?\s*\d*\s*\]?\s*\]?)?)?)?|\bNAV\s*:?\s*\d*)\s*$/i;
+      function stripTrailingMarker(s) {
+        return s.replace(NAV_TRAILING_RE, '');
+      }
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        acc += decoder.decode(value, { stream: true });
+        if (target) {
+          // Render incrementally through the safe allowlist renderer so
+          // emphasis/links/lists from the model show up properly while
+          // partial markup can't break out. Hide any in-flight nav marker
+          // (full or partial) so it never flashes visible.
+          const display = stripTrailingMarker(acc);
+          target.innerHTML = safeRenderModelHtml(display);
+          log.scrollTop = log.scrollHeight;
+        }
+      }
+
+      // Stream done. Pull out the NAV marker (if any), strip it from the
+      // visible answer, and decide whether to surface a navigation CTA.
+      //
+      // Be liberal in what we accept: gpt-4.1 occasionally outputs
+      // `[[NAV: 2]]`, `[NAV:2]`, or wraps it in emphasis. We strip every
+      // plausible form so nothing leaks into the rendered answer.
+      let navIdx = null;
+      const navPatterns = [
+        /\[\[\s*NAV\s*:\s*(\d+)\s*\]\]/i,
+        /\[\s*NAV\s*:\s*(\d+)\s*\]/i,
+        /\bNAV\s*:\s*(\d+)\b/i,
+      ];
+      for (const re of navPatterns) {
+        const m = acc.match(re);
+        if (m) {
+          navIdx = parseInt(m[1], 10);
+          break;
+        }
+      }
+      // Always strip every variant of the marker from the visible answer,
+      // even when no number was parseable (so stray "[[NAV:" doesn't show).
+      acc = acc
+        .replace(/<\/?(em|strong)>\s*\[+\s*NAV\s*:\s*\d*\s*\]+\s*<\/?(em|strong)>/gi, '')
+        .replace(/\[+\s*NAV\s*:\s*\d*\s*\]+/gi, '')
+        .replace(/\bNAV\s*:\s*\d+\b/gi, '')
+        .replace(/\n{3,}/g, '\n\n')
+        .trimEnd();
+
+      // Fallback: if the model didn't emit a marker, default to the
+      // top-ranked chunk when its score is meaningfully above noise. This
+      // keeps the "want me to take you there?" affordance working even
+      // if the model ignores the format instruction.
+      let navTarget = null;
+      if (navIdx && navIdx > 0 && navIdx <= top.length) {
+        navTarget = top[navIdx - 1];
+      } else if (navIdx === 0) {
+        // Model explicitly said "no destination" — respect it.
+        navTarget = null;
+      } else if (top[0] && top[0].s >= 1.5) {
+        navTarget = top[0];
+      }
+
+      if (bubble) {
+        let html = safeRenderModelHtml(acc) + renderSources(top);
+        if (navTarget) {
+          const url = `${base}${navTarget.d.url.replace(/^\//, '')}`;
+          const label = navTarget.d.heading && navTarget.d.heading !== navTarget.d.title
+            ? `${navTarget.d.title} — ${navTarget.d.heading}`
+            : navTarget.d.title;
+          pendingNav = { url, label };
+          html += renderNavCta(url, label);
+        } else {
+          pendingNav = null;
+        }
+        bubble.innerHTML = html;
+      }
+      if (speakReplies) speak(acc);
+      saveTranscript();
+      return true;
+    }
+
+    // "Want me to take you there?" CTA appended beneath a streamed answer
+    // when the model emitted a [[NAV:n]] marker. Click handling is wired
+    // via event delegation on `log` (see below) so re-renders / transcript
+    // restores keep working.
+    function renderNavCta(url, label) {
+      const safeUrl = escapeHtml(url);
+      const safeLabel = escapeHtml(label);
+      return (
+        `<div class="mai-nav-cta mt-3 pt-2 border-t border-muted/20 text-[12px]" data-mai-nav-cta data-nav-url="${safeUrl}">` +
+          `<p class="text-muted mb-1.5">Want me to take you to <em>${safeLabel}</em>?</p>` +
+          `<div class="flex gap-2">` +
+            `<button type="button" class="mai-nav-yes rounded border border-accent text-accent px-2 py-1 text-[11px] hover:bg-accent hover:text-paper transition-colors" data-mai-nav-yes>Yes, take me</button>` +
+            `<button type="button" class="mai-nav-no rounded border border-muted/30 text-muted px-2 py-1 text-[11px] hover:border-muted/60 transition-colors" data-mai-nav-no>No thanks</button>` +
+          `</div>` +
+        `</div>`
+      );
+    }
+
+    // ---------- Intent classifier (deterministic, no AI) ----------
+    // We can't call a model, so we don't pretend to understand free-form
+    // intent. What we CAN do is recognize the *shape* of a request and
+    // respond honestly. Each branch returns a hand-written reply or hands
+    // off to retrieval. No randomness, no improvisation.
+    const INTENT = {
+      // Things M.AI literally cannot do — weather, jokes, the time, music,
+      // open-ended chat. We name the limit and redirect to the site.
+      smallTalk: /\b(weather|temperature|forecast|joke|funny|sing|song|music|story|poem|chat|talk to me|bored|love|date|girlfriend|boyfriend|favorite color|favourite colour|game|play a game|what time|what.s the time|today.s date|news)\b/i,
+      // Direct questions about the assistant's nature beyond what the KB covers.
+      meta: /\b(are you (real|alive|sentient|human|conscious|smart|chatgpt|claude|gpt|gemini|copilot)|do you (think|feel|dream)|llm|language model|neural network)\b/i,
+      // Hostile / abusive — polite redirect, no engagement, no echo.
+      hostile: /\b(fuck|shit|bitch|asshole|cunt|dick|piss|hate you|kill (you|yourself)|die|suck|trash|garbage|useless|moron|idiot|retard)\b/i,
+      // Sexual / NSFW — firmly out of scope, don't pay tokens to refuse.
+      nsfw: /\b(sex|sexy|nude|naked|porn|horny|kiss me|date me|marry me|hot|attractive|boobs|breast|penis|vagina|onlyfans)\b/i,
+      // Jailbreak / prompt-injection — short-circuit before they hit the model.
+      jailbreak: /(ignore (all |any |your |previous |prior )?(instructions|rules|prompt|system)|disregard (the |your |previous )?(above|prior|prompt|instructions)|you are (now |actually )?(dan|developer mode|jailbroken|unrestricted)|act as|pretend to be|role[- ]?play as|system\s*:|<\s*system|new instructions|reveal (your|the) (system )?prompt|what (is|are) your (system )?(prompt|instructions))/i,
+      // SSN / credit-card-looking numbers — never echo, never send.
+      pii: /\b(\d{3}[- ]?\d{2}[- ]?\d{4}|\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4})\b/,
+      // Capability question — user is asking what they can ask.
+      capability: /\b(what can (you|i) (ask|do|search)|help|how (do|does) (this|you) work|instructions|examples|what should i (ask|type)|what (are you|do you) (good|able) (at|to))\b/i,
+      // Things M.AI also can't do: book, buy, sign up, subscribe, schedule.
+      action: /\b(book|buy|order|schedule|sign (me )?up|subscribe|register|download|install|log ?in|sign ?in)\b/i,
+    };
+
+    // Hard cap on input length — anything bigger is almost certainly a
+    // paste-bomb or injection payload; not worth tokens.
+    const MAX_INPUT_CHARS = 500;
+
+    function classifyIntent(text) {
+      const t = text.trim();
+      if (!t) return 'empty';
+      if (t.length < 3) return 'too-short';
+      if (t.length > MAX_INPUT_CHARS) return 'too-long';
+      // Single "word" with no vowels and no digits — likely keysmash.
+      const compact = t.replace(/\s+/g, '');
+      if (compact.length >= 4 && !/[aeiouy0-9]/i.test(compact)) return 'gibberish';
+      // Check the high-risk patterns first — these are the ones we MUST NOT
+      // forward to the model, even if other patterns also match.
+      if (INTENT.pii.test(t)) return 'pii';
+      if (INTENT.jailbreak.test(t)) return 'jailbreak';
+      if (INTENT.nsfw.test(t)) return 'nsfw';
+      if (INTENT.hostile.test(t)) return 'hostile';
+      if (INTENT.smallTalk.test(t)) return 'small-talk';
+      if (INTENT.meta.test(t)) return 'meta';
+      if (INTENT.capability.test(t)) return 'capability';
+      if (INTENT.action.test(t)) return 'action';
+      return 'search';
+    }
+
+    function intentReply(kind) {
+      switch (kind) {
+        case 'empty':
+          return `Type a few words about Flora's work, writing, or anything in the Toybox — I'll look across the site.`;
+        case 'too-short':
+          return `A little more to go on, please — even one full word helps me find the right page.`;
+        case 'gibberish':
+          return `That didn't come through as a question I can answer. Try a topic from the chips below.`;
+        case 'too-long':
+          return `That's a lot to take in at once — try a shorter question (a sentence or two) and I'll work from there.`;
+        case 'pii':
+          return `Please keep personal numbers out of the chat — I only need to know what to look up on Flora's site.`;
+        case 'jailbreak':
+          return `I don't take instructions from inside the chat. Ask about a topic on Flora's site and I'll work from what's actually there.`;
+        case 'nsfw':
+          return `That's not what I'm here for. Ask about Flora's writing, her work, or anything in the Toybox.`;
+        case 'hostile':
+          return `Let's keep it kind. Ask about Flora's work, her writing, or any page on the site and I'll help.`;
+        case 'small-talk':
+          return `That sits outside what I can speak to — I work from what Flora has published. Try a topic from the chips below.`;
+        case 'meta':
+          return `I'm M.ai — a thoughtful guide to Flora's work, writing, and ideas. I read across her published pages and synthesize an answer with citations. Not a general chatbot, and I won't speak to anything she hasn't put on the site.`;
+        case 'capability':
+          return `I can read across anything Flora has published — her <a class="text-accent underline" href="${base}writing">writing</a>, <a class="text-accent underline" href="${base}work">work</a>, <a class="text-accent underline" href="${base}toybox">Toybox</a>, and <a class="text-accent underline" href="${base}play">play</a> pages — and pull the relevant pieces together. Try a name, a topic, or a phrase from a post.`;
+        case 'action':
+          return `I don't take actions on Flora's behalf — no bookings, no signups. For anything that needs her directly, <a class="text-accent underline" href="https://linkedin.com/in/floramaydelacruz">LinkedIn</a> is the clearest path.`;
+        default:
+          return null;
+      }
+    }
+
+    // ---------- DOM ----------
+    const root = document.getElementById('mai-root');
+    if (!root) return;
+    const panel = document.getElementById('mai-panel');
+    const backdrop = document.getElementById('mai-backdrop');
+    const closeBtn = document.getElementById('mai-close');
+    const expandBtn = document.getElementById('mai-expand');
+    const expandIcon = document.getElementById('mai-expand-icon-expand');
+    const collapseIcon = document.getElementById('mai-expand-icon-collapse');
+    const log = document.getElementById('mai-log');
+    const chipsBar = document.getElementById('mai-chips');
+    const topicsEl = document.getElementById('mai-topics');
+    const form = document.getElementById('mai-form');
+    const input = document.getElementById('mai-input');
+    const micBtn = document.getElementById('mai-mic');
+    const speakToggle = document.getElementById('mai-speak-toggle');
+
+    let speakReplies = false;
+    let fullscreen = false;
+    const fab = document.getElementById('mai-fab');
+
+    // ---------- Theme toggle (moon / sun) ----------
+    // Reads/writes localStorage 'theme'. The pre-paint script in
+    // BaseLayout already applied the initial class; this just keeps
+    // the icon and aria state in sync and handles user toggles.
+    (function initThemeToggle() {
+      const btn = document.getElementById('theme-toggle');
+      const moon = document.getElementById('theme-icon-moon');
+      const sun = document.getElementById('theme-icon-sun');
+      if (!btn || !moon || !sun) return;
+      // SVGElement doesn't inherit from HTMLElement, so el.hidden = true
+      // sets a JS property but does NOT add the `hidden` attribute to the
+      // DOM. Use setAttribute/removeAttribute so CSS [hidden] applies.
+      function setHidden(el, on) {
+        if (on) el.setAttribute('hidden', '');
+        else el.removeAttribute('hidden');
+      }
+      function syncUI() {
+        const isDark = document.documentElement.classList.contains('dark');
+        setHidden(moon, isDark);
+        setHidden(sun, !isDark);
+        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        // aria-pressed mirrors the toggle state so AT exposes whether
+        // dark mode is currently active, not just the next action.
+        btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      }
+      syncUI();
+      btn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
+        syncUI();
+      });
+    })();
+
+    // ---------- Open / close ----------
+    // Persistence follows the sticky-view-state playbook: panel open/closed
+    // survives navigation within the tab (sessionStorage), dies on tab
+    // close or hard refresh of a tab where it was never opened. We skip
+    // focus-stealing on restore so the page doesn't grab the cursor every
+    // time the user navigates with the rail already open.
+    // Pending re-hide timer for the close transition. We set `panel.hidden`
+    // only AFTER the slide-out finishes so the panel can animate out; if
+    // open() is called before that lands, we cancel it.
+    var _closeTimer = null;
+    function open(opts) {
+      var restoring = opts && opts.restoring;
+      // Cancel any in-flight close so a fast reopen doesn't re-hide
+      // the panel 200ms in.
+      if (_closeTimer) { clearTimeout(_closeTimer); _closeTimer = null; }
+      panel.hidden = false;
+      backdrop.hidden = false;
+      if (fab) fab.hidden = true;
+      // Force a reflow so the panel's initial off-screen transform
+      // (translateX(100%)) gets committed BEFORE we add mai-open. Without
+      // this, the browser collapses both styles into one paint and the
+      // slide-in skips its transition.
+      void panel.offsetWidth;
+      document.documentElement.classList.add('mai-no-scroll');
+      document.documentElement.classList.add('mai-open');
+      try { sessionStorage.setItem('mai-open', 'true'); } catch (e) {}
+      // Warm the index + vocabulary so fuzzy spell-fix is ready by the
+      // time the user types/speaks their first question. Both promises
+      // are idempotent.
+      loadVocab();
+      if (!restoring) setTimeout(() => input.focus({ preventScroll: true }), 50);
+    }
+    function close() {
+      if (fab) fab.hidden = false;
+      document.documentElement.classList.remove('mai-no-scroll');
+      document.documentElement.classList.remove('mai-open');
+      try { sessionStorage.removeItem('mai-open'); } catch (e) {}
+      if (fullscreen) setFullscreen(false);
+      stopSpeaking();
+      // Keep the panel + backdrop in the DOM so the slide-out animates;
+      // re-apply `hidden` only after the transform settles. Match the
+      // 200ms transform/opacity duration in CSS.
+      if (_closeTimer) clearTimeout(_closeTimer);
+      _closeTimer = setTimeout(function () {
+        panel.hidden = true;
+        backdrop.hidden = true;
+        _closeTimer = null;
+      }, 220);
+    }
+    closeBtn.addEventListener('click', close);
+    backdrop.addEventListener('click', close);
+    if (fab) fab.addEventListener('click', () => open());
+
+    // Bind any topbar trigger (or anywhere on the site) marked data-mai-open.
+    // Also listen for a dispatched event so callers in other scripts can open
+    // the drawer programmatically without a DOM lookup.
+    document.querySelectorAll('[data-mai-open]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        open();
+      });
+    });
+    window.addEventListener('mai:open', () => open());
+
+    // Restore from sessionStorage. The pre-paint script in BaseLayout
+    // already set html.mai-open so the body shift is in place; we just
+    // need to unhide the aside, hide the FAB, and not steal focus.
+    try {
+      // Detect a real page refresh — if so, reset the conversation.
+      // Otherwise hydrate the log + chips so the convo survives in-tab nav.
+      const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      const isReload = navEntry
+        ? navEntry.type === 'reload'
+        : (performance.navigation && performance.navigation.type === 1);
+      if (isReload) {
+        sessionStorage.removeItem('mai-transcript');
+        sessionStorage.removeItem('mai-chips');
+        sessionStorage.removeItem('mai-topics-hidden');
+        sessionStorage.removeItem('mai-open');
+      } else {
+        const t = sessionStorage.getItem('mai-transcript');
+        if (t) {
+          log.innerHTML = t;
+          log.scrollTop = log.scrollHeight;
+        }
+        const c = sessionStorage.getItem('mai-chips');
+        if (c) {
+          chipsBar.innerHTML = c;
+          rewireChipButtons();
+        }
+        if (sessionStorage.getItem('mai-topics-hidden') === '1' && topicsEl) {
+          topicsEl.hidden = true;
+        }
+      }
+      if (sessionStorage.getItem('mai-open') === 'true') {
+        open({ restoring: true });
+      }
+    } catch (e) {}
+
+    // ---------- Expand / collapse ----------
+    function setFullscreen(on) {
+      fullscreen = on;
+      panel.classList.toggle('mai-fullscreen', on);
+      expandBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      expandBtn.setAttribute('aria-label', on ? 'Collapse M.AI' : 'Expand M.AI to full screen');
+      expandBtn.setAttribute('title', on ? 'Collapse' : 'Expand');
+      expandIcon.hidden = on;
+      collapseIcon.hidden = !on;
+    }
+    expandBtn.addEventListener('click', () => setFullscreen(!fullscreen));
+
+    // Topic buttons \u2014 each fires the same flow as a typed/spoken question.
+    topicsEl.querySelectorAll('.mai-topic').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const q = btn.getAttribute('data-q') || '';
+        handle(q);
+      });
+    });
+
+    let _bubbleSeq = 0;
+
+    // ---------- Transcript persistence ----------
+    // Per the sticky-view-state playbook: in-tab nav preserves the
+    // conversation; a real refresh resets it; closing the tab forgets
+    // everything. Scope = sessionStorage. Reload detected via
+    // PerformanceNavigationTiming.
+    function saveTranscript() {
+      try {
+        // Don't snapshot mid-stream — the bubble would restore as a
+        // half-rendered placeholder. The final write at end-of-stream
+        // catches it.
+        if (log.querySelector('.mai-stream')) return;
+        sessionStorage.setItem('mai-transcript', log.innerHTML);
+        sessionStorage.setItem('mai-chips', chipsBar.innerHTML);
+        if (topicsEl) sessionStorage.setItem('mai-topics-hidden', topicsEl.hidden ? '1' : '0');
+      } catch (e) {}
+    }
+    function rewireChipButtons() {
+      // innerHTML restore loses click handlers — reattach them so
+      // restored suggestion chips remain interactive.
+      chipsBar.querySelectorAll('button').forEach((b) => {
+        b.addEventListener('click', () => handle(b.textContent || ''));
+      });
+    }
+
+    function addBubble(who, html) {
+      const wrap = document.createElement('div');
+      wrap.className = who === 'mai'
+        ? 'flex justify-start'
+        : 'flex justify-end';
+      const bubble = document.createElement('div');
+      const id = `mai-bubble-${++_bubbleSeq}`;
+      bubble.id = id;
+      bubble.dataset.role = who;
+      bubble.className = who === 'mai'
+        ? 'max-w-[85%] rounded-lg bg-cream text-ink px-3 py-2 space-y-2'
+        : 'max-w-[85%] rounded-lg bg-ink text-paper px-3 py-2';
+      bubble.innerHTML = html;
+      wrap.appendChild(bubble);
+      log.appendChild(wrap);
+      log.scrollTop = log.scrollHeight;
+      saveTranscript();
+      return id;
+    }
+
+    function renderChips(items) {
+      chipsBar.innerHTML = '';
+      if (!items || !items.length) return;
+      for (const text of items) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = text;
+        b.className = 'rounded-full border border-ink/15 px-2.5 py-1 text-[11px] text-muted hover:border-accent hover:text-accent transition-colors';
+        b.addEventListener('click', () => handle(text));
+        chipsBar.appendChild(b);
+      }
+      saveTranscript();
+    }
+
+    function handle(text) {
+      const raw = (text || '').trim();
+      if (!raw) return;
+      // Apply speech-to-text corrections (toy box → toybox, M A I → M.AI,
+      // play book → playbook, etc.). Helps both spoken AND typed inputs.
+      let clean = expandSpeech(raw);
+
+      // 0) If a message-to-Flora flow is in progress, route every input
+      // through its state machine. Returns true if consumed.
+      if (messageFlow) {
+        progressMessageFlow(clean);
+        return;
+      }
+
+      // Detect "I want to send a message" / "leave a message" / "tell Flora"
+      // / "message her" intents and start the multi-turn flow. Done before
+      // intent classification so these don't fall through to the LLM.
+      // Loose ".{0,30}" between verb and noun so "send Flora a message"
+      // matches as easily as "send a message".
+      const MESSAGE_INTENT_RE = /\b(send|leave|drop|forward)\b.{0,30}\b(message|note)\b|\b(message|tell|write to|reach out to)\s+(her|flora|flora\s*may)\b|\bi(?:'| ?a)?d (?:like|love|want) to (?:contact|reach|message|write|leave a message|email|tell)\b/i;
+      if (MESSAGE_INTENT_RE.test(clean)) {
+        addBubble('user', escapeHtml(clean));
+        input.value = '';
+        startMessageFlow();
+        return;
+      }
+
+      // If a navigation offer is pending from the last answer and the user's
+      // input is a short yes/no, honor it instead of treating it as a new
+      // question. Anything else just clears the pending offer and falls
+      // through to normal handling.
+      if (pendingNav) {
+        const t = clean.toLowerCase();
+        const AFFIRM = /^(y|ya|ye|yes+|yea+h?|yep|yup|sure|ok(ay)?|please|do it|go|take me( there)?|let'?s go|sounds good|absolutely|definitely)[.! ]*$/;
+        const DENY = /^(no+|nope|nah|cancel|don'?t|stop|not now|later)[.! ]*$/;
+        if (AFFIRM.test(t)) {
+          const target = pendingNav;
+          pendingNav = null;
+          addBubble('user', escapeHtml(clean));
+          input.value = '';
+          addBubble('mai', `Taking you to <em>${escapeHtml(target.label)}</em>…`);
+          saveTranscript();
+          // Close the panel on mobile only (full-screen drawer would hide
+          // the destination). Desktop keeps the side rail open so the
+          // conversation continues alongside the new page. Small delay so
+          // the confirmation bubble paints before the page unloads.
+          const isMobile = window.matchMedia('(max-width: 767px)').matches;
+          setTimeout(() => {
+            if (isMobile) close();
+            window.location.assign(target.url);
+          }, 250);
+          return;
+        }
+        if (DENY.test(t)) {
+          pendingNav = null;
+          addBubble('user', escapeHtml(clean));
+          input.value = '';
+          addBubble('mai', 'No problem — what else can I help you find?');
+          // Strip the CTA from the last assistant bubble so it doesn't
+          // linger as a dangling offer.
+          const ctas = log.querySelectorAll('[data-mai-nav-cta]');
+          if (ctas.length) ctas[ctas.length - 1].remove();
+          renderChips(STARTER_CHIPS);
+          saveTranscript();
+          return;
+        }
+        // Neither — treat as a new question. Drop the offer silently.
+        pendingNav = null;
+      }
+      // If the vocabulary is already loaded (we kick that off when the
+      // panel opens), repair any unknown words against the indexed terms.
+      // Catches misspellings the hand-listed table can't anticipate:
+      // "packbot" → "pacbot", "vehra" → "vera", "miendelf" → "mindelf",
+      // "tabloos" → "tabulas". Best-effort: if vocab isn't ready yet on
+      // the very first query, BM25 retrieval will still try the raw form.
+      if (_vocabReady) clean = fuzzyCorrectQuery(clean, _vocabReady);
+      // First interaction collapses the topic grid — the conversation owns
+      // the panel from this point on. The chips bar still surfaces topics.
+      if (topicsEl && !topicsEl.hidden) topicsEl.hidden = true;
+      addBubble('user', escapeHtml(clean));
+      input.value = '';
+
+      // 1) Guard rails first — anything abusive, NSFW, an injection attempt,
+      // a paste-bomb, PII, or a meta question gets a canned reply BEFORE
+      // we burn any tokens calling the worker. The KB matcher doesn't get
+      // a chance to misroute these either.
+      const preIntent = classifyIntent(clean);
+      const HARD_BLOCK = new Set(['hostile', 'nsfw', 'jailbreak', 'pii', 'too-long', 'meta']);
+      if (HARD_BLOCK.has(preIntent)) {
+        const reply = intentReply(preIntent);
+        addBubble('mai', reply);
+        renderChips(STARTER_CHIPS);
+        if (speakReplies) speak(stripHtml(reply));
+        return;
+      }
+
+      // 2) Identity / greeting / contact — hand-written wins outright.
+      const kb = kbAnswerFor(clean);
+      if (kb) {
+        addBubble('mai', kb.answer);
+        renderChips(kb.followups || STARTER_CHIPS);
+        if (speakReplies) speak(stripHtml(kb.answer));
+        return;
+      }
+
+      // 3) Any other non-search shape — honest, scripted reply.
+      const intent = preIntent;
+      if (intent !== 'search') {
+        const reply = intentReply(intent);
+        addBubble('mai', reply);
+        renderChips(STARTER_CHIPS);
+        if (speakReplies) speak(stripHtml(reply));
+        return;
+      }
+
+      // 4) Otherwise, search the site. Index loads lazily on first query.
+      const thinkingId = addBubble('mai', '<span class="mai-thinking text-muted">Looking through Flora&rsquo;s work<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>');
+      loadIndex().then(async (index) => {
+        // Replace the placeholder bubble in-place so it doesn't pile up.
+        const bubble = document.getElementById(thinkingId);
+        if (!index || !index.docs?.length) {
+          if (bubble) bubble.innerHTML = noMatchAnswer(clean);
+          renderChips(STARTER_CHIPS);
+          saveTranscript();
+          return;
+        }
+        // If fuzzy correction didn't get a chance pre-KB (first-ever
+        // query race), do it now against the loaded vocab so BM25 has
+        // a fair shot at matching mis-spelled proper nouns.
+        if (!_vocabReady) await loadVocab();
+        if (_vocabReady) clean = fuzzyCorrectQuery(clean, _vocabReady);
+        const scored = rank(index, clean);
+        // Send a wider context to the LLM — it can pick the relevant bits
+        // and ignore the rest. Cheaper than refusing a question we COULD have
+        // answered if we'd looked further down the list.
+        const top = dedupeByDoc(scored, 6);
+        // Low floor: if anything scores above noise, give the LLM a chance.
+        // The model is grounded by the chunks and will refuse on its own if
+        // none are relevant — much rarer than the old client-side cutoff.
+        if (!top.length || top[0].s < 0.6) {
+          if (bubble) bubble.innerHTML = noMatchAnswer(clean);
+          renderChips(STARTER_CHIPS);
+          if (speakReplies) speak(stripHtml(noMatchAnswer(clean)));
+          saveTranscript();
+          return;
+        }
+        // If the LLM tier is configured + healthy, ask it to write a
+        // grounded answer using the top chunks. Otherwise (or on any
+        // failure) fall through to the keyword-result list \u2014 the user
+        // always gets something useful.
+        if (MAI_WORKER_URL && !aiPaused) {
+          if (bubble) bubble.innerHTML = '<span class="mai-thinking text-muted">Reading the relevant pages<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>';
+          const ok = await askWorker(clean, top, bubble);
+          if (ok) {
+            renderChips(STARTER_CHIPS);
+            return;
+          }
+          // Fell through \u2014 fall back to plain retrieval below.
+        }
+        const html = renderRetrieval(top, clean);
+        if (bubble) bubble.innerHTML = html;
+        renderChips(STARTER_CHIPS);
+        if (speakReplies) {
+          // Read the top result's heading + snippet aloud \u2014 not the whole list.
+          const first = top[0].d;
+          speak(`${first.title}. ${stripHtml(snippet(first.text, clean))}`);
+        }
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handle(input.value);
+    });
+
+    // Delegated handler for the "Want me to take you there?" CTA buttons
+    // appended at the end of streamed answers (see renderNavCta). Lives on
+    // `log` so it survives re-renders and transcript restores.
+    log.addEventListener('click', (e) => {
+      const yes = e.target.closest('[data-mai-nav-yes]');
+      const no = e.target.closest('[data-mai-nav-no]');
+      if (!yes && !no) return;
+      const cta = (yes || no).closest('[data-mai-nav-cta]');
+      if (!cta) return;
+      if (yes) {
+        const url = cta.getAttribute('data-nav-url') || '';
+        pendingNav = null;
+        if (url) {
+          // On mobile the panel is a full-screen drawer that would cover
+          // the destination page while it loads, so close it first for
+          // immediate visual feedback (close() also clears the `mai-open`
+          // sessionStorage flag so the next page doesn't auto-reopen it).
+          // On desktop the panel is a 24rem side rail — the page is
+          // already visible alongside it, so leave it open.
+          const isMobile = window.matchMedia('(max-width: 767px)').matches;
+          if (isMobile) close();
+          window.location.assign(url);
+        }
+        return;
+      }
+      // No thanks — remove the CTA and clear any pending offer.
+      pendingNav = null;
+      cta.remove();
+      saveTranscript();
+    });
+
+    // Delegated handler for the "Or leave a message here" button rendered
+    // by the contact KB answer. Kicks off the multi-turn message flow.
+    log.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-mai-start-message]');
+      if (!trigger) return;
+      if (messageFlow) return; // already in flow
+      startMessageFlow();
+    });
+
+    // Delegated handler for the message-flow confirm step (Send / Cancel
+    // buttons rendered into the confirm bubble).
+    log.addEventListener('click', (e) => {
+      const send = e.target.closest('[data-mai-msg-send]');
+      const cancel = e.target.closest('[data-mai-msg-cancel]');
+      if (!send && !cancel) return;
+      const cta = (send || cancel).closest('[data-mai-msg-cta]');
+      if (cta) cta.remove();
+      if (send) {
+        if (messageFlow && messageFlow.stage === 'confirm') {
+          sendMessageFlow();
+        }
+        return;
+      }
+      // Cancel
+      messageFlow = null;
+      addBubble('mai', `No problem — nothing sent. What else can I help with?`);
+      renderChips(STARTER_CHIPS);
+      saveTranscript();
+    });
+
+    // ---------- Voice in (Web Speech API — SpeechRecognition) ----------
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    // iOS Safari technically exposes webkitSpeechRecognition but the
+    // implementation is unreliable in the wild — frequent silent failures,
+    // no recognition events on some iOS versions. Warn the user once.
+    const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    let recog = null;
+    let listening = false;
+    // Track the "Listening…" placeholder bubble so we can clear it on result
+    // or error instead of leaving a ghost in the log.
+    let listeningBubbleId = null;
+    // Safety net: if no result/end/error fires within this window (e.g. user
+    // ignored the permission popup, or recognition silently hung), abort.
+    let micTimeout = null;
+    function clearListeningBubble() {
+      if (!listeningBubbleId) return;
+      const el = document.getElementById(listeningBubbleId);
+      if (el && el.parentElement) el.parentElement.remove();
+      listeningBubbleId = null;
+    }
+    function clearMicTimeout() {
+      if (micTimeout) { clearTimeout(micTimeout); micTimeout = null; }
+    }
+    function setMicState(on) {
+      listening = on;
+      micBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      micBtn.classList.toggle('text-accent', on);
+      if (!on) clearMicTimeout();
+    }
+    // Error codes per the SpeechRecognition spec. We name what went wrong
+    // instead of silently resetting the button — the old behaviour looked
+    // like the mic was broken.
+    const MIC_ERROR_COPY = {
+      'not-allowed': `Microphone permission was blocked. Click the lock icon in your browser's address bar, allow the mic for this site, and try again.`,
+      'service-not-allowed': `Microphone permission was blocked. Click the lock icon in your browser's address bar, allow the mic for this site, and try again.`,
+      'no-speech': `I didn't hear anything. Try again, a little closer to the mic.`,
+      'audio-capture': `No microphone was found. Check that one is connected and selected in your system settings.`,
+      'network': `Speech recognition couldn't reach the browser speech service. Check your internet connection, disable strict tracker/ad blocking for this site, or try Chrome/Edge on desktop. You can always type your question instead.`,
+      'aborted': null, // user cancelled — no message
+    };
+    if (SR) {
+      recog = new SR();
+      recog.lang = 'en-US';
+      recog.interimResults = false;
+      recog.maxAlternatives = 1;
+      recog.addEventListener('result', (e) => {
+        clearMicTimeout();
+        clearListeningBubble();
+        const text = e.results[0][0].transcript;
+        input.value = text;
+        handle(text);
+      });
+      recog.addEventListener('end', () => {
+        setMicState(false);
+        // Leave any error bubble in place; only clear the live placeholder.
+        if (listeningBubbleId) {
+          const el = document.getElementById(listeningBubbleId);
+          if (el && el.textContent?.includes('Listening')) clearListeningBubble();
+        }
+      });
+      recog.addEventListener('error', (e) => {
+        setMicState(false);
+        clearListeningBubble();
+        const code = e?.error || 'unknown';
+        // 'aborted' is the user stopping the mic — don't bother them with a message.
+        if (code === 'aborted') return;
+        const msg =
+          code === 'network' && navigator.onLine === false
+            ? `You're offline right now, so voice input can't start. Reconnect to the internet and try again, or type your question.`
+            : MIC_ERROR_COPY[code] || `The microphone didn't respond (${escapeHtml(code)}). You can type instead.`;
+        addBubble('mai', msg);
+      });
+    }
+    // We intentionally LEAVE the button visible on browsers without
+    // SpeechRecognition support — clicking it explains what to do instead
+    // of just silently missing.
+    micBtn.addEventListener('click', async () => {
+      // Stop a session in progress.
+      if (listening) {
+        try { recog?.stop(); } catch {}
+        clearMicTimeout();
+        clearListeningBubble();
+        setMicState(false);
+        return;
+      }
+      // No SpeechRecognition at all → tell the user why.
+      if (!SR) {
+        addBubble(
+          'mai',
+          `Voice input isn't supported in this browser. It works in Chrome and Edge on desktop. You can type your question instead.`,
+        );
+        return;
+      }
+      // Browser is offline: fail fast with a specific message instead of
+      // waiting for SpeechRecognition to emit a generic network error.
+      if (navigator.onLine === false) {
+        addBubble('mai', `You're offline right now, so voice input can't start. Reconnect to the internet and try again, or type your question.`);
+        return;
+      }
+      // Pre-flight permission check (where supported) — catches the
+      // "user previously denied" case BEFORE we attempt recognition,
+      // which on Safari often emits no error event at all.
+      try {
+        if (navigator.permissions?.query) {
+          const status = await navigator.permissions.query({ name: 'microphone' });
+          if (status.state === 'denied') {
+            addBubble('mai', MIC_ERROR_COPY['not-allowed']);
+            return;
+          }
+        }
+      } catch { /* Permissions API not available for 'microphone' on this browser — ignore. */ }
+      // Explicit getUserMedia warm-up: reliably surfaces the permission
+      // prompt on Chrome/Safari/Edge in cases where SpeechRecognition.start()
+      // alone fails to do so. We release the stream immediately so we don't
+      // hold the mic open in parallel with recognition.
+      if (navigator.mediaDevices?.getUserMedia) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          stream.getTracks().forEach((t) => t.stop());
+        } catch (err) {
+          const name = err?.name || '';
+          if (name === 'NotAllowedError' || name === 'SecurityError') {
+            addBubble('mai', MIC_ERROR_COPY['not-allowed']);
+          } else if (name === 'NotFoundError' || name === 'OverconstrainedError') {
+            addBubble('mai', MIC_ERROR_COPY['audio-capture']);
+          } else {
+            addBubble('mai', `The microphone couldn't start (${escapeHtml(name || 'unknown')}). You can type instead.`);
+          }
+          return;
+        }
+      }
+      // Start the recognizer. Catch InvalidStateError specifically — happens
+      // when a previous session is still tearing down and the user clicks again.
+      try {
+        recog.start();
+        setMicState(true);
+        listeningBubbleId = addBubble(
+          'mai',
+          IS_IOS
+            ? '<span class="text-muted">Listening… (voice on iOS is unreliable — typing usually works better.)</span>'
+            : '<span class="text-muted">Listening… speak now.</span>',
+        );
+        // Safety timeout: if no recognition events fire within 15 s
+        // (user ignored the permission popup, browser hung, etc.),
+        // abort cleanly and tell them what to try.
+        micTimeout = setTimeout(() => {
+          try { recog.stop(); } catch {}
+          try { recog.abort?.(); } catch {}
+          setMicState(false);
+          clearListeningBubble();
+          addBubble(
+            'mai',
+            `The mic didn't respond. If your browser asked for permission, you may need to allow it and try again — or type your question instead.`,
+          );
+        }, 15000);
+      } catch (err) {
+        setMicState(false);
+        clearListeningBubble();
+        const name = err?.name || '';
+        if (name === 'InvalidStateError') {
+          // Recognition was already running — silently reset and let the
+          // user click again.
+          try { recog.abort?.(); } catch {}
+          return;
+        }
+        addBubble('mai', `The microphone couldn't start. ${escapeHtml(err?.message || 'Try again, or type your question instead.')}`);
+      }
+    });
+
+    // ---------- Voice out (SpeechSynthesis) ----------
+    function speak(text) {
+      if (!('speechSynthesis' in window)) return;
+      stopSpeaking();
+      const u = new SpeechSynthesisUtterance(text);
+      u.rate = 1.0;
+      u.pitch = 1.05;
+      window.speechSynthesis.speak(u);
+    }
+    function stopSpeaking() {
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+    speakToggle.addEventListener('click', () => {
+      speakReplies = !speakReplies;
+      speakToggle.setAttribute('aria-pressed', speakReplies ? 'true' : 'false');
+      // Stronger visual: filled chip when on, muted icon when off.
+      speakToggle.classList.toggle('text-accent', speakReplies);
+      speakToggle.classList.toggle('bg-accent/15', speakReplies);
+      speakToggle.classList.toggle('text-muted', !speakReplies);
+      if (!speakReplies) {
+        stopSpeaking();
+        return;
+      }
+      // Instant feedback: read the most recent M.AI reply aloud so the user
+      // can hear that it works without needing to ask another question.
+      const lastMai = Array.from(log.querySelectorAll('[id^="mai-bubble-"]'))
+        .reverse()
+        .find((b) => b.dataset.role === 'mai');
+      if (lastMai) {
+        speak(stripHtml(lastMai.innerHTML));
+      } else {
+        // No replies yet — confirm audibly so the user knows the toggle works.
+        speak("Voice on. Ask me a question and I'll read the answer aloud.");
+      }
+    });
+
+    // ---------- Close on Escape ----------
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) close();
+    });
+  })();
+})();</script> </body></html>

@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="A top-down knolling flat-lay of toys on cream paper: a small train, alphabet blocks, three toy cars, a teddy bear, a Rubik's cube, a stack of books, a spinning top, and a small cluster of building bricks.">
+  <rect width="1600" height="900" fill="#e5e3dc"/>
+
+  <!-- Composition fills the canvas; the page's figcaption handles the caption. -->
+  <g>
+
+  <!-- ============== CARDBOARD BOX (top-down view) ============== -->
+  <g stroke="#303636" stroke-width="5" stroke-linejoin="round">
+    <!-- Outer rim: cardboard-colored frame around the toys -->
+    <rect x="30" y="30" width="1540" height="820" rx="14" fill="#d4967d"/>
+    <!-- Inner cutout: the box "floor" (same cream as the page bg) -->
+    <rect x="90" y="80" width="1420" height="720" rx="8" fill="#e5e3dc"/>
+  </g>
+  <!-- Cardboard flute hint (faint parallel lines on the rim) -->
+  <g stroke="#a24a2a" stroke-width="1.2" opacity="0.35" fill="none">
+    <line x1="60" y1="55" x2="1540" y2="55"/>
+    <line x1="60" y1="825" x2="1540" y2="825"/>
+    <line x1="55" y1="100" x2="55" y2="780"/>
+    <line x1="1545" y1="100" x2="1545" y2="780"/>
+  </g>
+  <!-- Corner fold creases — sells the cardboard read -->
+  <g stroke="#303636" stroke-width="2.5" fill="none" opacity="0.7">
+    <line x1="40" y1="40" x2="95" y2="85"/>
+    <line x1="1560" y1="40" x2="1505" y2="85"/>
+    <line x1="40" y1="840" x2="95" y2="795"/>
+    <line x1="1560" y1="840" x2="1505" y2="795"/>
+  </g>
+
+  <!-- ============== TOYS (laid out inside the box) ============== -->
+  <g stroke="#303636" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" transform="translate(0, 70)">
+
+    <!-- ============== COLUMN A — left ============== -->
+
+    <!-- A1: TRAIN (3 cars stacked vertically, top-down) -->
+    <rect x="160" y="80" width="170" height="80" rx="10" fill="#495a58"/>
+    <rect x="195" y="100" width="50" height="40" rx="4" fill="#e5e3dc"/>
+    <circle cx="175" cy="80" r="12" fill="#fff"/>
+    <circle cx="315" cy="80" r="12" fill="#fff"/>
+    <circle cx="175" cy="160" r="12" fill="#fff"/>
+    <circle cx="315" cy="160" r="12" fill="#fff"/>
+    <line x1="245" y1="160" x2="245" y2="200"/>
+
+    <rect x="160" y="200" width="170" height="80" rx="10" fill="#d4967d"/>
+    <line x1="245" y1="200" x2="245" y2="280" stroke="#303636" opacity="0"/>
+    <circle cx="175" cy="200" r="12" fill="#fff"/>
+    <circle cx="315" cy="200" r="12" fill="#fff"/>
+    <circle cx="175" cy="280" r="12" fill="#fff"/>
+    <circle cx="315" cy="280" r="12" fill="#fff"/>
+    <line x1="245" y1="280" x2="245" y2="320"/>
+
+    <rect x="160" y="320" width="170" height="80" rx="10" fill="#fff"/>
+    <rect x="200" y="340" width="90" height="40" rx="4" fill="#a24a2a"/>
+    <circle cx="175" cy="320" r="12" fill="#fff"/>
+    <circle cx="315" cy="320" r="12" fill="#fff"/>
+    <circle cx="175" cy="400" r="12" fill="#fff"/>
+    <circle cx="315" cy="400" r="12" fill="#fff"/>
+
+    <!-- A2: RUBIK'S CUBE (top-down) -->
+    <rect x="165" y="495" width="56" height="56" fill="#d4967d" stroke="none"/>
+    <rect x="297" y="495" width="58" height="56" fill="#495a58" stroke="none"/>
+    <rect x="231" y="561" width="57" height="57" fill="#a24a2a" stroke="none"/>
+    <rect x="165" y="628" width="56" height="57" fill="#495a58" stroke="none"/>
+    <rect x="297" y="628" width="58" height="57" fill="#d4967d" stroke="none"/>
+    <rect x="160" y="490" width="200" height="200" rx="8" fill="none"/>
+    <line x1="160" y1="556" x2="360" y2="556"/>
+    <line x1="160" y1="623" x2="360" y2="623"/>
+    <line x1="226" y1="490" x2="226" y2="690"/>
+    <line x1="293" y1="490" x2="293" y2="690"/>
+
+    <!-- ============== COLUMN B ============== -->
+
+    <!-- B1: ALPHABET BLOCKS (2 x 3 grid) -->
+    <rect x="430" y="80"  width="80" height="80" rx="6" fill="#d4967d"/>
+    <rect x="520" y="80"  width="80" height="80" rx="6" fill="#fff"/>
+    <rect x="610" y="80"  width="80" height="80" rx="6" fill="#495a58"/>
+    <rect x="430" y="170" width="80" height="80" rx="6" fill="#fff"/>
+    <rect x="520" y="170" width="80" height="80" rx="6" fill="#a24a2a"/>
+    <rect x="610" y="170" width="80" height="80" rx="6" fill="#fff"/>
+
+    <g font-family="Libre Baskerville, Georgia, serif" font-size="42" text-anchor="middle" stroke="none">
+      <text x="470" y="138" fill="#303636">A</text>
+      <text x="560" y="138" fill="#303636">B</text>
+      <text x="650" y="138" fill="#e5e3dc">C</text>
+      <text x="470" y="228" fill="#303636">1</text>
+      <text x="560" y="228" fill="#fff">2</text>
+      <text x="650" y="228" fill="#303636">3</text>
+    </g>
+
+    <!-- B2: STACK OF BOOKS (top-down, offset stack) -->
+    <rect x="420" y="500" width="280" height="50" rx="4" fill="#495a58"/>
+    <rect x="440" y="555" width="280" height="50" rx="4" fill="#d4967d"/>
+    <rect x="410" y="610" width="290" height="50" rx="4" fill="#fff"/>
+    <line x1="440" y1="635" x2="680" y2="635"/>
+    <line x1="440" y1="645" x2="640" y2="645"/>
+
+    <!-- ============== COLUMN C ============== -->
+
+    <!-- C1: THREE TOY CARS (top-down) -->
+    <rect x="780" y="80" width="200" height="90" rx="40" fill="#d4967d"/>
+    <rect x="830" y="98" width="100" height="54" rx="14" fill="#fff"/>
+    <rect x="790" y="68" width="40" height="20" rx="6" fill="#303636"/>
+    <rect x="930" y="68" width="40" height="20" rx="6" fill="#303636"/>
+    <rect x="790" y="162" width="40" height="20" rx="6" fill="#303636"/>
+    <rect x="930" y="162" width="40" height="20" rx="6" fill="#303636"/>
+
+    <rect x="780" y="220" width="200" height="90" rx="40" fill="#495a58"/>
+    <rect x="830" y="238" width="100" height="54" rx="14" fill="#fff"/>
+    <rect x="790" y="208" width="40" height="20" rx="6" fill="#303636"/>
+    <rect x="930" y="208" width="40" height="20" rx="6" fill="#303636"/>
+    <rect x="790" y="302" width="40" height="20" rx="6" fill="#303636"/>
+    <rect x="930" y="302" width="40" height="20" rx="6" fill="#303636"/>
+
+    <rect x="780" y="360" width="200" height="90" rx="40" fill="#a24a2a"/>
+    <rect x="830" y="378" width="100" height="54" rx="14" fill="#fff"/>
+    <rect x="790" y="348" width="40" height="20" rx="6" fill="#303636"/>
+    <rect x="930" y="348" width="40" height="20" rx="6" fill="#303636"/>
+    <rect x="790" y="442" width="40" height="20" rx="6" fill="#303636"/>
+    <rect x="930" y="442" width="40" height="20" rx="6" fill="#303636"/>
+
+    <!-- C2: SPINNING TOP / YOYO (concentric circles) -->
+    <circle cx="880" cy="610" r="100" fill="#d4967d"/>
+    <circle cx="880" cy="610" r="62" fill="#fff"/>
+    <circle cx="880" cy="610" r="22" fill="#a24a2a"/>
+    <circle cx="880" cy="610" r="6" fill="#303636"/>
+
+    <!-- ============== COLUMN D — right ============== -->
+
+    <!-- D1: TOY ROBOT (top-down / front, replacing teddy) -->
+    <!-- Antennas -->
+    <line x1="1260" y1="50" x2="1245" y2="22"/>
+    <circle cx="1245" cy="22" r="10" fill="#a24a2a"/>
+    <line x1="1320" y1="50" x2="1335" y2="22"/>
+    <circle cx="1335" cy="22" r="10" fill="#d4967d"/>
+
+    <!-- Head -->
+    <rect x="1220" y="50" width="140" height="120" rx="14" fill="#495a58"/>
+    <!-- Eyes -->
+    <rect x="1240" y="82" width="30" height="30" rx="4" fill="#fff"/>
+    <circle cx="1255" cy="97" r="6" fill="#303636"/>
+    <rect x="1310" y="82" width="30" height="30" rx="4" fill="#fff"/>
+    <circle cx="1325" cy="97" r="6" fill="#303636"/>
+    <!-- Mouth (speaker grille) -->
+    <rect x="1255" y="132" width="70" height="22" rx="4" fill="#e5e3dc"/>
+    <line x1="1268" y1="134" x2="1268" y2="152"/>
+    <line x1="1281" y1="134" x2="1281" y2="152"/>
+    <line x1="1294" y1="134" x2="1294" y2="152"/>
+    <line x1="1307" y1="134" x2="1307" y2="152"/>
+
+    <!-- Neck -->
+    <rect x="1270" y="170" width="40" height="22" rx="4" fill="#fff"/>
+
+    <!-- Body / chest -->
+    <rect x="1170" y="192" width="240" height="220" rx="18" fill="#fff"/>
+    <!-- Chest panel -->
+    <rect x="1200" y="222" width="180" height="110" rx="8" fill="#e5e3dc"/>
+    <!-- Dial -->
+    <circle cx="1232" cy="277" r="20" fill="#d4967d"/>
+    <circle cx="1232" cy="277" r="5" fill="#303636"/>
+    <line x1="1232" y1="277" x2="1232" y2="262"/>
+    <!-- LED row -->
+    <circle cx="1290" cy="250" r="7" fill="#495a58"/>
+    <circle cx="1315" cy="250" r="7" fill="#a24a2a"/>
+    <circle cx="1340" cy="250" r="7" fill="#d4967d"/>
+    <!-- Bars -->
+    <rect x="1280" y="280" width="80" height="8" rx="3" fill="#495a58"/>
+    <rect x="1280" y="296" width="55" height="8" rx="3" fill="#495a58"/>
+    <rect x="1280" y="312" width="70" height="8" rx="3" fill="#495a58"/>
+    <!-- Power button -->
+    <circle cx="1290" cy="370" r="16" fill="#a24a2a"/>
+    <line x1="1290" y1="358" x2="1290" y2="370" stroke="#fff"/>
+    <path d="M 1281 368 A 11 11 0 1 0 1299 368" fill="none" stroke="#fff"/>
+
+    <!-- Arms -->
+    <rect x="1090" y="212" width="60" height="170" rx="14" fill="#495a58"/>
+    <rect x="1080" y="380" width="80" height="34" rx="8" fill="#d4967d"/>
+    <rect x="1430" y="212" width="60" height="170" rx="14" fill="#495a58"/>
+    <rect x="1420" y="380" width="80" height="34" rx="8" fill="#d4967d"/>
+
+    <!-- Legs -->
+    <rect x="1198" y="412" width="78" height="58" rx="8" fill="#495a58"/>
+    <rect x="1304" y="412" width="78" height="58" rx="8" fill="#495a58"/>
+    <!-- Feet -->
+    <rect x="1180" y="468" width="114" height="24" rx="6" fill="#a24a2a"/>
+    <rect x="1286" y="468" width="114" height="24" rx="6" fill="#a24a2a"/>
+
+    <!-- D2: BUILDING BRICKS -->
+    <rect x="1140" y="540" width="120" height="60" rx="6" fill="#a24a2a"/>
+    <circle cx="1170" cy="570" r="10" fill="#a24a2a"/>
+    <circle cx="1200" cy="570" r="10" fill="#a24a2a"/>
+    <circle cx="1230" cy="570" r="10" fill="#a24a2a"/>
+
+    <rect x="1280" y="540" width="170" height="60" rx="6" fill="#495a58"/>
+    <circle cx="1310" cy="570" r="10" fill="#495a58"/>
+    <circle cx="1340" cy="570" r="10" fill="#495a58"/>
+    <circle cx="1370" cy="570" r="10" fill="#495a58"/>
+    <circle cx="1400" cy="570" r="10" fill="#495a58"/>
+    <circle cx="1430" cy="570" r="10" fill="#495a58"/>
+
+    <rect x="1150" y="620" width="160" height="60" rx="6" fill="#d4967d"/>
+    <circle cx="1180" cy="650" r="10" fill="#d4967d"/>
+    <circle cx="1210" cy="650" r="10" fill="#d4967d"/>
+    <circle cx="1240" cy="650" r="10" fill="#d4967d"/>
+    <circle cx="1270" cy="650" r="10" fill="#d4967d"/>
+
+    <rect x="1330" y="620" width="120" height="60" rx="6" fill="#fff"/>
+    <circle cx="1360" cy="650" r="10" fill="#fff"/>
+    <circle cx="1390" cy="650" r="10" fill="#fff"/>
+    <circle cx="1420" cy="650" r="10" fill="#fff"/>
+
+  </g>
+
+  </g>
+
+</svg>

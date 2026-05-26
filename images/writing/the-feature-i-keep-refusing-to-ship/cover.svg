@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="A feature card with a clean diagonal line crossing it out — a subtraction.">
+  <rect width="1600" height="1200" fill="#e5e3dc"/>
+  <g font-family="Almarai, system-ui, sans-serif">
+    <!-- Two ghost cards behind -->
+    <rect x="380" y="320" width="780" height="240" rx="14" fill="#fff" stroke="#303636" stroke-width="4" opacity="0.6"/>
+    <rect x="420" y="280" width="780" height="240" rx="14" fill="#fff" stroke="#303636" stroke-width="4" opacity="0.85"/>
+    <!-- Front card (the refused one) -->
+    <g>
+      <rect x="460" y="240" width="780" height="240" rx="14" fill="#fff" stroke="#303636" stroke-width="5"/>
+      <text x="500" y="320" font-size="30" fill="#6b7373">Feature proposal</text>
+      <text x="500" y="380" font-size="42" fill="#303636" font-family="Libre Baskerville, Georgia, serif">Aggregate group score</text>
+      <text x="500" y="430" font-size="26" fill="#6b7373">Rolls child item scores up to the parent.</text>
+      <!-- Strikethrough -->
+      <line x1="430" y1="500" x2="1270" y2="220" stroke="#d4967d" stroke-width="10" stroke-linecap="round"/>
+    </g>
+    <!-- Refusal sentence -->
+    <text x="800" y="720" text-anchor="middle"
+          font-family="Libre Baskerville, Georgia, serif"
+          font-size="44" fill="#303636">Groups do not have aggregate scores.</text>
+    <text x="800" y="790" text-anchor="middle"
+          font-style="italic" font-size="30" fill="#6b7373">a noun, not a principle</text>
+  </g>
+</svg>

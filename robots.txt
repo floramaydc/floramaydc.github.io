@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Don't index the placeholder unlock state or the secret project routes.
+Disallow: /projects/protected/
+
+Sitemap: https://www.floramaydc.com/sitemap-index.xml

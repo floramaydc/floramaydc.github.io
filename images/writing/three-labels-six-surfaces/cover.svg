@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Three button labels — Upgrade, Upgrade remaining, and Already upgraded — stacked vertically.">
+  <rect width="1600" height="1200" fill="#e5e3dc"/>
+  <g font-family="Almarai, system-ui, sans-serif" font-size="40">
+    <!-- Label 1 active -->
+    <g>
+      <rect x="400" y="280" width="800" height="120" rx="60" fill="#495a58"/>
+      <text x="800" y="358" text-anchor="middle" fill="#fff">Upgrade</text>
+    </g>
+    <!-- Label 2 active -->
+    <g>
+      <rect x="400" y="460" width="800" height="120" rx="60" fill="#495a58"/>
+      <text x="800" y="538" text-anchor="middle" fill="#fff">Upgrade remaining</text>
+    </g>
+    <!-- Label 3 disabled -->
+    <g>
+      <rect x="400" y="640" width="800" height="120" rx="60" fill="#fff" stroke="#6b7373" stroke-width="4"/>
+      <text x="800" y="718" text-anchor="middle" fill="#6b7373">Already upgraded</text>
+    </g>
+    <text x="800" y="900" text-anchor="middle"
+          font-family="Libre Baskerville, Georgia, serif"
+          font-style="italic" font-size="36" fill="#6b7373">three labels, six surfaces, one rule</text>
+  </g>
+</svg>

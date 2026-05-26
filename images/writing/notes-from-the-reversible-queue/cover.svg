@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="A stack of queue cards with an undo arrow looping back to the top">
+  <rect width="1600" height="1200" fill="#e5e3dc"/>
+  <g font-family="Almarai, system-ui, sans-serif" font-size="34" fill="#303636">
+    <!-- Active card -->
+    <g>
+      <rect x="500" y="240" width="700" height="140" rx="10" fill="#fff" stroke="#303636" stroke-width="5"/>
+      <rect x="500" y="240" width="14" height="140" fill="#d4967d"/>
+      <text x="540" y="296">Active · awaiting decision</text>
+      <rect x="1050" y="278" width="120" height="60" rx="6" fill="#495a58"/>
+      <text x="1110" y="316" text-anchor="middle" fill="#fff" font-size="26">Resolve</text>
+    </g>
+    <!-- Snoozed -->
+    <g opacity="0.85">
+      <rect x="500" y="420" width="700" height="120" rx="10" fill="#fff" stroke="#6b7373" stroke-width="3" stroke-dasharray="10 6"/>
+      <text x="540" y="492" fill="#6b7373">Snoozed · wakes Friday 9:00</text>
+    </g>
+    <!-- Completed -->
+    <g opacity="0.7">
+      <rect x="500" y="580" width="700" height="120" rx="10" fill="#fff" stroke="#6b7373" stroke-width="3"/>
+      <text x="540" y="652" fill="#6b7373">Completed · applied baseline</text>
+      <line x1="540" y1="650" x2="900" y2="650" stroke="#6b7373" stroke-width="2"/>
+    </g>
+    <!-- Dismissed -->
+    <g opacity="0.5">
+      <rect x="500" y="740" width="700" height="120" rx="10" fill="#fff" stroke="#6b7373" stroke-width="3"/>
+      <text x="540" y="812" fill="#6b7373">Dismissed · not relevant</text>
+    </g>
+    <!-- Undo arrow -->
+    <g fill="none" stroke="#d4967d" stroke-width="6" stroke-linecap="round">
+      <path d="M 460 800 Q 280 800 280 540 Q 280 310 470 310" />
+      <polyline points="430,290 470,310 450,350" stroke-linejoin="round"/>
+    </g>
+    <text x="240" y="940" font-style="italic" fill="#6b7373" font-size="32">undo, for 8 seconds</text>
+  </g>
+</svg>
