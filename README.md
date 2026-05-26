@@ -7,7 +7,7 @@ This repository is intentionally deployment-only.
 
 ## Source of truth
 
-- Private source repo: https://github.com/floramaydc/floramaydc-site-source
+- Private source repo: https://github.com/floramaydc/site-source
 
 ## Why this split exists
 
