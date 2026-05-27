@@ -1658,6 +1658,14 @@ This policy may be updated as features evolve. Any updates will be reflected
       window.location.href = url.toString();
     }
 
+    function minimizeMaiPageToPanel() {
+      try {
+        sessionStorage.setItem(maiStorageKey('open'), 'true');
+        sessionStorage.setItem('mai-open', 'true');
+      } catch (e) {}
+      exitMaiPage();
+    }
+
     function isComplexPage() {
       const main = document.getElementById('main-content') || document.querySelector('main') || document.body;
       if (!main) return { hasForm: false, hasDecision: false, hasWarning: false };
@@ -2004,6 +2012,11 @@ This policy may be updated as features evolve. Any updates will be reflected
       collapseIcon.hidden = !on;
     }
     expandBtn.addEventListener('click', () => {
+      if (isMaiRoute && fullscreen) {
+        track('mai_minimize_to_panel', { source: 'mai_page' });
+        minimizeMaiPageToPanel();
+        return;
+      }
       if (!isMaiRoute && !fullscreen) {
         openMaiPage({ prompt: input ? input.value : '' });
         return;

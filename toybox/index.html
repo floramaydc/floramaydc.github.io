@@ -1674,6 +1674,14 @@ All pieces are released into the public domain under
       window.location.href = url.toString();
     }
 
+    function minimizeMaiPageToPanel() {
+      try {
+        sessionStorage.setItem(maiStorageKey('open'), 'true');
+        sessionStorage.setItem('mai-open', 'true');
+      } catch (e) {}
+      exitMaiPage();
+    }
+
     function isComplexPage() {
       const main = document.getElementById('main-content') || document.querySelector('main') || document.body;
       if (!main) return { hasForm: false, hasDecision: false, hasWarning: false };
@@ -2020,6 +2028,11 @@ All pieces are released into the public domain under
       collapseIcon.hidden = !on;
     }
     expandBtn.addEventListener('click', () => {
+      if (isMaiRoute && fullscreen) {
+        track('mai_minimize_to_panel', { source: 'mai_page' });
+        minimizeMaiPageToPanel();
+        return;
+      }
       if (!isMaiRoute && !fullscreen) {
         openMaiPage({ prompt: input ? input.value : '' });
         return;
