@@ -1368,16 +1368,42 @@
     backdrop.addEventListener('click', close);
     if (fab) fab.addEventListener('click', () => open({ source: 'fab' }));
 
+    function triggerPrompt(prompt, autoSend) {
+      const q = (prompt || '').trim();
+      if (!q) return;
+      input.value = q;
+      if (autoSend) {
+        handle(q, { explicitMedium: 'text' });
+      } else {
+        input.focus({ preventScroll: true });
+      }
+    }
+
     // Bind any topbar trigger (or anywhere on the site) marked data-mai-open.
     // Also listen for a dispatched event so callers in other scripts can open
     // the drawer programmatically without a DOM lookup.
     document.querySelectorAll('[data-mai-open]').forEach((el) => {
       el.addEventListener('click', (e) => {
         e.preventDefault();
-        open({ source: 'nav' });
+        const source = el.getAttribute('data-mai-source') || 'nav';
+        const prompt = el.getAttribute('data-mai-prompt') || '';
+        const autoSend = el.getAttribute('data-mai-autosend') !== 'false';
+        open({ source });
+        if (prompt) {
+          setTimeout(() => triggerPrompt(prompt, autoSend), 90);
+        }
       });
     });
-    window.addEventListener('mai:open', () => open({ source: 'programmatic' }));
+    window.addEventListener('mai:open', (evt) => {
+      const detail = evt && evt.detail ? evt.detail : {};
+      const source = detail.source || 'programmatic';
+      const prompt = detail.prompt || '';
+      const autoSend = detail.autoSend !== false;
+      open({ source });
+      if (prompt) {
+        setTimeout(() => triggerPrompt(prompt, autoSend), 90);
+      }
+    });
 
     // Restore from sessionStorage. The pre-paint script in BaseLayout
     // already set html.mai-open so the body shift is in place; we just
