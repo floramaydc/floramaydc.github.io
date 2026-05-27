@@ -2585,8 +2585,9 @@ is always appreciated but never required.
       const asksOldestPlaybook = /\b(oldest|first|earliest)\s+playbook\b/i.test(clean);
       if (asksPageContext || asksOldestPlaybook) {
         const page = getPageContext();
-        const pageLabel = trimText(page.heading || page.title || page.path || 'this page', 120);
-        const pageLine = `You're on <strong>${escapeHtml(pageLabel)}</strong> (<em>${escapeHtml(page.path || '/')}</em>).`;
+        const pagePath = page.path || window.location.pathname || '/';
+        const pageLabel = trimText(pathToName(pagePath), 120);
+        const pageLine = `You're on <strong>${escapeHtml(pageLabel)}</strong>.`;
 
         if (!asksOldestPlaybook) {
           addBubble('mai', `${pageLine}<br><br>If you want, I can navigate you to Work, Writing, Toybox, or About.`);
@@ -2619,7 +2620,7 @@ is always appreciated but never required.
             : `The oldest playbook by published date is <em>${escapeHtml(pick.title)}</em>${pick.updated ? ` (${escapeHtml(pick.updated)})` : ''}.`;
           bubble.innerHTML = `${pageLine}<br><br>${tieMsg}${action ? renderActionCta(action) : ''}`;
           renderChips(STARTER_CHIPS);
-          if (shouldSpeakThisTurn) speak(stripHtml(`${pageLabel}. ${tieMsg}`));
+          if (shouldSpeakThisTurn) speak(stripHtml(`${pageLine} ${tieMsg}`));
           saveTranscript();
         });
         return;
