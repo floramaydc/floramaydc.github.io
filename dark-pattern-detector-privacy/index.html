@@ -828,8 +828,8 @@ This policy may be updated as features evolve. Any updates will be reflected
       const t = String(type || '').trim().toLowerCase();
       const rawTarget = String(target || '').trim();
       const rawLabel = String(label || '').trim();
-      if (!['navigate', 'focus', 'scroll'].includes(t)) return null;
-      if (!rawTarget) return null;
+      if (!['navigate', 'focus', 'scroll', 'toggle-theme'].includes(t)) return null;
+      if (!rawTarget && t !== 'toggle-theme') return null;
       const safeLabel = trimText(rawLabel || `${t} ${rawTarget}`, 120);
       return { type: t, target: trimText(rawTarget, 220), label: safeLabel };
     }
@@ -955,6 +955,22 @@ This policy may be updated as features evolve. Any updates will be reflected
         setActionResult({ type, status: 'not_found', target, label, source });
         track('mai_action_execute', { type, status: 'not_found', source });
         addBubble('mai', `I couldn't find that section on this page.`);
+        return false;
+      }
+
+      if (type === 'toggle-theme') {
+        const btn = document.getElementById('theme-toggle');
+        if (btn) {
+          btn.click();
+          setActionResult({ type, status: 'executed', target, label, source });
+          track('mai_action_execute', { type, status: 'executed', source });
+          const isDark = document.documentElement.classList.contains('dark');
+          addBubble('mai', `Done. I switched you to ${isDark ? 'dark' : 'light'} mode.`);
+          return true;
+        }
+        setActionResult({ type, status: 'not_found', target, label, source });
+        track('mai_action_execute', { type, status: 'not_found', source });
+        addBubble('mai', `I couldn't find the theme toggle on this page.`);
         return false;
       }
 
