@@ -103,7 +103,7 @@
           } catch (e) {}
         }, { passive: true });
       })();
-    </script><title>No Dream Is Too Big — Flora May dela Cruz</title><link rel="stylesheet" href="/_astro/about.CRYFfTdN.css">
+    </script><title>No Dream Is Too Big — Flora May dela Cruz</title><link rel="stylesheet" href="/_astro/about.Db1KseZq.css">
 <link rel="stylesheet" href="/_astro/no-dream-is-too-big.BTn5Fa_o.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave text-ink/20 dark:text-ink/[0.18]" aria-hidden="true"> <svg viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg"> <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path> <path d="M-20,192 C200,152 380,252 560,222 C740,192 900,292 1080,262 C1260,232 1440,312 1620,282"></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <header class="site-header sticky top-0 z-30"> <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5"> <a href="/" class="font-script text-3xl md:text-4xl leading-none text-ink hover:text-accent transition-colors">Flora May</a> <div class="flex items-center gap-3 md:gap-5"> <ul class="hidden md:flex items-center gap-6 text-sm"> <li><a href="/toybox" class="hover:text-accent">Toybox</a></li> <li><a href="/work" class="hover:text-accent">Work</a></li> <li><a href="/play" class="hover:text-accent">Play</a></li> <li><a href="/writing" class="hover:text-accent">Writing</a></li> <li><a href="/about" class="hover:text-accent">About</a></li> </ul> <button id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch theme" class="inline-flex h-9 w-9 items-center justify-center text-ink hover:text-accent transition-colors"> <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> <svg id="theme-icon-sun" hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <line x1="12" y1="2" x2="12" y2="5"></line> <line x1="12" y1="19" x2="12" y2="22"></line> <line x1="2" y1="12" x2="5" y2="12"></line> <line x1="19" y1="12" x2="22" y2="12"></line> <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"></line> <line x1="16.95" y1="16.95" x2="19.07" y2="19.07"></line> <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"></line> <line x1="16.95" y1="7.05" x2="19.07" y2="4.93"></line> </svg> </button> <button id="nav-toggle" class="md:hidden inline-flex h-9 w-9 items-center justify-center text-ink hover:text-accent transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="20" y2="17"></line> </svg> </button> </div> </nav> <!--
         Mobile menu — an off-canvas drawer that overlays the page rather
         than pushing the content. Inspired by editorial sites (Bustle et al):
@@ -544,6 +544,29 @@
       for (const key of legacyKeys) sessionStorage.removeItem(key);
     }
 
+    function safeJsonParse(raw) {
+      if (!raw) return null;
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return null;
+      }
+    }
+
+    function trimText(value, max = 140) {
+      return String(value || '').replace(/\s+/g, ' ').trim().slice(0, max);
+    }
+
+    function pathFromHref(href) {
+      if (!href) return '';
+      try {
+        const url = new URL(href, window.location.href);
+        return `${url.pathname}${url.hash || ''}`;
+      } catch {
+        return '';
+      }
+    }
+
     // ---------- Hand-written answers ----------
     // A short list of structured replies M.ai should answer the same way every
     // time — contact info (needs real links) and pure greeting/thanks. Anything
@@ -866,6 +889,48 @@
       return out;
     }
 
+    function pickOldestPlaybook(index) {
+      const bySlug = new Map();
+      for (const d of index?.docs || []) {
+        if (d.collection !== 'toybox') continue;
+        if (String(d.category || '').toLowerCase() !== 'playbook') continue;
+        const url = String(d.url || '');
+        if (!url || !url.startsWith('/')) continue;
+        const updated = String(d.updated || '').trim();
+        const candidate = {
+          slug: String(d.slug || ''),
+          title: String(d.title || d.heading || 'Playbook').trim(),
+          url,
+          updated,
+        };
+        const prev = bySlug.get(candidate.slug);
+        if (!prev) {
+          bySlug.set(candidate.slug, candidate);
+          continue;
+        }
+        // Prefer non-anchor URL as canonical destination per slug.
+        const prevAnchor = prev.url.includes('#');
+        const candAnchor = candidate.url.includes('#');
+        if (prevAnchor && !candAnchor) bySlug.set(candidate.slug, candidate);
+      }
+
+      const all = [...bySlug.values()];
+      if (!all.length) return null;
+
+      // Oldest first by `updated`; empty dates sort to the end.
+      all.sort((a, b) => {
+        const ad = a.updated || '9999-12-31';
+        const bd = b.updated || '9999-12-31';
+        if (ad < bd) return -1;
+        if (ad > bd) return 1;
+        return a.title.localeCompare(b.title);
+      });
+
+      const first = all[0];
+      const tieCount = all.filter((x) => (x.updated || '') === (first.updated || '')).length;
+      return { first, tieCount };
+    }
+
     function escapeHtml(s) {
       return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
@@ -879,7 +944,7 @@
     // to emit a small set of HTML tags (<em>, <strong>, <a href="...">)
     // plus hyphen-prefixed lines for bullet lists. We escape EVERYTHING
     // first, then re-allow only that tight set — so a hallucinated
-    // <script>, <iframe>, or javascript: URL never survives. Safe to call
+    // script/iframe tags or javascript: URLs never survive. Safe to call
     // on partial streamed chunks: half-formed tags stay escaped until
     // their closing token arrives.
     function safeRenderModelHtml(text) {
@@ -986,6 +1051,121 @@
     //     or negative ("no/nope/cancel").
     // Anything else just clears it and proceeds as a normal new question.
     let pendingNav = null; // { url, label } | null
+    let pendingUiAction = null; // { type, target, label } | null
+
+    function normalizeUiAction(type, target, label) {
+      const t = String(type || '').trim().toLowerCase();
+      const rawTarget = String(target || '').trim();
+      const rawLabel = String(label || '').trim();
+      if (!['navigate', 'focus', 'scroll'].includes(t)) return null;
+      if (!rawTarget) return null;
+      const safeLabel = trimText(rawLabel || `${t} ${rawTarget}`, 120);
+      return { type: t, target: trimText(rawTarget, 220), label: safeLabel };
+    }
+
+    function parseActionMarker(text) {
+      const m = String(text || '').match(/\[\[\s*ACTION\s*:\s*([a-z]+)\|([^|\]]*)\|([^\]]*)\]\]/i);
+      if (!m) return null;
+      return normalizeUiAction(m[1], m[2], m[3]);
+    }
+
+    function stripControlMarkers(text) {
+      return String(text || '')
+        .replace(/\[\[\s*NAV\s*:\s*\d+\s*\]\]/gi, '')
+        .replace(/\[\[\s*ACTION\s*:\s*[^\]]+\]\]/gi, '')
+        .replace(/\n{3,}/g, '\n\n')
+        .trimEnd();
+    }
+
+    function renderActionCta(action) {
+      if (!action) return '';
+      const safeType = escapeHtml(action.type);
+      const safeTarget = escapeHtml(action.target);
+      const safeLabel = escapeHtml(action.label || `${action.type} ${action.target}`);
+      return (
+        `<div class="mai-action-cta mt-3 pt-2 border-t border-muted/20 text-[12px]" ` +
+          `data-mai-action-cta data-action-type="${safeType}" data-action-target="${safeTarget}" data-action-label="${safeLabel}">` +
+          `<p class="text-muted mb-1.5">I can do this now: <em>${safeLabel}</em>.</p>` +
+          `<div class="flex gap-2">` +
+            `<button type="button" class="rounded border border-accent text-accent px-2 py-1 text-[11px] hover:bg-accent hover:text-paper transition-colors" data-mai-action-run>Run it</button>` +
+            `<button type="button" class="rounded border border-muted/30 text-muted px-2 py-1 text-[11px] hover:border-muted/60 transition-colors" data-mai-action-no>Not now</button>` +
+          `</div>` +
+        `</div>`
+      );
+    }
+
+    function executeUiAction(action, source) {
+      if (!action) return false;
+      const type = action.type;
+      const target = action.target;
+      const label = action.label;
+
+      if (type === 'navigate') {
+        const ok = /^\//.test(target) || /^https?:\/\//i.test(target);
+        if (!ok) {
+          setActionResult({ type, status: 'invalid_target', target, label, source });
+          addBubble('mai', `I couldn't run that navigation target safely.`);
+          return false;
+        }
+        setActionResult({ type, status: 'accepted', target, label, source });
+        track('mai_action_execute', { type, status: 'accepted', source });
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        if (isMobile) close();
+        window.location.assign(target);
+        return true;
+      }
+
+      if (type === 'focus') {
+        let node = null;
+        const q = String(target || '').toLowerCase();
+        if (q.includes('email')) node = document.querySelector('input[type="email"]');
+        if (!node && (q.includes('message') || q.includes('text'))) node = document.querySelector('textarea, input[type="text"]');
+        if (!node && q.includes('search')) node = document.querySelector('input[type="search"], [role="search"] input');
+        if (!node && q.includes('form')) node = document.querySelector('form input, form textarea, form select, form button');
+        if (!node && q === 'main') node = document.querySelector('#main-content :is(input,textarea,select,button,a[href])');
+        if (!node) node = document.querySelector('main :is(input,textarea,select,button,a[href])');
+
+        if (node && typeof node.focus === 'function') {
+          node.scrollIntoView?.({ behavior: 'smooth', block: 'center' });
+          node.focus({ preventScroll: true });
+          setActionResult({ type, status: 'executed', target, label, source });
+          track('mai_action_execute', { type, status: 'executed', source });
+          addBubble('mai', `Done. I moved focus to the relevant control.`);
+          return true;
+        }
+        setActionResult({ type, status: 'not_found', target, label, source });
+        track('mai_action_execute', { type, status: 'not_found', source });
+        addBubble('mai', `I couldn't find a matching field to focus on this page.`);
+        return false;
+      }
+
+      if (type === 'scroll') {
+        let node = null;
+        if (target === 'main') node = document.getElementById('main-content');
+        else if (target.startsWith('#')) node = document.querySelector(target);
+        if (!node && target.startsWith('/')) {
+          setActionResult({ type, status: 'accepted', target, label, source });
+          track('mai_action_execute', { type, status: 'accepted', source });
+          const isMobile = window.matchMedia('(max-width: 767px)').matches;
+          if (isMobile) close();
+          window.location.assign(target);
+          return true;
+        }
+        if (node) {
+          node.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setActionResult({ type, status: 'executed', target, label, source });
+          track('mai_action_execute', { type, status: 'executed', source });
+          addBubble('mai', `Done. I moved you to that section.`);
+          return true;
+        }
+        setActionResult({ type, status: 'not_found', target, label, source });
+        track('mai_action_execute', { type, status: 'not_found', source });
+        addBubble('mai', `I couldn't find that section on this page.`);
+        return false;
+      }
+
+      return false;
+    }
 
     // ---------- Message-to-Flora flow ----------
     // Multi-turn conversation that collects name -> email -> message and
@@ -1270,12 +1450,14 @@
         text: r.d.text,
         url: `${base}${r.d.url.replace(/^\//, '')}`,
       }));
+      const pageContext = getLiveContextPacket();
+      const conversation = getRecentConversation(10);
       let res;
       try {
         res = await fetch(MAI_WORKER_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ question, chunks }),
+          body: JSON.stringify({ question, chunks, pageContext, conversation }),
         });
       } catch {
         return false; // network error \u2014 fall back silently
@@ -1318,9 +1500,9 @@
       // `[[NAV`, `[[NAV:`, `[[NAV:1`, `[[NAV:1]`, `[[NAV:1]]`, plus the
       // single-bracket and bare-`NAV:` variants gpt-4.1 sometimes emits.
       // It only matches at end-of-string so it can't swallow earlier text.
-      const NAV_TRAILING_RE = /\s*(?:\[\[?\s*N(?:A(?:V(?:\s*:?\s*\d*\s*\]?\s*\]?)?)?)?|\bNAV\s*:?\s*\d*)\s*$/i;
+      const CONTROL_TRAILING_RE = /\s*(?:\[\[?\s*(?:N(?:A(?:V(?:\s*:?\s*\d*\s*\]?\s*\]?)?)?|A(?:C(?:T(?:I(?:O(?:N(?:\s*:?\s*[^\]]*)?)?)?)?)?))|\bNAV\s*:?\s*\d*)\s*$/i;
       function stripTrailingMarker(s) {
-        return s.replace(NAV_TRAILING_RE, '');
+        return s.replace(CONTROL_TRAILING_RE, '');
       }
       while (true) {
         const { done, value } = await reader.read();
@@ -1353,6 +1535,7 @@
       // `[[NAV: 2]]`, `[NAV:2]`, or wraps it in emphasis. We strip every
       // plausible form so nothing leaks into the rendered answer.
       let navIdx = null;
+      const action = parseActionMarker(acc);
       const navPatterns = [
         /\[\[\s*NAV\s*:\s*(\d+)\s*\]\]/i,
         /\[\s*NAV\s*:\s*(\d+)\s*\]/i,
@@ -1367,12 +1550,7 @@
       }
       // Always strip every variant of the marker from the visible answer,
       // even when no number was parseable (so stray "[[NAV:" doesn't show).
-      acc = acc
-        .replace(/<\/?(em|strong)>\s*\[+\s*NAV\s*:\s*\d*\s*\]+\s*<\/?(em|strong)>/gi, '')
-        .replace(/\[+\s*NAV\s*:\s*\d*\s*\]+/gi, '')
-        .replace(/\bNAV\s*:\s*\d+\b/gi, '')
-        .replace(/\n{3,}/g, '\n\n')
-        .trimEnd();
+      acc = stripControlMarkers(acc);
 
       // Fallback: if the model didn't emit a marker, default to the
       // top-ranked chunk when its score is meaningfully above noise. This
@@ -1399,6 +1577,12 @@
           html += renderNavCta(url, label);
         } else {
           pendingNav = null;
+        }
+        if (action) {
+          pendingUiAction = action;
+          html += renderActionCta(action);
+        } else {
+          pendingUiAction = null;
         }
         bubble.innerHTML = html;
       }
@@ -1523,6 +1707,10 @@
     const micBtn = document.getElementById('mai-mic');
     const speakToggle = document.getElementById('mai-speak-toggle');
     const MAI_MEDIUM_STORAGE_KEY = 'mai:response-medium';
+    const MAI_CONTEXT_LAST_PAGE_KEY = maiStorageKey('context:last-page');
+    const MAI_CONTEXT_TRANSITION_KEY = maiStorageKey('context:transition');
+    const MAI_CONTEXT_LAST_ACTION_KEY = maiStorageKey('context:last-action');
+    const MAI_CONTEXT_LAST_ACTION_RESULT_KEY = maiStorageKey('context:last-action-result');
 
     let speakReplies = false;
     let fullscreen = false;
@@ -1555,6 +1743,135 @@
         );
       } catch (e) {}
     }
+
+    function isComplexPage() {
+      const main = document.getElementById('main-content') || document.querySelector('main') || document.body;
+      if (!main) return { hasForm: false, hasDecision: false, hasWarning: false };
+      const hasForm = Boolean(main.querySelector('form'));
+      const hasDecision = Boolean(main.querySelector('select, input[type=radio], input[type=checkbox], [role="tablist"], [aria-controls]'));
+      const hasWarning = Boolean(main.querySelector('[role="alert"], [aria-live="assertive"], .error, .warning'));
+      return { hasForm, hasDecision, hasWarning };
+    }
+
+    function getPageContext() {
+      const h1 = document.querySelector('main h1, h1');
+      const { hasForm, hasDecision, hasWarning } = isComplexPage();
+      return {
+        path: window.location.pathname,
+        title: trimText(document.title, 120),
+        heading: trimText(h1 ? h1.textContent : '', 120),
+        hasForm,
+        hasDecision,
+        hasWarning,
+        capturedAt: Date.now(),
+      };
+    }
+
+    function labelForActionTarget(el) {
+      if (!el) return '';
+      const aria = trimText(el.getAttribute?.('aria-label') || '', 120);
+      if (aria) return aria;
+      const title = trimText(el.getAttribute?.('title') || '', 120);
+      if (title) return title;
+      const text = trimText(el.textContent || '', 120);
+      if (text) return text;
+      if (el instanceof HTMLInputElement) {
+        if (el.name) return trimText(el.name, 120);
+        if (el.placeholder) return trimText(el.placeholder, 120);
+      }
+      return trimText(el.id || el.className || el.tagName || '', 120);
+    }
+
+    function saveLastAction(action) {
+      try {
+        sessionStorage.setItem(MAI_CONTEXT_LAST_ACTION_KEY, JSON.stringify(action));
+      } catch (e) {}
+    }
+
+    function setActionResult(result) {
+      try {
+        sessionStorage.setItem(
+          MAI_CONTEXT_LAST_ACTION_RESULT_KEY,
+          JSON.stringify({ ...result, capturedAt: Date.now() }),
+        );
+      } catch (e) {}
+    }
+
+    function initContextTracking() {
+      const current = getPageContext();
+      const previous = safeJsonParse(sessionStorage.getItem(MAI_CONTEXT_LAST_PAGE_KEY));
+      const from = previous && previous.path && previous.path !== current.path
+        ? { path: previous.path, title: previous.title || '', heading: previous.heading || '' }
+        : null;
+      const transition = {
+        from,
+        to: { path: current.path, title: current.title, heading: current.heading },
+        changedPage: Boolean(from),
+        capturedAt: Date.now(),
+      };
+      try {
+        sessionStorage.setItem(MAI_CONTEXT_LAST_PAGE_KEY, JSON.stringify(current));
+        sessionStorage.setItem(MAI_CONTEXT_TRANSITION_KEY, JSON.stringify(transition));
+      } catch (e) {}
+
+      document.addEventListener('click', (evt) => {
+        const target = evt.target instanceof Element
+          ? evt.target.closest('a, button, [role="button"], input[type="submit"]')
+          : null;
+        if (!target) return;
+        const href = target instanceof HTMLAnchorElement ? pathFromHref(target.getAttribute('href') || '') : '';
+        saveLastAction({
+          type: 'click',
+          label: labelForActionTarget(target),
+          href,
+          tag: target.tagName.toLowerCase(),
+          capturedAt: Date.now(),
+        });
+      }, { capture: true, passive: true });
+
+      document.addEventListener('change', (evt) => {
+        const target = evt.target;
+        if (!(target instanceof HTMLInputElement || target instanceof HTMLSelectElement || target instanceof HTMLTextAreaElement)) return;
+        saveLastAction({
+          type: 'change',
+          label: labelForActionTarget(target),
+          field: trimText(target.name || target.id || target.tagName.toLowerCase(), 120),
+          capturedAt: Date.now(),
+        });
+      }, { capture: true, passive: true });
+    }
+
+    function getLiveContextPacket() {
+      const transition = safeJsonParse(sessionStorage.getItem(MAI_CONTEXT_TRANSITION_KEY));
+      const lastAction = safeJsonParse(sessionStorage.getItem(MAI_CONTEXT_LAST_ACTION_KEY));
+      const lastActionResult = safeJsonParse(sessionStorage.getItem(MAI_CONTEXT_LAST_ACTION_RESULT_KEY));
+      return {
+        page: getPageContext(),
+        transition: transition || null,
+        lastAction: lastAction || null,
+        lastActionResult: lastActionResult || null,
+        responseMedium: speakReplies ? 'voice' : 'text',
+        panelState: {
+          open: document.documentElement.classList.contains('mai-open'),
+          fullscreen,
+        },
+      };
+    }
+
+    function getRecentConversation(maxItems = 8) {
+      const bubbles = Array.from(log.querySelectorAll('[data-role]'));
+      const rows = [];
+      for (const bubble of bubbles) {
+        const role = bubble.getAttribute('data-role') || '';
+        const text = trimText(stripHtml(bubble.innerHTML || ''), 320);
+        if (!text) continue;
+        if (/^(looking through|reading the relevant pages|transcribing with whisper|sending)/i.test(text)) continue;
+        rows.push({ role, content: text });
+      }
+      return rows.slice(-maxItems);
+    }
+
+    initContextTracking();
 
     // ---------- Theme toggle (moon / sun) ----------
     // Reads/writes localStorage 'theme'. The pre-paint script in
@@ -1602,6 +1919,7 @@
     function open(opts) {
       var restoring = opts && opts.restoring;
       var source = (opts && opts.source) || 'unknown';
+      if (restoring) document.documentElement.classList.add('mai-restoring');
       // Cancel any in-flight close so a fast reopen doesn't re-hide
       // the panel 200ms in.
       if (_closeTimer) { clearTimeout(_closeTimer); _closeTimer = null; }
@@ -1622,6 +1940,11 @@
       // are idempotent.
       loadVocab();
       if (!restoring) setTimeout(() => input.focus({ preventScroll: true }), 50);
+      if (restoring) {
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('mai-restoring');
+        });
+      }
     }
     function close() {
       if (fab) fab.hidden = false;
@@ -1882,6 +2205,40 @@
         // Neither — treat as a new question. Drop the offer silently.
         pendingNav = null;
       }
+
+      if (pendingUiAction) {
+        const t = clean.toLowerCase();
+        const AFFIRM = /^(y|ya|ye|yes+|yea+h?|yep|yup|sure|ok(ay)?|please|do it|go|run it|do that|sounds good|absolutely|definitely)[.! ]*$/;
+        const DENY = /^(no+|nope|nah|cancel|don'?t|stop|not now|later)[.! ]*$/;
+        if (AFFIRM.test(t)) {
+          const action = pendingUiAction;
+          pendingUiAction = null;
+          addBubble('user', escapeHtml(raw));
+          input.value = '';
+          executeUiAction(action, 'typed_confirm');
+          saveTranscript();
+          return;
+        }
+        if (DENY.test(t)) {
+          const action = pendingUiAction;
+          pendingUiAction = null;
+          setActionResult({
+            type: action.type,
+            status: 'declined',
+            target: action.target,
+            label: action.label,
+            source: 'typed_decline',
+          });
+          track('mai_action_execute', { type: action.type, status: 'declined', source: 'typed_decline' });
+          addBubble('user', escapeHtml(raw));
+          input.value = '';
+          addBubble('mai', 'Understood. I will not run that action.');
+          const ctas = log.querySelectorAll('[data-mai-action-cta]');
+          if (ctas.length) ctas[ctas.length - 1].remove();
+          saveTranscript();
+          return;
+        }
+      }
       // If the vocabulary is already loaded (we kick that off when the
       // panel opens), repair any unknown words against the indexed terms.
       // Catches misspellings the hand-listed table can't anticipate:
@@ -1918,6 +2275,52 @@
         addBubble('mai', kb.answer);
         renderChips(kb.followups || STARTER_CHIPS);
         if (shouldSpeakThisTurn) speak(stripHtml(kb.answer));
+        return;
+      }
+
+      // 2.5) Deterministic context/navigation intents. These should not
+      // depend on keyword retrieval quality.
+      const asksPageContext = /\b(what page am i(?: in| on)?|where am i|what page is this|which page am i on)\b/i.test(clean);
+      const asksOldestPlaybook = /\b(oldest|first|earliest)\s+playbook\b/i.test(clean);
+      if (asksPageContext || asksOldestPlaybook) {
+        const page = getPageContext();
+        const pageLabel = trimText(page.heading || page.title || page.path || 'this page', 120);
+        const pageLine = `You're on <strong>${escapeHtml(pageLabel)}</strong> (<em>${escapeHtml(page.path || '/')}</em>).`;
+
+        if (!asksOldestPlaybook) {
+          addBubble('mai', `${pageLine}<br><br>If you want, I can navigate you to Work, Writing, Toybox, or About.`);
+          renderChips(STARTER_CHIPS);
+          if (shouldSpeakThisTurn) speak(stripHtml(pageLine));
+          return;
+        }
+
+        const pendingId = addBubble(
+          'mai',
+          '<span class="mai-thinking text-muted">Checking the Toybox chronology<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>',
+        );
+        loadIndex().then((index) => {
+          const bubble = document.getElementById(pendingId);
+          if (!bubble) return;
+          const oldest = pickOldestPlaybook(index);
+          if (!oldest?.first) {
+            bubble.innerHTML = `${pageLine}<br><br>I couldn't resolve a published playbook chronology right now, but I can take you to <a class="text-accent underline" href="${base}toybox">Toybox</a>.`;
+            renderChips(STARTER_CHIPS);
+            if (shouldSpeakThisTurn) speak('I could not resolve the oldest playbook right now, but I can take you to Toybox.');
+            saveTranscript();
+            return;
+          }
+
+          const pick = oldest.first;
+          const action = normalizeUiAction('navigate', pick.url, `Open ${pick.title}`);
+          pendingUiAction = action;
+          const tieMsg = oldest.tieCount > 1
+            ? `Multiple playbooks share the oldest published date (${escapeHtml(pick.updated || 'unknown')}); I picked ${escapeHtml(pick.title)} first.`
+            : `The oldest playbook by published date is <em>${escapeHtml(pick.title)}</em>${pick.updated ? ` (${escapeHtml(pick.updated)})` : ''}.`;
+          bubble.innerHTML = `${pageLine}<br><br>${tieMsg}${action ? renderActionCta(action) : ''}`;
+          renderChips(STARTER_CHIPS);
+          if (shouldSpeakThisTurn) speak(stripHtml(`${pageLabel}. ${tieMsg}`));
+          saveTranscript();
+        });
         return;
       }
 
@@ -2021,6 +2424,44 @@
       pendingNav = null;
       track('mai_nav_cta_click', { action: 'decline_button' });
       cta.remove();
+      saveTranscript();
+    });
+
+    log.addEventListener('click', (e) => {
+      const run = e.target.closest('[data-mai-action-run]');
+      const no = e.target.closest('[data-mai-action-no]');
+      if (!run && !no) return;
+      const cta = (run || no).closest('[data-mai-action-cta]');
+      if (!cta) return;
+      const action = normalizeUiAction(
+        cta.getAttribute('data-action-type') || '',
+        cta.getAttribute('data-action-target') || '',
+        cta.getAttribute('data-action-label') || '',
+      );
+      if (!action) {
+        cta.remove();
+        pendingUiAction = null;
+        saveTranscript();
+        return;
+      }
+      if (run) {
+        pendingUiAction = null;
+        cta.remove();
+        executeUiAction(action, 'cta_button');
+        saveTranscript();
+        return;
+      }
+      pendingUiAction = null;
+      setActionResult({
+        type: action.type,
+        status: 'declined',
+        target: action.target,
+        label: action.label,
+        source: 'cta_decline',
+      });
+      track('mai_action_execute', { type: action.type, status: 'declined', source: 'cta_decline' });
+      cta.remove();
+      addBubble('mai', 'No problem — I will leave the page as-is.');
       saveTranscript();
     });
 
