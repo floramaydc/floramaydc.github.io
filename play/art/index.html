@@ -1835,6 +1835,7 @@
     const MAI_CONTEXT_TRANSITION_KEY = maiStorageKey('context:transition');
     const MAI_CONTEXT_LAST_ACTION_KEY = maiStorageKey('context:last-action');
     const MAI_CONTEXT_LAST_ACTION_RESULT_KEY = maiStorageKey('context:last-action-result');
+    const isMaiRoute = /^\/mai\/?$/.test(window.location.pathname || '');
 
     let speakReplies = false;
     let fullscreen = false;
@@ -1866,6 +1867,30 @@
           new CustomEvent('site:track', { detail: { name: name, params: params || {} } }),
         );
       } catch (e) {}
+    }
+
+    function exitMaiPage() {
+      const ref = document.referrer || '';
+      if (ref) {
+        try {
+          const refUrl = new URL(ref);
+          if (refUrl.origin === window.location.origin && !/^\/mai\/?$/.test(refUrl.pathname || '')) {
+            window.location.href = refUrl.href;
+            return;
+          }
+        } catch (e) {}
+      }
+      window.location.href = base;
+    }
+
+    function openMaiPage(opts) {
+      const url = new URL(`${base}mai`, window.location.origin);
+      const prompt = (opts && opts.prompt ? String(opts.prompt) : '').trim();
+      if (prompt) {
+        url.searchParams.set('q', prompt);
+        url.searchParams.set('auto', 'false');
+      }
+      window.location.href = url.toString();
     }
 
     function isComplexPage() {
@@ -2049,7 +2074,7 @@
       // the panel 200ms in.
       if (_closeTimer) { clearTimeout(_closeTimer); _closeTimer = null; }
       panel.hidden = false;
-      backdrop.hidden = false;
+      backdrop.hidden = isMaiRoute;
       if (fab) fab.hidden = true;
       // Force a reflow so the panel's initial off-screen transform
       // (translateX(100%)) gets committed BEFORE we add mai-open. Without
@@ -2077,6 +2102,15 @@
       }
     }
     function close() {
+      if (isMaiRoute) {
+        try {
+          sessionStorage.removeItem(maiStorageKey('open'));
+          sessionStorage.removeItem('mai-open');
+        } catch (e) {}
+        stopSpeaking();
+        exitMaiPage();
+        return;
+      }
       if (fab) fab.hidden = false;
       document.documentElement.classList.remove('mai-no-scroll');
       document.documentElement.classList.remove('mai-open');
@@ -2183,7 +2217,6 @@
       }
 
       // Dedicated chat route should always feel like a full-page M.ai surface.
-      const isMaiRoute = /^\/mai\/?$/.test(window.location.pathname || '');
       if (isMaiRoute) {
         if (!document.documentElement.classList.contains('mai-open')) {
           open({ source: 'mai_route', fullscreen: true });
@@ -2205,7 +2238,13 @@
       expandIcon.hidden = on;
       collapseIcon.hidden = !on;
     }
-    expandBtn.addEventListener('click', () => setFullscreen(!fullscreen));
+    expandBtn.addEventListener('click', () => {
+      if (!isMaiRoute && !fullscreen) {
+        openMaiPage({ prompt: input ? input.value : '' });
+        return;
+      }
+      setFullscreen(!fullscreen);
+    });
 
     // Topic buttons \u2014 each fires the same flow as a typed/spoken question.
     topicsEl.querySelectorAll('.mai-topic').forEach((btn) => {
