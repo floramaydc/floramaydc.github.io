@@ -1406,17 +1406,34 @@ When design work takes a pause, I'm off exploring with my family. I post
 
       if (bubble) {
         let html = safeRenderModelHtml(acc) + renderSources(top);
+
+        // Single navigation CTA path: if navigation is available via either
+        // [[NAV:n]] or [[ACTION:navigate|...]], show only the nav CTA.
+        let navOffer = null;
         if (navTarget) {
           const url = `${base}${navTarget.d.url.replace(/^\//, '')}`;
           const label = navTarget.d.heading && navTarget.d.heading !== navTarget.d.title
             ? `${navTarget.d.title} — ${navTarget.d.heading}`
             : navTarget.d.title;
-          pendingNav = { url, label };
-          html += renderNavCta(url, label);
+          navOffer = { url, label };
+        } else if (action && action.type === 'navigate') {
+          const rawTarget = String(action.target || '');
+          const url = /^https?:\/\//i.test(rawTarget)
+            ? rawTarget
+            : `${base}${rawTarget.replace(/^\//, '')}`;
+          const label = action.label || `Go to ${pathToName(rawTarget)}`;
+          navOffer = { url, label };
+        }
+
+        if (navOffer) {
+          pendingNav = navOffer;
+          html += renderNavCta(navOffer.url, navOffer.label);
         } else {
           pendingNav = null;
         }
-        if (action) {
+
+        // Keep explicit action CTAs for non-navigation asks only.
+        if (action && action.type !== 'navigate') {
           pendingUiAction = action;
           html += renderActionCta(action);
         } else {
