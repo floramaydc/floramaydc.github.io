@@ -943,11 +943,34 @@
         .trimEnd();
     }
 
+    function pathToName(path) {
+      // Map URL paths to human-readable page names.
+      if (!path) return 'a page';
+      const segments = path.split('/').filter(Boolean);
+      const base = segments[0] || 'home';
+      const map = {
+        'home': 'Home page',
+        'about': 'About Flora',
+        'toybox': 'Toybox',
+        'work': 'Work',
+        'play': 'Play',
+        'writing': 'Writing',
+        'contact': 'Contact',
+      };
+      return map[base] || `the ${base} section`;
+    }
+
     function renderActionCta(action) {
       if (!action) return '';
       const safeType = escapeHtml(action.type);
       const safeTarget = escapeHtml(action.target);
-      const safeLabel = escapeHtml(action.label || `${action.type} ${action.target}`);
+      let displayLabel = action.label;
+      if (!displayLabel && action.type === 'navigate') {
+        displayLabel = `Take me to ${pathToName(action.target)}`;
+      } else if (!displayLabel) {
+        displayLabel = `${action.type} ${action.target}`;
+      }
+      const safeLabel = escapeHtml(displayLabel);
       return (
         `<div class="mai-action-cta mt-3 pt-2 border-t border-muted/20 text-[12px]" ` +
           `data-mai-action-cta data-action-type="${safeType}" data-action-target="${safeTarget}" data-action-label="${safeLabel}">` +
@@ -1876,10 +1899,10 @@
     // already set html.mai-open so the body shift is in place; we just
     // need to unhide the aside, hide the FAB, and not steal focus.
     try {
-      const savedVersion = sessionStorage.getItem('mai:client-version');
+      const savedVersion = localStorage.getItem('mai:client-version');
       if (savedVersion !== MAI_CLIENT_VERSION) {
         clearLegacyMaiState();
-        sessionStorage.setItem('mai:client-version', MAI_CLIENT_VERSION);
+        localStorage.setItem('mai:client-version', MAI_CLIENT_VERSION);
       }
       // Detect a real page refresh — if so, reset the conversation.
       // Otherwise hydrate the log + chips so the convo survives in-tab nav.
@@ -1888,26 +1911,26 @@
         ? navEntry.type === 'reload'
         : (performance.navigation && performance.navigation.type === 1);
       if (isReload) {
-        sessionStorage.removeItem(maiStorageKey('transcript'));
-        sessionStorage.removeItem(maiStorageKey('chips'));
-        sessionStorage.removeItem(maiStorageKey('topics-hidden'));
-        sessionStorage.removeItem(maiStorageKey('open'));
+        localStorage.removeItem(maiStorageKey('transcript'));
+        localStorage.removeItem(maiStorageKey('chips'));
+        localStorage.removeItem(maiStorageKey('topics-hidden'));
+        localStorage.removeItem(maiStorageKey('open'));
       } else {
-        const t = sessionStorage.getItem(maiStorageKey('transcript'));
+        const t = localStorage.getItem(maiStorageKey('transcript'));
         if (t) {
           log.innerHTML = t;
           log.scrollTop = log.scrollHeight;
         }
-        const c = sessionStorage.getItem(maiStorageKey('chips'));
+        const c = localStorage.getItem(maiStorageKey('chips'));
         if (c) {
           chipsBar.innerHTML = c;
           rewireChipButtons();
         }
-        if (sessionStorage.getItem(maiStorageKey('topics-hidden')) === '1' && topicsEl) {
+        if (localStorage.getItem(maiStorageKey('topics-hidden')) === '1' && topicsEl) {
           topicsEl.hidden = true;
         }
       }
-      if (sessionStorage.getItem(maiStorageKey('open')) === 'true') {
+      if (localStorage.getItem(maiStorageKey('open')) === 'true') {
         open({ restoring: true });
       }
     } catch (e) {}
@@ -1946,9 +1969,9 @@
         // half-rendered placeholder. The final write at end-of-stream
         // catches it.
         if (log.querySelector('.mai-stream')) return;
-        sessionStorage.setItem(maiStorageKey('transcript'), log.innerHTML);
-        sessionStorage.setItem(maiStorageKey('chips'), chipsBar.innerHTML);
-        if (topicsEl) sessionStorage.setItem(maiStorageKey('topics-hidden'), topicsEl.hidden ? '1' : '0');
+        localStorage.setItem(maiStorageKey('transcript'), log.innerHTML);
+        localStorage.setItem(maiStorageKey('chips'), chipsBar.innerHTML);
+        if (topicsEl) localStorage.setItem(maiStorageKey('topics-hidden'), topicsEl.hidden ? '1' : '0');
       } catch (e) {}
     }
     function rewireChipButtons() {
