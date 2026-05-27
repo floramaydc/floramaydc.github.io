@@ -13,7 +13,15 @@
     </script><script>
       (function () {
         try {
-          if (sessionStorage.getItem('mai-open') === 'true') {
+          var hasVersionedOpen = false;
+          for (var i = 0; i < sessionStorage.length; i++) {
+            var key = sessionStorage.key(i) || '';
+            if (/^mai:.*:open$/.test(key) && sessionStorage.getItem(key) === 'true') {
+              hasVersionedOpen = true;
+              break;
+            }
+          }
+          if (sessionStorage.getItem('mai-open') === 'true' || hasVersionedOpen) {
             document.documentElement.classList.add('mai-open');
           }
         } catch (e) {}
@@ -34,6 +42,10 @@
               html.classList.remove('mai-open');
               html.classList.remove('mai-no-scroll');
               sessionStorage.removeItem('mai-open');
+              for (var i = sessionStorage.length - 1; i >= 0; i--) {
+                var key = sessionStorage.key(i) || '';
+                if (/^mai:.*:open$/.test(key)) sessionStorage.removeItem(key);
+              }
             }
           } catch (e) {}
         }
@@ -1797,7 +1809,11 @@
       void panel.offsetWidth;
       document.documentElement.classList.add('mai-no-scroll');
       document.documentElement.classList.add('mai-open');
-      try { sessionStorage.setItem(maiStorageKey('open'), 'true'); } catch (e) {}
+      try {
+        sessionStorage.setItem(maiStorageKey('open'), 'true');
+        // Keep the legacy key for pre-paint compatibility in BaseLayout.
+        sessionStorage.setItem('mai-open', 'true');
+      } catch (e) {}
       if (!restoring) track('mai_open', { source: source });
       // Warm the index + vocabulary so fuzzy spell-fix is ready by the
       // time the user types/speaks their first question. Both promises
@@ -1814,7 +1830,10 @@
       if (fab) fab.hidden = false;
       document.documentElement.classList.remove('mai-no-scroll');
       document.documentElement.classList.remove('mai-open');
-      try { sessionStorage.removeItem(maiStorageKey('open')); } catch (e) {}
+      try {
+        sessionStorage.removeItem(maiStorageKey('open'));
+        sessionStorage.removeItem('mai-open');
+      } catch (e) {}
       track('mai_close', { fullscreen: fullscreen ? 'true' : 'false' });
       if (fullscreen) setFullscreen(false);
       stopSpeaking();
@@ -1888,7 +1907,8 @@
         localStorage.removeItem(maiStorageKey('transcript'));
         localStorage.removeItem(maiStorageKey('chips'));
         localStorage.removeItem(maiStorageKey('topics-hidden'));
-        localStorage.removeItem(maiStorageKey('open'));
+        sessionStorage.removeItem(maiStorageKey('open'));
+        sessionStorage.removeItem('mai-open');
       } else {
         const t = localStorage.getItem(maiStorageKey('transcript'));
         if (t) {
@@ -1904,7 +1924,10 @@
           topicsEl.hidden = true;
         }
       }
-      if (localStorage.getItem(maiStorageKey('open')) === 'true') {
+      if (
+        sessionStorage.getItem(maiStorageKey('open')) === 'true' ||
+        sessionStorage.getItem('mai-open') === 'true'
+      ) {
         open({ restoring: true });
       }
     } catch (e) {}
