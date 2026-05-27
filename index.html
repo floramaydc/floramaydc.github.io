@@ -20,6 +20,34 @@
       })();
     </script><script>
       (function () {
+        function clearStuckMaiOpen() {
+          try {
+            var html = document.documentElement;
+            if (!html.classList.contains('mai-open')) return;
+            var panel = document.getElementById('mai-panel');
+            var isVisible = false;
+            if (panel) {
+              var style = window.getComputedStyle(panel);
+              isVisible = !panel.hasAttribute('hidden') && style.display !== 'none' && style.visibility !== 'hidden';
+            }
+            if (!isVisible) {
+              html.classList.remove('mai-open');
+              html.classList.remove('mai-no-scroll');
+              sessionStorage.removeItem('mai-open');
+            }
+          } catch (e) {}
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(clearStuckMaiOpen, 250);
+          });
+        } else {
+          setTimeout(clearStuckMaiOpen, 250);
+        }
+      })();
+    </script><script>
+      (function () {
         var header;
         var ticking = false;
         var threshold = 24;
@@ -1241,9 +1269,10 @@ Updated May 22, 2026 </time> </div> <h3 class="mt-3 text-lg">Dark Mode Spec One-
       // `[[NAV`, `[[NAV:`, `[[NAV:1`, `[[NAV:1]`, `[[NAV:1]]`, plus the
       // single-bracket and bare-`NAV:` variants gpt-4.1 sometimes emits.
       // It only matches at end-of-string so it can't swallow earlier text.
-      const CONTROL_TRAILING_RE = /\s*(?:\[\[?\s*(?:N(?:A(?:V(?:\s*:?\s*\d*\s*\]?\s*\]?)?)?|A(?:C(?:T(?:I(?:O(?:N(?:\s*:?\s*[^\]]*)?)?)?)?)?))|\bNAV\s*:?\s*\d*)\s*$/i;
+      const NAV_TRAILING_RE = /\s*\[\[\s*NAV\s*:?\s*\d*\s*\]?\]?\s*$/i;
+      const ACTION_TRAILING_RE = /\s*\[\[\s*ACTION\s*:?\s*[^\]]*\]?\]?\s*$/i;
       function stripTrailingMarker(s) {
-        return s.replace(CONTROL_TRAILING_RE, '');
+        return s.replace(NAV_TRAILING_RE, '').replace(ACTION_TRAILING_RE, '');
       }
       while (true) {
         const { done, value } = await reader.read();
