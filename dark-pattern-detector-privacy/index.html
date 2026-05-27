@@ -2198,6 +2198,20 @@ This policy may be updated as features evolve. Any updates will be reflected
     });
 
     // ---------- Voice out (model TTS via worker only) ----------
+    function speakWithBrowserFallback(text) {
+      if (!('speechSynthesis' in window)) return false;
+      try {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(String(text || '').slice(0, 500));
+        u.rate = 1.0;
+        u.pitch = 1.0;
+        window.speechSynthesis.speak(u);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
     async function speak(text) {
       stopSpeaking();
       const clean = String(text || '').trim();
@@ -2235,6 +2249,7 @@ This policy may be updated as features evolve. Any updates will be reflected
         await playAudioUrl(url);
       } catch (err) {
         const name = String(err?.name || '');
+        if (name === 'AbortError') return;
         if (name === 'NotAllowedError') {
           if (currentAudioUrl) {
             pendingAudioUrl = currentAudioUrl;
@@ -2242,8 +2257,18 @@ This policy may be updated as features evolve. Any updates will be reflected
             currentAudioUrl = null;
           }
           addBubble('mai', `Your phone blocked auto-play audio. <button type="button" class="underline text-accent" data-mai-play-pending-audio>Tap to play the reply</button>.`);
+        } else if (name === 'NotSupportedError' || name === 'audio_decode_error') {
+          if (speakWithBrowserFallback(clean)) {
+            addBubble('mai', `Your browser couldn't play streamed audio, so I switched to built-in voice for this reply.`);
+          } else {
+            addBubble('mai', `Voice playback failed this time. Please try again.`);
+          }
         } else {
-          addBubble('mai', `Voice playback failed this time. Please try again.`);
+          if (speakWithBrowserFallback(clean)) {
+            addBubble('mai', `Voice playback had a temporary issue, so I switched to built-in voice for this reply.`);
+          } else {
+            addBubble('mai', `Voice playback failed this time. Please try again.`);
+          }
         }
       } finally {
         ttsAbort = null;
@@ -2262,8 +2287,18 @@ This policy may be updated as features evolve. Any updates will be reflected
       audio.onerror = () => {
         if (currentAudio === audio) currentAudio = null;
         if (currentAudioUrl === url) currentAudioUrl = null;
+        try { URL.revokeObjectURL(url); } catch {}
       };
-      await audio.play();
+      try {
+        await audio.play();
+      } catch (err) {
+        if (String(err?.name || '') === 'NotSupportedError') {
+          const e = new Error('audio_decode_error');
+          e.name = 'audio_decode_error';
+          throw e;
+        }
+        throw err;
+      }
     }
 
     function clearPendingAudio() {
@@ -2285,6 +2320,9 @@ This policy may be updated as features evolve. Any updates will be reflected
       if (currentAudioUrl) {
         try { URL.revokeObjectURL(currentAudioUrl); } catch {}
         currentAudioUrl = null;
+      }
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch {}
       }
     }
     speakToggle.addEventListener('click', () => {
