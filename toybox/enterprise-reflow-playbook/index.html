@@ -1293,9 +1293,11 @@ is always appreciated but never required.
         if (blocked) {
           track('mai_message_flow_blocked', { reason: 'spam_filter' });
           const b = document.getElementById(pendingId);
+          const prompt = `That message tripped one of the spam filters, so I can't forward it. If this is a real note, please email Flora directly at floramaydelacruz@gmail.com.`;
           if (b) {
-            b.innerHTML = `That message tripped one of the spam filters, so I can't forward it. If this is a real note, please email Flora directly at floramaydelacruz@gmail.com.`;
+            b.innerHTML = prompt;
           }
+          if (speakReplies) speak(prompt);
           messageFlow = null;
           renderChips(STARTER_CHIPS);
           saveTranscript();
@@ -1322,9 +1324,11 @@ is always appreciated but never required.
         try { body = await res.json(); } catch {}
         if (res.ok && body && body.success) {
           track('mai_message_flow_submit', { status: 'success' });
+          const prompt = `Sent. Flora will see it in her inbox and get back to you at ${data.email}. Thank you for reaching out.`;
           if (pendingBubble) {
             pendingBubble.innerHTML = `Sent. Flora will see it in her inbox and get back to you at <em>${escapeHtml(data.email)}</em>. Thank you for reaching out.`;
           }
+          if (speakReplies) speak(prompt);
         } else {
           track('mai_message_flow_submit', { status: 'error', code: String(res.status) });
           const status = res.status;
@@ -1335,13 +1339,16 @@ is always appreciated but never required.
             ? `That message was flagged as spam by our filter. If this is a real note, please email Flora directly at floramaydelacruz@gmail.com.`
             : `Something went wrong sending that (${w3msg || status}). You can reach Flora directly at floramaydelacruz@gmail.com.`;
           if (pendingBubble) pendingBubble.innerHTML = human;
+          if (speakReplies) speak(human);
         }
       } catch {
         track('mai_message_flow_submit', { status: 'error', code: 'network' });
         const pendingBubble = document.getElementById(pendingId);
+        const prompt = `Couldn't reach the server. You can email Flora directly at floramaydelacruz@gmail.com.`;
         if (pendingBubble) {
-          pendingBubble.innerHTML = `Couldn't reach the server. You can email Flora directly at floramaydelacruz@gmail.com.`;
+          pendingBubble.innerHTML = prompt;
         }
+        if (speakReplies) speak(prompt);
       }
       messageFlow = null;
       renderChips(STARTER_CHIPS);
@@ -1422,6 +1429,7 @@ is always appreciated but never required.
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let acc = '';
+      let spokeEarly = false;
       // The model ends its reply with `[[NAV:n]]` (see personality.md).
       // We never want the marker to flash in the DOM during streaming —
       // strip any *trailing* marker-or-partial-marker before rendering each
@@ -1446,6 +1454,15 @@ is always appreciated but never required.
           const display = stripTrailingMarker(acc);
           target.innerHTML = safeRenderModelHtml(display);
           log.scrollTop = log.scrollHeight;
+
+          if (shouldSpeak && !spokeEarly) {
+            const plain = display.replace(/\s+/g, ' ').trim();
+            const firstSentence = plain.match(/^(.{40,220}?[.!?])(?:\s|$)/);
+            if (firstSentence?.[1]) {
+              spokeEarly = true;
+              speak(firstSentence[1]);
+            }
+          }
         }
       }
 
@@ -1505,7 +1522,7 @@ is always appreciated but never required.
         }
         bubble.innerHTML = html;
       }
-      if (shouldSpeak) speak(acc);
+      if (shouldSpeak && !spokeEarly) speak(acc);
       saveTranscript();
       return true;
     }
@@ -1816,7 +1833,7 @@ is always appreciated but never required.
       btn.addEventListener('click', () => {
         const q = btn.getAttribute('data-q') || '';
         track('mai_topic_click', { topic: q });
-        handle(q);
+        handle(q, { explicitMedium: 'text' });
       });
     });
 
@@ -1842,7 +1859,7 @@ is always appreciated but never required.
       // innerHTML restore loses click handlers — reattach them so
       // restored suggestion chips remain interactive.
       chipsBar.querySelectorAll('button').forEach((b) => {
-        b.addEventListener('click', () => handle(b.textContent || ''));
+        b.addEventListener('click', () => handle(b.textContent || '', { explicitMedium: 'text' }));
       });
     }
 
@@ -1874,7 +1891,7 @@ is always appreciated but never required.
         b.type = 'button';
         b.textContent = text;
         b.className = 'rounded-full border border-ink/15 px-2.5 py-1 text-[11px] text-muted hover:border-accent hover:text-accent transition-colors';
-        b.addEventListener('click', () => handle(text));
+        b.addEventListener('click', () => handle(text, { explicitMedium: 'text' }));
         chipsBar.appendChild(b);
       }
       saveTranscript();
@@ -1883,6 +1900,8 @@ is always appreciated but never required.
     function handle(text, options = {}) {
       const raw = (text || '').trim();
       if (!raw) return;
+      if (options.explicitMedium === 'voice') setResponseMedium('voice');
+      else if (options.explicitMedium === 'text') setResponseMedium('text');
       const shouldSpeakThisTurn = speakReplies || Boolean(options.fromVoice);
       // Apply speech-to-text corrections (toy box → toybox, M A I → M.AI,
       // play book → playbook, etc.). Helps both spoken AND typed inputs.
@@ -2063,7 +2082,7 @@ is always appreciated but never required.
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      handle(input.value);
+      handle(input.value, { explicitMedium: 'text' });
     });
 
     // Delegated handler for the "Want me to take you there?" CTA buttons
@@ -2141,7 +2160,9 @@ is always appreciated but never required.
       // Cancel
       messageFlow = null;
       track('mai_message_flow_cancel', { source: 'confirm_cta' });
-      addBubble('mai', `No problem — nothing sent. What else can I help with?`);
+      const prompt = `No problem — nothing sent. What else can I help with?`;
+      addBubble('mai', prompt);
+      if (speakReplies) speak(prompt);
       renderChips(STARTER_CHIPS);
       saveTranscript();
     });
@@ -2294,8 +2315,8 @@ is always appreciated but never required.
 
       const data = new Uint8Array(whisperAnalyser.fftSize);
       whisperStartedAt = Date.now();
-      const MIN_RECORD_MS = 1200;
-      const SILENCE_STOP_MS = 900;
+      const MIN_RECORD_MS = 700;
+      const SILENCE_STOP_MS = 550;
       const NOISE_FLOOR_RMS = 0.018;
 
       const tick = () => {
@@ -2390,7 +2411,7 @@ is always appreciated but never required.
           track('mai_voice_transcribed', { mode: 'whisper', transcript_length: text.length });
           if (pending) pending.remove();
           input.value = text;
-          handle(text, { fromVoice: true });
+          handle(text, { fromVoice: true, explicitMedium: 'voice' });
         } catch (err) {
           const code = err?.code || '';
           track('mai_voice_error', { mode: 'whisper', error: code || 'unknown' });
@@ -2453,7 +2474,7 @@ is always appreciated but never required.
         clearListeningBubble();
         const text = e.results[0][0].transcript;
         input.value = text;
-        handle(text, { fromVoice: true });
+        handle(text, { fromVoice: true, explicitMedium: 'voice' });
       });
       recog.addEventListener('end', () => {
         setMicState(false);
@@ -2684,13 +2705,8 @@ is always appreciated but never required.
       }
     }
     speakToggle.addEventListener('click', () => {
-      speakReplies = !speakReplies;
+      setResponseMedium(speakReplies ? 'text' : 'voice');
       track('mai_voice_reply_toggle', { enabled: speakReplies ? 'true' : 'false' });
-      speakToggle.setAttribute('aria-pressed', speakReplies ? 'true' : 'false');
-      // Stronger visual: filled chip when on, muted icon when off.
-      speakToggle.classList.toggle('text-accent', speakReplies);
-      speakToggle.classList.toggle('bg-accent/15', speakReplies);
-      speakToggle.classList.toggle('text-muted', !speakReplies);
       if (!speakReplies) {
         stopSpeaking();
         return;
