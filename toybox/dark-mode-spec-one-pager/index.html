@@ -49,6 +49,60 @@
           init();
         }
       })();
+    </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-2X8SE1JJX7"></script><script>(function(){const gaMeasurementId = "G-2X8SE1JJX7";
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', gaMeasurementId, {
+            anonymize_ip: true,
+            transport_type: 'beacon',
+          });
+        })();</script><script>
+      (function () {
+        function trackSiteEvent(name, params) {
+          try {
+            if (!name || typeof window.gtag !== 'function') return;
+            window.gtag('event', name, params || {});
+          } catch (e) {}
+        }
+
+        // Shared helper used by inline component scripts.
+        window.trackSiteEvent = trackSiteEvent;
+
+        // Components can emit CustomEvent('site:track', { detail: { name, params } }).
+        window.addEventListener('site:track', function (evt) {
+          var detail = evt && evt.detail ? evt.detail : {};
+          if (!detail.name) return;
+          trackSiteEvent(detail.name, detail.params || {});
+        });
+
+        // Track outbound link clicks globally.
+        document.addEventListener('click', function (evt) {
+          var target = evt.target;
+          if (!target || typeof target.closest !== 'function') return;
+          var link = target.closest('a[href]');
+          if (!link) return;
+          if (link.hasAttribute('data-no-track')) return;
+          var href = link.getAttribute('href') || '';
+          if (!href || href[0] === '#' || href.indexOf('javascript:') === 0) return;
+          var isAbsolute = /^https?:\/\//i.test(href);
+          if (!isAbsolute) return;
+          try {
+            var url = new URL(href, window.location.href);
+            if (url.host === window.location.host) return;
+            trackSiteEvent('outbound_click', {
+              link_url: url.href,
+              link_host: url.host,
+              link_text: (link.textContent || '').trim().slice(0, 80),
+              page_path: window.location.pathname,
+            });
+          } catch (e) {}
+        }, { passive: true });
+      })();
     </script><title>Dark Mode Spec One-Pager — Toybox</title><script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Dark Mode Spec One-Pager","headline":"Dark Mode Spec One-Pager","description":"The single-page spec a designer hands engineering when adding dark mode to a product that wasn't designed for it. Names the three layers it has to touch, the contrast traps, and the seams to leave documented.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://www.floramaydc.com/about"},"url":"https://www.floramaydc.com/toybox/dark-mode-spec-one-pager/","license":"https://creativecommons.org/publicdomain/zero/1.0/","dateModified":"2026-05-23T00:00:00.000Z","keywords":"spec-template, theming, dark-mode, design-handoff","genre":"Templates"}</script><link rel="stylesheet" href="/_astro/about.CL24vZJV.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave text-ink/20 dark:text-ink/[0.18]" aria-hidden="true"> <svg viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg"> <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path> <path d="M-20,192 C200,152 380,252 560,222 C740,192 900,292 1080,262 C1260,232 1440,312 1620,282"></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <header class="site-header sticky top-0 z-30"> <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5"> <a href="/" class="font-script text-3xl md:text-4xl leading-none text-ink hover:text-accent transition-colors">Flora May</a> <div class="flex items-center gap-3 md:gap-5"> <ul class="hidden md:flex items-center gap-6 text-sm"> <li><a href="/toybox" class="hover:text-accent">Toybox</a></li> <li><a href="/work" class="hover:text-accent">Work</a></li> <li><a href="/play" class="hover:text-accent">Play</a></li> <li><a href="/writing" class="hover:text-accent">Writing</a></li> <li><a href="/about" class="hover:text-accent">About</a></li> </ul> <button id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" title="Switch theme" class="inline-flex h-9 w-9 items-center justify-center text-ink hover:text-accent transition-colors"> <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> <svg id="theme-icon-sun" hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <line x1="12" y1="2" x2="12" y2="5"></line> <line x1="12" y1="19" x2="12" y2="22"></line> <line x1="2" y1="12" x2="5" y2="12"></line> <line x1="19" y1="12" x2="22" y2="12"></line> <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"></line> <line x1="16.95" y1="16.95" x2="19.07" y2="19.07"></line> <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"></line> <line x1="16.95" y1="7.05" x2="19.07" y2="4.93"></line> </svg> </button> <button id="nav-toggle" class="md:hidden inline-flex h-9 w-9 items-center justify-center text-ink hover:text-accent transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="20" y2="17"></line> </svg> </button> </div> </nav> <!--
         Mobile menu — an off-canvas drawer that overlays the page rather
         than pushing the content. Inspired by editorial sites (Bustle et al):
@@ -476,7 +530,7 @@ Dark-mode work tends to grow indefinitely because there&#39;s always one more co
 - [x] No real component-library class hashes or pinned versions
 - [x] No real package names
 - [x] No real brand hex values — example colors illustrative only
-- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const u="fmdc-playbook-unlocked",f="fmdc-playbook-email";function m(){try{return localStorage.getItem(u)==="true"}catch{return!1}}function y(e){try{localStorage.setItem(u,"true"),e&&localStorage.setItem(f,e)}catch{}}function d(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function i(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function n(e,t,o){const a=e.querySelector(t);a&&(a.textContent=o)}function p(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),a=URL.createObjectURL(o),r=document.createElement("a");r.href=a,r.download=e,document.body.appendChild(r),r.click(),document.body.removeChild(r),setTimeout(()=>URL.revokeObjectURL(a),1e3)}function b(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",a=e.dataset.filename||`${t}.md`;d(e);const r=e.querySelector(".unlock-form");r?.addEventListener("submit",async c=>{c.preventDefault();const s=r.querySelector("input[type=email]").value.trim();if(s){if(n(e,".form-status","Saving…"),o)try{if(res=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})}),!res.ok){const l=await res.json().catch(()=>({}));if(l.error==="invalid_email"){n(e,".form-status","That email looks off — check the address and try again.");return}if(l.error==="rate_limited"){n(e,".form-status","Too many tries — wait a bit and retry.");return}console.warn("subscribe failed",res.status,l)}}catch(l){console.warn("subscribe network error",l)}y(s),d(e),n(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const c=i(t);try{await navigator.clipboard.writeText(c),n(e,".action-status","Markdown copied to clipboard.")}catch{n(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const c=i(t);p(a,c),n(e,".action-status",`Downloaded ${a}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>b(e));</script>  <footer class="mt-10 border-t border-ink/10 pt-6 text-sm text-muted space-y-3"> <p>
+- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script>  <footer class="mt-10 border-t border-ink/10 pt-6 text-sm text-muted space-y-3"> <p>
 By Flora May dela Cruz · Released into the
         public domain under
 <a class="underline hover:text-accent" href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0 1.0</a>.
@@ -498,6 +552,16 @@ is always appreciated but never required.
     // M.AI stays in keyword-only mode (the original behavior). See
     // workers/mai/README.md for deploy steps.
     const MAI_WORKER_URL = 'https://mai.floramaydc-mai.workers.dev';
+    const MAI_CLIENT_VERSION = '2026-05-26-whisper-v1';
+
+    function maiStorageKey(name) {
+      return `mai:${MAI_CLIENT_VERSION}:${name}`;
+    }
+
+    function clearLegacyMaiState() {
+      const legacyKeys = ['mai-transcript', 'mai-chips', 'mai-topics-hidden', 'mai-open'];
+      for (const key of legacyKeys) sessionStorage.removeItem(key);
+    }
 
     // ---------- Hand-written answers ----------
     // A short list of structured replies M.ai should answer the same way every
@@ -957,12 +1021,12 @@ is always appreciated but never required.
     const MESSAGE_CANCEL_RE = /^(cancel|stop|nevermind|never mind|forget it|exit|quit|no)[.! ]*$/i;
     const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-    function startMessageFlow() {
+    function startMessageFlow(source) {
+      track('mai_message_flow_start', { source: source || 'unknown' });
       messageFlow = { stage: 'name', data: {} };
-      addBubble(
-        'mai',
-        `Happy to take a message and forward it to Flora.<br><br>What's your name? <span class="text-muted text-[11px]">(say "cancel" anytime to stop)</span>`,
-      );
+      const prompt = `Happy to take a message and forward it to Flora.<br><br>What's your name? <span class="text-muted text-[11px]">(say "cancel" anytime to stop)</span>`;
+      addBubble('mai', prompt);
+      if (speakReplies) speak(stripHtml(prompt));
       renderChips([]);
       saveTranscript();
     }
@@ -977,9 +1041,12 @@ is always appreciated but never required.
       // Universal escape hatch.
       if (MESSAGE_CANCEL_RE.test(text)) {
         messageFlow = null;
+        track('mai_message_flow_cancel', { source: 'typed_cancel' });
         addBubble('user', escapeHtml(text));
         input.value = '';
-        addBubble('mai', `No problem — I won't send anything. What else can I help with?`);
+        const prompt = `No problem — I won't send anything. What else can I help with?`;
+        addBubble('mai', prompt);
+        if (speakReplies) speak(stripHtml(prompt));
         renderChips(STARTER_CHIPS);
         saveTranscript();
         return true;
@@ -998,33 +1065,40 @@ is always appreciated but never required.
           }
           messageFlow.data.name = text;
           messageFlow.stage = 'email';
-          addBubble(
-            'mai',
-            `Nice to meet you, ${escapeHtml(text.split(/\s+/)[0])}. What's the best email for Flora to reply to?`,
-          );
+          const prompt = `Nice to meet you, ${escapeHtml(text.split(/\s+/)[0])}. What's the best email for Flora to reply to?`;
+          addBubble('mai', prompt);
+          if (speakReplies) speak(stripHtml(prompt));
           saveTranscript();
           return true;
         }
         case 'email': {
           if (!EMAIL_RE.test(text) || text.length > 254) {
-            addBubble('mai', `That doesn't look like a valid email — mind double-checking?`);
+            const prompt = `That doesn't look like a valid email — mind double-checking?`;
+            addBubble('mai', prompt);
+            if (speakReplies) speak(stripHtml(prompt));
             saveTranscript();
             return true;
           }
           messageFlow.data.email = text.toLowerCase();
           messageFlow.stage = 'message';
-          addBubble('mai', `Got it. What would you like to say? (a sentence or a few — up to ~2000 characters)`);
+          const prompt = `Got it. What would you like to say? (a sentence or a few — up to ~2000 characters)`;
+          addBubble('mai', prompt);
+          if (speakReplies) speak(stripHtml(prompt));
           saveTranscript();
           return true;
         }
         case 'message': {
           if (text.length < 5) {
-            addBubble('mai', `A little more, please — even one sentence is plenty.`);
+            const prompt = `A little more, please — even one sentence is plenty.`;
+            addBubble('mai', prompt);
+            if (speakReplies) speak(stripHtml(prompt));
             saveTranscript();
             return true;
           }
           if (text.length > 2000) {
-            addBubble('mai', `That's longer than I can send in one go. Mind trimming it to around 2000 characters?`);
+            const prompt = `That's longer than I can send in one go. Mind trimming it to around 2000 characters?`;
+            addBubble('mai', prompt);
+            if (speakReplies) speak(stripHtml(prompt));
             saveTranscript();
             return true;
           }
@@ -1055,7 +1129,9 @@ is always appreciated but never required.
           // message" — restart from the message stage.
           messageFlow.stage = 'message';
           messageFlow.data.message = '';
-          addBubble('mai', `Okay — what should the message say instead?`);
+          const prompt = `Okay — what should the message say instead?`;
+          addBubble('mai', prompt);
+          if (speakReplies) speak(stripHtml(prompt));
           saveTranscript();
           return true;
         }
@@ -1114,6 +1190,7 @@ is always appreciated but never required.
           msgSpamScore(msg) >= 3 ||
           (msg.match(/\bhttps?:\/\/|www\./gi) || []).length > 1;
         if (blocked) {
+          track('mai_message_flow_blocked', { reason: 'spam_filter' });
           const b = document.getElementById(pendingId);
           if (b) {
             b.innerHTML = `That message tripped one of the spam filters, so I can't forward it. If this is a real note, please email Flora directly at floramaydelacruz@gmail.com.`;
@@ -1143,10 +1220,12 @@ is always appreciated but never required.
         let body = null;
         try { body = await res.json(); } catch {}
         if (res.ok && body && body.success) {
+          track('mai_message_flow_submit', { status: 'success' });
           if (pendingBubble) {
             pendingBubble.innerHTML = `Sent. Flora will see it in her inbox and get back to you at <em>${escapeHtml(data.email)}</em>. Thank you for reaching out.`;
           }
         } else {
+          track('mai_message_flow_submit', { status: 'error', code: String(res.status) });
           const status = res.status;
           const w3msg = (body && body.message) || '';
           const human = status === 429
@@ -1157,6 +1236,7 @@ is always appreciated but never required.
           if (pendingBubble) pendingBubble.innerHTML = human;
         }
       } catch {
+        track('mai_message_flow_submit', { status: 'error', code: 'network' });
         const pendingBubble = document.getElementById(pendingId);
         if (pendingBubble) {
           pendingBubble.innerHTML = `Couldn't reach the server. You can email Flora directly at floramaydelacruz@gmail.com.`;
@@ -1193,7 +1273,7 @@ is always appreciated but never required.
 
     // Stream a grounded answer from the worker into the given bubble.
     // Returns true on success, false on any failure (caller falls back).
-    async function askWorker(question, top, bubble) {
+    async function askWorker(question, top, bubble, shouldSpeak = false) {
       if (!MAI_WORKER_URL || aiPaused) return false;
       const chunks = top.map((r) => ({
         title: r.d.heading && r.d.heading !== r.d.title
@@ -1324,7 +1404,7 @@ is always appreciated but never required.
         }
         bubble.innerHTML = html;
       }
-      if (speakReplies) speak(acc);
+      if (shouldSpeak) speak(acc);
       saveTranscript();
       return true;
     }
@@ -1444,10 +1524,39 @@ is always appreciated but never required.
     const input = document.getElementById('mai-input');
     const micBtn = document.getElementById('mai-mic');
     const speakToggle = document.getElementById('mai-speak-toggle');
+    const MAI_MEDIUM_STORAGE_KEY = 'mai:response-medium';
 
     let speakReplies = false;
     let fullscreen = false;
     const fab = document.getElementById('mai-fab');
+
+    function syncSpeakToggleUi() {
+      speakToggle.setAttribute('aria-pressed', speakReplies ? 'true' : 'false');
+      speakToggle.classList.toggle('text-accent', speakReplies);
+      speakToggle.classList.toggle('bg-accent/15', speakReplies);
+      speakToggle.classList.toggle('text-muted', !speakReplies);
+    }
+
+    function setResponseMedium(medium) {
+      speakReplies = medium === 'voice';
+      try { localStorage.setItem(MAI_MEDIUM_STORAGE_KEY, speakReplies ? 'voice' : 'text'); } catch (e) {}
+      syncSpeakToggleUi();
+    }
+
+    try {
+      speakReplies = localStorage.getItem(MAI_MEDIUM_STORAGE_KEY) === 'voice';
+    } catch (e) {
+      speakReplies = false;
+    }
+    syncSpeakToggleUi();
+
+    function track(name, params) {
+      try {
+        window.dispatchEvent(
+          new CustomEvent('site:track', { detail: { name: name, params: params || {} } }),
+        );
+      } catch (e) {}
+    }
 
     // ---------- Theme toggle (moon / sun) ----------
     // Reads/writes localStorage 'theme'. The pre-paint script in
@@ -1494,6 +1603,7 @@ is always appreciated but never required.
     var _closeTimer = null;
     function open(opts) {
       var restoring = opts && opts.restoring;
+      var source = (opts && opts.source) || 'unknown';
       // Cancel any in-flight close so a fast reopen doesn't re-hide
       // the panel 200ms in.
       if (_closeTimer) { clearTimeout(_closeTimer); _closeTimer = null; }
@@ -1507,7 +1617,8 @@ is always appreciated but never required.
       void panel.offsetWidth;
       document.documentElement.classList.add('mai-no-scroll');
       document.documentElement.classList.add('mai-open');
-      try { sessionStorage.setItem('mai-open', 'true'); } catch (e) {}
+      try { sessionStorage.setItem(maiStorageKey('open'), 'true'); } catch (e) {}
+      if (!restoring) track('mai_open', { source: source });
       // Warm the index + vocabulary so fuzzy spell-fix is ready by the
       // time the user types/speaks their first question. Both promises
       // are idempotent.
@@ -1518,7 +1629,8 @@ is always appreciated but never required.
       if (fab) fab.hidden = false;
       document.documentElement.classList.remove('mai-no-scroll');
       document.documentElement.classList.remove('mai-open');
-      try { sessionStorage.removeItem('mai-open'); } catch (e) {}
+      try { sessionStorage.removeItem(maiStorageKey('open')); } catch (e) {}
+      track('mai_close', { fullscreen: fullscreen ? 'true' : 'false' });
       if (fullscreen) setFullscreen(false);
       stopSpeaking();
       // Keep the panel + backdrop in the DOM so the slide-out animates;
@@ -1533,7 +1645,7 @@ is always appreciated but never required.
     }
     closeBtn.addEventListener('click', close);
     backdrop.addEventListener('click', close);
-    if (fab) fab.addEventListener('click', () => open());
+    if (fab) fab.addEventListener('click', () => open({ source: 'fab' }));
 
     // Bind any topbar trigger (or anywhere on the site) marked data-mai-open.
     // Also listen for a dispatched event so callers in other scripts can open
@@ -1541,15 +1653,20 @@ is always appreciated but never required.
     document.querySelectorAll('[data-mai-open]').forEach((el) => {
       el.addEventListener('click', (e) => {
         e.preventDefault();
-        open();
+        open({ source: 'nav' });
       });
     });
-    window.addEventListener('mai:open', () => open());
+    window.addEventListener('mai:open', () => open({ source: 'programmatic' }));
 
     // Restore from sessionStorage. The pre-paint script in BaseLayout
     // already set html.mai-open so the body shift is in place; we just
     // need to unhide the aside, hide the FAB, and not steal focus.
     try {
+      const savedVersion = sessionStorage.getItem('mai:client-version');
+      if (savedVersion !== MAI_CLIENT_VERSION) {
+        clearLegacyMaiState();
+        sessionStorage.setItem('mai:client-version', MAI_CLIENT_VERSION);
+      }
       // Detect a real page refresh — if so, reset the conversation.
       // Otherwise hydrate the log + chips so the convo survives in-tab nav.
       const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
@@ -1557,26 +1674,26 @@ is always appreciated but never required.
         ? navEntry.type === 'reload'
         : (performance.navigation && performance.navigation.type === 1);
       if (isReload) {
-        sessionStorage.removeItem('mai-transcript');
-        sessionStorage.removeItem('mai-chips');
-        sessionStorage.removeItem('mai-topics-hidden');
-        sessionStorage.removeItem('mai-open');
+        sessionStorage.removeItem(maiStorageKey('transcript'));
+        sessionStorage.removeItem(maiStorageKey('chips'));
+        sessionStorage.removeItem(maiStorageKey('topics-hidden'));
+        sessionStorage.removeItem(maiStorageKey('open'));
       } else {
-        const t = sessionStorage.getItem('mai-transcript');
+        const t = sessionStorage.getItem(maiStorageKey('transcript'));
         if (t) {
           log.innerHTML = t;
           log.scrollTop = log.scrollHeight;
         }
-        const c = sessionStorage.getItem('mai-chips');
+        const c = sessionStorage.getItem(maiStorageKey('chips'));
         if (c) {
           chipsBar.innerHTML = c;
           rewireChipButtons();
         }
-        if (sessionStorage.getItem('mai-topics-hidden') === '1' && topicsEl) {
+        if (sessionStorage.getItem(maiStorageKey('topics-hidden')) === '1' && topicsEl) {
           topicsEl.hidden = true;
         }
       }
-      if (sessionStorage.getItem('mai-open') === 'true') {
+      if (sessionStorage.getItem(maiStorageKey('open')) === 'true') {
         open({ restoring: true });
       }
     } catch (e) {}
@@ -1597,6 +1714,7 @@ is always appreciated but never required.
     topicsEl.querySelectorAll('.mai-topic').forEach((btn) => {
       btn.addEventListener('click', () => {
         const q = btn.getAttribute('data-q') || '';
+        track('mai_topic_click', { topic: q });
         handle(q);
       });
     });
@@ -1614,9 +1732,9 @@ is always appreciated but never required.
         // half-rendered placeholder. The final write at end-of-stream
         // catches it.
         if (log.querySelector('.mai-stream')) return;
-        sessionStorage.setItem('mai-transcript', log.innerHTML);
-        sessionStorage.setItem('mai-chips', chipsBar.innerHTML);
-        if (topicsEl) sessionStorage.setItem('mai-topics-hidden', topicsEl.hidden ? '1' : '0');
+        sessionStorage.setItem(maiStorageKey('transcript'), log.innerHTML);
+        sessionStorage.setItem(maiStorageKey('chips'), chipsBar.innerHTML);
+        if (topicsEl) sessionStorage.setItem(maiStorageKey('topics-hidden'), topicsEl.hidden ? '1' : '0');
       } catch (e) {}
     }
     function rewireChipButtons() {
@@ -1661,9 +1779,10 @@ is always appreciated but never required.
       saveTranscript();
     }
 
-    function handle(text) {
+    function handle(text, options = {}) {
       const raw = (text || '').trim();
       if (!raw) return;
+      const shouldSpeakThisTurn = speakReplies || Boolean(options.fromVoice);
       // Apply speech-to-text corrections (toy box → toybox, M A I → M.AI,
       // play book → playbook, etc.). Helps both spoken AND typed inputs.
       let clean = expandSpeech(raw);
@@ -1684,9 +1803,14 @@ is always appreciated but never required.
       if (MESSAGE_INTENT_RE.test(clean)) {
         addBubble('user', escapeHtml(raw));
         input.value = '';
-        startMessageFlow();
+        startMessageFlow('intent');
         return;
       }
+
+      track('mai_query_submit', {
+        source: options.fromVoice ? 'voice' : 'text',
+        query_length: clean.length,
+      });
 
       // If a navigation offer is pending from the last answer and the user's
       // input is a short yes/no, honor it instead of treating it as a new
@@ -1699,6 +1823,7 @@ is always appreciated but never required.
         if (AFFIRM.test(t)) {
           const target = pendingNav;
           pendingNav = null;
+          track('mai_nav_cta_click', { action: 'accept' });
           addBubble('user', escapeHtml(raw));
           input.value = '';
           addBubble('mai', `Taking you to <em>${escapeHtml(target.label)}</em>…`);
@@ -1716,6 +1841,7 @@ is always appreciated but never required.
         }
         if (DENY.test(t)) {
           pendingNav = null;
+          track('mai_nav_cta_click', { action: 'decline' });
           addBubble('user', escapeHtml(raw));
           input.value = '';
           addBubble('mai', 'No problem — what else can I help you find?');
@@ -1756,7 +1882,7 @@ is always appreciated but never required.
         const reply = intentReply(preIntent);
         addBubble('mai', reply);
         renderChips(STARTER_CHIPS);
-        if (speakReplies) speak(stripHtml(reply));
+        if (shouldSpeakThisTurn) speak(stripHtml(reply));
         return;
       }
 
@@ -1765,7 +1891,7 @@ is always appreciated but never required.
       if (kb) {
         addBubble('mai', kb.answer);
         renderChips(kb.followups || STARTER_CHIPS);
-        if (speakReplies) speak(stripHtml(kb.answer));
+        if (shouldSpeakThisTurn) speak(stripHtml(kb.answer));
         return;
       }
 
@@ -1775,7 +1901,7 @@ is always appreciated but never required.
         const reply = intentReply(intent);
         addBubble('mai', reply);
         renderChips(STARTER_CHIPS);
-        if (speakReplies) speak(stripHtml(reply));
+        if (shouldSpeakThisTurn) speak(stripHtml(reply));
         return;
       }
 
@@ -1806,7 +1932,7 @@ is always appreciated but never required.
         if (!top.length || top[0].s < 0.6) {
           if (bubble) bubble.innerHTML = noMatchAnswer(raw);
           renderChips(STARTER_CHIPS);
-          if (speakReplies) speak(stripHtml(noMatchAnswer(raw)));
+          if (shouldSpeakThisTurn) speak(stripHtml(noMatchAnswer(raw)));
           saveTranscript();
           return;
         }
@@ -1816,7 +1942,7 @@ is always appreciated but never required.
         // always gets something useful.
         if (MAI_WORKER_URL && !aiPaused) {
           if (bubble) bubble.innerHTML = '<span class="mai-thinking text-muted">Reading the relevant pages<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>';
-          const ok = await askWorker(raw, top, bubble);
+          const ok = await askWorker(raw, top, bubble, shouldSpeakThisTurn);
           if (ok) {
             renderChips(STARTER_CHIPS);
             return;
@@ -1826,7 +1952,7 @@ is always appreciated but never required.
         const html = renderRetrieval(top, retrievalQuery);
         if (bubble) bubble.innerHTML = html;
         renderChips(STARTER_CHIPS);
-        if (speakReplies) {
+        if (shouldSpeakThisTurn) {
           // Read the top result's heading + snippet aloud \u2014 not the whole list.
           const first = top[0].d;
           speak(`${first.title}. ${stripHtml(snippet(first.text, clean))}`);
@@ -1851,6 +1977,7 @@ is always appreciated but never required.
       if (yes) {
         const url = cta.getAttribute('data-nav-url') || '';
         pendingNav = null;
+        track('mai_nav_cta_click', { action: 'accept_button' });
         if (url) {
           // On mobile the panel is a full-screen drawer that would cover
           // the destination page while it loads, so close it first for
@@ -1866,6 +1993,7 @@ is always appreciated but never required.
       }
       // No thanks — remove the CTA and clear any pending offer.
       pendingNav = null;
+      track('mai_nav_cta_click', { action: 'decline_button' });
       cta.remove();
       saveTranscript();
     });
@@ -1876,7 +2004,23 @@ is always appreciated but never required.
       const trigger = e.target.closest('[data-mai-start-message]');
       if (!trigger) return;
       if (messageFlow) return; // already in flow
-      startMessageFlow();
+      startMessageFlow('contact_cta');
+    });
+
+    log.addEventListener('click', async (e) => {
+      const trigger = e.target.closest('[data-mai-play-pending-audio]');
+      if (!trigger || !pendingAudioUrl) return;
+      stopSpeaking();
+      const url = pendingAudioUrl;
+      pendingAudioUrl = null;
+      try {
+        await playAudioUrl(url);
+        const wrap = trigger.closest('.flex');
+        if (wrap) wrap.remove();
+      } catch {
+        pendingAudioUrl = url;
+        addBubble('mai', `Audio playback is still blocked on this device.`);
+      }
     });
 
     // Delegated handler for the message-flow confirm step (Send / Cancel
@@ -1895,12 +2039,13 @@ is always appreciated but never required.
       }
       // Cancel
       messageFlow = null;
+      track('mai_message_flow_cancel', { source: 'confirm_cta' });
       addBubble('mai', `No problem — nothing sent. What else can I help with?`);
       renderChips(STARTER_CHIPS);
       saveTranscript();
     });
 
-    // ---------- Voice in (Web Speech API — SpeechRecognition) ----------
+    // ---------- Voice in (Whisper via worker, with SpeechRecognition fallback) ----------
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     const UA = navigator.userAgent || '';
     // iOS Safari technically exposes webkitSpeechRecognition but the
@@ -1909,8 +2054,26 @@ is always appreciated but never required.
     const IS_IOS = /iPad|iPhone|iPod/.test(UA) && !window.MSStream;
     const IS_ELECTRON = /\bElectron\/\d+/i.test(UA);
     const IS_EDGE = /\bEdg\//.test(UA);
+    const WORKER_BASE_URL = (MAI_WORKER_URL || '').replace(/\/$/, '');
+    const TTS_VOICE = 'nova';
+    const TRANSCRIBE_HINT =
+      'Names may include Flora May dela Cruz, M.AI, Toybox, PacBot, Mindelf, Pale and Bright, CodeCatalyst, Vera, Tabulas.';
     let recog = null;
     let listening = false;
+    let whisperRecorder = null;
+    let whisperStream = null;
+    let whisperChunks = [];
+    let whisperMime = '';
+    let whisperAudioContext = null;
+    let whisperAnalyser = null;
+    let whisperSource = null;
+    let whisperMonitorRaf = null;
+    let whisperSilentSince = 0;
+    let whisperStartedAt = 0;
+    let currentAudio = null;
+    let currentAudioUrl = null;
+    let pendingAudioUrl = null;
+    let ttsAbort = null;
     // Track the "Listening…" placeholder bubble so we can clear it on result
     // or error instead of leaving a ghost in the log.
     let listeningBubbleId = null;
@@ -1931,6 +2094,242 @@ is always appreciated but never required.
       micBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
       micBtn.classList.toggle('text-accent', on);
       if (!on) clearMicTimeout();
+    }
+    function canUseWhisperMic() {
+      return Boolean(
+        WORKER_BASE_URL &&
+        window.MediaRecorder &&
+        navigator.mediaDevices?.getUserMedia,
+      );
+    }
+    function bestRecorderMimeType() {
+      const options = [
+        'audio/webm;codecs=opus',
+        'audio/webm',
+        'audio/mp4',
+      ];
+      for (const t of options) {
+        if (MediaRecorder.isTypeSupported?.(t)) return t;
+      }
+      return '';
+    }
+    function extensionForMime(type) {
+      if (!type) return 'webm';
+      if (type.includes('mp4')) return 'm4a';
+      if (type.includes('ogg')) return 'ogg';
+      if (type.includes('wav')) return 'wav';
+      return 'webm';
+    }
+    async function transcribeWhisperBlob(blob, mimeType) {
+      const ext = extensionForMime(mimeType || blob.type || 'audio/webm');
+      const file = new File([blob], `speech.${ext}`, {
+        type: mimeType || blob.type || 'audio/webm',
+      });
+      const formData = new FormData();
+      formData.append('audio', file);
+      formData.append('prompt', TRANSCRIBE_HINT);
+
+      let res;
+      try {
+        res = await fetch(`${WORKER_BASE_URL}/transcribe`, {
+          method: 'POST',
+          body: formData,
+        });
+      } catch {
+        throw new Error('network');
+      }
+
+      let payload = null;
+      try { payload = await res.json(); } catch {}
+      if (!res.ok) {
+        const err = new Error(payload?.error || 'transcribe_failed');
+        err.code = payload?.error || `http_${res.status}`;
+        throw err;
+      }
+      const text = String(payload?.text || '').trim();
+      if (!text) {
+        const err = new Error('empty_transcript');
+        err.code = 'empty_transcript';
+        throw err;
+      }
+      return text;
+    }
+    function stopWhisperMonitor() {
+      if (whisperMonitorRaf) {
+        cancelAnimationFrame(whisperMonitorRaf);
+        whisperMonitorRaf = null;
+      }
+      whisperSilentSince = 0;
+      try { whisperSource?.disconnect(); } catch {}
+      whisperSource = null;
+      whisperAnalyser = null;
+      if (whisperAudioContext) {
+        try { whisperAudioContext.close(); } catch {}
+        whisperAudioContext = null;
+      }
+    }
+    function stopWhisperStream() {
+      stopWhisperMonitor();
+      if (!whisperStream) return;
+      try { whisperStream.getTracks().forEach((t) => t.stop()); } catch {}
+      whisperStream = null;
+    }
+    function stopWhisperRecorder() {
+      if (whisperRecorder && whisperRecorder.state !== 'inactive') {
+        try { whisperRecorder.stop(); } catch {}
+      }
+    }
+    function startWhisperSilenceMonitor() {
+      if (!whisperStream || !whisperRecorder) return;
+      try {
+        whisperAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+        whisperSource = whisperAudioContext.createMediaStreamSource(whisperStream);
+        whisperAnalyser = whisperAudioContext.createAnalyser();
+        whisperAnalyser.fftSize = 2048;
+        whisperSource.connect(whisperAnalyser);
+      } catch {
+        return;
+      }
+
+      const data = new Uint8Array(whisperAnalyser.fftSize);
+      whisperStartedAt = Date.now();
+      const MIN_RECORD_MS = 1200;
+      const SILENCE_STOP_MS = 900;
+      const NOISE_FLOOR_RMS = 0.018;
+
+      const tick = () => {
+        if (!whisperRecorder || whisperRecorder.state !== 'recording' || !whisperAnalyser) return;
+        whisperAnalyser.getByteTimeDomainData(data);
+        let sum = 0;
+        for (let i = 0; i < data.length; i++) {
+          const n = (data[i] - 128) / 128;
+          sum += n * n;
+        }
+        const rms = Math.sqrt(sum / data.length);
+        const now = Date.now();
+        if (rms < NOISE_FLOOR_RMS && now - whisperStartedAt > MIN_RECORD_MS) {
+          if (!whisperSilentSince) whisperSilentSince = now;
+          if (now - whisperSilentSince > SILENCE_STOP_MS) {
+            stopWhisperRecorder();
+            return;
+          }
+        } else {
+          whisperSilentSince = 0;
+        }
+        whisperMonitorRaf = requestAnimationFrame(tick);
+      };
+
+      whisperMonitorRaf = requestAnimationFrame(tick);
+    }
+    async function startWhisperCapture() {
+      if (navigator.onLine === false) {
+        addBubble('mai', `You're offline right now, so voice input can't start. Reconnect to the internet and try again, or type your question.`);
+        return;
+      }
+
+      try {
+        whisperStream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            channelCount: 1,
+            sampleRate: 16000,
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true,
+          },
+        });
+      } catch (err) {
+        const name = err?.name || '';
+        if (name === 'NotAllowedError' || name === 'SecurityError') {
+          addBubble('mai', MIC_ERROR_COPY['not-allowed']);
+        } else if (name === 'NotFoundError' || name === 'OverconstrainedError') {
+          addBubble('mai', MIC_ERROR_COPY['audio-capture']);
+        } else {
+          addBubble('mai', `The microphone couldn't start (${escapeHtml(name || 'unknown')}). You can type instead.`);
+        }
+        return;
+      }
+
+      whisperChunks = [];
+      whisperMime = bestRecorderMimeType();
+
+      try {
+        whisperRecorder = whisperMime
+          ? new MediaRecorder(whisperStream, { mimeType: whisperMime })
+          : new MediaRecorder(whisperStream);
+      } catch {
+        stopWhisperStream();
+        addBubble('mai', `This browser couldn't initialize audio recording for Whisper. You can type your question instead.`);
+        return;
+      }
+
+      whisperRecorder.addEventListener('dataavailable', (e) => {
+        if (e.data && e.data.size > 0) whisperChunks.push(e.data);
+      });
+
+      whisperRecorder.addEventListener('stop', async () => {
+        setMicState(false);
+        clearListeningBubble();
+        clearMicTimeout();
+        stopWhisperStream();
+
+        if (!whisperChunks.length) {
+          addBubble('mai', `I couldn't capture any audio. Try again, or type your question instead.`);
+          return;
+        }
+
+        const pendingId = addBubble(
+          'mai',
+          '<span class="mai-thinking text-muted">Transcribing with Whisper<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>',
+        );
+        const pending = document.getElementById(pendingId);
+
+        try {
+          const blob = new Blob(whisperChunks, { type: whisperMime || whisperChunks[0]?.type || 'audio/webm' });
+          const text = await transcribeWhisperBlob(blob, whisperMime);
+          track('mai_voice_transcribed', { mode: 'whisper', transcript_length: text.length });
+          if (pending) pending.remove();
+          input.value = text;
+          handle(text, { fromVoice: true });
+        } catch (err) {
+          const code = err?.code || '';
+          track('mai_voice_error', { mode: 'whisper', error: code || 'unknown' });
+          const msg =
+            code === 'rate_limited'
+              ? `Voice transcription is temporarily rate-limited. Try again in a bit, or type your question.`
+              : code === 'audio_too_large'
+                ? `That recording is too long to transcribe in one go. Try a shorter question, then send.`
+                : code === 'empty_transcript'
+                  ? `I couldn't detect speech in that recording. Try again, a little closer to the mic.`
+                  : code === 'network'
+                    ? `Couldn't reach the transcription service. Check your connection, then try again.`
+                    : `I couldn't transcribe that audio right now. You can type your question instead.`;
+          if (pending) pending.innerHTML = msg;
+        } finally {
+          whisperChunks = [];
+          whisperRecorder = null;
+        }
+      });
+
+      try {
+        whisperRecorder.start();
+        track('mai_voice_start', { mode: 'whisper' });
+        setMicState(true);
+        startWhisperSilenceMonitor();
+        listeningBubbleId = addBubble(
+          'mai',
+          '<span class="text-muted">Listening... I will send automatically when you pause.</span>',
+        );
+        micTimeout = setTimeout(() => {
+          stopWhisperRecorder();
+        }, 12000);
+      } catch (err) {
+        track('mai_voice_error', { mode: 'whisper', error: 'start_failed' });
+        setMicState(false);
+        clearListeningBubble();
+        stopWhisperStream();
+        whisperRecorder = null;
+        addBubble('mai', `The microphone couldn't start. ${escapeHtml(err?.message || 'Try again, or type your question instead.')}`);
+      }
     }
     // Error codes per the SpeechRecognition spec. We name what went wrong
     // instead of silently resetting the button — the old behaviour looked
@@ -1953,7 +2352,7 @@ is always appreciated but never required.
         clearListeningBubble();
         const text = e.results[0][0].transcript;
         input.value = text;
-        handle(text);
+        handle(text, { fromVoice: true });
       });
       recog.addEventListener('end', () => {
         setMicState(false);
@@ -1978,10 +2377,18 @@ is always appreciated but never required.
         addBubble('mai', msg);
       });
     }
-    // We intentionally LEAVE the button visible on browsers without
-    // SpeechRecognition support — clicking it explains what to do instead
-    // of just silently missing.
+    // Prefer Whisper when the worker URL + MediaRecorder are available;
+    // fallback to browser SpeechRecognition otherwise.
     micBtn.addEventListener('click', async () => {
+      if (canUseWhisperMic()) {
+        if (listening) {
+          stopWhisperRecorder();
+          return;
+        }
+        await startWhisperCapture();
+        return;
+      }
+
       // Stop a session in progress.
       if (listening) {
         try { recog?.stop(); } catch {}
@@ -2049,6 +2456,7 @@ is always appreciated but never required.
       // when a previous session is still tearing down and the user clicks again.
       try {
         recog.start();
+        track('mai_voice_start', { mode: 'browser' });
         setMicState(true);
         listeningBubbleId = addBubble(
           'mai',
@@ -2070,6 +2478,7 @@ is always appreciated but never required.
           );
         }, 15000);
       } catch (err) {
+        track('mai_voice_error', { mode: 'browser', error: String(err?.name || 'start_failed') });
         setMicState(false);
         clearListeningBubble();
         const name = err?.name || '';
@@ -2083,20 +2492,99 @@ is always appreciated but never required.
       }
     });
 
-    // ---------- Voice out (SpeechSynthesis) ----------
-    function speak(text) {
-      if (!('speechSynthesis' in window)) return;
+    // ---------- Voice out (model TTS via worker only) ----------
+    async function speak(text) {
       stopSpeaking();
-      const u = new SpeechSynthesisUtterance(text);
-      u.rate = 1.0;
-      u.pitch = 1.05;
-      window.speechSynthesis.speak(u);
+      const clean = String(text || '').trim();
+      if (!clean) return;
+
+      if (!WORKER_BASE_URL) {
+        addBubble('mai', `Voice playback needs the M.AI worker URL. It is currently unavailable.`);
+        return;
+      }
+
+      ttsAbort = new AbortController();
+      try {
+        const res = await fetch(`${WORKER_BASE_URL}/speak`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: clean.slice(0, 1200), voice: TTS_VOICE }),
+          signal: ttsAbort.signal,
+        });
+        if (!res.ok) {
+          let detail = '';
+          try {
+            const payload = await res.json();
+            detail = String(payload?.error || '').toLowerCase();
+          } catch {}
+          if (res.status === 403 || detail === 'origin_not_allowed') {
+            addBubble('mai', `Voice playback is blocked for this local origin. Open the site from http://localhost (or redeploy worker CORS for your dev URL).`);
+          } else {
+            addBubble('mai', `Voice playback is temporarily unavailable. Please try again in a moment.`);
+          }
+          return;
+        }
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        clearPendingAudio();
+        await playAudioUrl(url);
+      } catch (err) {
+        const name = String(err?.name || '');
+        if (name === 'NotAllowedError') {
+          if (currentAudioUrl) {
+            pendingAudioUrl = currentAudioUrl;
+            currentAudio = null;
+            currentAudioUrl = null;
+          }
+          addBubble('mai', `Your phone blocked auto-play audio. <button type="button" class="underline text-accent" data-mai-play-pending-audio>Tap to play the reply</button>.`);
+        } else {
+          addBubble('mai', `Voice playback failed this time. Please try again.`);
+        }
+      } finally {
+        ttsAbort = null;
+      }
     }
+    async function playAudioUrl(url) {
+      const audio = new Audio(url);
+      audio.playsInline = true;
+      currentAudio = audio;
+      currentAudioUrl = url;
+      audio.onended = () => {
+        if (currentAudio === audio) currentAudio = null;
+        if (currentAudioUrl === url) currentAudioUrl = null;
+        try { URL.revokeObjectURL(url); } catch {}
+      };
+      audio.onerror = () => {
+        if (currentAudio === audio) currentAudio = null;
+        if (currentAudioUrl === url) currentAudioUrl = null;
+      };
+      await audio.play();
+    }
+
+    function clearPendingAudio() {
+      if (!pendingAudioUrl) return;
+      try { URL.revokeObjectURL(pendingAudioUrl); } catch {}
+      pendingAudioUrl = null;
+    }
+
     function stopSpeaking() {
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      if (ttsAbort) {
+        try { ttsAbort.abort(); } catch {}
+        ttsAbort = null;
+      }
+      if (currentAudio) {
+        try { currentAudio.pause(); } catch {}
+        try { currentAudio.currentTime = 0; } catch {}
+        currentAudio = null;
+      }
+      if (currentAudioUrl) {
+        try { URL.revokeObjectURL(currentAudioUrl); } catch {}
+        currentAudioUrl = null;
+      }
     }
     speakToggle.addEventListener('click', () => {
       speakReplies = !speakReplies;
+      track('mai_voice_reply_toggle', { enabled: speakReplies ? 'true' : 'false' });
       speakToggle.setAttribute('aria-pressed', speakReplies ? 'true' : 'false');
       // Stronger visual: filled chip when on, muted icon when off.
       speakToggle.classList.toggle('text-accent', speakReplies);
