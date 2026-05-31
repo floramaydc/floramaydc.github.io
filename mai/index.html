@@ -394,6 +394,11 @@ M.ai never takes actions on Flora&rsquo;s behalf. For anything that needs her di
           var params = new URLSearchParams(window.location.search);
           var context = params.get('context') || '';
           var prompt = params.get('q') || params.get('prompt') || '';
+
+          // MAi.astro already auto-opens when the route is /mai. Only
+          // dispatch here when query params carry extra intent.
+          if (!context && !prompt) return;
+
           window.dispatchEvent(
             new CustomEvent('mai:open', {
               detail: {
@@ -1879,6 +1884,25 @@ M.ai never takes actions on Flora&rsquo;s behalf. For anything that needs her di
     // only AFTER the slide-out finishes so the panel can animate out; if
     // open() is called before that lands, we cancel it.
     var _closeTimer = null;
+    var _warmTimer = null;
+    var _warmScheduled = false;
+
+    function scheduleWarmIndex() {
+      if (_warmScheduled) return;
+      _warmScheduled = true;
+
+      function runWarm() {
+        _warmTimer = null;
+        loadVocab();
+      }
+
+      // Let first paint settle before warming retrieval assets.
+      if (typeof window.requestIdleCallback === 'function') {
+        window.requestIdleCallback(runWarm, { timeout: 1800 });
+      } else {
+        _warmTimer = window.setTimeout(runWarm, 900);
+      }
+    }
     function open(opts) {
       var restoring = opts && opts.restoring;
       var source = (opts && opts.source) || 'unknown';
@@ -1903,10 +1927,9 @@ M.ai never takes actions on Flora&rsquo;s behalf. For anything that needs her di
         sessionStorage.setItem('mai-open', 'true');
       } catch (e) {}
       if (!restoring) track('mai_open', { source: source });
-      // Warm the index + vocabulary so fuzzy spell-fix is ready by the
-      // time the user types/speaks their first question. Both promises
-      // are idempotent.
-      loadVocab();
+      // Warm retrieval assets once the page is idle so first paint and
+      // panel animation on /mai are not competing with heavy JSON work.
+      scheduleWarmIndex();
       if (!restoring) setTimeout(() => input.focus({ preventScroll: true }), 50);
       if (restoring) {
         requestAnimationFrame(() => {
