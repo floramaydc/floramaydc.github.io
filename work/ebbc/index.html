@@ -147,7 +147,11 @@
           initThemeToggles();
         }
       })();
-    </script><script async src="https://www.googletagmanager.com/gtag/js?id=G-2X8SE1JJX7"></script><script>(function(){const gaMeasurementId = "G-2X8SE1JJX7";
+    </script><script>(function(){const gaMeasurementId = "G-2X8SE1JJX7";
+
+        (function () {
+          var loaded = false;
+          var pendingLoad = false;
 
           window.dataLayer = window.dataLayer || [];
           function gtag() {
@@ -155,11 +159,42 @@
           }
           window.gtag = gtag;
           gtag('js', new Date());
-          gtag('config', gaMeasurementId, {
-            anonymize_ip: true,
-            transport_type: 'beacon',
-          });
-        })();</script><script>
+
+          function loadGtag() {
+            if (loaded || pendingLoad) return;
+            pendingLoad = true;
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gaMeasurementId);
+            script.onload = function () {
+              loaded = true;
+              pendingLoad = false;
+              gtag('config', gaMeasurementId, {
+                anonymize_ip: true,
+                transport_type: 'beacon',
+              });
+            };
+            script.onerror = function () {
+              pendingLoad = false;
+            };
+            document.head.appendChild(script);
+          }
+
+          var loadedByInteraction = false;
+          function loadOnce() {
+            if (loadedByInteraction) return;
+            loadedByInteraction = true;
+            loadGtag();
+          }
+
+          window.addEventListener('pointerdown', loadOnce, { once: true, passive: true });
+          window.addEventListener('keydown', loadOnce, { once: true });
+          window.addEventListener('scroll', loadOnce, { once: true, passive: true });
+
+          // Fallback: if no interaction happens, still load analytics soon after paint.
+          window.setTimeout(loadGtag, 4000);
+        })();
+      })();</script><script>
       (function () {
         function trackSiteEvent(name, params) {
           try {
