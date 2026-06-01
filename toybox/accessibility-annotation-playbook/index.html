@@ -562,6 +562,13 @@
 <li><strong>The decorative image with a useless alt.</strong> An icon that decorates next to a text label should have empty alt, not “icon.”</li>
 <li><strong>Treating annotation as a final-stage activity.</strong> If annotations show up at handoff, the <em>design itself</em> has already missed accessibility decisions — the wrong primitive, an ambiguous focus order, an invisible state.</li>
 </ol>
+<h2 id="companion-artifacts">Companion artifacts</h2>
+<ul>
+<li><a href="/toybox/accessibility-compliance-baseline-playbook">The Accessibility Compliance Baseline Playbook</a> for shell-level primitives and enforcement mapping</li>
+<li><a href="/toybox/accessibility-audit-ops-playbook">Accessibility Audit Ops Playbook</a> for recurring audit cadence and evidence tracking</li>
+<li><a href="/toybox/audit-command-center-template">Audit Command Center Template</a> for combining accessibility findings with system and dark-mode work</li>
+<li><a href="/toybox/dark-mode-spec-one-pager">Dark Mode Spec One-Pager</a> for theme contrast decisions this annotation set should validate</li>
+</ul>
 <h2 id="generalized-example">Generalized example</h2>
 <p>A fictional fleet-management dashboard introduces a <strong>vehicle status drawer</strong> — a right-side overlay that opens when an operator clicks a row in a vehicles table. The drawer shows the vehicle’s current trip, last 24 hours of telemetry, and lets the operator dispatch a maintenance request.</p>
 <p><strong>Layer 1 — Semantics.</strong> The drawer is a <code>dialog</code> (it manages focus, dismisses on Esc, sits over the page). The maintenance request button inside it is a <code>button</code> (it triggers an action; it does not navigate). The “view full vehicle history” text is a <code>link</code> (it navigates).</p>
@@ -827,6 +834,13 @@ What AI should not do: choose announcement politeness level, decide whether an i
 6. **Toasts that disappear before they&#39;re read.** Auto-dismiss timing assumes sighted attention. AT users need a longer dwell, dismiss-on-focus-out, or a persistent log surface.
 7. **The decorative image with a useless alt.** An icon that decorates next to a text label should have empty alt, not &quot;icon.&quot;
 8. **Treating annotation as a final-stage activity.** If annotations show up at handoff, the *design itself* has already missed accessibility decisions — the wrong primitive, an ambiguous focus order, an invisible state.
+
+## Companion artifacts
+
+- [The Accessibility Compliance Baseline Playbook](/toybox/accessibility-compliance-baseline-playbook) for shell-level primitives and enforcement mapping
+- [Accessibility Audit Ops Playbook](/toybox/accessibility-audit-ops-playbook) for recurring audit cadence and evidence tracking
+- [Audit Command Center Template](/toybox/audit-command-center-template) for combining accessibility findings with system and dark-mode work
+- [Dark Mode Spec One-Pager](/toybox/dark-mode-spec-one-pager) for theme contrast decisions this annotation set should validate
 
 ## Generalized example
 

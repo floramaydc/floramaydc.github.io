@@ -586,6 +586,13 @@
 <li><strong>Hand-rolled dialog without focus trap.</strong> Tab leaks out to the background page. Use the component-library dialog whenever possible.</li>
 <li><strong>No Known Gaps table.</strong> Document claims full compliance and the auditor finds three gaps in fifteen minutes. Naming gaps openly is faster than discovering them late.</li>
 </ol>
+<h2 id="companion-artifacts">Companion artifacts</h2>
+<ul>
+<li><a href="/toybox/accessibility-annotation-playbook">Accessibility Annotation Playbook</a> for the design-time contract that feeds this baseline</li>
+<li><a href="/toybox/accessibility-audit-ops-playbook">Accessibility Audit Ops Playbook</a> for recurring verification and finding ownership</li>
+<li><a href="/toybox/audit-command-center-template">Audit Command Center Template</a> for consolidating accessibility, design-system, and dark-mode remediation</li>
+<li><a href="/toybox/dark-mode-spec-one-pager">Dark Mode Spec One-Pager</a> for contrast and theme-layer decisions that must pass baseline checks</li>
+</ul>
 <h2 id="generalized-example">Generalized example</h2>
 <p>A fictional <strong>fleet-management dashboard</strong>. Application shell wired with: a skip link, a focusable <code>&#x3C;main></code>, a single polite live region, and a route-to-title map. The compliance matrix is reviewed at the start of the project; ten SCs are enforced once (shell + tokens), six are flagged per-feature. The PR checklist is added to the team’s pull-request template.</p>
 <p>Six months in, a new feature adds a “schedule recall” action. The PR checklist catches three issues the author hadn’t thought about: the icon-only “more actions” menu has an <code>aria-label</code> but no tooltip, the success toast was about to spin up its own <code>aria-live</code> div instead of calling <code>announce()</code>, and the modal’s Escape handler was missing because it was hand-rolled instead of using the dialog primitive. Fixed in fifteen minutes — instead of caught by an auditor four sprints later.</p>
@@ -782,6 +789,13 @@ Both prompts are *checkpoint* tools, not generators. The matrix and the spec sti
 8. **Color-only status pill.** Green badge, red badge, no text. Fail for color-blind users *and* anyone using a high-contrast theme that may render both as the same shade.
 9. **Hand-rolled dialog without focus trap.** Tab leaks out to the background page. Use the component-library dialog whenever possible.
 10. **No Known Gaps table.** Document claims full compliance and the auditor finds three gaps in fifteen minutes. Naming gaps openly is faster than discovering them late.
+
+## Companion artifacts
+
+- [Accessibility Annotation Playbook](/toybox/accessibility-annotation-playbook) for the design-time contract that feeds this baseline
+- [Accessibility Audit Ops Playbook](/toybox/accessibility-audit-ops-playbook) for recurring verification and finding ownership
+- [Audit Command Center Template](/toybox/audit-command-center-template) for consolidating accessibility, design-system, and dark-mode remediation
+- [Dark Mode Spec One-Pager](/toybox/dark-mode-spec-one-pager) for contrast and theme-layer decisions that must pass baseline checks
 
 ## Generalized example
 
