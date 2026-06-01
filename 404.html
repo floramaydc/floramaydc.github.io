@@ -395,7 +395,12 @@
       else if (p === '/artwork') to = '/play/art';
       // /paleandbright -> /play/pale-and-bright
       else if (p === '/paleandbright') to = '/play/pale-and-bright';
-      if (to) location.replace(to);
+      // Canonical M.ai route is /mai/ in static output; normalize /mai.
+      else if (p === '/mai') to = '/mai/';
+      if (to) {
+        var suffix = p === '/mai' ? (location.search || '') + (location.hash || '') : '';
+        location.replace(to + suffix);
+      }
     })();
   </script>  </main> <footer class="relative z-10 mt-24 border-t border-ink/10 bg-paper"> <div class="mx-auto flex max-w-5xl flex-col items-start gap-4 px-6 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between md:gap-0"> <span>© 2026 Flora May dela Cruz</span> <div class="flex flex-wrap gap-x-4 gap-y-2"> <a href="https://linkedin.com/in/floramaydelacruz" class="hover:text-accent">LinkedIn</a> <a href="https://instagram.com/floramaydc" class="hover:text-accent">Instagram</a> <a href="https://github.com/floramaydc" class="hover:text-accent">GitHub</a> </div> </div> </footer> <div id="mai-root" class="print:hidden"> <!-- Backdrop (mobile only — desktop keeps the page interactive behind the
        panel so M.ai can guide the user through the UI bidirectionally). --> <div id="mai-backdrop" hidden class="fixed inset-0 z-40 bg-ink/30 backdrop-blur-[1px] transition-opacity md:hidden"></div> <!-- Right-side drawer panel. On mobile it floats over the page; on
