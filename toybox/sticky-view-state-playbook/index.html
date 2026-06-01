@@ -2342,6 +2342,7 @@ is always appreciated but never required.
       }
     }
     function close() {
+      const onMaiRoute = isMaiRoute();
       document.documentElement.classList.remove('mai-no-scroll');
       document.documentElement.classList.remove('mai-open');
       try {
@@ -2359,6 +2360,9 @@ is always appreciated but never required.
         panel.hidden = true;
         backdrop.hidden = true;
         _closeTimer = null;
+        if (onMaiRoute) {
+          window.location.replace('/');
+        }
       }, 220);
     }
     closeBtn.addEventListener('click', close);
@@ -2472,8 +2476,13 @@ is always appreciated but never required.
     // dedicated /mai page dispatches mai:open with forceFullscreen so direct
     // navigation lands users in the same fullscreen experience without a
     // duplicate implementation.
-    const MAI_PATH = '/mai';
+    const MAI_PATH = '/mai/';
     let _prevPathBeforeFullscreen = null;
+
+    function isMaiRoute(pathname) {
+      const path = (pathname || window.location.pathname || '').replace(/\/+$/, '');
+      return path === '/mai';
+    }
 
     function setFullscreen(on) {
       fullscreen = on;
@@ -2490,7 +2499,7 @@ is always appreciated but never required.
     function toggleFullscreenFromUI() {
       const goingFullscreen = !fullscreen;
       try {
-        if (goingFullscreen && window.location.pathname !== MAI_PATH) {
+        if (goingFullscreen && !isMaiRoute()) {
           _prevPathBeforeFullscreen =
             window.location.pathname + window.location.search + window.location.hash;
           history.pushState(
@@ -2498,7 +2507,7 @@ is always appreciated but never required.
             '',
             MAI_PATH,
           );
-        } else if (!goingFullscreen && window.location.pathname === MAI_PATH) {
+        } else if (!goingFullscreen && isMaiRoute()) {
           const target = _prevPathBeforeFullscreen || '/';
           _prevPathBeforeFullscreen = null;
           history.pushState({ mai: 'collapsed' }, '', target);
@@ -2511,7 +2520,7 @@ is always appreciated but never required.
 
     // Sync UI when browser back/forward crosses /mai.
     window.addEventListener('popstate', () => {
-      const onMai = window.location.pathname === MAI_PATH;
+      const onMai = isMaiRoute();
       if (onMai && !fullscreen) {
         if (panel.hidden) open({ source: 'popstate_mai', restoring: true, fullscreen: true });
         setFullscreen(true);
@@ -2522,7 +2531,7 @@ is always appreciated but never required.
 
     // If this page loaded directly at /mai, ensure fullscreen experience is on.
     setTimeout(() => {
-      if (window.location.pathname === MAI_PATH) {
+      if (isMaiRoute()) {
         if (panel.hidden) open({ source: 'mai_route', restoring: true, fullscreen: true });
         if (!fullscreen) setFullscreen(true);
       }
