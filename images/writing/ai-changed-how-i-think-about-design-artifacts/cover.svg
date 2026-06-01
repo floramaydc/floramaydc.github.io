@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Structured design artifacts flowing into an AI interpretation panel.">
+  <rect width="1600" height="1200" fill="#e5e3dc"/>
+
+  <g>
+    <rect x="170" y="170" width="790" height="860" rx="22" fill="#ffffff" stroke="#303636" stroke-width="5"/>
+    <rect x="225" y="255" width="680" height="54" rx="11" fill="#495a58"/>
+    <text x="565" y="290" text-anchor="middle" font-family="Almarai, system-ui, sans-serif" font-size="26" fill="#ffffff">Design artifact</text>
+
+    <g font-family="Almarai, system-ui, sans-serif" font-size="22" fill="#303636">
+      <rect x="240" y="350" width="300" height="130" rx="10" fill="#f6f3ec" stroke="#495a58" stroke-width="3"/>
+      <text x="260" y="390">Button / Primary</text>
+      <text x="260" y="424" fill="#5a6362">variant: default</text>
+      <text x="260" y="456" fill="#5a6362">state: enabled</text>
+
+      <rect x="565" y="350" width="320" height="130" rx="10" fill="#f6f3ec" stroke="#495a58" stroke-width="3"/>
+      <text x="585" y="390">Card / Recommendation</text>
+      <text x="585" y="424" fill="#5a6362">rule: idempotent action</text>
+      <text x="585" y="456" fill="#5a6362">status: partial</text>
+
+      <rect x="240" y="525" width="645" height="110" rx="10" fill="#ffffff" stroke="#6b7373" stroke-width="3" stroke-dasharray="10 8"/>
+      <text x="260" y="568">Layer names: semantic, not generic</text>
+      <text x="260" y="603" fill="#5a6362">Constraints, spacing scale, and roles are explicit</text>
+
+      <rect x="240" y="680" width="645" height="110" rx="10" fill="#ffffff" stroke="#6b7373" stroke-width="3" stroke-dasharray="10 8"/>
+      <text x="260" y="723">Hierarchy: components -> flows -> system intent</text>
+      <text x="260" y="758" fill="#5a6362">Structure becomes reusable machine input</text>
+    </g>
+  </g>
+
+  <g>
+    <path d="M980 575 C1080 470, 1180 470, 1268 575" fill="none" stroke="#a24a2a" stroke-width="10" stroke-linecap="round"/>
+    <polygon points="1270,575 1230,553 1230,597" fill="#a24a2a"/>
+  </g>
+
+  <g>
+    <rect x="1070" y="420" width="360" height="360" rx="18" fill="#2a3432"/>
+    <text x="1250" y="485" text-anchor="middle" font-family="Almarai, system-ui, sans-serif" font-size="28" fill="#e8e3d7">Machine interpretation</text>
+
+    <g font-family="Almarai, system-ui, sans-serif" font-size="22" fill="#bcc0bb">
+      <text x="1105" y="548">- component map: clear</text>
+      <text x="1105" y="590">- constraints: valid</text>
+      <text x="1105" y="632">- state logic: traceable</text>
+      <text x="1105" y="674">- accessibility intent: present</text>
+    </g>
+
+    <rect x="1100" y="705" width="300" height="48" rx="24" fill="#8aa39e"/>
+    <text x="1250" y="736" text-anchor="middle" font-family="Almarai, system-ui, sans-serif" font-size="22" fill="#1c2422">Output quality improves</text>
+  </g>
+
+  <text x="800" y="1080" text-anchor="middle" font-family="Libre Baskerville, Georgia, serif" font-size="40" fill="#303636">artifacts are becoming infrastructure</text>
+</svg>
