@@ -588,12 +588,14 @@
     }
 
     // Build follow-up chips from the user's latest ask + retrieved docs so
-    // suggestions change as the conversation evolves.
+    // suggestions change as the conversation evolves. Now extracts document
+    // titles and topics to generate truly contextual follow-ups.
     function getDynamicChips(query = '', top = []) {
       const q = normalize(query || '');
       const chips = [];
       const add = (...items) => chips.push(...items);
 
+      // Query-driven suggestions (context-aware defaults if no retrieval yet)
       if (/\b(dark|theme|contrast|accessib)\w*\b/.test(q)) {
         add('Turn on dark mode', 'Show dark mode one-pager', 'Run accessibility checklist');
       }
@@ -610,10 +612,42 @@
         add('Take me to About', 'What is Flora working on?', 'Show me case studies');
       }
 
-      const collections = new Set((top || []).map((r) => r?.d?.collection).filter(Boolean));
-      if (collections.has('work')) add('Take me to Work', 'Compare flagship projects');
-      if (collections.has('toybox')) add('Explore the Toybox', 'Show newest Toybox updates');
-      if (collections.has('writing')) add('Take me to Writing', 'Show recent writing');
+      // Document-driven suggestions (extract titles and collections from retrieved docs)
+      if (top && top.length > 0) {
+        const docs = top.slice(0, 3); // top 3 docs for follow-up context
+        const titles = docs.map((r) => r?.d?.title).filter(Boolean);
+        const collections = new Set(docs.map((r) => r?.d?.collection).filter(Boolean));
+        const categories = new Set(docs.map((r) => r?.d?.category).filter(Boolean));
+
+        // Extract related topics from document titles for smart follow-ups
+        for (const title of titles) {
+          const t = String(title || '').toLowerCase();
+          // For playbooks, offer to explore related patterns
+          if (categories.has('playbook') && !chips.some(c => c.includes('playbook'))) {
+            add('Explore more playbooks', 'What playbooks exist?');
+          }
+          // For work/case studies, offer project comparisons
+          if (collections.has('work') && !chips.some(c => c.includes('case stud'))) {
+            add('Compare flagship projects', 'Show me other case studies');
+          }
+          // For writing/essays, offer thematic exploration
+          if (collections.has('writing') && !chips.some(c => c.includes('Writing'))) {
+            add('Show recent writing', 'Explore more essays');
+          }
+          // For toybox prototypes/tools, offer to explore the collection
+          if (collections.has('toybox') && !chips.some(c => c.includes('Toybox'))) {
+            add('Explore the Toybox', 'Show newest Toybox updates');
+          }
+        }
+
+        // Add collection-level navigation if multiple docs from same collection
+        if (collections.size === 1) {
+          const col = Array.from(collections)[0];
+          if (col === 'work' && !chips.some(c => c.includes('Work'))) add('Take me to Work');
+          if (col === 'toybox' && !chips.some(c => c.includes('Toybox'))) add('Take me to Toybox');
+          if (col === 'writing' && !chips.some(c => c.includes('Writing'))) add('Take me to Writing');
+        }
+      }
 
       return uniqueChips([...chips, 'Send a message', ...STARTER_CHIPS], 4);
     }
@@ -2527,7 +2561,7 @@
           if (bubble) bubble.innerHTML = '<span class="mai-thinking text-muted">Reading the relevant pages<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>';
           const ok = await askWorker(raw, top, bubble, shouldSpeakThisTurn);
           if (ok) {
-            renderChips(STARTER_CHIPS);
+            renderChips(getDynamicChips(clean, top));
             return;
           }
           // Fell through \u2014 fall back to plain retrieval below.
