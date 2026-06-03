@@ -50,7 +50,7 @@ import{E,a as S}from"./jspdf.plugin.autotable.BNWpDLH5.js";import"./preload-help
   `,t?.screenshot?.data){const e=t.screenshot,m=Number(e.width||1),a=Number(e.height||1),p=c.filter(o=>o?.boundingBox).map(o=>{const d=o.boundingBox,b=d.x/m*100,u=d.y/a*100,h=d.width/m*100,x=d.height/a*100;return`
           <div class="absolute border-2 border-red-600/90 bg-red-600/10" title="${r(o.rule||"")}" style="left:${b}%; top:${u}%; width:${h}%; height:${x}%;"></div>
           <div class="absolute z-10" style="left:${b}%; top:${u}%; transform: translate(-50%, -50%);">
-            <div class="flex h-7 w-7 items-center justify-center rounded-full border border-white bg-accent text-xs font-bold text-white shadow-lg shadow-black/20">${r(o.annotationId)}</div>
+            <div class="flex h-7 w-7 items-center justify-center rounded-full border border-paper bg-accent text-xs font-bold text-paper shadow-lg shadow-black/20">${r(o.annotationId)}</div>
           </div>
         `}).join("");s+=`
       <div class="mt-5 space-y-5">
@@ -68,7 +68,7 @@ import{E,a as S}from"./jspdf.plugin.autotable.BNWpDLH5.js";import"./preload-help
     `,c.forEach(o=>{s+=`
         <article id="annotation-${r(o.annotationId)}" class="rounded border border-ink/10 bg-paper p-4 shadow-sm dark:bg-cream/5">
           <div class="flex items-start gap-3">
-            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-white">${r(o.annotationId)}</div>
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-paper">${r(o.annotationId)}</div>
             <div class="min-w-0">
               <p class="text-xs font-semibold uppercase tracking-widest text-muted">${r((o?.severity||"").toUpperCase())}</p>
               <h4 class="mt-1 font-serif text-base">${r(o?.rule||"Finding")}</h4>
