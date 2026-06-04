@@ -16,7 +16,9 @@ backend:
   name: github
   repo: floramaydc/site-source
   branch: main
-  base_url: https://floramaydc.com
+  # The site is served by GitHub Pages, but Vercel functions handle OAuth.
+  # Decap concatenates base_url + auth_endpoint to build the login URL.
+  base_url: https://floramaydc-audit-api.vercel.app
   auth_endpoint: api/oauth
 
 # Where Decap uploads images dragged into the editor. Mirrors the existing
