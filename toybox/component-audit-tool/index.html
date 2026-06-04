@@ -399,7 +399,17 @@ Send feedback
 <li>Gives you an <strong>M.ai context payload</strong> for follow-up questions about specific findings</li>
 </ol>
 <h3 id="core-concept">Core Concept</h3>
-<p>This is an <strong>observe → inventory → annotate → recommend</strong> engine. The same architecture that powers the Accessibility Audit applied to component-level analysis. The engine detects three component libraries today — <strong>Carbon</strong> (<code>cds--*</code>, <code>bx--*</code>, <code>c4p--*</code>), <strong>Fluent UI</strong> (<code>fui-*</code>, <code>ms-*</code>), and <strong>Material UI</strong> (<code>Mui[Component]-root</code>, <code>mui-*</code>, MDC <code>mdc-*</code>, Material 3 <code>m3-*</code>). Each library has its own rule pack, so a Material-heavy page is evaluated against Material rules, not Fluent ones. Pages with no detected design system get cross-library options side-by-side so you can compare before picking.</p>
+<p>This is an <strong>observe → inventory → annotate → recommend</strong> engine. The same architecture that powers the Accessibility Audit applied to component-level analysis. The engine detects the major Material-spec implementations and their peers today:</p>
+<ul>
+<li><strong>Carbon</strong> (IBM) — <code>cds--*</code>, <code>bx--*</code>, <code>c4p--*</code></li>
+<li><strong>Fluent UI</strong> (Microsoft) — <code>fui-*</code>, <code>ms-*</code></li>
+<li><strong>MUI</strong> (the React library, <code>@mui/material</code>) — <code>Mui[Component]-root</code>, <code>mui-*</code></li>
+<li><strong>Material Web</strong> (Google’s current Material 3 web components, <code>@material/web</code>) — <code>md-*</code> elements, <code>md-typescale-*</code></li>
+<li><strong>MWC</strong> (legacy Material web components, <code>@material/mwc-*</code>) — <code>mwc-*</code></li>
+<li><strong>MDC Web</strong> (archived Material Components for Web, <code>@material/*</code>) — <code>mdc-*</code></li>
+<li><strong>Angular Material</strong> (<code>@angular/material</code>) — <code>mat-*</code></li>
+</ul>
+<p>Each library has its own rule pack, so a Material-heavy page is evaluated against the right rules — MUI is not Material Web is not MDC. Pages with no detected design system get cross-library options side-by-side so you can compare before picking.</p>
 <h3 id="inventory-captures">Inventory Captures</h3>
 <p>For each detected component:</p>
 <ul>
@@ -452,7 +462,7 @@ Send feedback
 <li>Source detection is heuristic (class-name and ARIA-based), not build-artifact analysis</li>
 <li>No saved history or user accounts</li>
 </ul>
-<h3 id="what-this-tool-does--and-what-it-does-not">What this tool does — and what it does not</h3>
+<h3 id="reach-pages-this-tool-can-and-cant-see">Reach: pages this tool can and can’t see</h3>
 <p>It works best on pages a normal browser can reach with no sign-in. Public marketing sites, public docs, public product pages. For those, it loads the page, takes the screenshot, builds the component inventory, and runs the rule packs.</p>
 <p>It does <strong>not</strong> sign in for you. It does <strong>not</strong> click through region pickers, cookie walls, or anti-bot challenges. If a page redirects to a login screen, the inventory will be from the login screen — not the app you were trying to study.</p>
 <div class="not-prose my-6 rounded-lg border border-accent/40 bg-accent/10 p-5 dark:bg-accent/15">
@@ -471,7 +481,7 @@ Yes. The tool is public and free. Export the report and share with your engineer
 <p><strong>Is this only useful for Fluent codebases?</strong>
 No. Detection works for Fluent UI, Material UI (<a href="https://m3.material.io">m3.material.io</a>), and Carbon (<a href="https://carbondesignsystem.com">carbondesignsystem.com</a>), and the inventory is useful for any page regardless of stack. Prescriptive recommendations are currently Fluent-only — Material and Carbon recommendation packs are being added next.</p>
 <p><strong>How does source detection work?</strong>
-The engine checks class-name prefixes for each supported library — Fluent UI (<code>fui-</code>, <code>ms-</code>, <code>data-automationid</code>), Material UI (<code>Mui[Component]-root</code>, <code>mui-</code>), and Carbon (<code>cds--</code>, <code>bx--</code>) — and falls back to native HTML / custom / unknown. Confidence scores reflect how certain the heuristic is.</p>
+The engine checks class-name prefixes and custom-element tags for each supported library — Fluent UI (<code>fui-</code>, <code>ms-</code>, <code>data-automationid</code>), Carbon (<code>cds--</code>, <code>bx--</code>, <code>c4p--</code>), MUI (<code>Mui[Component]-root</code>, <code>mui-</code>), Material Web / M3 (<code>md-*</code> elements, <code>md-typescale-*</code>), MWC (<code>mwc-*</code>), MDC Web (<code>mdc-*</code>), and Angular Material (<code>mat-*</code>) — and falls back to native HTML / custom / unknown. Confidence scores reflect how certain the heuristic is.</p>
 <p><strong>Can I ask M.ai follow-up questions about my report?</strong>
 Yes. The report includes an M.ai context payload you can paste into M.ai to ask detailed questions about specific findings.</p>
 <p><strong>Why no accounts or history?</strong>
@@ -512,7 +522,17 @@ You paste a URL. The tool:
 
 ### Core Concept
 
-This is an **observe → inventory → annotate → recommend** engine. The same architecture that powers the Accessibility Audit applied to component-level analysis. The engine detects three component libraries today — **Carbon** (`cds--*`, `bx--*`, `c4p--*`), **Fluent UI** (`fui-*`, `ms-*`), and **Material UI** (`Mui[Component]-root`, `mui-*`, MDC `mdc-*`, Material 3 `m3-*`). Each library has its own rule pack, so a Material-heavy page is evaluated against Material rules, not Fluent ones. Pages with no detected design system get cross-library options side-by-side so you can compare before picking.
+This is an **observe → inventory → annotate → recommend** engine. The same architecture that powers the Accessibility Audit applied to component-level analysis. The engine detects the major Material-spec implementations and their peers today:
+
+- **Carbon** (IBM) — `cds--*`, `bx--*`, `c4p--*`
+- **Fluent UI** (Microsoft) — `fui-*`, `ms-*`
+- **MUI** (the React library, `@mui/material`) — `Mui[Component]-root`, `mui-*`
+- **Material Web** (Google&#39;s current Material 3 web components, `@material/web`) — `md-*` elements, `md-typescale-*`
+- **MWC** (legacy Material web components, `@material/mwc-*`) — `mwc-*`
+- **MDC Web** (archived Material Components for Web, `@material/*`) — `mdc-*`
+- **Angular Material** (`@angular/material`) — `mat-*`
+
+Each library has its own rule pack, so a Material-heavy page is evaluated against the right rules — MUI is not Material Web is not MDC. Pages with no detected design system get cross-library options side-by-side so you can compare before picking.
 
 ### Inventory Captures
 
@@ -551,7 +571,7 @@ When a risky implementation is found, the report includes:
 - Source detection is heuristic (class-name and ARIA-based), not build-artifact analysis
 - No saved history or user accounts
 
-### What this tool does — and what it does not
+### Reach: pages this tool can and can&#39;t see
 
 It works best on pages a normal browser can reach with no sign-in. Public marketing sites, public docs, public product pages. For those, it loads the page, takes the screenshot, builds the component inventory, and runs the rule packs.
 
@@ -577,7 +597,7 @@ Yes. The tool is public and free. Export the report and share with your engineer
 No. Detection works for Fluent UI, Material UI ([m3.material.io](https://m3.material.io)), and Carbon ([carbondesignsystem.com](https://carbondesignsystem.com)), and the inventory is useful for any page regardless of stack. Prescriptive recommendations are currently Fluent-only — Material and Carbon recommendation packs are being added next.
 
 **How does source detection work?**
-The engine checks class-name prefixes for each supported library — Fluent UI (`fui-`, `ms-`, `data-automationid`), Material UI (`Mui[Component]-root`, `mui-`), and Carbon (`cds--`, `bx--`) — and falls back to native HTML / custom / unknown. Confidence scores reflect how certain the heuristic is.
+The engine checks class-name prefixes and custom-element tags for each supported library — Fluent UI (`fui-`, `ms-`, `data-automationid`), Carbon (`cds--`, `bx--`, `c4p--`), MUI (`Mui[Component]-root`, `mui-`), Material Web / M3 (`md-*` elements, `md-typescale-*`), MWC (`mwc-*`), MDC Web (`mdc-*`), and Angular Material (`mat-*`) — and falls back to native HTML / custom / unknown. Confidence scores reflect how certain the heuristic is.
 
 **Can I ask M.ai follow-up questions about my report?**
 Yes. The report includes an M.ai context payload you can paste into M.ai to ask detailed questions about specific findings.
