@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" role="img" aria-label="Flora May dela Cruz — Content admin">
+  <title>Flora May dela Cruz — Content admin</title>
+  <defs>
+    <style>
+      .wordmark {
+        font-family: 'Apple Chancery', 'Snell Roundhand', 'Lucida Calligraphy', 'Bickham Script Pro', cursive;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 120px;
+        letter-spacing: -0.01em;
+        fill: #a24a2a;
+      }
+      .caption {
+        font-family: 'Libre Baskerville', 'Hoefler Text', Georgia, 'Times New Roman', serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 22px;
+        letter-spacing: 0.04em;
+        fill: #6b7373;
+      }
+    </style>
+  </defs>
+  <text class="wordmark" x="360" y="130" text-anchor="middle">Flora May</text>
+  <text class="caption" x="360" y="180" text-anchor="middle">content admin</text>
+</svg>
