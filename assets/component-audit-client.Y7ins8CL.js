@@ -1,0 +1,257 @@
+import{E as L,a as w}from"./jspdf.plugin.autotable.BNWpDLH5.js";import"./preload-helper.BlTxHScW.js";function s(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}function k(t,e,i){const u=s(e),p=i?s(i):"";t.innerHTML=`
+    <div class="rounded border border-red-200 bg-red-50 p-4 text-red-900" role="alert">
+      <p class="m-0 text-sm font-semibold break-words>${u}</p>
+      ${p?`<p class="mt-2 mb-0 text-sm text-red-800 break-words">${p}</p>`:""}
+    </div>
+  `}function U(t,e){const i=String(e||"").toLowerCase();return t===429?"The service is currently busy. Please retry in about 30-60 seconds.":t===502||t===503||t===504?"The audit service is temporarily unavailable or under maintenance. Please try again shortly.":t===408?"The page took too long to load. Retry once, then test a lighter page to confirm connectivity.":t===422||i.includes("could not reach")||i.includes("could not be resolved")?"Verify that the page is public, not login-gated, and not blocking automated browsers.":"Please try again in a moment. If this keeps happening, the audit service may be temporarily unavailable."}function P(t){const e=["Connecting to M.ai audit service","Opening page in a secure browser session","Inspecting component inventory and risks","Packaging your report"];let i=0;const u=()=>{const b=e.map((h,r)=>{const c=r===i;return`<li class="flex items-center gap-2 text-sm ${c?"text-ink font-semibold":"text-muted"}"><span class="inline-block h-2 w-2 rounded-full ${c?"bg-accent animate-pulse":"bg-ink/20"}" aria-hidden="true"></span>${s(h)}</li>`}).join("");t.innerHTML=`
+      <div class="rounded border border-accent/25 bg-white/70 p-4 dark:bg-ink/10" role="status" aria-live="polite">
+        <p class="m-0 text-sm font-semibold text-ink">Running your audit</p>
+        <p class="mt-2 mb-0 text-xs text-muted">This can take 10-60 seconds depending on page size and network conditions.</p>
+        <ul class="mt-3 space-y-2">${b}</ul>
+        <p class="mt-3 mb-0 text-xs text-muted">If this takes unusually long, the service may be busy or in maintenance. We'll show a clear message if that happens.</p>
+      </div>
+    `};u();const p=window.setInterval(()=>{i=(i+1)%e.length,u()},1800);return{stop(){window.clearInterval(p)}}}function A(t){const e=String(t||"").trim();if(!e)return"The audit request failed.";const i=e.replace(/^component audit failed:\s*/i,""),p=i.split(/browser logs?:/i)[0].trim()||i,b=p.toLowerCase();return b.includes("target page, context or browser has been closed")?"This site could not be audited because the browser session closed unexpectedly.":b.includes("timeout")||b.includes("timed out")?"The audit timed out before the page finished loading.":b.includes("err_name_not_resolved")||b.includes("dns")?"The URL could not be resolved.":b.includes("net::err_")||b.includes("failed to fetch")?"The audit could not reach that URL.":p.length>220?`${p.slice(0,217)}...`:p}function C(t,e=10){return(Array.isArray(t?.findings)?t.findings:[]).slice(0,e).map((u,p)=>({...u,annotationId:u?.annotationId??p+1}))}function I(t){return t?`${t.x}, ${t.y}, ${t.width} × ${t.height}`:""}function F(t,e,i){return t.filter(u=>u?.boundingBox).map(u=>{const p=u.boundingBox,b=p.x/e*100,h=p.y/i*100,r=p.width/e*100,c=p.height/i*100;return`
+        <div class="absolute ${M(u.severity)}" title="${s(u.rule||"")}" style="left:${b}%; top:${h}%; width:${r}%; height:${c}%;"></div>
+        <div class="absolute z-10" style="left:${b}%; top:${h}%; transform: translate(-50%, -50%);">
+          <div class="flex h-7 w-7 items-center justify-center rounded-full border border-paper bg-accent text-xs font-bold text-paper shadow-lg shadow-black/20">${s(u.annotationId)}</div>
+        </div>
+      `}).join("")}function T(t){return t==="high"?"text-red-700":t==="medium"?"text-orange-600":"text-emerald-700"}function R(t){return t==="high"?"bg-red-50 text-red-700 border border-red-200":t==="medium"?"bg-orange-50 text-orange-700 border border-orange-200":"bg-emerald-50 text-emerald-700 border border-emerald-200"}function M(t){return t==="high"?"border-2 border-red-500/90 bg-red-500/10":t==="medium"?"border-2 border-orange-400/90 bg-orange-400/10":"border border-emerald-400/60"}function j(t){const e=t?.summary||{},i=C(t,10),u=Array.isArray(t?.inventory)?t.inventory:[],p=t?.fluentMeta||{},b=t?.notice,h=Object.entries(e.componentDistribution||{}).map(([n,d])=>`  - ${n}: ${d}`).join(`
+`),r=["# Component Audit","",`- URL: ${t?.url||""}`,`- Library context: ${t?.libraryContext||"Generic"}`,`- Timestamp: ${t?.timestamp||""}`,`- Total components: ${e.totalComponents??0}`,`- Custom: ${e.customComponentCount??0}  Native: ${e.nativeComponentCount??0}  Fluent UI: ${e.fluentComponentCount??0}  Material UI: ${e.materialComponentCount??0}  Carbon: ${e.carbonComponentCount??0}`,`- Risk — High: ${e.riskSummary?.high??0}  Medium: ${e.riskSummary?.medium??0}  Low: ${e.riskSummary?.low??0}`];if(b&&r.push("",`> **Note:** ${b}`),p?.detected){const n=p.versionDetected?`\`${p.versionDetected}\` detected${p.versionLatest?` — latest is \`${p.versionLatest}\``:""}${p.isOutdated?" (outdated)":""}`:"version not pinned in script URLs";r.push("","## Fluent fingerprint","",`- \`fui-*\` elements on page: ${p.totalFuiElements??0}`,`- @fluentui/react-components: ${n}`,`- Storybook: ${p.storybookHome||"https://react.fluentui.dev"}`)}r.push("","## Component distribution","",h||"  (none)","","## Method","","- Observe: visit the page, capture screenshot, extract DOM inventory.","- Inventory: build a typed component list with source detection and confidence scores.","- Annotate: apply per-library rule packs (Fluent UI / Material UI / Carbon) to flag risky implementations.","- Recommend: map each finding to the appropriate library component with explanation. Pages with no design system get generic accessibility guidance.","","## Annotations",""),i.length===0?r.push("No risky implementations found.",""):i.forEach(n=>{const d=n.detectedProps&&Object.keys(n.detectedProps).length?Object.entries(n.detectedProps).map(([a,o])=>`${a}=${o}`).join(", "):"—";r.push(`### Annotation ${n.annotationId} — ${n.rule||"Finding"}`,"",`- Risk: ${n.severity}`,`- Component type: ${n.componentType}`,`- Fluent component: ${n.fluentComponent?`\`${n.fluentComponent}\``:"—"}`,`- Storybook: ${n.storybookUrl||"—"}`,`- Detected props: ${d}`,`- Selector: ${n.selector||""}`,`- Bounding box: ${I(n.boundingBox)}`,`- Evidence: ${n.evidence||""}`,`- Recommendation: ${n.recommendation||""}`,`- Library: ${n.libraryLabel||"none detected"}`,`- Suggested component: ${n.recommendedComponent||n.fluentAlternative||"n/a"}`,`- Package: ${n.recommendedPackage||n.fluentPackage||"n/a"}`,`- Benefits: ${(n.benefits||[]).join(", ")}`,`- Explanation: ${n.explanation||""}`,"")}),r.push("## Findings",""),i.length===0?r.push("No issues found."):(r.push("| # | Risk | Rule | Type | Selector | Library | Suggested component |","|---|---|---|---|---|---|---|"),i.forEach(n=>{r.push(`| ${n.annotationId} | ${n.severity} | ${n.rule} | ${n.componentType} | ${n.selector||""} | ${n.libraryLabel||"—"} | ${n.recommendedComponent||n.fluentAlternative||"n/a"} |`)})),r.push("","## Screenshot","");const c=t?.screenshot;return c?.data?r.push(`![Component audit screenshot](data:${c.mimeType||"image/png"};base64,${c.data})`):r.push("Screenshot unavailable."),r.push("","## Component Inventory","","| ID | Type | Library component | Props | Source | Risk | Conf. | Text | Selector | Docs |","|---|---|---|---|---|---|---|---|---|---|"),u.forEach(n=>{const d=n?.detectedProps&&Object.keys(n.detectedProps).length?Object.entries(n.detectedProps).map(([g,y])=>`${g}=${y}`).join(" "):"—",a=n?.storybookUrl?`[docs](${n.storybookUrl})`:"—",o=String(n?.visibleText||"").replace(/\|/g,"\\|"),m=String(n?.selector||"").replace(/\|/g,"\\|");r.push(`| ${n?.id||""} | ${n?.componentType||""} | ${n?.libraryComponentName||n?.fluentComponent||"—"} | ${d} | ${n?.possibleSource||""} | ${n?.risk||""} | ${n?.confidence??""}% | ${o} | ${m} | ${a} |`)}),r.push("","## M.ai Context","","```json",JSON.stringify(t?.maiContext||{},null,2),"```"),r.join(`
+`)}function D(t){const e=new L({orientation:"landscape",unit:"pt",format:"letter"}),i=t?.summary||{},u=C(t,10),p=Array.isArray(t?.inventory)?t.inventory:[],b=t?.screenshot,h=`component-audit-${new URL(t.url).hostname}-${new Date(t.timestamp||Date.now()).toISOString().slice(0,10)}`,r=e.internal.pageSize.getWidth(),c=40,n=r-c*2;let d=48;if(e.setFont("helvetica","bold"),e.setFontSize(18),e.text("Component Audit by M.ai",c,d),d+=18,e.setFont("helvetica","normal"),e.setFontSize(10),e.text(`URL: ${t.url}`,c,d),d+=14,e.text(`Library context: ${t.libraryContext||"No design system detected"}`,c,d),d+=14,e.text(`Timestamp: ${t.timestamp||""}`,c,d),d+=18,w(e,{startY:d,margin:{left:c,right:c},head:[["Total","Custom","Native","Fluent UI","Material UI","Carbon","High Risk","Medium Risk"]],body:[[String(i.totalComponents??0),String(i.customComponentCount??0),String(i.nativeComponentCount??0),String(i.fluentComponentCount??0),String(i.materialComponentCount??0),String(i.carbonComponentCount??0),String(i.riskSummary?.high??0),String(i.riskSummary?.medium??0)]],styles:{fontSize:9,cellPadding:4},headStyles:{fillColor:[40,40,40]}}),d=e.lastAutoTable.finalY+18,b?.data){e.setFont("helvetica","bold"),e.setFontSize(14),e.text("Screenshot with annotations",c,d),d+=10;const a=Number(b.width||1),o=Number(b.height||1),m=Math.max(220,Math.round(n*(o/a)));e.addImage(`data:${b.mimeType||"image/png"};base64,${b.data}`,"PNG",c,d,n,m);const g=n/a,y=m/o;u.forEach(l=>{if(!l.boundingBox)return;const x=c+l.boundingBox.x*g,f=d+l.boundingBox.y*y,$=l.boundingBox.width*g,S=l.boundingBox.height*y;if($>0&&S>0){const v=l.severity==="high";e.setDrawColor(v?204:234,v?51:88,v?51:12),e.setLineWidth(1),e.rect(x,f,$,S),e.setFillColor(v?122:160,v?40:80,v?40:10),e.circle(x+8,f+8,8,"F"),e.setTextColor(255,255,255),e.setFont("helvetica","bold"),e.setFontSize(8),e.text(String(l.annotationId),x+8,f+10.5,{align:"center"}),e.setTextColor(0,0,0)}}),d+=m+18}e.setFont("helvetica","bold"),e.setFontSize(14),e.text("Annotations",c,d),d+=8,u.length===0?(e.setFont("helvetica","normal"),e.setFontSize(10),e.text("No risky implementations found.",c,d+12),d+=30):(w(e,{startY:d,margin:{left:c,right:c},head:[["#","Risk","Rule","Type","Library","Suggested component","Storybook"]],body:u.map(a=>[String(a.annotationId),String(a.severity||""),String(a.rule||""),String(a.componentType||""),String(a.libraryLabel||"—"),String(a.recommendedComponent||a.fluentAlternative||"n/a"),String(a.storybookUrl||"—")]),styles:{fontSize:7.5,cellPadding:3,valign:"top",overflow:"linebreak"},headStyles:{fillColor:[122,74,42]},columnStyles:{0:{cellWidth:22},1:{cellWidth:44},2:{cellWidth:110},3:{cellWidth:70},4:{cellWidth:90},5:{cellWidth:110},6:{cellWidth:266}}}),d=e.lastAutoTable.finalY+18),e.setFont("helvetica","bold"),e.setFontSize(14),e.text("Component inventory",c,d),d+=8,w(e,{startY:d,margin:{left:c,right:c},head:[["ID","Type","Library component","Props","Source","Risk","Conf.","Text","Selector","Storybook"]],body:p.map(a=>{const o=a?.detectedProps&&Object.keys(a.detectedProps).length?Object.entries(a.detectedProps).map(([m,g])=>`${m}=${g}`).join(" "):"—";return[String(a?.id||""),String(a?.componentType||""),String(a?.libraryComponentName||a?.fluentComponent||"—"),o,String(a?.possibleSource||""),String(a?.risk||""),`${a?.confidence??""}%`,String(a?.visibleText||"").substring(0,40),String(a?.selector||"").substring(0,80),String(a?.storybookUrl||"—")]}),styles:{fontSize:6.5,cellPadding:2,valign:"top",overflow:"linebreak"},headStyles:{fillColor:[40,40,40]},columnStyles:{0:{cellWidth:40},1:{cellWidth:54},2:{cellWidth:70},3:{cellWidth:90},4:{cellWidth:44},5:{cellWidth:36},6:{cellWidth:30},7:{cellWidth:96},8:{cellWidth:110},9:{cellWidth:142}}}),e.save(`${h}.pdf`)}function O(t,e){const i=e?.summary||{},u=C(e,10),p=Array.isArray(e?.inventory)?e.inventory:[],b=i.componentDistribution||{},h=u.length;let r=`
+    <div class="mb-6 rounded border border-ink/10 bg-paper/80 p-6 dark:bg-cream/5">
+      <h3 class="mt-0 font-serif text-xl">Report Summary</h3>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mt-4">
+        <div>
+          <p class="mb-1 text-xs text-muted">Components</p>
+          <p class="m-0 text-xl font-bold">${s(i.totalComponents??0)}</p>
+        </div>
+        <div>
+          <p class="mb-1 text-xs text-muted">Findings</p>
+          <p class="m-0 text-xl font-bold">${s(h)}</p>
+        </div>
+        <div>
+          <p class="mb-1 text-xs text-muted">High Risk</p>
+          <p class="m-0 text-xl font-bold text-red-700">${s(i.riskSummary?.high??0)}</p>
+        </div>
+        <div>
+          <p class="mb-1 text-xs text-muted">Medium Risk</p>
+          <p class="m-0 text-xl font-bold text-orange-600">${s(i.riskSummary?.medium??0)}</p>
+        </div>
+      </div>
+      <div class="mt-5 rounded border border-ink/10 bg-paper p-4 text-sm text-muted dark:bg-cream/5">
+        <p class="m-0">
+          Source mix:
+          <span class="font-semibold text-ink">${s(i.customComponentCount??0)}</span> custom,
+          <span class="font-semibold text-ink">${s(i.nativeComponentCount??0)}</span> native,
+          <span class="font-semibold text-ink">${s(i.fluentComponentCount??0)}</span> Fluent UI,
+          <span class="font-semibold text-ink">${s(i.materialComponentCount??0)}</span> Material UI,
+          <span class="font-semibold text-ink">${s(i.carbonComponentCount??0)}</span> Carbon.
+        </p>
+        ${(e?.librariesDetected||[]).length?`
+        <p class="mt-3 m-0">
+          Detected libraries:
+          ${(e.librariesDetected||[]).map(o=>`<span class="ml-1 inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-semibold ${o==="fluent"?"bg-blue-50 text-blue-800 border-blue-200":o==="material"?"bg-indigo-50 text-indigo-800 border-indigo-200":o==="carbon"?"bg-slate-100 text-slate-800 border-slate-300":"bg-cream text-ink border-ink/20"}">${s(o==="fluent"?"Fluent UI":o==="material"?"Material UI":o==="carbon"?"Carbon":o)}</span>`).join("")}
+        </p>`:""}
+      </div>
+    </div>
+  `;const c=e?.fluentMeta||{},n=e?.notice,d=e?.librariesDetected||[],a=e?.frameworkMeta||{frameworks:[],generator:null};if(n&&(r+=`
+      <div class="mb-6 rounded border border-ink/15 bg-cream/40 p-4 text-sm text-ink dark:bg-cream/10">
+        <p class="m-0"><strong>Heads up:</strong> ${s(n)}</p>
+      </div>
+    `),d.length>0){const o=d.map(m=>{if(m==="fluent"){const g=c.versionDetected?`v${s(c.versionDetected)}`:"version unpinned",y=c.versionLatest?`v${s(c.versionLatest)}`:"—",l=c.isOutdated?'<span class="ml-2 inline-flex items-center rounded-full border border-orange-400 px-2 py-0.5 text-xs font-semibold text-orange-700">outdated</span>':"";return`
+          <div class="rounded border border-ink/10 bg-paper p-4 dark:bg-cream/5">
+            <h4 class="mt-0 font-serif text-lg">Fluent UI</h4>
+            <ul class="mt-2 space-y-1 text-sm text-muted">
+              <li><span class="text-ink"><code>fui-*</code> elements:</span> ${s(c.totalFuiElements??0)}</li>
+              <li><span class="text-ink">@fluentui/react-components:</span> ${g} · latest ${y}${l}</li>
+              <li><span class="text-ink">Docs:</span> <a class="text-accent underline" href="https://react.fluentui.dev" target="_blank" rel="noreferrer noopener">react.fluentui.dev</a></li>
+            </ul>
+          </div>`}return m==="material"?`
+          <div class="rounded border border-ink/10 bg-paper p-4 dark:bg-cream/5">
+            <h4 class="mt-0 font-serif text-lg">Material UI</h4>
+            <ul class="mt-2 space-y-1 text-sm text-muted">
+              <li><span class="text-ink">Detected via:</span> <code>Mui*-root</code>, <code>mdc-*</code>, <code>m3-*</code>, or <code>material-icons</code></li>
+              <li><span class="text-ink">Suggested package:</span> <code>@mui/material</code></li>
+              <li><span class="text-ink">Docs:</span> <a class="text-accent underline" href="https://mui.com/material-ui/" target="_blank" rel="noreferrer noopener">mui.com</a> · <a class="text-accent underline" href="https://m3.material.io" target="_blank" rel="noreferrer noopener">m3.material.io</a></li>
+            </ul>
+          </div>`:m==="carbon"?`
+          <div class="rounded border border-ink/10 bg-paper p-4 dark:bg-cream/5">
+            <h4 class="mt-0 font-serif text-lg">Carbon</h4>
+            <ul class="mt-2 space-y-1 text-sm text-muted">
+              <li><span class="text-ink">Detected via:</span> <code>cds--*</code>, <code>bx--*</code>, <code>c4p--*</code></li>
+              <li><span class="text-ink">Suggested package:</span> <code>@carbon/react</code></li>
+              <li><span class="text-ink">Docs:</span> <a class="text-accent underline" href="https://carbondesignsystem.com" target="_blank" rel="noreferrer noopener">carbondesignsystem.com</a></li>
+            </ul>
+          </div>`:""}).join("");r+=`
+      <div class="mb-6 rounded border border-ink/10 bg-paper/80 p-6 dark:bg-cream/5">
+        <h3 class="mt-0 font-serif text-xl">Design system fingerprint</h3>
+        <div class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">${o}</div>
+      </div>
+    `}if((a.frameworks||[]).length||a.generator){const o=(a.frameworks||[]).map(m=>{const g=m.version?` <span class="text-muted">v${s(m.version)}</span>`:"";return`<span class="inline-flex items-center rounded-full border border-ink/15 bg-cream/40 px-2.5 py-0.5 text-xs font-semibold text-ink dark:bg-cream/10">${s(m.name)}${g}</span>`}).join(" ");r+=`
+      <div class="mb-6 rounded border border-ink/10 bg-paper/80 p-6 dark:bg-cream/5">
+        <h3 class="mt-0 font-serif text-xl">Built with</h3>
+        <p class="mt-2 text-sm text-muted">Framework / build tool detected via <code>&lt;meta name="generator"&gt;</code> and runtime hints. This is a separate dimension from the UI component library — frameworks like Astro, Next.js, or SvelteKit don't ship UI components themselves.</p>
+        <div class="mt-3 flex flex-wrap gap-2">${o||'<span class="text-muted text-sm">No framework signature found.</span>'}</div>
+        ${a.generator?`<p class="mt-3 text-xs text-muted"><code>&lt;meta name="generator"&gt;</code>: ${s(a.generator)}</p>`:""}
+      </div>
+    `}if(r+=`
+    <section class="mb-6 rounded border border-ink/10 bg-paper/80 p-6 dark:bg-cream/5">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h3 class="mt-0 font-serif text-xl">Annotations</h3>
+          <p class="mt-2 text-sm text-muted">Numbered markers on the screenshot match the cards and the findings table below.</p>
+        </div>
+        <div class="rounded border border-ink/10 bg-paper px-3 py-2 text-xs text-muted dark:bg-cream/5">
+          Reference annotations are designed to read like the accessibility audit: a visible marker, a note, and a matching evidence row.
+        </div>
+      </div>
+  `,e?.screenshot?.data){const o=e.screenshot,m=Number(o.width||1),g=Number(o.height||1),y=F(u,m,g);r+=`
+      <div class="mt-5 space-y-5">
+        <div class="relative overflow-hidden rounded border border-ink/10 bg-paper">
+          <img
+            src="data:${s(o.mimeType||"image/png")};base64,${o.data}"
+            alt="Component audit screenshot with annotations"
+            class="block h-auto w-full"
+          />
+          <div class="pointer-events-none absolute inset-0">${y}</div>
+        </div>
+        <div>
+          <h4 class="font-serif text-lg">Findings list</h4>
+          <div class="mt-3 space-y-3">
+    `,u.forEach(l=>{R(l.severity),r+=`
+        <article id="ca-annotation-${s(l.annotationId)}" class="rounded border border-ink/10 bg-paper p-4 shadow-sm dark:bg-cream/5">
+          <div class="flex items-start gap-3">
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-paper">${s(l.annotationId)}</div>
+            <div class="min-w-0">
+              <p class="text-xs font-semibold uppercase tracking-widest text-muted">${s((l.severity||"").toUpperCase())} RISK</p>
+              <h4 class="mt-1 font-serif text-base">${s(l.rule||"Finding")}</h4>
+            </div>
+          </div>
+          <dl class="mt-3 space-y-2 text-sm">
+            <div>
+              <dt class="text-xs uppercase tracking-widest text-muted">Component</dt>
+              <dd class="mt-1 text-ink">${s(l.componentType||"n/a")}</dd>
+            </div>
+            ${l.fluentComponent?`
+            <div>
+              <dt class="text-xs uppercase tracking-widest text-muted">Fluent component</dt>
+              <dd class="mt-1 text-ink"><code>${s(l.fluentComponent)}</code>${l.storybookUrl?` · <a class="text-accent underline" href="${s(l.storybookUrl)}" target="_blank" rel="noreferrer noopener">Storybook docs</a>`:""}</dd>
+            </div>`:""}
+            ${l.detectedProps&&Object.keys(l.detectedProps).length?`
+            <div>
+              <dt class="text-xs uppercase tracking-widest text-muted">Detected props</dt>
+              <dd class="mt-1 flex flex-wrap gap-1">${Object.entries(l.detectedProps).map(([x,f])=>`<span class="inline-block rounded-full border border-ink/15 px-2 py-0.5 text-[11px] text-muted">${s(x)}=${s(String(f))}</span>`).join("")}</dd>
+            </div>`:""}
+            <div>
+              <dt class="text-xs uppercase tracking-widest text-muted">Why it matters</dt>
+              <dd class="mt-1 text-muted">${s(l.evidence||"")}</dd>
+            </div>
+            <div>
+              <dt class="text-xs uppercase tracking-widest text-muted">Suggested fix</dt>
+              <dd class="mt-1 whitespace-pre-line text-muted">${s(l.recommendation||"")}</dd>
+            </div>
+            <div>
+              <dt class="text-xs uppercase tracking-widest text-muted">Library</dt>
+              <dd class="mt-1 text-muted">${s(l.libraryLabel||"None detected")}</dd>
+            </div>
+            <div>
+              <dt class="text-xs uppercase tracking-widest text-muted">Suggested component</dt>
+              <dd class="mt-1 text-muted">${s(l.recommendedComponent||l.fluentAlternative||"n/a")}</dd>
+            </div>
+            ${l.recommendedComponent||l.fluentAlternative?`
+            <div>
+              <dt class="text-xs uppercase tracking-widest text-muted">Package</dt>
+              <dd class="mt-1 font-mono text-xs text-accent">${s(l.recommendedPackage||l.fluentPackage||"")}</dd>
+            </div>`:""}
+          </dl>
+        </article>
+      `}),r+="</div></div></div>"}else u.length===0&&(r+='<p class="mt-5 rounded bg-emerald-50 p-4 text-emerald-800">No risky implementations found.</p>');r+=`
+      <div class="mt-6 overflow-x-auto">
+        <table class="min-w-full border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-ink/10 text-xs uppercase tracking-widest text-muted">
+              <th class="py-2 pr-3 font-semibold">Annotation</th>
+              <th class="py-2 pr-3 font-semibold">Severity</th>
+              <th class="py-2 pr-3 font-semibold">Rule</th>
+              <th class="py-2 pr-3 font-semibold">Component</th>
+              <th class="py-2 pr-3 font-semibold">Selector</th>
+              <th class="py-2 pr-3 font-semibold">Bounding box</th>
+            </tr>
+          </thead>
+          <tbody>
+  `,u.forEach(o=>{r+=`
+      <tr class="border-b border-ink/5 align-top last:border-b-0">
+        <td class="py-3 pr-3 text-muted">${s(o.annotationId)}</td>
+        <td class="py-3 pr-3"><span class="rounded bg-cream px-2 py-0.5 text-xs font-semibold uppercase ${T(o.severity||"")}">${s((o.severity||"").toUpperCase())}</span></td>
+        <td class="py-3 pr-3 font-medium">${s(o.rule||"Finding")}</td>
+        <td class="py-3 pr-3 text-muted">${s(o.componentType||"n/a")}</td>
+        <td class="py-3 pr-3 text-muted">${s(o.selector||"n/a")}</td>
+        <td class="py-3 pr-3 text-muted">${s(I(o.boundingBox))}</td>
+      </tr>
+    `}),r+="</tbody></table></div>",u.length>10&&(r+=`<p class="mt-3 text-xs text-muted">... and ${s(u.length-10)} more annotated findings</p>`),r+=`
+      <div class="mt-6 rounded border border-ink/10 bg-paper p-4 dark:bg-cream/5">
+        <h4 class="mt-0 font-serif text-lg">Method</h4>
+        <ul class="mt-3 space-y-2 text-sm text-muted">
+          <li>Observe: visit the page, capture screenshot, and extract the DOM inventory.</li>
+          <li>Inventory: build a typed component list with source detection — Fluent UI, Material UI, Carbon, native, or custom — plus confidence scores.</li>
+          <li>Annotate: apply per-library rule packs (Fluent UI, Material UI, Carbon) to flag risky implementations. Pages with no design system get generic accessibility guidance.</li>
+          <li>Recommend: map each finding to the appropriate library component — Fluent, Material, or Carbon — with explanation and benefits.</li>
+        </ul>
+      </div>
+    </section>
+  `,r+=`
+    <details class="mb-6 rounded border border-ink/10 bg-paper/80 p-6 dark:bg-cream/5">
+      <summary class="cursor-pointer font-serif text-xl">Component inventory (${s(p.length)})</summary>
+      <p class="mt-2 text-sm text-muted">All detected components with source, risk, and confidence score.</p>
+      ${Object.keys(b).length?`
+      <div class="mt-4 rounded border border-ink/10 bg-paper p-4 dark:bg-cream/5">
+        <h4 class="mt-0 font-serif text-lg">Component distribution</h4>
+        <div class="mt-3 flex flex-wrap gap-2">
+          ${Object.entries(b).sort((o,m)=>m[1]-o[1]).map(([o,m])=>`
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-ink/15 px-3 py-1 text-xs text-muted">
+                <span class="font-semibold text-ink">${s(m)}</span>
+                ${s(o)}
+              </span>
+            `).join("")}
+        </div>
+      </div>`:""}
+      <div class="mt-4 overflow-x-auto">
+        <table class="min-w-full border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-ink/10 text-xs uppercase tracking-widest text-muted">
+              <th class="py-2 pr-3 font-semibold">ID</th>
+              <th class="py-2 pr-3 font-semibold">Type</th>
+              <th class="py-2 pr-3 font-semibold">Library component</th>
+              <th class="py-2 pr-3 font-semibold">Props</th>
+              <th class="py-2 pr-3 font-semibold">Source</th>
+              <th class="py-2 pr-3 font-semibold">Risk</th>
+              <th class="py-2 pr-3 font-semibold">Conf.</th>
+              <th class="py-2 pr-3 font-semibold">Text</th>
+              <th class="py-2 pr-3 font-semibold">Selector</th>
+              <th class="py-2 pr-3 font-semibold">Docs</th>
+            </tr>
+          </thead>
+          <tbody>
+  `,p.forEach(o=>{const m=o?.detectedProps?Object.entries(o.detectedProps):[],g=m.length?m.map(([f,$])=>`<span class="mr-1 inline-block rounded-full border border-ink/15 px-2 py-0.5 text-[10px] text-muted">${s(f)}=${s(String($))}</span>`).join(""):'<span class="text-muted">—</span>',y=o?.storybookUrl?`<a class="text-accent underline" href="${s(o.storybookUrl)}" target="_blank" rel="noreferrer noopener">docs</a>`:'<span class="text-muted">—</span>',l=o?.libraryComponentName||o?.fluentComponent||o?.materialComponent||o?.carbonComponent||null,x=l?`<code class="text-ink">${s(l)}</code>`:'<span class="text-muted">—</span>';r+=`
+      <tr class="border-b border-ink/5 align-top last:border-b-0">
+        <td class="py-2 pr-3 text-muted text-xs">${s(o?.id||"")}</td>
+        <td class="py-2 pr-3 text-xs">${s(o?.componentType||"")}</td>
+        <td class="py-2 pr-3 text-xs">${x}</td>
+        <td class="py-2 pr-3 text-xs">${g}</td>
+        <td class="py-2 pr-3 text-xs text-muted">${s(o?.possibleSource||"")}</td>
+        <td class="py-2 pr-3 text-xs ${T(o?.risk||"")}">${s((o?.risk||"").toUpperCase())}</td>
+        <td class="py-2 pr-3 text-xs text-muted">${s(o?.confidence??"")}%</td>
+        <td class="py-2 pr-3 text-xs text-muted">${s((o?.visibleText||"").substring(0,40))}</td>
+        <td class="py-2 pr-3 text-xs text-muted">${s((o?.selector||"").substring(0,60))}</td>
+        <td class="py-2 pr-3 text-xs">${y}</td>
+      </tr>
+    `}),r+="</tbody></table></div>",r+=`<p class="mt-3 text-xs text-muted">${s(p.length)} components total — the downloadable report preserves the full list.</p>`,r+="</details>",r+=`
+    <div class="mt-6 flex flex-wrap gap-3 border-t border-ink/10 pt-4">
+      <button type="button" data-ca-export-format="md" class="rounded border border-ink/20 px-4 py-2 text-sm font-semibold text-ink hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50">
+        Download Markdown
+      </button>
+      <button type="button" data-ca-export-format="pdf" class="rounded bg-ink px-4 py-2 text-sm font-semibold text-paper hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50">
+        Download PDF
+      </button>
+    </div>
+  `,t.innerHTML=r,t.querySelectorAll("[data-ca-export-format]").forEach(o=>{o.addEventListener("click",()=>{const m=o.getAttribute("data-ca-export-format");if(m==="pdf")D(e);else if(m==="md"){const g=j(e),y=`component-audit-${new URL(e.url).hostname}-${new Date(e.timestamp||Date.now()).toISOString().slice(0,10)}`,l=new Blob([g],{type:"text/markdown;charset=utf-8"}),x=document.createElement("a");x.href=URL.createObjectURL(l),x.download=`${y}.md`,document.body.appendChild(x),x.click(),x.remove(),URL.revokeObjectURL(x.href)}})})}function N(){const t=document.getElementById("component-audit-tool"),e=t?.dataset.componentAuditApiUrl||"",i=["localhost","127.0.0.1","::1"].includes(window.location.hostname)||window.location.hostname.endsWith(".local"),u=window.__COMPONENT_AUDIT_API_URL||e||(i?"http://localhost:3000/api/component-audit":`${window.location.origin}/api/component-audit`),p=document.getElementById("component-audit-url"),b=document.getElementById("run-component-audit-btn"),h=document.getElementById("component-result-container");!t||!p||!b||!h||(window.location.hash==="#component-audit-tool"&&requestAnimationFrame(()=>{t.scrollIntoView({block:"start"})}),b.addEventListener("click",async()=>{const r=p.value.trim();if(!r){k(h,"Please enter a URL.");return}if(typeof navigator<"u"&&!navigator.onLine){k(h,"You appear to be offline.","Reconnect to the internet, then run the audit again.");return}try{new URL(r.startsWith("http")?r:"https://"+r)}catch{k(h,"Please enter a valid URL.");return}b.disabled=!0,b.textContent="Running audit...";const c=P(h);try{const n=new AbortController,d=window.setTimeout(()=>n.abort(),9e4),a=await fetch(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:r}),signal:n.signal});if(window.clearTimeout(d),!a.ok){let m=null;try{m=await a.json()}catch{m=null}const g=A(m?.error);k(h,g,m?.hint||U(a.status,g));return}const o=await a.json();O(h,o)}catch(n){const d=String(n?.message||"").toLowerCase(),a=n?.name==="AbortError"||d.includes("aborted");k(h,a?"This audit took too long to finish.":"Unable to contact the audit service.",a?"The service may be busy right now. Please retry in a minute.":"Check your connection and retry. If this persists, the API may be temporarily unavailable.")}finally{c.stop(),b.disabled=!1,b.textContent="Run Audit"}}))}export{N as initializeComponentAuditTool};
