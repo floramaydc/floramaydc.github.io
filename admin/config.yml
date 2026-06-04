@@ -49,9 +49,13 @@ collections:
     slug: "{{slug}}"
     extension: md
     format: frontmatter
+    # Guidance: for voice + structure, see
+    # https://floramaydc.com/toybox/enterprise-reflow-playbook/
     fields:
-      - { name: title,    label: Title,   widget: string }
-      - { name: summary,  label: Summary, widget: text }
+      - { name: title,    label: Title,   widget: string,
+          hint: "Sentence-case. See voice guidance at floramaydc.com/toybox/enterprise-reflow-playbook" }
+      - { name: summary,  label: Summary, widget: text,
+          hint: "One or two sentences. Lead with the reader's takeaway, not the topic." }
       - { name: date,     label: Date,    widget: datetime, picker_utc: false, time_format: false, date_format: "YYYY-MM-DD" }
       - { name: category, label: Category, widget: select, required: false,
           options: ["Learnings", "Opinion", "Travel", "Craft notes", "Pale & Bright", "Appropriasian"] }
@@ -75,10 +79,15 @@ collections:
     slug: "{{slug}}"
     extension: md
     format: frontmatter
+    # Guidance: entry type rubric +
+    # https://floramaydc.com/toybox/toybox-entry-types-definitions/
     fields:
-      - { name: title,    label: Title,   widget: string }
-      - { name: summary,  label: Summary, widget: text }
+      - { name: title,    label: Title,   widget: string,
+          hint: "Memorable but practical. See the entry type rubric at floramaydc.com/toybox/toybox-entry-type-rubric" }
+      - { name: summary,  label: Summary, widget: text,
+          hint: "What the reader walks away with. See voice guidance: floramaydc.com/toybox/enterprise-reflow-playbook" }
       - { name: category, label: Category, widget: select,
+          hint: "Definitions: floramaydc.com/toybox/toybox-entry-types-definitions",
           options: ["playbook", "prompt", "template", "pattern", "tool", "prototype"] }
       - { name: tags,     label: Tags,    widget: list, required: false }
       - { name: updated,  label: Updated, widget: datetime, required: false,
@@ -100,11 +109,14 @@ collections:
     folder: src/content/play
     create: true
     slug: "{{slug}}"
-    extension: md
+    extension: mdx
     format: frontmatter
+    # Guidance for voice + summary tone:
+    # https://floramaydc.com/toybox/enterprise-reflow-playbook/
     fields:
       - { name: title,    label: Title,   widget: string }
-      - { name: summary,  label: Summary, widget: text }
+      - { name: summary,  label: Summary, widget: text,
+          hint: "One short sentence. What the piece is, and why it exists." }
       - { name: order,    label: Order,   widget: number, required: false, value_type: int }
       - { name: cover,    label: "Cover image path", widget: string, required: false }
       - { name: coverAlt, label: "Cover alt text", widget: string, required: false }
@@ -123,11 +135,15 @@ collections:
     folder: src/content/work
     create: true
     slug: "{{slug}}"
-    extension: md
+    extension: mdx
     format: frontmatter
+    # Case study structure + voice:
+    # https://floramaydc.com/toybox/enterprise-reflow-playbook/
     fields:
-      - { name: title,    label: Title,   widget: string }
-      - { name: summary,  label: Summary, widget: text }
+      - { name: title,    label: Title,   widget: string,
+          hint: "Lead with the outcome or the shift, not the project name." }
+      - { name: summary,  label: Summary, widget: text,
+          hint: "What changed, for whom. See structure: floramaydc.com/toybox/enterprise-reflow-playbook" }
       - { name: order,    label: Order,   widget: number, required: false, value_type: int }
       - { name: tags,     label: Tags,    widget: list, required: false }
       - { name: cover,    label: "Cover image path", widget: string, required: false }
@@ -137,7 +153,8 @@ collections:
       - { name: role,     label: Role,    widget: string, required: false }
       - { name: year,     label: Year,    widget: string, required: false }
       - { name: team,     label: Team,    widget: string, required: false }
-      - { name: archive,  label: Archive, widget: boolean, required: false, default: false }
+      - { name: archive,  label: Archive, widget: boolean, required: false, default: false,
+          hint: "Older case studies routed under /work/archive/. Still public, just past chapter." }
       - { name: wip,      label: "Work in progress", widget: boolean, required: false, default: true,
           hint: "WIP entries are hidden in production. Untick to publish." }
       - { name: hidden,   label: Hidden,  widget: boolean, required: false, default: false }
