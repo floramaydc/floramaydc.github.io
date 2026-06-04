@@ -1,214 +1,182 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="A top-down knolling flat-lay of toys on cream paper: a small train, alphabet blocks, three toy cars, a teddy bear, a Rubik's cube, a stack of books, a spinning top, and a small cluster of building bricks.">
-  <rect width="1600" height="900" fill="#e5e3dc"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="A wooden toy chest being opened, lid propped up, with colourful toys — a red ball, building blocks, a star, and a small car — tumbling out of the warm glow inside.">
 
-  <!-- Composition fills the canvas; the page's figcaption handles the caption. -->
-  <g>
+  <!-- ───── Gradients & filters ───── -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="65%" r="52%">
+      <stop offset="0%"  stop-color="#f2c9a8" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#f2c9a8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="innerGlow" cx="50%" cy="35%" r="70%">
+      <stop offset="0%"  stop-color="#fde8d0" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#e8c59a" stop-opacity="1"/>
+    </radialGradient>
+    <filter id="sh" x="-25%" y="-15%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="12" flood-color="#4a3220" flood-opacity="0.20"/>
+    </filter>
+    <filter id="shSm" x="-30%" y="-20%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#4a3220" flood-opacity="0.18"/>
+    </filter>
+  </defs>
 
-  <!-- ============== CARDBOARD BOX (top-down view) ============== -->
-  <g stroke="#303636" stroke-width="5" stroke-linejoin="round">
-    <!-- Outer rim: cardboard-colored frame around the toys -->
-    <rect x="30" y="30" width="1540" height="820" rx="14" fill="#d4967d"/>
-    <!-- Inner cutout: the box "floor" (same cream as the page bg) -->
-    <rect x="90" y="80" width="1420" height="720" rx="8" fill="#e5e3dc"/>
-  </g>
-  <!-- Cardboard flute hint (faint parallel lines on the rim) -->
-  <g stroke="#a24a2a" stroke-width="1.2" opacity="0.35" fill="none">
-    <line x1="60" y1="55" x2="1540" y2="55"/>
-    <line x1="60" y1="825" x2="1540" y2="825"/>
-    <line x1="55" y1="100" x2="55" y2="780"/>
-    <line x1="1545" y1="100" x2="1545" y2="780"/>
-  </g>
-  <!-- Corner fold creases — sells the cardboard read -->
-  <g stroke="#303636" stroke-width="2.5" fill="none" opacity="0.7">
-    <line x1="40" y1="40" x2="95" y2="85"/>
-    <line x1="1560" y1="40" x2="1505" y2="85"/>
-    <line x1="40" y1="840" x2="95" y2="795"/>
-    <line x1="1560" y1="840" x2="1505" y2="795"/>
-  </g>
+  <!-- Ambient glow blob behind chest -->
+  <ellipse cx="400" cy="370" rx="300" ry="205" fill="url(#glow)"/>
 
-  <!-- ============== TOYS (laid out inside the box) ============== -->
-  <g stroke="#303636" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" transform="translate(0, 70)">
+  <!-- ═══════════════════════════════════════════════════════════
+       CHEST BODY
+  ════════════════════════════════════════════════════════════ -->
+  <g filter="url(#sh)">
+    <!-- Ground shadow -->
+    <ellipse cx="400" cy="512" rx="215" ry="20" fill="#c49070" opacity="0.22"/>
 
-    <!-- ============== COLUMN A — left ============== -->
+    <!-- Front face -->
+    <rect x="158" y="288" width="484" height="206" rx="6" fill="#c8845a"/>
+    <!-- Top ledge on body (rim under lid) -->
+    <rect x="158" y="280" width="484" height="14" rx="3" fill="#b07044"/>
+    <!-- Left side face -->
+    <polygon points="158,280 124,258 124,452 158,474" fill="#a05c38"/>
+    <!-- Bottom (floor) strip -->
+    <rect x="124" y="452" width="518" height="16" rx="3" fill="#8f5030"/>
 
-    <!-- A1: TRAIN (3 cars stacked vertically, top-down) -->
-    <rect x="160" y="80" width="170" height="80" rx="10" fill="#495a58"/>
-    <rect x="195" y="100" width="50" height="40" rx="4" fill="#e5e3dc"/>
-    <circle cx="175" cy="80" r="12" fill="#fff"/>
-    <circle cx="315" cy="80" r="12" fill="#fff"/>
-    <circle cx="175" cy="160" r="12" fill="#fff"/>
-    <circle cx="315" cy="160" r="12" fill="#fff"/>
-    <line x1="245" y1="160" x2="245" y2="200"/>
-
-    <rect x="160" y="200" width="170" height="80" rx="10" fill="#d4967d"/>
-    <line x1="245" y1="200" x2="245" y2="280" stroke="#303636" opacity="0"/>
-    <circle cx="175" cy="200" r="12" fill="#fff"/>
-    <circle cx="315" cy="200" r="12" fill="#fff"/>
-    <circle cx="175" cy="280" r="12" fill="#fff"/>
-    <circle cx="315" cy="280" r="12" fill="#fff"/>
-    <line x1="245" y1="280" x2="245" y2="320"/>
-
-    <rect x="160" y="320" width="170" height="80" rx="10" fill="#fff"/>
-    <rect x="200" y="340" width="90" height="40" rx="4" fill="#a24a2a"/>
-    <circle cx="175" cy="320" r="12" fill="#fff"/>
-    <circle cx="315" cy="320" r="12" fill="#fff"/>
-    <circle cx="175" cy="400" r="12" fill="#fff"/>
-    <circle cx="315" cy="400" r="12" fill="#fff"/>
-
-    <!-- A2: RUBIK'S CUBE (top-down) -->
-    <rect x="165" y="495" width="56" height="56" fill="#d4967d" stroke="none"/>
-    <rect x="297" y="495" width="58" height="56" fill="#495a58" stroke="none"/>
-    <rect x="231" y="561" width="57" height="57" fill="#a24a2a" stroke="none"/>
-    <rect x="165" y="628" width="56" height="57" fill="#495a58" stroke="none"/>
-    <rect x="297" y="628" width="58" height="57" fill="#d4967d" stroke="none"/>
-    <rect x="160" y="490" width="200" height="200" rx="8" fill="none"/>
-    <line x1="160" y1="556" x2="360" y2="556"/>
-    <line x1="160" y1="623" x2="360" y2="623"/>
-    <line x1="226" y1="490" x2="226" y2="690"/>
-    <line x1="293" y1="490" x2="293" y2="690"/>
-
-    <!-- ============== COLUMN B ============== -->
-
-    <!-- B1: ALPHABET BLOCKS (2 x 3 grid) -->
-    <rect x="430" y="80"  width="80" height="80" rx="6" fill="#d4967d"/>
-    <rect x="520" y="80"  width="80" height="80" rx="6" fill="#fff"/>
-    <rect x="610" y="80"  width="80" height="80" rx="6" fill="#495a58"/>
-    <rect x="430" y="170" width="80" height="80" rx="6" fill="#fff"/>
-    <rect x="520" y="170" width="80" height="80" rx="6" fill="#a24a2a"/>
-    <rect x="610" y="170" width="80" height="80" rx="6" fill="#fff"/>
-
-    <g font-family="Libre Baskerville, Georgia, serif" font-size="42" text-anchor="middle" stroke="none">
-      <text x="470" y="138" fill="#303636">A</text>
-      <text x="560" y="138" fill="#303636">B</text>
-      <text x="650" y="138" fill="#e5e3dc">C</text>
-      <text x="470" y="228" fill="#303636">1</text>
-      <text x="560" y="228" fill="#fff">2</text>
-      <text x="650" y="228" fill="#303636">3</text>
+    <!-- Wood grain — front face -->
+    <g stroke="#b07244" stroke-width="1.1" opacity="0.32" fill="none">
+      <line x1="200" y1="294" x2="200" y2="488"/>
+      <line x1="268" y1="292" x2="268" y2="490"/>
+      <line x1="346" y1="290" x2="346" y2="492"/>
+      <line x1="454" y1="290" x2="454" y2="492"/>
+      <line x1="532" y1="292" x2="532" y2="490"/>
+      <line x1="598" y1="294" x2="598" y2="488"/>
     </g>
 
-    <!-- B2: STACK OF BOOKS (top-down, offset stack) -->
-    <rect x="420" y="500" width="280" height="50" rx="4" fill="#495a58"/>
-    <rect x="440" y="555" width="280" height="50" rx="4" fill="#d4967d"/>
-    <rect x="410" y="610" width="290" height="50" rx="4" fill="#fff"/>
-    <line x1="440" y1="635" x2="680" y2="635"/>
-    <line x1="440" y1="645" x2="640" y2="645"/>
+    <!-- Metal corner brackets -->
+    <g fill="#d4a060" stroke="#b07830" stroke-width="1.5">
+      <rect x="158" y="280" width="22" height="22" rx="3"/>
+      <rect x="620" y="280" width="22" height="22" rx="3"/>
+      <rect x="158" y="450" width="22" height="22" rx="3"/>
+      <rect x="620" y="450" width="22" height="22" rx="3"/>
+    </g>
 
-    <!-- ============== COLUMN C ============== -->
+    <!-- Decorative lower band -->
+    <rect x="158" y="434" width="484" height="40" rx="0" fill="#b57248" opacity="0.50"/>
+    <line x1="158" y1="434" x2="642" y2="434" stroke="#9a5c30" stroke-width="1.1" opacity="0.45"/>
+    <line x1="158" y1="474" x2="642" y2="474" stroke="#9a5c30" stroke-width="1.1" opacity="0.45"/>
 
-    <!-- C1: THREE TOY CARS (top-down) -->
-    <rect x="780" y="80" width="200" height="90" rx="40" fill="#d4967d"/>
-    <rect x="830" y="98" width="100" height="54" rx="14" fill="#fff"/>
-    <rect x="790" y="68" width="40" height="20" rx="6" fill="#303636"/>
-    <rect x="930" y="68" width="40" height="20" rx="6" fill="#303636"/>
-    <rect x="790" y="162" width="40" height="20" rx="6" fill="#303636"/>
-    <rect x="930" y="162" width="40" height="20" rx="6" fill="#303636"/>
+    <!-- Chest latch -->
+    <rect x="380" y="372" width="40" height="28" rx="5" fill="#d4a060" stroke="#9a7030" stroke-width="1.5"/>
+    <rect x="388" y="380" width="24" height="14" rx="3" fill="#b08030" stroke="#9a6820" stroke-width="1"/>
+    <circle cx="400" cy="385" r="3.5" fill="#7a5020"/>
+    <rect x="397.5" y="385" width="5" height="6" rx="1.5" fill="#7a5020"/>
 
-    <rect x="780" y="220" width="200" height="90" rx="40" fill="#495a58"/>
-    <rect x="830" y="238" width="100" height="54" rx="14" fill="#fff"/>
-    <rect x="790" y="208" width="40" height="20" rx="6" fill="#303636"/>
-    <rect x="930" y="208" width="40" height="20" rx="6" fill="#303636"/>
-    <rect x="790" y="302" width="40" height="20" rx="6" fill="#303636"/>
-    <rect x="930" y="302" width="40" height="20" rx="6" fill="#303636"/>
-
-    <rect x="780" y="360" width="200" height="90" rx="40" fill="#a24a2a"/>
-    <rect x="830" y="378" width="100" height="54" rx="14" fill="#fff"/>
-    <rect x="790" y="348" width="40" height="20" rx="6" fill="#303636"/>
-    <rect x="930" y="348" width="40" height="20" rx="6" fill="#303636"/>
-    <rect x="790" y="442" width="40" height="20" rx="6" fill="#303636"/>
-    <rect x="930" y="442" width="40" height="20" rx="6" fill="#303636"/>
-
-    <!-- C2: SPINNING TOP / YOYO (concentric circles) -->
-    <circle cx="880" cy="610" r="100" fill="#d4967d"/>
-    <circle cx="880" cy="610" r="62" fill="#fff"/>
-    <circle cx="880" cy="610" r="22" fill="#a24a2a"/>
-    <circle cx="880" cy="610" r="6" fill="#303636"/>
-
-    <!-- ============== COLUMN D — right ============== -->
-
-    <!-- D1: TOY ROBOT (top-down / front, replacing teddy) -->
-    <!-- Antennas -->
-    <line x1="1260" y1="50" x2="1245" y2="22"/>
-    <circle cx="1245" cy="22" r="10" fill="#a24a2a"/>
-    <line x1="1320" y1="50" x2="1335" y2="22"/>
-    <circle cx="1335" cy="22" r="10" fill="#d4967d"/>
-
-    <!-- Head -->
-    <rect x="1220" y="50" width="140" height="120" rx="14" fill="#495a58"/>
-    <!-- Eyes -->
-    <rect x="1240" y="82" width="30" height="30" rx="4" fill="#fff"/>
-    <circle cx="1255" cy="97" r="6" fill="#303636"/>
-    <rect x="1310" y="82" width="30" height="30" rx="4" fill="#fff"/>
-    <circle cx="1325" cy="97" r="6" fill="#303636"/>
-    <!-- Mouth (speaker grille) -->
-    <rect x="1255" y="132" width="70" height="22" rx="4" fill="#e5e3dc"/>
-    <line x1="1268" y1="134" x2="1268" y2="152"/>
-    <line x1="1281" y1="134" x2="1281" y2="152"/>
-    <line x1="1294" y1="134" x2="1294" y2="152"/>
-    <line x1="1307" y1="134" x2="1307" y2="152"/>
-
-    <!-- Neck -->
-    <rect x="1270" y="170" width="40" height="22" rx="4" fill="#fff"/>
-
-    <!-- Body / chest -->
-    <rect x="1170" y="192" width="240" height="220" rx="18" fill="#fff"/>
-    <!-- Chest panel -->
-    <rect x="1200" y="222" width="180" height="110" rx="8" fill="#e5e3dc"/>
-    <!-- Dial -->
-    <circle cx="1232" cy="277" r="20" fill="#d4967d"/>
-    <circle cx="1232" cy="277" r="5" fill="#303636"/>
-    <line x1="1232" y1="277" x2="1232" y2="262"/>
-    <!-- LED row -->
-    <circle cx="1290" cy="250" r="7" fill="#495a58"/>
-    <circle cx="1315" cy="250" r="7" fill="#a24a2a"/>
-    <circle cx="1340" cy="250" r="7" fill="#d4967d"/>
-    <!-- Bars -->
-    <rect x="1280" y="280" width="80" height="8" rx="3" fill="#495a58"/>
-    <rect x="1280" y="296" width="55" height="8" rx="3" fill="#495a58"/>
-    <rect x="1280" y="312" width="70" height="8" rx="3" fill="#495a58"/>
-    <!-- Power button -->
-    <circle cx="1290" cy="370" r="16" fill="#a24a2a"/>
-    <line x1="1290" y1="358" x2="1290" y2="370" stroke="#fff"/>
-    <path d="M 1281 368 A 11 11 0 1 0 1299 368" fill="none" stroke="#fff"/>
-
-    <!-- Arms -->
-    <rect x="1090" y="212" width="60" height="170" rx="14" fill="#495a58"/>
-    <rect x="1080" y="380" width="80" height="34" rx="8" fill="#d4967d"/>
-    <rect x="1430" y="212" width="60" height="170" rx="14" fill="#495a58"/>
-    <rect x="1420" y="380" width="80" height="34" rx="8" fill="#d4967d"/>
-
-    <!-- Legs -->
-    <rect x="1198" y="412" width="78" height="58" rx="8" fill="#495a58"/>
-    <rect x="1304" y="412" width="78" height="58" rx="8" fill="#495a58"/>
-    <!-- Feet -->
-    <rect x="1180" y="468" width="114" height="24" rx="6" fill="#a24a2a"/>
-    <rect x="1286" y="468" width="114" height="24" rx="6" fill="#a24a2a"/>
-
-    <!-- D2: BUILDING BRICKS -->
-    <rect x="1140" y="540" width="120" height="60" rx="6" fill="#a24a2a"/>
-    <circle cx="1170" cy="570" r="10" fill="#a24a2a"/>
-    <circle cx="1200" cy="570" r="10" fill="#a24a2a"/>
-    <circle cx="1230" cy="570" r="10" fill="#a24a2a"/>
-
-    <rect x="1280" y="540" width="170" height="60" rx="6" fill="#495a58"/>
-    <circle cx="1310" cy="570" r="10" fill="#495a58"/>
-    <circle cx="1340" cy="570" r="10" fill="#495a58"/>
-    <circle cx="1370" cy="570" r="10" fill="#495a58"/>
-    <circle cx="1400" cy="570" r="10" fill="#495a58"/>
-    <circle cx="1430" cy="570" r="10" fill="#495a58"/>
-
-    <rect x="1150" y="620" width="160" height="60" rx="6" fill="#d4967d"/>
-    <circle cx="1180" cy="650" r="10" fill="#d4967d"/>
-    <circle cx="1210" cy="650" r="10" fill="#d4967d"/>
-    <circle cx="1240" cy="650" r="10" fill="#d4967d"/>
-    <circle cx="1270" cy="650" r="10" fill="#d4967d"/>
-
-    <rect x="1330" y="620" width="120" height="60" rx="6" fill="#fff"/>
-    <circle cx="1360" cy="650" r="10" fill="#fff"/>
-    <circle cx="1390" cy="650" r="10" fill="#fff"/>
-    <circle cx="1420" cy="650" r="10" fill="#fff"/>
-
+    <!-- Hinges (where lid meets body) -->
+    <g fill="#c09040" stroke="#9a7020" stroke-width="1.2">
+      <rect x="226" y="277" width="20" height="11" rx="2.5"/>
+      <rect x="554" y="277" width="20" height="11" rx="2.5"/>
+    </g>
   </g>
 
+  <!-- ═══════════════════════════════════════════════════════════
+       CHEST INTERIOR (warm glow visible when open)
+  ════════════════════════════════════════════════════════════ -->
+  <rect x="164" y="210" width="478" height="72" fill="url(#innerGlow)" rx="2"/>
+  <!-- Depth shadow at back wall of interior -->
+  <rect x="164" y="210" width="478" height="20" fill="#c09060" opacity="0.40"/>
+  <!-- Toys peeking over the rim -->
+  <!-- Red block -->
+  <rect x="250" y="218" width="32" height="32" rx="4" fill="#e05030" stroke="#b83018" stroke-width="1.2"/>
+  <text x="266" y="237" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">A</text>
+  <!-- Blue block -->
+  <rect x="282" y="224" width="28" height="26" rx="4" fill="#4880c8" stroke="#3060a0" stroke-width="1.2"/>
+  <text x="296" y="239" font-family="Georgia,serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">B</text>
+  <!-- Green block -->
+  <rect x="310" y="220" width="30" height="30" rx="4" fill="#50a850" stroke="#388038" stroke-width="1.2"/>
+  <!-- Ball -->
+  <circle cx="415" cy="232" r="24" fill="#e04040" stroke="#b02828" stroke-width="1.2"/>
+  <ellipse cx="406" cy="222" rx="8" ry="5.5" fill="#f08080" opacity="0.55"/>
+  <!-- Star -->
+  <polygon points="490,234 494,248 509,248 498,257 502,271 490,262 478,271 482,257 471,248 486,248" fill="#f0b030" stroke="#c08010" stroke-width="1.2"/>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LID  — propped open (~48° back tilt via skew transform)
+  ════════════════════════════════════════════════════════════ -->
+  <!-- Using a perspective-ish skew to suggest a lid swung open toward viewer -->
+  <g transform="translate(158,280) rotate(-50) translate(-158,-280)" filter="url(#sh)">
+    <!-- Lid top (outer face) -->
+    <rect x="158" y="204" width="484" height="76" rx="6" fill="#d8905e" stroke="#b07040" stroke-width="1.5"/>
+    <!-- Lid front lip -->
+    <rect x="158" y="276" width="484" height="10" rx="2" fill="#b87040"/>
+    <!-- Lid left side -->
+    <polygon points="158,204 124,184 124,256 158,276" fill="#a86030"/>
+    <!-- Wood grain on lid -->
+    <g stroke="#be7848" stroke-width="1" opacity="0.28" fill="none">
+      <line x1="218" y1="208" x2="218" y2="276"/>
+      <line x1="300" y1="206" x2="300" y2="278"/>
+      <line x1="400" y1="204" x2="400" y2="280"/>
+      <line x1="510" y1="206" x2="510" y2="278"/>
+      <line x1="585" y1="208" x2="585" y2="276"/>
+    </g>
+    <!-- Lid corners -->
+    <g fill="#d4a060" stroke="#b07830" stroke-width="1.5">
+      <rect x="158" y="204" width="22" height="22" rx="3"/>
+      <rect x="620" y="204" width="22" height="22" rx="3"/>
+      <rect x="158" y="262" width="22" height="16" rx="2"/>
+      <rect x="620" y="262" width="22" height="16" rx="2"/>
+    </g>
+    <!-- Decorative star on lid panel -->
+    <rect x="286" y="216" width="228" height="44" rx="4" fill="#c87848" stroke="#a05828" stroke-width="1"/>
+    <polygon points="400,226 404,236 415,236 407,243 410,253 400,247 390,253 393,243 385,236 396,236" fill="#f0b030" stroke="#c08010" stroke-width="0.8"/>
+    <!-- Lid hinges (back edge) -->
+    <g fill="#c09040" stroke="#9a7020" stroke-width="1.2">
+      <rect x="226" y="268" width="20" height="10" rx="2"/>
+      <rect x="554" y="268" width="20" height="10" rx="2"/>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TOYS SPILLING OUT
+  ════════════════════════════════════════════════════════════ -->
+
+  <!-- Red ball, rolled out right -->
+  <g filter="url(#shSm)">
+    <ellipse cx="664" cy="498" rx="30" ry="9" fill="#c08060" opacity="0.20"/>
+    <circle cx="660" cy="424" r="38" fill="#e03838" stroke="#b02020" stroke-width="2"/>
+    <ellipse cx="648" cy="408" rx="12" ry="8" fill="#f08888" opacity="0.52"/>
+    <!-- seam lines -->
+    <path d="M660,386 Q690,424 660,462" fill="none" stroke="#b02020" stroke-width="1.5" opacity="0.5"/>
+    <path d="M660,386 Q630,424 660,462" fill="none" stroke="#b02020" stroke-width="1.5" opacity="0.5"/>
+  </g>
+
+  <!-- Blue block, tumbled left -->
+  <g filter="url(#shSm)" transform="rotate(-16, 130, 432)">
+    <ellipse cx="132" cy="490" rx="28" ry="8" fill="#c08060" opacity="0.18"/>
+    <rect x="100" y="398" width="56" height="56" rx="6" fill="#4880c8" stroke="#3060a0" stroke-width="2"/>
+    <text x="128" y="430" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">B</text>
+  </g>
+
+  <!-- Yellow star, flung top-right -->
+  <g filter="url(#shSm)" transform="rotate(18, 688, 196)">
+    <polygon points="688,158 695,180 720,180 700,194 708,218 688,204 668,218 676,194 656,180 681,180"
+      fill="#f0c030" stroke="#c09010" stroke-width="2"/>
+  </g>
+
+  <!-- Small wooden car, bottom-right corner -->
+  <g transform="translate(580, 464) rotate(-5)" filter="url(#shSm)">
+    <ellipse cx="44" cy="72" rx="44" ry="8" fill="#c08060" opacity="0.16"/>
+    <!-- body -->
+    <rect x="0" y="18" width="88" height="32" rx="6" fill="#d04828" stroke="#a03018" stroke-width="1.5"/>
+    <!-- cab -->
+    <rect x="14" y="4" width="46" height="26" rx="5" fill="#e06040" stroke="#b04020" stroke-width="1.5"/>
+    <!-- window -->
+    <rect x="20" y="8" width="34" height="16" rx="3" fill="#a8d8f0" stroke="#80b8d0" stroke-width="1"/>
+    <!-- wheels -->
+    <circle cx="20" cy="52" r="13" fill="#3a3a3a" stroke="#222" stroke-width="1.5"/>
+    <circle cx="68" cy="52" r="13" fill="#3a3a3a" stroke="#222" stroke-width="1.5"/>
+    <circle cx="20" cy="52" r="5" fill="#777"/>
+    <circle cx="68" cy="52" r="5" fill="#777"/>
+  </g>
+
+  <!-- Scattered letter tile, bottom-left -->
+  <g filter="url(#shSm)" transform="rotate(20, 198, 504)">
+    <rect x="176" y="484" width="44" height="44" rx="5" fill="#f0e8d0" stroke="#c0a870" stroke-width="1.5"/>
+    <text x="198" y="509" font-family="Georgia,serif" font-size="20" font-weight="bold" fill="#8a5c30" text-anchor="middle" dominant-baseline="middle">C</text>
   </g>
 
 </svg>
