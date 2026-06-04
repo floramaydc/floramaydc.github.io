@@ -1,0 +1,142 @@
+# Decap CMS configuration for floramaydc.com
+#
+# Backend: GitHub OAuth via custom Vercel handler at /api/oauth.
+# This keeps the entire login flow on floramaydc.com (no Netlify dependency).
+#
+# Publish mode: simple — every save in the CMS is a direct commit to main.
+# Drafts stay invisible on the live site because src/pages/writing/[...slug].astro
+# (and the toybox/play/work indexes) already filter on `draft: true` in prod.
+#
+# Auto-deploy is gated by .github/workflows/deploy-on-publish.yml in the
+# source repo: it builds + pushes to floramaydc.github.io only when a
+# content file flips from draft:true to draft:false (or when non-content
+# files change). Saving in-progress drafts commits but does NOT redeploy.
+
+backend:
+  name: github
+  repo: floramaydc/site-source
+  branch: main
+  base_url: https://floramaydc.com
+  auth_endpoint: api/oauth
+
+# Where Decap uploads images dragged into the editor. Mirrors the existing
+# convention of one folder per writing post under public/images/writing/<slug>/.
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# Editorial workflow is disabled: each save = direct commit. The deploy
+# gate (draft flip) is enforced in the GitHub Action, not here.
+publish_mode: simple
+
+site_url: https://floramaydc.com
+display_url: https://floramaydc.com
+logo_url: https://floramaydc.com/og-default.png
+
+collections:
+  # ---------------------------------------------------------------------------
+  # Writing — long-form posts (Travel, Learnings, Opinion, etc.)
+  # Mirrors src/content/config.ts > writing schema. `date` is required and is
+  # the source of the TZ off-by-one quirk noted in repo memory: store as a
+  # date string and add +1 day if the displayed date drifts.
+  # ---------------------------------------------------------------------------
+  - name: writing
+    label: Writing
+    folder: src/content/writing
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: title,    label: Title,   widget: string }
+      - { name: summary,  label: Summary, widget: text }
+      - { name: date,     label: Date,    widget: datetime, picker_utc: false, time_format: false, date_format: "YYYY-MM-DD" }
+      - { name: category, label: Category, widget: select, required: false,
+          options: ["Learnings", "Opinion", "Travel", "Craft notes", "Pale & Bright", "Appropriasian"] }
+      - { name: tags,     label: Tags,    widget: list, required: false }
+      - { name: cover,    label: "Cover image path",
+          widget: string,
+          hint: "Path under public/, e.g. images/writing/my-post/cover.svg" }
+      - { name: coverAlt, label: "Cover alt text", widget: string, required: false }
+      - { name: draft,    label: Draft,   widget: boolean, default: true,
+          hint: "Drafts are hidden in production. Untick to publish — this is what triggers the deploy." }
+      - { name: body,     label: Body,    widget: markdown }
+
+  # ---------------------------------------------------------------------------
+  # Toybox — playbooks, prompts, prototypes, patterns, templates, tools.
+  # Mirrors src/content/config.ts > toybox schema.
+  # ---------------------------------------------------------------------------
+  - name: toybox
+    label: Toybox
+    folder: src/content/toybox
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: title,    label: Title,   widget: string }
+      - { name: summary,  label: Summary, widget: text }
+      - { name: category, label: Category, widget: select,
+          options: ["playbook", "prompt", "template", "pattern", "tool", "prototype"] }
+      - { name: tags,     label: Tags,    widget: list, required: false }
+      - { name: updated,  label: Updated, widget: datetime, required: false,
+          picker_utc: false, time_format: false, date_format: "YYYY-MM-DD" }
+      - { name: author,   label: Author,  widget: string, required: false }
+      - { name: install,  label: "Install URL", widget: string, required: false,
+          pattern: ["^https?://", "Must be a valid URL"] }
+      - { name: installLabel, label: "Install button label", widget: string, required: false }
+      - { name: draft,    label: Draft,   widget: boolean, default: true,
+          hint: "Drafts are hidden in production. Untick to publish — this is what triggers the deploy." }
+      - { name: body,     label: Body,    widget: markdown }
+
+  # ---------------------------------------------------------------------------
+  # Play — visual / personal work. Schema has no `draft` field, so use the
+  # `archive`-style "hidden" pattern by simply not committing until ready.
+  # ---------------------------------------------------------------------------
+  - name: play
+    label: Play
+    folder: src/content/play
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: title,    label: Title,   widget: string }
+      - { name: summary,  label: Summary, widget: text }
+      - { name: order,    label: Order,   widget: number, required: false, value_type: int }
+      - { name: cover,    label: "Cover image path", widget: string, required: false }
+      - { name: coverAlt, label: "Cover alt text", widget: string, required: false }
+      - { name: year,     label: Year,    widget: string, required: false }
+      - { name: medium,   label: Medium,  widget: string, required: false }
+      - { name: external, label: "External link", widget: string, required: false,
+          pattern: ["^https?://", "Must be a valid URL"] }
+      - { name: body,     label: Body,    widget: markdown }
+
+  # ---------------------------------------------------------------------------
+  # Work — case studies. `hidden` and `wip` already exist as visibility flags;
+  # the deploy action treats either as "not ready to publish".
+  # ---------------------------------------------------------------------------
+  - name: work
+    label: Work
+    folder: src/content/work
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: title,    label: Title,   widget: string }
+      - { name: summary,  label: Summary, widget: text }
+      - { name: order,    label: Order,   widget: number, required: false, value_type: int }
+      - { name: tags,     label: Tags,    widget: list, required: false }
+      - { name: cover,    label: "Cover image path", widget: string, required: false }
+      - { name: coverAlt, label: "Cover alt text", widget: string, required: false }
+      - { name: client,   label: Client,  widget: string, required: false }
+      - { name: organization, label: Organization, widget: string, required: false }
+      - { name: role,     label: Role,    widget: string, required: false }
+      - { name: year,     label: Year,    widget: string, required: false }
+      - { name: team,     label: Team,    widget: string, required: false }
+      - { name: archive,  label: Archive, widget: boolean, required: false, default: false }
+      - { name: wip,      label: "Work in progress", widget: boolean, required: false, default: true,
+          hint: "WIP entries are hidden in production. Untick to publish." }
+      - { name: hidden,   label: Hidden,  widget: boolean, required: false, default: false }
+      - { name: gallery,  label: "Gallery layout", widget: boolean, required: false, default: false }
+      - { name: body,     label: Body,    widget: markdown }
