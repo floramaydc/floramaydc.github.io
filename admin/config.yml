@@ -32,7 +32,8 @@ publish_mode: simple
 
 site_url: https://floramaydc.com
 display_url: https://floramaydc.com
-logo_url: https://floramaydc.com/admin/brand-logo.svg
+# logo_url intentionally omitted — admin/index.html injects the real
+# Flora May wordmark in Ballet (brand font, ink color) above the login.
 
 collections:
   # ---------------------------------------------------------------------------

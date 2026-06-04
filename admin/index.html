@@ -6,6 +6,35 @@
     <meta name="robots" content="noindex, nofollow" />
     <title>Content admin · Flora May dela Cruz</title>
     <link rel="icon" href="data:," />
+    <link rel="preload" href="/fonts/ballet-400.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Ballet';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/ballet-400.woff2') format('woff2');
+      }
+      /* Brand wordmark above Decap's login pane.
+         Pinned to top, centered, uses real site font + ink color. */
+      body.flora-login::before {
+        content: 'Flora May';
+        position: fixed;
+        top: 6vh;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-family: 'Ballet', cursive;
+        font-size: clamp(56px, 9vw, 112px);
+        line-height: 1;
+        color: #303636;
+        pointer-events: none;
+        z-index: 10;
+      }
+      @media (prefers-color-scheme: dark) {
+        body.flora-login::before { color: #e8e3d7; }
+      }
+    </style>
   </head>
   <body>
     <!--
@@ -19,5 +48,20 @@
       public site nav — bookmark /admin/ to author.
     -->
     <script src="https://unpkg.com/decap-cms@^3.7.4/dist/decap-cms.js"></script>
+    <script>
+      // Show the brand wordmark only while the login screen is mounted.
+      // Once the CMS authenticates and switches to the editor shell, drop
+      // the class so the wordmark doesn't sit on top of the editor chrome.
+      (function () {
+        function syncLoginClass() {
+          var hasLoginButton = !!Array.from(document.querySelectorAll('button'))
+            .find(function (b) { return /Login with GitHub/i.test(b.textContent || ''); });
+          document.body.classList.toggle('flora-login', hasLoginButton);
+        }
+        var obs = new MutationObserver(syncLoginClass);
+        obs.observe(document.documentElement, { childList: true, subtree: true });
+        syncLoginClass();
+      })();
+    </script>
   </body>
 </html>
