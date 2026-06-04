@@ -7,33 +7,368 @@
     <title>Content admin · Flora May dela Cruz</title>
     <link rel="icon" href="data:," />
     <link rel="preload" href="/fonts/ballet-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/almarai-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/libre-baskerville-400.woff2" as="font" type="font/woff2" crossorigin />
     <style>
+      /* ----- Brand fonts (mirror the live site) ----- */
       @font-face {
         font-family: 'Ballet';
-        font-style: normal;
-        font-weight: 400;
-        font-display: swap;
+        font-style: normal; font-weight: 400; font-display: swap;
         src: url('/fonts/ballet-400.woff2') format('woff2');
       }
-      /* Brand wordmark above Decap's login pane.
-         Pinned to top, centered, uses real site font + ink color. */
+      @font-face {
+        font-family: 'Almarai';
+        font-style: normal; font-weight: 400; font-display: swap;
+        src: url('/fonts/almarai-400.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Almarai';
+        font-style: normal; font-weight: 700; font-display: swap;
+        src: url('/fonts/almarai-700.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Libre Baskerville';
+        font-style: normal; font-weight: 400; font-display: swap;
+        src: url('/fonts/libre-baskerville-400.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Libre Baskerville';
+        font-style: italic; font-weight: 400; font-display: swap;
+        src: url('/fonts/libre-baskerville-400-italic.woff2') format('woff2');
+      }
+
+      /* ----- Brand tokens (match src/styles/global.css exactly) ----- */
+      :root {
+        --c-ink: #303636;
+        --c-paper: #ffffff;
+        --c-cream: #e5e3dc;
+        --c-accent: #a24a2a;
+        --c-muted: #5a6362;
+        --c-border: rgba(48, 54, 54, 0.12);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --c-ink: #e8e3d7;
+          --c-paper: #1c2422;
+          --c-cream: #2a3432;
+          --c-accent: #e0a890;
+          --c-muted: #bcc0bb;
+          --c-border: rgba(232, 227, 215, 0.18);
+        }
+      }
+
+      /* ----- Base typography + page color ----- */
+      html, body { background: var(--c-paper) !important; color: var(--c-ink) !important; }
+      body, body * {
+        font-family: 'Almarai', system-ui, -apple-system, sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Libre Baskerville', Georgia, serif !important;
+        color: var(--c-ink) !important;
+      }
+
+      /* ----- Login screen brand wordmark ----- */
       body.flora-login::before {
         content: 'Flora May';
         position: fixed;
-        top: 6vh;
-        left: 0;
-        right: 0;
+        top: 6vh; left: 0; right: 0;
         text-align: center;
         font-family: 'Ballet', cursive;
         font-size: clamp(56px, 9vw, 112px);
         line-height: 1;
-        color: #303636;
+        color: var(--c-ink);
         pointer-events: none;
         z-index: 10;
       }
-      @media (prefers-color-scheme: dark) {
-        body.flora-login::before { color: #e8e3d7; }
+
+      /* ----- App header / top bar ----- */
+      [class*="-AppHeader"] {
+        background: var(--c-cream) !important;
+        border-bottom: 1px solid var(--c-border) !important;
+        box-shadow: none !important;
       }
+      [class*="-AppHeader"] a,
+      [class*="-AppHeader"] button {
+        color: var(--c-ink) !important;
+      }
+      [class*="header-link-active"] {
+        color: var(--c-accent) !important;
+        border-bottom-color: var(--c-accent) !important;
+      }
+      [class*="-AppHeaderSiteLink"] {
+        color: var(--c-accent) !important;
+        font-weight: 700;
+      }
+
+      /* ----- Sidebar (collections list) ----- */
+      [class*="-SidebarContainer"] {
+        background: var(--c-paper) !important;
+        border: 1px solid var(--c-border) !important;
+        border-radius: 12px !important;
+        box-shadow: none !important;
+      }
+      [class*="-SidebarHeading"] {
+        color: var(--c-ink) !important;
+        font-family: 'Libre Baskerville', Georgia, serif !important;
+      }
+      [class*="-SidebarNavList"] a {
+        color: var(--c-ink) !important;
+        border-radius: 8px !important;
+      }
+      [class*="-SidebarNavList"] a:hover {
+        background: var(--c-cream) !important;
+      }
+      [class*="-SidebarNavList"] a[class*="sidebar-active"],
+      [class*="-SidebarNavList"] .sidebar-active {
+        background: var(--c-cream) !important;
+        color: var(--c-accent) !important;
+        font-weight: 700;
+      }
+
+      /* ----- Search input ----- */
+      [class*="-SearchInput"] {
+        background: var(--c-paper) !important;
+        color: var(--c-ink) !important;
+        border: 1px solid var(--c-border) !important;
+        border-radius: 8px !important;
+      }
+      [class*="-SearchInput"]::placeholder {
+        color: var(--c-muted) !important;
+      }
+
+      /* ----- Collection top: H1 + "New" button + view toggles ----- */
+      [class*="-CollectionTopContainer"] {
+        background: transparent !important;
+        box-shadow: none !important;
+        border-bottom: 1px solid var(--c-border) !important;
+      }
+      [class*="-CollectionTopHeading"] {
+        font-family: 'Libre Baskerville', Georgia, serif !important;
+        color: var(--c-ink) !important;
+      }
+      [class*="-CollectionTopNewButton"],
+      a[href*="/new"][class*="Button"],
+      button[class*="-CollectionTopNewButton"] {
+        background: var(--c-accent) !important;
+        color: var(--c-paper) !important;
+        border: 1px solid var(--c-accent) !important;
+        border-radius: 999px !important;
+        padding: 0.5rem 1rem !important;
+        font-weight: 700;
+      }
+      [class*="-CollectionTopNewButton"]:hover {
+        filter: brightness(0.92);
+      }
+      [class*="-ViewControlsButton"] {
+        background: transparent !important;
+        color: var(--c-muted) !important;
+        border-radius: 6px !important;
+      }
+      [class*="-ViewControlsButton"]:hover {
+        color: var(--c-accent) !important;
+      }
+
+      /* ----- Entry list cards ----- */
+      [class*="-ListCard"] {
+        background: var(--c-paper) !important;
+        border: 1px solid var(--c-border) !important;
+        border-radius: 12px !important;
+        box-shadow: none !important;
+        transition: border-color 0.15s ease, transform 0.15s ease;
+      }
+      [class*="-ListCard"]:hover {
+        border-color: var(--c-accent) !important;
+        transform: translateY(-1px);
+      }
+      [class*="-ListCardTitle"] {
+        color: var(--c-ink) !important;
+        font-family: 'Libre Baskerville', Georgia, serif !important;
+      }
+
+      /* ----- Editor: form fields, labels, hints ----- */
+      [class*="ControlPaneContainer"] label,
+      [class*="-FieldLabel"] {
+        color: var(--c-muted) !important;
+        font-weight: 700;
+        text-transform: none !important;
+        letter-spacing: 0 !important;
+      }
+      [class*="-FieldCaption"], [class*="-Hint"] {
+        color: var(--c-muted) !important;
+        font-style: italic;
+      }
+      input[type="text"], input[type="url"], input[type="email"],
+      input[type="date"], input[type="datetime-local"],
+      textarea, [class*="-TextField"], [class*="-Editor"] {
+        background: var(--c-paper) !important;
+        color: var(--c-ink) !important;
+        border: 1px solid var(--c-border) !important;
+        border-radius: 8px !important;
+      }
+      input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus {
+        border-color: var(--c-accent) !important;
+        outline: 2px solid var(--c-accent) !important;
+        outline-offset: 1px !important;
+      }
+
+      /* ----- Editor toolbar (save, preview, status) ----- */
+      [class*="-EditorToolbar"] {
+        background: var(--c-cream) !important;
+        border-bottom: 1px solid var(--c-border) !important;
+      }
+      [class*="-SaveButton"], [class*="-PublishButton"] {
+        background: var(--c-accent) !important;
+        color: var(--c-paper) !important;
+        border-radius: 999px !important;
+      }
+
+      /* ----- Markdown toolbar (bold/italic/link/etc) ----- */
+      [class*="-Toolbar"] button {
+        color: var(--c-ink) !important;
+        border-radius: 6px !important;
+      }
+      [class*="-Toolbar"] button:hover {
+        background: var(--c-cream) !important;
+        color: var(--c-accent) !important;
+      }
+
+      /* =====================================================
+         MOBILE REFLOW — the heart of the fix
+         Decap was built desktop-first. Below 768px, the
+         sidebar shoves the main pane offscreen and form
+         fields lose half their width. Below we collapse
+         the sidebar into a horizontal scroll strip and let
+         the editor breathe.
+         ===================================================== */
+      @media (max-width: 768px) {
+        /* App header — wrap, no horizontal scroll */
+        [class*="-AppHeader"] {
+          padding: 0.5rem 0.75rem !important;
+        }
+        [class*="-AppHeaderContent"] {
+          flex-wrap: wrap !important;
+          gap: 0.5rem !important;
+        }
+        [class*="-AppHeaderNavList"] {
+          gap: 0.25rem !important;
+        }
+
+        /* Main two-column layout becomes single column */
+        [class*="-AppMainContainer"],
+        [class*="-CollectionContainer"],
+        [class*="-EntryContainer"] {
+          display: block !important;
+          padding: 0.75rem !important;
+        }
+
+        /* Sidebar → horizontal scroll strip at top of content */
+        [class*="-SidebarContainer"] {
+          position: sticky !important;
+          top: 0 !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          margin: 0 0 0.75rem 0 !important;
+          padding: 0.5rem !important;
+          z-index: 5;
+        }
+        [class*="-SidebarHeading"] {
+          font-size: 0.85rem !important;
+          margin-bottom: 0.4rem !important;
+        }
+        [class*="-SidebarNavList"] {
+          display: flex !important;
+          flex-direction: row !important;
+          overflow-x: auto !important;
+          gap: 0.4rem !important;
+          padding-bottom: 0.25rem;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin;
+        }
+        [class*="-SidebarNavList"] li {
+          flex-shrink: 0 !important;
+        }
+        [class*="-SidebarNavList"] a {
+          padding: 0.5rem 0.75rem !important;
+          font-size: 0.85rem !important;
+          white-space: nowrap !important;
+        }
+
+        /* Collection top: stack heading + new button */
+        [class*="-CollectionTopContainer"] {
+          padding: 0.75rem !important;
+        }
+        [class*="-CollectionTopRow"] {
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 0.75rem !important;
+        }
+        [class*="-CollectionTopNewButton"] {
+          width: 100% !important;
+          text-align: center;
+        }
+
+        /* Entry cards full width */
+        [class*="-CardsGrid"] {
+          grid-template-columns: 1fr !important;
+          gap: 0.5rem !important;
+        }
+        [class*="-ListCard"] {
+          padding: 0.75rem !important;
+        }
+        [class*="-ListCardTitle"] {
+          font-size: 1rem !important;
+          line-height: 1.3;
+        }
+
+        /* Editor pane: stack form, hide preview by default
+           (Decap preview is too narrow to be useful on mobile;
+           tap the preview toggle to see it) */
+        [class*="-EditorContainer"],
+        [class*="-EditorContent"] {
+          display: block !important;
+        }
+        [class*="-PreviewPaneContainer"] {
+          display: none !important;
+        }
+        body.show-preview [class*="-PreviewPaneContainer"] {
+          display: block !important;
+          margin-top: 1rem;
+          border-top: 1px solid var(--c-border);
+          padding-top: 1rem;
+        }
+
+        /* Field controls: full-width touch targets */
+        input[type="text"], input[type="url"], input[type="email"],
+        input[type="date"], input[type="datetime-local"],
+        textarea, select {
+          width: 100% !important;
+          font-size: 16px !important; /* prevents iOS zoom */
+          padding: 0.6rem 0.75rem !important;
+          min-height: 44px;
+        }
+        button {
+          min-height: 44px;
+        }
+
+        /* Editor toolbar: wrap, don't overflow */
+        [class*="-EditorToolbar"] {
+          flex-wrap: wrap !important;
+          gap: 0.4rem !important;
+          padding: 0.5rem !important;
+        }
+        [class*="-Toolbar"] {
+          flex-wrap: wrap !important;
+        }
+
+        /* Login screen wordmark scales down */
+        body.flora-login::before {
+          top: 3vh !important;
+          font-size: clamp(44px, 14vw, 72px) !important;
+        }
+      }
+
+      /* Hide horizontal scrollbars from layout adjustments */
+      html { overflow-x: hidden; }
     </style>
   </head>
   <body>
@@ -46,6 +381,11 @@
 
       This page is intentionally noindex'd and is not linked from the
       public site nav — bookmark /admin/ to author.
+
+      Brand styling: see the <style> block above. All Decap chrome
+      (header, sidebar, cards, forms, editor) is themed with the live
+      site's tokens and fonts, with a mobile-first reflow below 768px
+      so editing on a phone actually works.
     -->
     <script src="https://unpkg.com/decap-cms@^3.7.4/dist/decap-cms.js"></script>
     <script>
