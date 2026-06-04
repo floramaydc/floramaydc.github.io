@@ -1,182 +1,204 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="A wooden toy chest being opened, lid propped up, with colourful toys — a red ball, building blocks, a star, and a small car — tumbling out of the warm glow inside.">
-
-  <!-- ───── Gradients & filters ───── -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 740" role="img" aria-label="A wooden toy chest, lid propped wide open, glowing warmly inside, with colourful building blocks, a red ball, a star, and a small toy car tumbling out.">
   <defs>
-    <radialGradient id="glow" cx="50%" cy="65%" r="52%">
-      <stop offset="0%"  stop-color="#f2c9a8" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#f2c9a8" stop-opacity="0"/>
+    <!-- Interior warm light -->
+    <radialGradient id="ig" cx="50%" cy="35%" r="65%">
+      <stop offset="0%"  stop-color="#fde4c4"/>
+      <stop offset="100%" stop-color="#d9a86c"/>
     </radialGradient>
-    <radialGradient id="innerGlow" cx="50%" cy="35%" r="70%">
-      <stop offset="0%"  stop-color="#fde8d0" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#e8c59a" stop-opacity="1"/>
+    <!-- Light spilling UP from the opening -->
+    <radialGradient id="spill" cx="50%" cy="100%" r="85%">
+      <stop offset="0%"  stop-color="#fdd4a0" stop-opacity="0.40"/>
+      <stop offset="55%" stop-color="#fdd4a0" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#fdd4a0" stop-opacity="0"/>
     </radialGradient>
-    <filter id="sh" x="-25%" y="-15%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="7" stdDeviation="12" flood-color="#4a3220" flood-opacity="0.20"/>
+    <!-- Lid inner surface (warm pale wood, in shadow compared to exterior) -->
+    <linearGradient id="li" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="#edd5a0"/>
+      <stop offset="100%" stop-color="#c9a068"/>
+    </linearGradient>
+    <!-- Chest front face -->
+    <linearGradient id="bf" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="#cf8856"/>
+      <stop offset="100%" stop-color="#a85e30"/>
+    </linearGradient>
+    <!-- Soft drop shadow -->
+    <filter id="sh" x="-22%" y="-12%" width="144%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#2a1808" flood-opacity="0.17"/>
     </filter>
-    <filter id="shSm" x="-30%" y="-20%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#4a3220" flood-opacity="0.18"/>
+    <filter id="shSm" x="-45%" y="-45%" width="190%" height="190%">
+      <feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#2a1808" flood-opacity="0.15"/>
     </filter>
   </defs>
 
-  <!-- Ambient glow blob behind chest -->
-  <ellipse cx="400" cy="370" rx="300" ry="205" fill="url(#glow)"/>
+  <!-- ── Light spilling upward from the open chest ── -->
+  <!-- sits behind everything so the chest body blocks the bottom half of it -->
+  <ellipse cx="410" cy="445" rx="295" ry="205" fill="url(#spill)"/>
 
-  <!-- ═══════════════════════════════════════════════════════════
+  <!-- ── Ground shadow ── -->
+  <ellipse cx="410" cy="662" rx="238" ry="20" fill="#7a4820" opacity="0.13"/>
+
+  <!-- ══════════════════════════════════════════════════════════
        CHEST BODY
-  ════════════════════════════════════════════════════════════ -->
+  ═══════════════════════════════════════════════════════════ -->
   <g filter="url(#sh)">
-    <!-- Ground shadow -->
-    <ellipse cx="400" cy="512" rx="215" ry="20" fill="#c49070" opacity="0.22"/>
-
-    <!-- Front face -->
-    <rect x="158" y="288" width="484" height="206" rx="6" fill="#c8845a"/>
-    <!-- Top ledge on body (rim under lid) -->
-    <rect x="158" y="280" width="484" height="14" rx="3" fill="#b07044"/>
     <!-- Left side face -->
-    <polygon points="158,280 124,258 124,452 158,474" fill="#a05c38"/>
-    <!-- Bottom (floor) strip -->
-    <rect x="124" y="452" width="518" height="16" rx="3" fill="#8f5030"/>
+    <polygon points="154,464 118,440 118,616 154,628" fill="#985028"/>
+    <!-- Right side face -->
+    <polygon points="666,464 702,440 702,616 666,628" fill="#985028"/>
+    <!-- Front face -->
+    <rect x="154" y="464" width="512" height="164" rx="6" fill="url(#bf)"/>
+    <!-- Top rim strip (between interior and front face) -->
+    <rect x="118" y="444" width="584" height="22" rx="3" fill="#b87040"/>
+    <!-- Bottom strip -->
+    <rect x="118" y="626" width="584" height="14" rx="3" fill="#884020"/>
 
-    <!-- Wood grain — front face -->
-    <g stroke="#b07244" stroke-width="1.1" opacity="0.32" fill="none">
-      <line x1="200" y1="294" x2="200" y2="488"/>
-      <line x1="268" y1="292" x2="268" y2="490"/>
-      <line x1="346" y1="290" x2="346" y2="492"/>
-      <line x1="454" y1="290" x2="454" y2="492"/>
-      <line x1="532" y1="292" x2="532" y2="490"/>
-      <line x1="598" y1="294" x2="598" y2="488"/>
+    <!-- Wood grain on front face -->
+    <g stroke="#a86838" stroke-width="1.1" opacity="0.27" fill="none">
+      <line x1="205" y1="470" x2="205" y2="624"/>
+      <line x1="282" y1="468" x2="282" y2="626"/>
+      <line x1="370" y1="466" x2="370" y2="628"/>
+      <line x1="450" y1="466" x2="450" y2="628"/>
+      <line x1="535" y1="468" x2="535" y2="626"/>
+      <line x1="610" y1="470" x2="610" y2="624"/>
     </g>
 
-    <!-- Metal corner brackets -->
-    <g fill="#d4a060" stroke="#b07830" stroke-width="1.5">
-      <rect x="158" y="280" width="22" height="22" rx="3"/>
-      <rect x="620" y="280" width="22" height="22" rx="3"/>
-      <rect x="158" y="450" width="22" height="22" rx="3"/>
-      <rect x="620" y="450" width="22" height="22" rx="3"/>
+    <!-- Decorative lower panel band -->
+    <rect x="154" y="566" width="512" height="42" fill="#985030" opacity="0.40"/>
+    <line x1="154" y1="566" x2="666" y2="566" stroke="#7a3c18" stroke-width="1.1" opacity="0.36"/>
+    <line x1="154" y1="608" x2="666" y2="608" stroke="#7a3c18" stroke-width="1.1" opacity="0.36"/>
+
+    <!-- Corner brackets (front face) -->
+    <g fill="#d4a060" stroke="#a87020" stroke-width="1.5">
+      <rect x="154" y="446" width="26" height="26" rx="3"/>
+      <rect x="640" y="446" width="26" height="26" rx="3"/>
+      <rect x="154" y="604" width="26" height="26" rx="3"/>
+      <rect x="640" y="604" width="26" height="26" rx="3"/>
     </g>
 
-    <!-- Decorative lower band -->
-    <rect x="158" y="434" width="484" height="40" rx="0" fill="#b57248" opacity="0.50"/>
-    <line x1="158" y1="434" x2="642" y2="434" stroke="#9a5c30" stroke-width="1.1" opacity="0.45"/>
-    <line x1="158" y1="474" x2="642" y2="474" stroke="#9a5c30" stroke-width="1.1" opacity="0.45"/>
+    <!-- Chest latch (front centre) -->
+    <rect x="384" y="510" width="52" height="34" rx="6" fill="#d4a060" stroke="#9a7030" stroke-width="1.5"/>
+    <rect x="393" y="518" width="34" height="20" rx="4" fill="#b08030" stroke="#9a6820" stroke-width="1"/>
+    <circle cx="410" cy="526" r="4.5" fill="#7a5020"/>
+    <rect x="407" y="526" width="6" height="7" rx="2" fill="#7a5020"/>
+  </g>
 
-    <!-- Chest latch -->
-    <rect x="380" y="372" width="40" height="28" rx="5" fill="#d4a060" stroke="#9a7030" stroke-width="1.5"/>
-    <rect x="388" y="380" width="24" height="14" rx="3" fill="#b08030" stroke="#9a6820" stroke-width="1"/>
-    <circle cx="400" cy="385" r="3.5" fill="#7a5020"/>
-    <rect x="397.5" y="385" width="5" height="6" rx="1.5" fill="#7a5020"/>
+  <!-- ══════════════════════════════════════════════════════════
+       INTERIOR — warm cavity visible at the top of the chest
+  ═══════════════════════════════════════════════════════════ -->
+  <rect x="122" y="420" width="576" height="28" fill="url(#ig)" rx="1"/>
+  <!-- Interior back wall depth shadow -->
+  <rect x="122" y="420" width="576" height="14" fill="#b88840" opacity="0.42"/>
+  <!-- Toys peeking inside -->
+  <rect x="212" y="422" width="38" height="22" rx="4" fill="#e05030" stroke="#b83018" stroke-width="1.2"/>
+  <text x="231" y="435" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">A</text>
+  <rect x="254" y="426" width="30" height="18" rx="4" fill="#4880c8" stroke="#3060a0" stroke-width="1.2"/>
+  <circle cx="415" cy="431" r="18" fill="#e04040" stroke="#b02828" stroke-width="1.2"/>
+  <ellipse cx="406" cy="422" rx="7" ry="5" fill="#f08080" opacity="0.52"/>
+  <polygon points="505,428 509,440 522,440 513,447 516,459 505,452 494,459 497,447 488,440 501,440" fill="#f0b030" stroke="#c08010" stroke-width="1.1"/>
 
-    <!-- Hinges (where lid meets body) -->
-    <g fill="#c09040" stroke="#9a7020" stroke-width="1.2">
-      <rect x="226" y="277" width="20" height="11" rx="2.5"/>
-      <rect x="554" y="277" width="20" height="11" rx="2.5"/>
+  <!-- Hinges (lid attachment points) -->
+  <g fill="#c09040" stroke="#9a7020" stroke-width="1.2">
+    <rect x="226" y="438" width="24" height="13" rx="3"/>
+    <rect x="570" y="438" width="24" height="13" rx="3"/>
+  </g>
+
+  <!-- ══════════════════════════════════════════════════════════
+       LID — drawn directly in its open position.
+       Inner surface faces the viewer.
+       Bottom edge (hinge) at y=456; free edge at y=186.
+       Bottom is wider (154→666) than top (200→620) — perspective foreshortening.
+  ═══════════════════════════════════════════════════════════ -->
+  <g filter="url(#sh)">
+    <!-- Main inner surface — parallelogram -->
+    <path d="M154,456 L666,456 L620,186 L200,186 Z" fill="url(#li)"/>
+
+    <!-- Horizontal wood grain on inner face (follows perspective) -->
+    <g stroke="#c0a068" stroke-width="1.0" opacity="0.27" fill="none">
+      <!-- y=224 --> <line x1="196" y1="224" x2="624" y2="224"/>
+      <!-- y=264 --> <line x1="188" y1="264" x2="632" y2="264"/>
+      <!-- y=304 --> <line x1="180" y1="304" x2="640" y2="304"/>
+      <!-- y=344 --> <line x1="172" y1="344" x2="648" y2="344"/>
+      <!-- y=384 --> <line x1="163" y1="384" x2="657" y2="384"/>
+      <!-- y=424 --> <line x1="157" y1="424" x2="663" y2="424"/>
+    </g>
+
+    <!-- Decorative inset panel on lid interior -->
+    <path d="M256,238 L564,238 L568,376 L252,376 Z" fill="#d8b070" opacity="0.35" stroke="#b89050" stroke-width="1"/>
+    <!-- Star emblem on lid -->
+    <polygon points="410,264 417,287 442,287 422,303 429,326 410,311 391,326 398,303 378,287 403,287"
+      fill="#f0c030" stroke="#c09010" stroke-width="1.5"/>
+
+    <!-- Lid outer (free) edge — shows the lid thickness at the top -->
+    <rect x="200" y="178" width="420" height="11" rx="2" fill="#c07838"/>
+    <!-- Lid left side thickness sliver -->
+    <polygon points="154,456 178,456 200,186 176,186" fill="#9a5428" opacity="0.50"/>
+    <!-- Lid right side thickness sliver -->
+    <polygon points="666,456 642,456 620,186 644,186" fill="#9a5428" opacity="0.50"/>
+
+    <!-- Lid corner brackets -->
+    <g fill="#d4a060" stroke="#a87020" stroke-width="1.5">
+      <rect x="200" y="178" width="24" height="24" rx="3"/>
+      <rect x="596" y="178" width="24" height="24" rx="3"/>
+      <rect x="154" y="438" width="24" height="24" rx="3"/>
+      <rect x="642" y="438" width="24" height="24" rx="3"/>
     </g>
   </g>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       CHEST INTERIOR (warm glow visible when open)
-  ════════════════════════════════════════════════════════════ -->
-  <rect x="164" y="210" width="478" height="72" fill="url(#innerGlow)" rx="2"/>
-  <!-- Depth shadow at back wall of interior -->
-  <rect x="164" y="210" width="478" height="20" fill="#c09060" opacity="0.40"/>
-  <!-- Toys peeking over the rim -->
-  <!-- Red block -->
-  <rect x="250" y="218" width="32" height="32" rx="4" fill="#e05030" stroke="#b83018" stroke-width="1.2"/>
-  <text x="266" y="237" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">A</text>
-  <!-- Blue block -->
-  <rect x="282" y="224" width="28" height="26" rx="4" fill="#4880c8" stroke="#3060a0" stroke-width="1.2"/>
-  <text x="296" y="239" font-family="Georgia,serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">B</text>
-  <!-- Green block -->
-  <rect x="310" y="220" width="30" height="30" rx="4" fill="#50a850" stroke="#388038" stroke-width="1.2"/>
-  <!-- Ball -->
-  <circle cx="415" cy="232" r="24" fill="#e04040" stroke="#b02828" stroke-width="1.2"/>
-  <ellipse cx="406" cy="222" rx="8" ry="5.5" fill="#f08080" opacity="0.55"/>
-  <!-- Star -->
-  <polygon points="490,234 494,248 509,248 498,257 502,271 490,262 478,271 482,257 471,248 486,248" fill="#f0b030" stroke="#c08010" stroke-width="1.2"/>
+  <!-- ══════════════════════════════════════════════════════════
+       TOYS SCATTERED FREELY AROUND THE CHEST
+  ═══════════════════════════════════════════════════════════ -->
 
-  <!-- ═══════════════════════════════════════════════════════════
-       LID  — propped open (~48° back tilt via skew transform)
-  ════════════════════════════════════════════════════════════ -->
-  <!-- Using a perspective-ish skew to suggest a lid swung open toward viewer -->
-  <g transform="translate(158,280) rotate(-50) translate(-158,-280)" filter="url(#sh)">
-    <!-- Lid top (outer face) -->
-    <rect x="158" y="204" width="484" height="76" rx="6" fill="#d8905e" stroke="#b07040" stroke-width="1.5"/>
-    <!-- Lid front lip -->
-    <rect x="158" y="276" width="484" height="10" rx="2" fill="#b87040"/>
-    <!-- Lid left side -->
-    <polygon points="158,204 124,184 124,256 158,276" fill="#a86030"/>
-    <!-- Wood grain on lid -->
-    <g stroke="#be7848" stroke-width="1" opacity="0.28" fill="none">
-      <line x1="218" y1="208" x2="218" y2="276"/>
-      <line x1="300" y1="206" x2="300" y2="278"/>
-      <line x1="400" y1="204" x2="400" y2="280"/>
-      <line x1="510" y1="206" x2="510" y2="278"/>
-      <line x1="585" y1="208" x2="585" y2="276"/>
-    </g>
-    <!-- Lid corners -->
-    <g fill="#d4a060" stroke="#b07830" stroke-width="1.5">
-      <rect x="158" y="204" width="22" height="22" rx="3"/>
-      <rect x="620" y="204" width="22" height="22" rx="3"/>
-      <rect x="158" y="262" width="22" height="16" rx="2"/>
-      <rect x="620" y="262" width="22" height="16" rx="2"/>
-    </g>
-    <!-- Decorative star on lid panel -->
-    <rect x="286" y="216" width="228" height="44" rx="4" fill="#c87848" stroke="#a05828" stroke-width="1"/>
-    <polygon points="400,226 404,236 415,236 407,243 410,253 400,247 390,253 393,243 385,236 396,236" fill="#f0b030" stroke="#c08010" stroke-width="0.8"/>
-    <!-- Lid hinges (back edge) -->
-    <g fill="#c09040" stroke="#9a7020" stroke-width="1.2">
-      <rect x="226" y="268" width="20" height="10" rx="2"/>
-      <rect x="554" y="268" width="20" height="10" rx="2"/>
-    </g>
-  </g>
-
-  <!-- ═══════════════════════════════════════════════════════════
-       TOYS SPILLING OUT
-  ════════════════════════════════════════════════════════════ -->
-
-  <!-- Red ball, rolled out right -->
+  <!-- Red ball — rolled far right, on the ground -->
   <g filter="url(#shSm)">
-    <ellipse cx="664" cy="498" rx="30" ry="9" fill="#c08060" opacity="0.20"/>
-    <circle cx="660" cy="424" r="38" fill="#e03838" stroke="#b02020" stroke-width="2"/>
-    <ellipse cx="648" cy="408" rx="12" ry="8" fill="#f08888" opacity="0.52"/>
-    <!-- seam lines -->
-    <path d="M660,386 Q690,424 660,462" fill="none" stroke="#b02020" stroke-width="1.5" opacity="0.5"/>
-    <path d="M660,386 Q630,424 660,462" fill="none" stroke="#b02020" stroke-width="1.5" opacity="0.5"/>
+    <ellipse cx="728" cy="644" rx="30" ry="9" fill="#7a4820" opacity="0.12"/>
+    <circle cx="728" cy="592" r="46" fill="#e03838" stroke="#b02020" stroke-width="2.5"/>
+    <ellipse cx="712" cy="573" rx="16" ry="10" fill="#f08888" opacity="0.46"/>
+    <path d="M728,546 Q766,592 728,638" fill="none" stroke="#b02020" stroke-width="1.8" opacity="0.38"/>
+    <path d="M728,546 Q690,592 728,638" fill="none" stroke="#b02020" stroke-width="1.8" opacity="0.38"/>
   </g>
 
-  <!-- Blue block, tumbled left -->
-  <g filter="url(#shSm)" transform="rotate(-16, 130, 432)">
-    <ellipse cx="132" cy="490" rx="28" ry="8" fill="#c08060" opacity="0.18"/>
-    <rect x="100" y="398" width="56" height="56" rx="6" fill="#4880c8" stroke="#3060a0" stroke-width="2"/>
-    <text x="128" y="430" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">B</text>
+  <!-- Blue block — tumbled out left, on the ground -->
+  <g filter="url(#shSm)">
+    <ellipse cx="76" cy="642" rx="38" ry="10" fill="#7a4820" opacity="0.10"/>
+    <g transform="rotate(-17, 76, 596)">
+      <rect x="40" y="560" width="72" height="72" rx="8" fill="#4880c8" stroke="#3060a0" stroke-width="2.5"/>
+      <text x="76" y="598" font-family="Georgia,serif" font-size="28" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">B</text>
+    </g>
   </g>
 
-  <!-- Yellow star, flung top-right -->
-  <g filter="url(#shSm)" transform="rotate(18, 688, 196)">
-    <polygon points="688,158 695,180 720,180 700,194 708,218 688,204 668,218 676,194 656,180 681,180"
-      fill="#f0c030" stroke="#c09010" stroke-width="2"/>
+  <!-- Yellow star — launched upper-right, above the lid -->
+  <g filter="url(#shSm)" transform="rotate(22, 742, 106)">
+    <polygon points="742,58 751,87 782,87 758,104 768,134 742,116 716,134 726,104 702,87 733,87"
+      fill="#f0c030" stroke="#c09010" stroke-width="2.5"/>
   </g>
 
-  <!-- Small wooden car, bottom-right corner -->
-  <g transform="translate(580, 464) rotate(-5)" filter="url(#shSm)">
-    <ellipse cx="44" cy="72" rx="44" ry="8" fill="#c08060" opacity="0.16"/>
-    <!-- body -->
-    <rect x="0" y="18" width="88" height="32" rx="6" fill="#d04828" stroke="#a03018" stroke-width="1.5"/>
-    <!-- cab -->
-    <rect x="14" y="4" width="46" height="26" rx="5" fill="#e06040" stroke="#b04020" stroke-width="1.5"/>
-    <!-- window -->
-    <rect x="20" y="8" width="34" height="16" rx="3" fill="#a8d8f0" stroke="#80b8d0" stroke-width="1"/>
-    <!-- wheels -->
-    <circle cx="20" cy="52" r="13" fill="#3a3a3a" stroke="#222" stroke-width="1.5"/>
-    <circle cx="68" cy="52" r="13" fill="#3a3a3a" stroke="#222" stroke-width="1.5"/>
-    <circle cx="20" cy="52" r="5" fill="#777"/>
-    <circle cx="68" cy="52" r="5" fill="#777"/>
+  <!-- Green block — mid-air upper left, above the lid -->
+  <g filter="url(#shSm)" transform="rotate(-26, 96, 298)">
+    <rect x="60" y="262" width="72" height="72" rx="8" fill="#50a850" stroke="#388038" stroke-width="2.5"/>
+    <text x="96" y="300" font-family="Georgia,serif" font-size="28" font-weight="bold" fill="#fff" text-anchor="middle" dominant-baseline="middle">G</text>
   </g>
 
-  <!-- Scattered letter tile, bottom-left -->
-  <g filter="url(#shSm)" transform="rotate(20, 198, 504)">
-    <rect x="176" y="484" width="44" height="44" rx="5" fill="#f0e8d0" stroke="#c0a870" stroke-width="1.5"/>
-    <text x="198" y="509" font-family="Georgia,serif" font-size="20" font-weight="bold" fill="#8a5c30" text-anchor="middle" dominant-baseline="middle">C</text>
+  <!-- Orange triangle block — mid-air, right of chest -->
+  <g filter="url(#shSm)" transform="rotate(-14, 716, 312)">
+    <polygon points="716,266 754,338 678,338" fill="#e87830" stroke="#c05818" stroke-width="2"/>
+  </g>
+
+  <!-- Small wooden car — lower right, on the ground -->
+  <g transform="translate(540, 616) rotate(-3)" filter="url(#shSm)">
+    <ellipse cx="56" cy="80" rx="58" ry="9" fill="#7a4820" opacity="0.10"/>
+    <rect x="0" y="20" width="112" height="40" rx="8" fill="#d04828" stroke="#a03018" stroke-width="2"/>
+    <rect x="18" y="4" width="56" height="28" rx="6" fill="#e06040" stroke="#b04020" stroke-width="2"/>
+    <rect x="24" y="9" width="42" height="18" rx="4" fill="#a8d8f0" stroke="#80b8d0" stroke-width="1.2"/>
+    <circle cx="26" cy="64" r="16" fill="#3a3a3a" stroke="#222" stroke-width="1.8"/>
+    <circle cx="86" cy="64" r="16" fill="#3a3a3a" stroke="#222" stroke-width="1.8"/>
+    <circle cx="26" cy="64" r="6" fill="#888"/>
+    <circle cx="86" cy="64" r="6" fill="#888"/>
+  </g>
+
+  <!-- Letter tile C — bottom-left corner -->
+  <g filter="url(#shSm)" transform="rotate(24, 68, 628)">
+    <rect x="42" y="602" width="52" height="52" rx="6" fill="#f0e8d0" stroke="#c0a870" stroke-width="2"/>
+    <text x="68" y="630" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="#8a5c30" text-anchor="middle" dominant-baseline="middle">C</text>
   </g>
 
 </svg>
