@@ -80,6 +80,26 @@
         pointer-events: none;
         z-index: 10;
       }
+      /* Hide Decap's default Logo image + brand text on login (we have our own wordmark) */
+      body.flora-login img[alt="Logo"],
+      body.flora-login [class*="LoginPage"] img,
+      body.flora-login [class*="LoginPage"] h1,
+      body.flora-login [class*="LoginPage"] h2 {
+        display: none !important;
+      }
+      /* Recolor the GitHub login button to brand accent */
+      body.flora-login button[class*="Button"] {
+        background: var(--c-accent) !important;
+        color: #fff !important;
+        border-radius: 999px !important;
+        padding: 14px 28px !important;
+        font-family: 'Almarai', sans-serif !important;
+        font-weight: 700 !important;
+        box-shadow: none !important;
+      }
+      body.flora-login button[class*="Button"]:hover {
+        filter: brightness(1.05);
+      }
 
       /* ----- App header / top bar ----- */
       [class*="-AppHeader"] {
