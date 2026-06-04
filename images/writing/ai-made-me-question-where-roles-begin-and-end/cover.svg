@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Four overlapping role circles labeled Designer, PM, Engineer, and Manager with arrows crossing freely between them, and a small dense core in the center labeled expertise — systems, constraints, judgment">
+  <rect width="1600" height="1200" fill="#e5e3dc"/>
+  <g font-family="Almarai, system-ui, sans-serif" fill="#303636">
+
+    <!-- Header -->
+    <text x="60" y="120" font-size="40">Roles aren't disappearing.</text>
+    <text x="60" y="170" font-size="40">They're getting more fluid.</text>
+    <text x="60" y="208" font-size="22" fill="#6b7373" font-style="italic">what stays is the part that wasn't about the artifact</text>
+
+    <!-- Four overlapping circles around the center -->
+    <g fill="none" stroke="#303636" stroke-width="5">
+      <!-- Designer (top-left, terracotta tint) -->
+      <circle cx="640" cy="560" r="280" fill="#d4967d" fill-opacity="0.18"/>
+      <!-- PM (top-right, teal tint) -->
+      <circle cx="960" cy="560" r="280" fill="#495a58" fill-opacity="0.18"/>
+      <!-- Engineer (bottom-left) -->
+      <circle cx="640" cy="800" r="280" fill="#495a58" fill-opacity="0.18"/>
+      <!-- Manager (bottom-right) -->
+      <circle cx="960" cy="800" r="280" fill="#d4967d" fill-opacity="0.18"/>
+    </g>
+
+    <!-- Circle labels (outside the dense overlap) -->
+    <text x="380" y="380" font-size="30" font-weight="600">Designer</text>
+    <text x="1220" y="380" font-size="30" font-weight="600" text-anchor="end">PM</text>
+    <text x="380" y="1000" font-size="30" font-weight="600">Engineer</text>
+    <text x="1220" y="1000" font-size="30" font-weight="600" text-anchor="end">Manager</text>
+
+    <!-- Crossing arrows between the four roles -->
+    <g stroke="#d4967d" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Designer -> Engineer -->
+      <path d="M 430 460 C 360 600, 360 780, 430 880"/>
+      <polyline points="412 854 432 884 462 866"/>
+      <!-- PM -> Designer -->
+      <path d="M 1100 420 C 920 360, 720 360, 540 420"/>
+      <polyline points="566 398 538 420 560 444"/>
+      <!-- Engineer -> PM (diagonal cross) -->
+      <path d="M 540 900 C 760 980, 880 760, 1080 460"/>
+      <polyline points="1058 488 1082 462 1108 482"/>
+      <!-- Manager -> Engineer -->
+      <path d="M 1170 940 C 980 1020, 800 1020, 600 940"/>
+      <polyline points="626 916 600 940 622 964"/>
+    </g>
+
+    <!-- Dense core: what doesn't move -->
+    <g>
+      <circle cx="800" cy="680" r="140" fill="#303636"/>
+      <text x="800" y="660" text-anchor="middle" font-size="22" fill="#e5e3dc" letter-spacing="3">EXPERTISE</text>
+      <text x="800" y="694" text-anchor="middle" font-size="16" fill="#e5e3dc" font-style="italic">systems</text>
+      <text x="800" y="716" text-anchor="middle" font-size="16" fill="#e5e3dc" font-style="italic">constraints</text>
+      <text x="800" y="738" text-anchor="middle" font-size="16" fill="#e5e3dc" font-style="italic">judgment</text>
+    </g>
+
+    <!-- Bottom caption -->
+    <g>
+      <rect x="60" y="1080" width="1480" height="90" rx="14" fill="#495a58"/>
+      <text x="100" y="1120" font-size="24" fill="#ffffff">Tools moved across boundaries. The hard part didn't.</text>
+      <text x="100" y="1152" font-size="18" fill="#e5e3dc" font-style="italic">capability is cheap now — knowing what the artifact is hiding is not</text>
+    </g>
+
+  </g>
+</svg>

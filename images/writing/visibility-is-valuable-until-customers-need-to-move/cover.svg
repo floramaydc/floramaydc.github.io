@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Four ascending platforms labeled Visibility, Recommendations, Remediation, and Automation, resting on a wide foundation slab labeled Trust">
+  <rect width="1600" height="1200" fill="#e5e3dc"/>
+  <g font-family="Almarai, system-ui, sans-serif" fill="#303636">
+    <!-- Step 1: Visibility -->
+    <g>
+      <rect x="220" y="780" width="380" height="110" rx="10" fill="#ffffff" stroke="#303636" stroke-width="5"/>
+      <text x="250" y="830" font-size="32">Visibility</text>
+      <text x="250" y="868" font-size="22" fill="#6b7373" font-style="italic">helps customers understand</text>
+    </g>
+    <!-- Step 2: Recommendations -->
+    <g>
+      <rect x="420" y="640" width="420" height="110" rx="10" fill="#ffffff" stroke="#303636" stroke-width="5"/>
+      <text x="450" y="690" font-size="32">Recommendations</text>
+      <text x="450" y="728" font-size="22" fill="#6b7373" font-style="italic">help customers decide</text>
+    </g>
+    <!-- Step 3: Remediation -->
+    <g>
+      <rect x="620" y="500" width="420" height="110" rx="10" fill="#ffffff" stroke="#303636" stroke-width="5"/>
+      <text x="650" y="550" font-size="32">Remediation</text>
+      <text x="650" y="588" font-size="22" fill="#6b7373" font-style="italic">helps customers move</text>
+    </g>
+    <!-- Step 4: Automation (aspirational, dashed) -->
+    <g>
+      <rect x="820" y="360" width="420" height="110" rx="10" fill="#ffffff" stroke="#303636" stroke-width="5" stroke-dasharray="14 8"/>
+      <text x="850" y="410" font-size="32">Automation</text>
+      <text x="850" y="448" font-size="22" fill="#6b7373" font-style="italic">only if customers let go</text>
+    </g>
+    <!-- Foundation slab: Trust -->
+    <g>
+      <rect x="160" y="940" width="1280" height="120" rx="14" fill="#495a58"/>
+      <text x="800" y="1015" text-anchor="middle" font-size="44" fill="#ffffff" letter-spacing="6">TRUST</text>
+    </g>
+    <!-- Load-bearing arrows from steps down to Trust -->
+    <g stroke="#d4967d" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.85">
+      <line x1="410" y1="900" x2="410" y2="930"/>
+      <line x1="630" y1="760" x2="630" y2="930"/>
+      <line x1="830" y1="620" x2="830" y2="930"/>
+      <line x1="1030" y1="480" x2="1030" y2="930"/>
+    </g>
+    <!-- Caption -->
+    <text x="160" y="220" font-size="40" fill="#303636">Four stages.</text>
+    <text x="160" y="270" font-size="40" fill="#303636">One load-bearing foundation.</text>
+    <text x="160" y="318" font-size="24" fill="#6b7373" font-style="italic">visibility → recommendations → remediation → automation</text>
+  </g>
+</svg>

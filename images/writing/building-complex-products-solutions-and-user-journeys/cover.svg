@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Two side-by-side diagrams: on the left, a neat grid of solution boxes with team-ownership chips; on the right, the same boxes with a single winding path cutting across all of them, labeled 'one customer goal'">
+  <rect width="1600" height="1200" fill="#e5e3dc"/>
+  <g font-family="Almarai, system-ui, sans-serif" fill="#303636">
+
+    <!-- Headers -->
+    <text x="60" y="120" font-size="34">How we organized it</text>
+    <text x="60" y="156" font-size="20" fill="#6b7373" font-style="italic">solutions, ownership, roadmap boundaries</text>
+
+    <text x="860" y="120" font-size="34">How customers experience it</text>
+    <text x="860" y="156" font-size="20" fill="#6b7373" font-style="italic">one goal, crossing every seam</text>
+
+    <!-- LEFT GRID: neat solution boxes with team chips -->
+    <g>
+      <!-- Row 1 -->
+      <g>
+        <rect x="60"  y="220" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="4"/>
+        <text x="80" y="260" font-size="22">Solution A</text>
+        <rect x="80" y="350" width="120" height="32" rx="16" fill="#495a58"/>
+        <text x="140" y="372" text-anchor="middle" font-size="16" fill="#ffffff">Team 1</text>
+      </g>
+      <g>
+        <rect x="310" y="220" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="4"/>
+        <text x="330" y="260" font-size="22">Solution B</text>
+        <rect x="330" y="350" width="120" height="32" rx="16" fill="#495a58"/>
+        <text x="390" y="372" text-anchor="middle" font-size="16" fill="#ffffff">Team 2</text>
+      </g>
+      <g>
+        <rect x="560" y="220" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="4"/>
+        <text x="580" y="260" font-size="22">Solution C</text>
+        <rect x="580" y="350" width="120" height="32" rx="16" fill="#495a58"/>
+        <text x="640" y="372" text-anchor="middle" font-size="16" fill="#ffffff">Team 3</text>
+      </g>
+      <!-- Row 2 -->
+      <g>
+        <rect x="60"  y="430" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="4"/>
+        <text x="80" y="470" font-size="22">Solution D</text>
+        <rect x="80" y="560" width="120" height="32" rx="16" fill="#495a58"/>
+        <text x="140" y="582" text-anchor="middle" font-size="16" fill="#ffffff">Team 4</text>
+      </g>
+      <g>
+        <rect x="310" y="430" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="4"/>
+        <text x="330" y="470" font-size="22">Solution E</text>
+        <rect x="330" y="560" width="120" height="32" rx="16" fill="#495a58"/>
+        <text x="390" y="582" text-anchor="middle" font-size="16" fill="#ffffff">Team 5</text>
+      </g>
+      <g>
+        <rect x="560" y="430" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="4"/>
+        <text x="580" y="470" font-size="22">Solution F</text>
+        <rect x="580" y="560" width="120" height="32" rx="16" fill="#495a58"/>
+        <text x="640" y="582" text-anchor="middle" font-size="16" fill="#ffffff">Team 6</text>
+      </g>
+
+      <text x="60" y="680" font-size="18" fill="#6b7373" font-style="italic">clean ownership, clean boundaries</text>
+    </g>
+
+    <!-- Divider -->
+    <line x1="820" y1="200" x2="820" y2="700" stroke="#6b7373" stroke-width="2" stroke-dasharray="6 8"/>
+
+    <!-- RIGHT GRID: same boxes, faded, with a winding journey through them -->
+    <g opacity="0.55">
+      <!-- Row 1 -->
+      <rect x="860"  y="220" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="3"/>
+      <text x="880" y="260" font-size="22" fill="#303636">Solution A</text>
+      <rect x="1110" y="220" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="3"/>
+      <text x="1130" y="260" font-size="22" fill="#303636">Solution B</text>
+      <rect x="1360" y="220" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="3"/>
+      <text x="1380" y="260" font-size="22" fill="#303636">Solution C</text>
+      <!-- Row 2 -->
+      <rect x="860"  y="430" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="3"/>
+      <text x="880" y="470" font-size="22" fill="#303636">Solution D</text>
+      <rect x="1110" y="430" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="3"/>
+      <text x="1130" y="470" font-size="22" fill="#303636">Solution E</text>
+      <rect x="1360" y="430" width="220" height="180" rx="10" fill="#ffffff" stroke="#303636" stroke-width="3"/>
+      <text x="1380" y="470" font-size="22" fill="#303636">Solution F</text>
+    </g>
+
+    <!-- Winding customer-journey path crossing all six -->
+    <g fill="none" stroke="#d4967d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 880 380
+               C 1020 380, 1020 240, 1170 240
+               C 1320 240, 1320 380, 1470 380
+               C 1470 430, 1170 460, 970 510
+               C 850 540, 980 600, 1220 580
+               C 1430 565, 1500 530, 1560 540"/>
+      <!-- Arrowhead -->
+      <polyline points="1530,520 1570,540 1540,572"/>
+    </g>
+
+    <!-- Journey waypoints (small filled dots at each box hit) -->
+    <g fill="#d4967d">
+      <circle cx="880"  cy="380" r="9"/>
+      <circle cx="1170" cy="240" r="9"/>
+      <circle cx="1470" cy="380" r="9"/>
+      <circle cx="970"  cy="510" r="9"/>
+      <circle cx="1220" cy="580" r="9"/>
+      <circle cx="1470" cy="540" r="9"/>
+    </g>
+
+    <!-- Start label -->
+    <text x="855" y="408" text-anchor="end" font-size="16" fill="#303636" font-style="italic">start</text>
+    <!-- End label -->
+    <text x="1565" y="600" font-size="18" fill="#303636" font-style="italic">one customer goal</text>
+
+    <!-- Bottom caption tying the two halves together -->
+    <g>
+      <rect x="60" y="780" width="1480" height="160" rx="14" fill="#495a58"/>
+      <text x="100" y="838" font-size="30" fill="#ffffff">The customer journey did not resemble the navigation.</text>
+      <text x="100" y="884" font-size="30" fill="#ffffff">The customer journey did not resemble solution boundaries.</text>
+      <text x="100" y="924" font-size="22" fill="#e5e3dc" font-style="italic">our seams are the part they feel first</text>
+    </g>
+
+  </g>
+</svg>
