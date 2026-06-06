@@ -3044,13 +3044,33 @@ AI, like design, is only as useful as the intent we bring to it.
       stopSpeaking();
       const url = pendingAudioUrl;
       pendingAudioUrl = null;
+      // iOS drops gesture trust through an awaited async function call, so we
+      // must create the Audio element and call .play() synchronously here —
+      // before any await — then await the returned promise.
+      const audio = new Audio(url);
+      audio.playsInline = true;
+      currentAudio = audio;
+      currentAudioUrl = url;
+      audio.onended = () => {
+        if (currentAudio === audio) currentAudio = null;
+        if (currentAudioUrl === url) currentAudioUrl = null;
+        try { URL.revokeObjectURL(url); } catch {}
+      };
+      audio.onerror = () => {
+        if (currentAudio === audio) currentAudio = null;
+        if (currentAudioUrl === url) currentAudioUrl = null;
+        try { URL.revokeObjectURL(url); } catch {}
+      };
+      const playPromise = audio.play(); // synchronous start — preserves iOS gesture trust
       try {
-        await playAudioUrl(url);
+        await playPromise;
         const wrap = trigger.closest('.flex');
         if (wrap) wrap.remove();
       } catch {
+        currentAudio = null;
+        currentAudioUrl = null;
         pendingAudioUrl = url;
-        addBubble('mai', `Audio playback is still blocked on this device.`);
+        addBubble('mai', `Unable to play audio on this device. Try turning voice replies off and using text instead.`);
       }
     });
 

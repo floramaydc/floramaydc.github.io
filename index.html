@@ -397,7 +397,7 @@ Send feedback
   </script> <section class="py-16 md:py-20" data-astro-cid-j7pv25f6> <div class="home-hero-copy" data-astro-cid-j7pv25f6> <h1 data-reveal style="--reveal-order:0" class="home-hero-title mt-4 md:max-w-[18ch] font-semibold leading-[1.04] md:leading-[0.96] tracking-[-0.02em]" data-astro-cid-j7pv25f6>
 For <em class="home-hero-em" data-astro-cid-j7pv25f6>messy</em> problems and the people <em class="home-hero-em" data-astro-cid-j7pv25f6>untangling</em> them
 </h1> <p data-reveal style="--reveal-order:1" class="home-hero-bio mt-6 max-w-[64rem] text-lg text-muted md:text-xl md:leading-relaxed" data-astro-cid-j7pv25f6>
-A collection of tools, experiments, writing, and ideas worth keeping around — plus M.ai, an assistant you can ask anything about the site.
+A collection of tools, experiments, writing, and ideas worth keeping around.
 </p> <div data-reveal style="--reveal-order:2" class="home-hero-cta mt-8 flex flex-wrap gap-4" data-astro-cid-j7pv25f6> <a href="/toybox" class="rounded-md bg-ink px-5 py-3 text-paper text-sm hover:bg-accent" data-astro-cid-j7pv25f6>Open toybox</a> <a href="/writing" class="rounded-md border border-ink/20 px-5 py-3 text-sm hover:border-accent hover:text-accent" data-astro-cid-j7pv25f6>Explore writing</a> </div> </div> </section> <section class="mt-12 pt-12" data-astro-cid-j7pv25f6> <div data-reveal class="flex items-baseline justify-between gap-4 flex-wrap" data-astro-cid-j7pv25f6> <h2 class="text-2xl" data-astro-cid-j7pv25f6>Featured toys in the Toybox</h2> <a href="/toybox#featured" class="text-sm text-muted hover:text-accent underline" data-astro-cid-j7pv25f6>
 See all featured →
 </a> </div> <ul class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-astro-cid-j7pv25f6> <li data-reveal style="--reveal-order:0" class="home-card rounded-lg border border-ink/10 p-5 hover:border-accent transition-colors" data-astro-cid-j7pv25f6> <a href="/toybox/accessibility-audit-tool" class="block" data-astro-cid-j7pv25f6> <div class="flex items-center justify-between gap-3" data-astro-cid-j7pv25f6> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent" data-astro-cid-j7pv25f6> Tool </span> <time class="text-xs text-muted" datetime="2026-06-01T00:00:00.000Z" data-astro-cid-j7pv25f6>
@@ -2614,13 +2614,33 @@ AI, like design, is only as useful as the intent we bring to it.
       stopSpeaking();
       const url = pendingAudioUrl;
       pendingAudioUrl = null;
+      // iOS drops gesture trust through an awaited async function call, so we
+      // must create the Audio element and call .play() synchronously here —
+      // before any await — then await the returned promise.
+      const audio = new Audio(url);
+      audio.playsInline = true;
+      currentAudio = audio;
+      currentAudioUrl = url;
+      audio.onended = () => {
+        if (currentAudio === audio) currentAudio = null;
+        if (currentAudioUrl === url) currentAudioUrl = null;
+        try { URL.revokeObjectURL(url); } catch {}
+      };
+      audio.onerror = () => {
+        if (currentAudio === audio) currentAudio = null;
+        if (currentAudioUrl === url) currentAudioUrl = null;
+        try { URL.revokeObjectURL(url); } catch {}
+      };
+      const playPromise = audio.play(); // synchronous start — preserves iOS gesture trust
       try {
-        await playAudioUrl(url);
+        await playPromise;
         const wrap = trigger.closest('.flex');
         if (wrap) wrap.remove();
       } catch {
+        currentAudio = null;
+        currentAudioUrl = null;
         pendingAudioUrl = url;
-        addBubble('mai', `Audio playback is still blocked on this device.`);
+        addBubble('mai', `Unable to play audio on this device. Try turning voice replies off and using text instead.`);
       }
     });
 
