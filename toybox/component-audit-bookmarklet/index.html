@@ -496,6 +496,12 @@ AI, like design, is only as useful as the intent we bring to it.
         answer: `Of course. I'll be here whenever a new question comes up.`,
         followups: ['Explore the Toybox', 'Show me case studies'],
       },
+      {
+        id: 'audit-tools',
+        patterns: ['accessibility audit', 'component audit', 'run an audit', 'audit my page', 'audit my site', 'audit a url', 'audit a page', 'check accessibility', 'check for wcag', 'wcag check', 'audit tool'],
+        answer: `Two tools — paste any URL and get a structured report:<br><br>• <a class="text-accent underline" href="${base}toybox/accessibility-audit-tool/">Accessibility Audit</a> — WCAG 2.1 element inventory, contrast findings, missing labels, and actionable fixes<br>• <a class="text-accent underline" href="${base}toybox/component-audit-tool/">Component Audit</a> — component inventory with design-system source detection (Fluent UI, Material, Carbon) and risk flags<br><br>Both are free and require no sign-in. Paste a public URL and run.`,
+        followups: ['How does the accessibility audit work?', 'What design systems does Component Audit detect?', 'Explore the Toybox'],
+      },
     ];
 
     const STARTER_CHIPS = ['What playbooks exist?', 'Show me case studies', 'Explore the Toybox', 'Send a message'];
