@@ -413,19 +413,53 @@ Send feedback
   (() => {
     if (!window.matchMedia) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // One full pass of the story (field walk-in → drawing → crumple → ball →
+    // reading room → kick into the toy chest) settles at ~26.7s; we hold on the
+    // payoff for a beat, then replay so the hero loops instead of dead-ending.
+    const PERIOD = 29000;
+
+    // The SMIL kids jump runs from t=0; let it play, then freeze them standing
+    // as Flora walks in. Re-armed at the start of every loop.
+    const smilJump = (svg) => {
+      try {
+        svg.setCurrentTime(0);
+        svg.unpauseAnimations();
+      } catch (e) {}
+      setTimeout(() => {
+        try { svg.pauseAnimations(); } catch (e) {}
+      }, 3400);
+    };
+
+    // Re-trigger every CSS animation from its declared delay. The hidden scene
+    // layers all carry an explicit opacity:0 base style, so cancelling reverts
+    // each element to its exact t=0 state — no flash on the loop seam.
+    const restartCss = (svg) => {
+      let anims;
+      try { anims = svg.getAnimations({ subtree: true }); } catch (e) { return; }
+      anims.forEach((a) => {
+        try { a.cancel(); a.play(); } catch (e) {}
+      });
+    };
+
     document.querySelectorAll('.fv-art').forEach((svg) => {
       if (typeof svg.pauseAnimations !== 'function') return;
       if (reduce.matches) {
         // Rest state: kids already settled; freeze the SMIL jump at the start.
+        // No loop — honour the user's motion preference.
         svg.setCurrentTime(0);
         svg.pauseAnimations();
         return;
       }
-      // Let the kids jump, then freeze them standing as Flora walks in.
-      svg.unpauseAnimations();
-      setTimeout(() => {
-        try { svg.pauseAnimations(); } catch (e) {}
-      }, 3400);
+      // First pass plays from the CSS animations already running on load; just
+      // arm the SMIL jump and schedule the loop.
+      smilJump(svg);
+      const loop = () => {
+        restartCss(svg);
+        smilJump(svg);
+        setTimeout(loop, PERIOD);
+      };
+      setTimeout(loop, PERIOD);
     });
   })();
 </script> </div> <div class="home-hero-scrim" aria-hidden="true" data-astro-cid-j7pv25f6></div> <div class="home-band-inner home-hero-copy-wrap" data-astro-cid-j7pv25f6> <div class="home-hero-copy" data-astro-cid-j7pv25f6> <p class="text-sm uppercase tracking-widest text-muted" data-astro-cid-j7pv25f6>Senior Product Designer</p> <h1 class="home-hero-title mt-4 md:max-w-[18ch] font-semibold leading-[1.04] md:leading-[0.96] tracking-[-0.02em]" data-astro-cid-j7pv25f6>
