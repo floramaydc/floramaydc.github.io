@@ -1137,8 +1137,8 @@ AI, like design, is only as useful as the intent we bring to it.
 
       const defaultDest = NAV_DESTINATIONS.toybox;
       pendingNav = { url: defaultDest.url, label: defaultDest.label };
-      return `It sounds like you are not choosing a page yet; you are choosing a level of engagement. If you want something you can use immediately, start with <a class="text-accent underline" href="${defaultDest.url}">Toybox</a>. It is the most practical doorway because the tools and playbooks turn messy product judgment into repeatable moves.<br><br>` +
-        `If you would rather understand the philosophy underneath the tools, <a class="text-accent underline" href="${NAV_DESTINATIONS.writing.url}">Writing</a> is the slower, more reflective path. My first nudge would still be Toybox: it gives you something to hold, and you can follow the thread into essays or work examples after that.${renderNavCta(defaultDest.url, defaultDest.label)}`;
+      return `It sounds like you are not choosing a page yet; you are choosing a level of engagement. I would start with <strong>Toybox</strong> if you want something you can use immediately. It is the most practical doorway because the tools and playbooks turn messy product judgment into repeatable moves.<br><br>` +
+        `If you would rather understand the philosophy underneath the tools, <strong>Writing</strong> is the slower, more reflective path. My first nudge would still be Toybox: it gives you something to hold, and you can follow the thread into essays or work examples after that.${renderNavCta(defaultDest.url, defaultDest.label)}`;
     }
 
     const A11Y_FINDING_GUIDE = {
@@ -1667,7 +1667,7 @@ AI, like design, is only as useful as the intent we bring to it.
     }
 
     function noMatchAnswer(query) {
-      return `I don’t have enough to hold onto for <em>${escapeHtml(query)}</em> yet. Try giving me the problem you are trying to solve, paste a finding or result, or start in <a class="text-accent underline" href="${base}toybox">Toybox</a> if you want something practical to use.`;
+      return `I don’t have enough to hold onto for <em>${escapeHtml(query)}</em> yet. Give me the problem you are trying to solve, paste a finding or result, or tell me whether you want something practical or reflective and I’ll make the next call from there.`;
     }
 
     // ---------- LLM tier (optional) ----------
@@ -2376,7 +2376,7 @@ AI, like design, is only as useful as the intent we bring to it.
         case 'meta':
           return `I'm M.ai — a context-aware site assistant. I use the current page, the latest site manifest, and relevant published pages to answer with citations when useful.`;
         case 'capability':
-          return `I can help with the current page, pasted accessibility findings, Toybox tools and playbooks, <a class="text-accent underline" href="${base}writing">writing</a>, <a class="text-accent underline" href="${base}work">work</a>, and <a class="text-accent underline" href="${base}play">play</a> pages. Try “what can this page do?”, “show newest Toybox updates”, or paste a finding like <em>color-contrast</em>.`;
+          return `I can help you make sense of the page you are on, interpret a pasted audit finding, choose a practical tool or playbook, or follow a thread into writing and work examples. The useful move is to tell me what you are trying to decide, not just where you want to browse.`;
         case 'action':
           return `I don't take actions on Flora's behalf — no bookings, no signups. For anything that needs her directly, <a class="text-accent underline" href="https://linkedin.com/in/floramaydelacruz">LinkedIn</a> is the clearest path.`;
         default:
@@ -3093,7 +3093,7 @@ AI, like design, is only as useful as the intent we bring to it.
           if (!bubble) return;
           const reply = manifest
             ? renderManifestAnswer(manifest, clean)
-            : `I could not load the latest site manifest just now. Try the <a class="text-accent underline" href="${base}toybox">Toybox</a> index.`;
+            : `I could not load the latest site manifest just now. My best nudge is still Toybox if you want the most practical, current material.`;
           bubble.innerHTML = reply;
           renderChips(['What tools are available?', 'What playbooks exist?', 'What can this page do?']);
           if (shouldSpeakThisTurn) speak(stripHtml(reply));
@@ -3128,7 +3128,7 @@ AI, like design, is only as useful as the intent we bring to it.
           if (!bubble) return;
           const oldest = pickOldestPlaybook(index);
           if (!oldest?.first) {
-            bubble.innerHTML = `${pageLine}<br><br>I couldn't resolve a published playbook chronology right now, but I can take you to <a class="text-accent underline" href="${base}toybox">Toybox</a>.`;
+            bubble.innerHTML = `${pageLine}<br><br>I couldn't resolve a published playbook chronology right now. The useful next move is still Toybox if you want to browse the playbooks directly.`;
             renderChips(getDynamicChips(clean));
             if (shouldSpeakThisTurn) speak('I could not resolve the oldest playbook right now, but I can take you to Toybox.');
             saveTranscript();
