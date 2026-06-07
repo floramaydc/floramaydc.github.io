@@ -932,8 +932,8 @@ AI, like design, is only as useful as the intent we bring to it.
       {
         id: 'hi',
         patterns: ['hi', 'hello', 'hey', 'yo', 'sup', 'greetings'],
-        answer: `Hello. I can help you understand this page, choose where to go next, or work through a pasted audit finding. Tell me what you are trying to do and I will meet you there.`,
-        followups: ['What can this page do?', 'Help me choose where to start', 'What tools are available?'],
+        answer: `Hi. We can start wherever you are: this page, a pasted finding, a half-formed question, or the simple feeling of “I’m not sure where to go next.” I’ll help you orient before we move.`,
+        followups: ['Help me choose where to start', 'What can this page do?', 'What tools are available?'],
       },
       {
         id: 'thanks',
@@ -1280,17 +1280,17 @@ AI, like design, is only as useful as the intent we bring to it.
       const dest = destinationFromText(text);
       if (dest) {
         pendingNav = { url: dest.url, label: dest.label };
-        return `Yes — <strong>${escapeHtml(dest.label)}</strong> is the right next stop for ${escapeHtml(dest.reason)}.${renderNavCta(dest.url, dest.label)}`;
+        return `<strong>${escapeHtml(dest.label)}</strong> feels like the right next room for this: ${escapeHtml(dest.reason)}. I can take you there if you want to keep moving.${renderNavCta(dest.url, dest.label)}`;
       }
 
-      return `Let’s choose by intent, not by menu label.<br><br>` +
+      return `Let’s choose by what you are carrying, not by the menu label.<br><br>` +
         `<ul class="mai-list">` +
           `<li><strong>Use a tool or find a reusable method:</strong> start in <a class="text-accent underline" href="${NAV_DESTINATIONS.toybox.url}">Toybox</a>.</li>` +
           `<li><strong>Evaluate work examples:</strong> go to <a class="text-accent underline" href="${NAV_DESTINATIONS.work.url}">Work</a>.</li>` +
           `<li><strong>Read the thinking:</strong> browse <a class="text-accent underline" href="${NAV_DESTINATIONS.writing.url}">Writing</a>.</li>` +
           `<li><strong>Get background or contact paths:</strong> use <a class="text-accent underline" href="${NAV_DESTINATIONS.about.url}">About</a>.</li>` +
         `</ul>` +
-        `Tell me what you came here to do, and I can narrow it to one path instead of making you browse.`;
+        `Tell me what you are trying to understand, and I can narrow it to one path instead of making you browse.`;
     }
 
     const A11Y_FINDING_GUIDE = {
@@ -1815,11 +1815,11 @@ AI, like design, is only as useful as the intent we bring to it.
             <p class="mt-1 text-ink/80">${snippet(d.text, query)}</p>
           </div>`;
       }).join('');
-      return `<p class="text-[11px] text-muted mb-2">I found a few grounded starting points. The fuller assistant answer is not available right now, but these should still help you move.</p>${parts}`;
+      return `<p class="text-[11px] text-muted mb-2">I can’t shape a full answer right now, but these are the closest threads to pull on.</p>${parts}`;
     }
 
     function noMatchAnswer(query) {
-      return `I do not have enough grounded context for <em>${escapeHtml(query)}</em> yet. Try asking what you want to do next, paste a finding/result, or start with <a class="text-accent underline" href="${base}toybox">Toybox</a> for tools and playbooks.`;
+      return `I don’t have enough to hold onto for <em>${escapeHtml(query)}</em> yet. Try giving me the problem you are trying to solve, paste a finding or result, or start in <a class="text-accent underline" href="${base}toybox">Toybox</a> if you want something practical to use.`;
     }
 
     // ---------- LLM tier (optional) ----------
@@ -2248,7 +2248,7 @@ AI, like design, is only as useful as the intent we bring to it.
       const b = document.createElement('div');
       b.id = 'mai-paused-banner';
       b.className = 'text-[11px] text-muted bg-cream border border-muted/20 rounded px-2 py-1 mb-2';
-      b.textContent = message || 'The full answer mode is paused right now. I can still guide you with page context and grounded starting points.';
+      b.textContent = message || 'The fuller answer layer is paused right now, but I can still help you orient from the page and nearby material.';
       log.prepend(b);
     }
 
@@ -2290,7 +2290,7 @@ AI, like design, is only as useful as the intent we bring to it.
       }
       if (res.status === 402) {
         aiPaused = true;
-        showPausedBanner('The full answer mode is paused for this month. I can still guide you with page context and grounded starting points.');
+        showPausedBanner('The fuller answer layer is paused for this month, but I can still help you orient from the page and nearby material.');
         return false;
       }
       if (res.status === 429) {
@@ -2306,7 +2306,7 @@ AI, like design, is only as useful as the intent we bring to it.
         } catch {}
         setTimeout(() => { aiPaused = false; }, retry);
         showPausedBanner(
-          'The full answer mode is paused for this window — chat limit reached. I can still offer grounded starting points below.',
+          'The fuller answer layer is paused for this window. I can still point you toward the closest useful threads below.',
         );
         return false; // let caller render the retrieval list under the banner
       }
