@@ -528,8 +528,8 @@ AI, like design, is only as useful as the intent we bring to it.
       {
         id: 'audit-tools',
         patterns: ['accessibility audit', 'component audit', 'run an audit', 'audit my page', 'audit my site', 'audit a url', 'audit a page', 'check accessibility', 'check for wcag', 'wcag check', 'audit tool'],
-        answer: `Two tools — paste any URL and get a structured report:<br><br>• <a class="text-accent underline" href="${base}toybox/accessibility-audit-tool/">Accessibility Audit</a> — WCAG 2.1 element inventory, contrast findings, missing labels, and actionable fixes<br>• <a class="text-accent underline" href="${base}toybox/component-audit-tool/">Component Audit</a> — component inventory with design-system source detection (Fluent UI, Material, Carbon) and risk flags<br><br>Both are free and require no sign-in. Paste a public URL and run.`,
-        followups: ['How does the accessibility audit work?', 'What design systems does Component Audit detect?', 'Explore the Toybox'],
+        answer: `If you are asking about accessibility specifically, <strong>Accessibility Audit</strong> is the right starting point. It looks at a live page the way a pre-handoff reviewer would: structure first, then names, labels, contrast, landmarks, and the places where automated checks can give you a useful lead.<br><br>What matters is not the score by itself. The value is the annotated finding: what element is affected, why it matters for someone using assistive tech, and what a practical fix might look like. I would use it when you want to turn a vague “is this accessible?” question into a concrete review list you can act on.`,
+        followups: ['How does the accessibility audit work?', 'How do I verify a finding?', 'Open Accessibility Audit'],
       },
     ];
 
