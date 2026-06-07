@@ -756,7 +756,7 @@ AI, like design, is only as useful as the intent we bring to it.
     </script> <div id="mai-root" class="print:hidden"> <!-- Backdrop (mobile only — desktop keeps the page interactive behind the
        panel so M.ai can guide the user through the UI bidirectionally). --> <div id="mai-backdrop" hidden class="fixed inset-0 z-40 bg-ink/30 backdrop-blur-[1px] transition-opacity md:hidden"></div> <!-- Right-side drawer panel. On mobile it floats over the page; on
        desktop it claims a 24rem rail and the page shifts left to make
-       room (see html.mai-open rule below). --> <div id="mai-panel" role="dialog" aria-modal="true" aria-labelledby="mai-title" hidden class="fixed top-0 right-0 z-50 h-full w-full md:w-[24rem] bg-paper border-l border-ink/10 shadow-2xl shadow-ink/20 md:shadow-none flex flex-col"> <div class="flex items-start justify-between gap-2 border-b border-ink/10 px-4 py-4 bg-cream"> <div> <h2 id="mai-title" class="mai-panel-title font-serif italic text-2xl leading-none"><span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span></h2> <p class="mt-1.5 text-[11px] text-muted">A thoughtful guide to Flora&rsquo;s work, writing, and ideas. Ask anything &mdash; I&rsquo;ll read across the site and synthesize, with citations.</p> </div> <div class="flex items-center gap-1"> <button id="mai-expand" type="button" aria-label="Expand M.ai to full screen" aria-pressed="false" title="Expand" class="rounded p-1.5 text-muted hover:text-accent transition-colors hidden md:inline-flex"> <svg id="mai-expand-icon-expand" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polyline points="15 3 21 3 21 9"></polyline> <polyline points="9 21 3 21 3 15"></polyline> <line x1="21" y1="3" x2="14" y2="10"></line> <line x1="3" y1="21" x2="10" y2="14"></line> </svg> <svg id="mai-expand-icon-collapse" hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polyline points="4 14 10 14 10 20"></polyline> <polyline points="20 10 14 10 14 4"></polyline> <line x1="14" y1="10" x2="21" y2="3"></line> <line x1="3" y1="21" x2="10" y2="14"></line> </svg> </button> <button id="mai-speak-toggle" type="button" aria-label="Read replies aloud" aria-pressed="false" title="Read replies aloud" class="rounded p-1.5 text-muted hover:text-accent transition-colors"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon> <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path> </svg> </button> <button id="mai-close" type="button" aria-label="Close M.ai" class="rounded p-1.5 text-muted hover:text-accent transition-colors"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="6" y1="6" x2="18" y2="18"></line> <line x1="6" y1="18" x2="18" y2="6"></line> </svg> </button> </div> </div> <div id="mai-classic-nav" hidden class="px-4 py-2 border-b border-ink/10 bg-paper"> <p class="text-[10px] uppercase tracking-widest text-muted">Prefer traditional UX?</p> <div class="mt-1.5 flex flex-wrap gap-1.5"> <a href="/" class="mai-classic-link">Home</a> <a href="/toybox" class="mai-classic-link">Toybox</a> <a href="/work" class="mai-classic-link">Work</a> <a href="/play" class="mai-classic-link">Play</a> <a href="/writing" class="mai-classic-link">Writing</a> <a href="/about" class="mai-classic-link">About</a> </div> </div> <!-- Topic grid: shown on first open, hidden after the user asks something. --> <div id="mai-topics" class="px-4 py-3 border-b border-ink/5"> <p class="text-[11px] uppercase tracking-widest text-muted">Start exploring</p> <p class="mt-1 text-[11px] text-muted italic">Ask me about ideas, frameworks, or specific work. I'll search Flora's site and synthesize with citations.</p> <div class="mt-2 grid grid-cols-2 gap-2"> <button type="button" data-q="Who is Flora?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Who is Flora</span> <span class="mt-0.5 block text-[11px] text-muted">Her design approach</span> </button> <button type="button" data-q="What playbooks exist?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Playbooks</span> <span class="mt-0.5 block text-[11px] text-muted">Thinking frameworks</span> </button> <button type="button" data-q="Show me case studies" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Case Studies</span> <span class="mt-0.5 block text-[11px] text-muted">Design in practice</span> </button> <button type="button" data-q="What's in the writing?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Essays & Writing</span> <span class="mt-0.5 block text-[11px] text-muted">Systems and trust</span> </button> <button type="button" data-q="What tools are there?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Tools & Experiments</span> <span class="mt-0.5 block text-[11px] text-muted">Interactive systems</span> </button> <button type="button" data-q="How do I contact her?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Get in Touch</span> <span class="mt-0.5 block text-[11px] text-muted">Email, LinkedIn, message</span> </button> </div> </div> <div id="mai-log" class="flex-1 overflow-y-auto px-4 py-3 space-y-3 text-sm" aria-live="polite"></div> <div id="mai-chips" class="px-4 pt-2 pb-1 flex flex-wrap gap-1.5"></div> <form id="mai-form" class="flex items-center gap-2 border-t border-ink/10 px-4 pt-3 pb-8 bg-paper"> <button id="mai-mic" type="button" aria-label="Speak your question" aria-pressed="false" title="Speak" class="rounded p-2 text-muted hover:text-accent transition-colors"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="9" y="3" width="6" height="12" rx="3"></rect> <path d="M5 11a7 7 0 0 0 14 0"></path> <line x1="12" y1="18" x2="12" y2="22"></line> </svg> </button> <label for="mai-input" class="sr-only">Ask M.ai a question</label> <input id="mai-input" type="text" autocomplete="off" placeholder="Ask about a project, an idea, or where to start…" class="flex-1 min-w-0 rounded border border-ink/15 bg-paper px-3 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent"> <button type="submit" aria-label="Send" class="rounded bg-ink px-3 py-2.5 text-paper text-xs hover:bg-accent transition-colors">Send</button> </form> </div> </div>  <script>(function(){const base = "/";
+       room (see html.mai-open rule below). --> <div id="mai-panel" role="dialog" aria-modal="true" aria-labelledby="mai-title" hidden class="fixed top-0 right-0 z-50 h-full w-full md:w-[24rem] bg-paper border-l border-ink/10 shadow-2xl shadow-ink/20 md:shadow-none flex flex-col"> <div class="flex items-start justify-between gap-2 border-b border-ink/10 px-4 py-4 bg-cream"> <div> <h2 id="mai-title" class="mai-panel-title font-serif italic text-2xl leading-none"><span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span></h2> <p class="mt-1.5 text-[11px] text-muted">A context-aware guide for the page you&rsquo;re on. Ask about findings, tools, playbooks, writing, work, or next steps.</p> </div> <div class="flex items-center gap-1"> <button id="mai-expand" type="button" aria-label="Expand M.ai to full screen" aria-pressed="false" title="Expand" class="rounded p-1.5 text-muted hover:text-accent transition-colors hidden md:inline-flex"> <svg id="mai-expand-icon-expand" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polyline points="15 3 21 3 21 9"></polyline> <polyline points="9 21 3 21 3 15"></polyline> <line x1="21" y1="3" x2="14" y2="10"></line> <line x1="3" y1="21" x2="10" y2="14"></line> </svg> <svg id="mai-expand-icon-collapse" hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polyline points="4 14 10 14 10 20"></polyline> <polyline points="20 10 14 10 14 4"></polyline> <line x1="14" y1="10" x2="21" y2="3"></line> <line x1="3" y1="21" x2="10" y2="14"></line> </svg> </button> <button id="mai-speak-toggle" type="button" aria-label="Read replies aloud" aria-pressed="false" title="Read replies aloud" class="rounded p-1.5 text-muted hover:text-accent transition-colors"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon> <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path> </svg> </button> <button id="mai-close" type="button" aria-label="Close M.ai" class="rounded p-1.5 text-muted hover:text-accent transition-colors"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="6" y1="6" x2="18" y2="18"></line> <line x1="6" y1="18" x2="18" y2="6"></line> </svg> </button> </div> </div> <div id="mai-classic-nav" hidden class="px-4 py-2 border-b border-ink/10 bg-paper"> <p class="text-[10px] uppercase tracking-widest text-muted">Prefer traditional UX?</p> <div class="mt-1.5 flex flex-wrap gap-1.5"> <a href="/" class="mai-classic-link">Home</a> <a href="/toybox" class="mai-classic-link">Toybox</a> <a href="/work" class="mai-classic-link">Work</a> <a href="/play" class="mai-classic-link">Play</a> <a href="/writing" class="mai-classic-link">Writing</a> <a href="/about" class="mai-classic-link">About</a> </div> </div> <!-- Topic grid: shown on first open, hidden after the user asks something. --> <div id="mai-topics" class="px-4 py-3 border-b border-ink/5"> <p class="text-[11px] uppercase tracking-widest text-muted">Start exploring</p> <p class="mt-1 text-[11px] text-muted italic">Ask about this page, pasted findings, latest Toybox updates, or where to go next.</p> <div class="mt-2 grid grid-cols-2 gap-2"> <button type="button" data-q="Who is Flora?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Who is Flora</span> <span class="mt-0.5 block text-[11px] text-muted">Her design approach</span> </button> <button type="button" data-q="What playbooks exist?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Playbooks</span> <span class="mt-0.5 block text-[11px] text-muted">Thinking frameworks</span> </button> <button type="button" data-q="Show me case studies" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Case Studies</span> <span class="mt-0.5 block text-[11px] text-muted">Design in practice</span> </button> <button type="button" data-q="What's in the writing?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Essays & Writing</span> <span class="mt-0.5 block text-[11px] text-muted">Systems and trust</span> </button> <button type="button" data-q="What tools are there?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Tools & Experiments</span> <span class="mt-0.5 block text-[11px] text-muted">Interactive systems</span> </button> <button type="button" data-q="How do I contact her?" class="mai-topic"> <span class="block text-xs font-semibold text-ink">Get in Touch</span> <span class="mt-0.5 block text-[11px] text-muted">Email, LinkedIn, message</span> </button> </div> </div> <div id="mai-log" class="flex-1 overflow-y-auto px-4 py-3 space-y-3 text-sm" aria-live="polite"></div> <div id="mai-chips" class="px-4 pt-2 pb-1 flex flex-wrap gap-1.5"></div> <form id="mai-form" class="flex items-center gap-2 border-t border-ink/10 px-4 pt-3 pb-8 bg-paper"> <button id="mai-mic" type="button" aria-label="Speak your question" aria-pressed="false" title="Speak" class="rounded p-2 text-muted hover:text-accent transition-colors"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <rect x="9" y="3" width="6" height="12" rx="3"></rect> <path d="M5 11a7 7 0 0 0 14 0"></path> <line x1="12" y1="18" x2="12" y2="22"></line> </svg> </button> <label for="mai-input" class="sr-only">Ask M.ai a question</label> <input id="mai-input" type="text" autocomplete="off" placeholder="Ask about a project, an idea, or where to start…" class="flex-1 min-w-0 rounded border border-ink/15 bg-paper px-3 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent"> <button type="submit" aria-label="Send" class="rounded bg-ink px-3 py-2.5 text-paper text-xs hover:bg-accent transition-colors">Send</button> </form> </div> </div>  <script>(function(){const base = "/";
 
   (function () {
     // ---------- LLM proxy (optional) ----------
@@ -765,7 +765,7 @@ AI, like design, is only as useful as the intent we bring to it.
     // M.ai stays in keyword-only mode (the original behavior). See
     // workers/mai/README.md for deploy steps.
     const MAI_WORKER_URL = 'https://mai.floramaydc-mai.workers.dev';
-    const MAI_CLIENT_VERSION = '2026-05-26-whisper-v1';
+    const MAI_CLIENT_VERSION = '2026-06-07-context-aware-v1';
 
     function maiStorageKey(name) {
       return `mai:${MAI_CLIENT_VERSION}:${name}`;
@@ -817,8 +817,8 @@ AI, like design, is only as useful as the intent we bring to it.
       {
         id: 'hi',
         patterns: ['hi', 'hello', 'hey', 'yo', 'sup', 'greetings'],
-        answer: `Hello. Ask about Flora's work, writing, or frameworks in the Toybox — I'll search the site and synthesize with citations.`,
-        followups: ['What playbooks exist?', 'Show me case studies', 'Explore the Toybox'],
+        answer: `Hello. Ask about this page, paste an audit finding, or ask what is new in the Toybox. I will use the current page and latest site index first.`,
+        followups: ['What can this page do?', 'Show newest Toybox updates', 'What tools are available?'],
       },
       {
         id: 'thanks',
@@ -1017,11 +1017,205 @@ AI, like design, is only as useful as the intent we bring to it.
     let _indexPromise = null;
     function loadIndex() {
       if (!_indexPromise) {
-        _indexPromise = fetch(`${base}mai-index.json`)
+        _indexPromise = fetch(`${base}mai-index.json?v=${encodeURIComponent(MAI_CLIENT_VERSION)}`)
           .then((r) => (r.ok ? r.json() : null))
           .catch(() => null);
       }
       return _indexPromise;
+    }
+
+    let _manifestPromise = null;
+    let _manifestReady = null;
+    function loadManifest() {
+      if (!_manifestPromise) {
+        _manifestPromise = fetch(`${base}ai-manifest.json?v=${encodeURIComponent(MAI_CLIENT_VERSION)}`)
+          .then((r) => (r.ok ? r.json() : null))
+          .then((manifest) => {
+            _manifestReady = manifest;
+            return manifest;
+          })
+          .catch(() => null);
+      }
+      return _manifestPromise;
+    }
+
+    function normalizeManifestPath(path) {
+      let value = String(path || '/').split('#')[0].split('?')[0] || '/';
+      if (!value.startsWith('/')) value = `/${value}`;
+      if (value.length > 1) value = value.replace(/\/+$/, '');
+      return value;
+    }
+
+    function manifestEntries(manifest) {
+      return Array.isArray(manifest?.entries) ? manifest.entries : [];
+    }
+
+    function currentManifestEntry(manifest) {
+      const current = normalizeManifestPath(window.location.pathname || '/');
+      return manifestEntries(manifest).find((entry) => normalizeManifestPath(entry.url) === current) || null;
+    }
+
+    function newestEntries(manifest, options = {}) {
+      const section = options.section ? String(options.section).toLowerCase() : '';
+      const type = options.type ? String(options.type).toLowerCase() : '';
+      return manifestEntries(manifest)
+        .filter((entry) => {
+          if (section && String(entry.section || '').toLowerCase() !== section) return false;
+          if (type && String(entry.contentType || '').toLowerCase() !== type) return false;
+          if (String(entry.status || '').toLowerCase() === 'draft') return false;
+          return true;
+        })
+        .sort((a, b) => {
+          const ad = Date.parse(a.lastUpdatedDate || a.publishedDate || '') || 0;
+          const bd = Date.parse(b.lastUpdatedDate || b.publishedDate || '') || 0;
+          return bd - ad || String(a.title || '').localeCompare(String(b.title || ''));
+        });
+    }
+
+    function formatDate(value) {
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.valueOf())) return String(value);
+      return date.toISOString().slice(0, 10);
+    }
+
+    function isFreshnessQuery(text) {
+      return /\b(what'?s new|newest|latest|recent|recently updated|updates|what changed|what tools|tools are available|playbooks exist|available playbooks|what playbooks|what can this page do|this page do)\b/i.test(text);
+    }
+
+    function classifyManifestRequest(text) {
+      const q = normalize(text);
+      if (/\bwhat can this page do|this page do|what does this page do|what can i do here\b/.test(q)) return 'current-page';
+      if (/\bplaybooks?\b/.test(q)) return 'playbooks';
+      if (/\btools?\b/.test(q)) return 'tools';
+      if (/\bwhat'?s new|newest|latest|recent|recently updated|updates|what changed\b/.test(q)) return 'newest';
+      return '';
+    }
+
+    function renderManifestList(entries, intro, emptyText) {
+      const rows = entries.slice(0, 6).map((entry) => {
+        const url = `${base}${String(entry.url || '/').replace(/^\//, '')}`;
+        const date = formatDate(entry.lastUpdatedDate || entry.publishedDate || '');
+        const meta = [entry.section, entry.contentType, date].filter(Boolean).join(' · ');
+        return `<li><a class="text-accent underline font-semibold" href="${url}">${escapeHtml(entry.title || 'Untitled')}</a>${meta ? ` <span class="text-muted">${escapeHtml(meta)}</span>` : ''}<br><span class="text-ink/80">${escapeHtml(entry.summary || entry.pageIntent || '')}</span></li>`;
+      }).join('');
+      if (!rows) return emptyText;
+      return `${intro}<ul class="mai-list">${rows}</ul>`;
+    }
+
+    function renderManifestAnswer(manifest, query) {
+      const request = classifyManifestRequest(query);
+      if (request === 'current-page') {
+        const entry = currentManifestEntry(manifest);
+        if (!entry) return `I can read this page and related site resources, but I do not have structured metadata for this route yet.`;
+        const related = Array.isArray(entry.relatedPages) && entry.relatedPages.length
+          ? `<br><br>Related next stops:<ul class="mai-list">${entry.relatedPages.slice(0, 3).map((page) => `<li><a class="text-accent underline" href="${base}${String(page.url || '/').replace(/^\//, '')}">${escapeHtml(page.title || page.url)}</a></li>`).join('')}</ul>`
+          : '';
+        return `<strong>${escapeHtml(entry.title || 'This page')}</strong><br>${escapeHtml(entry.pageIntent || entry.summary || 'Use the page content as the main context signal.')}${related}`;
+      }
+      if (request === 'playbooks') {
+        return renderManifestList(
+          newestEntries(manifest, { section: 'Toybox', type: 'playbook' }),
+          'Newest Toybox playbooks first:',
+          `I could not find published playbooks in the current manifest.`,
+        );
+      }
+      if (request === 'tools') {
+        return renderManifestList(
+          newestEntries(manifest, { section: 'Toybox', type: 'tool' }),
+          'Available Toybox tools, newest first:',
+          `I could not find published tools in the current manifest.`,
+        );
+      }
+      return renderManifestList(
+        newestEntries(manifest, { section: 'Toybox' }),
+        'Newest Toybox updates first:',
+        `I could not find recent Toybox entries in the current manifest.`,
+      );
+    }
+
+    const A11Y_FINDING_GUIDE = {
+      'aria-required-children': {
+        meaning: 'A widget role is missing required owned child roles. For example, a `listbox` needs `option` children and a `tablist` needs `tab` children.',
+        matters: 'Assistive technologies rely on the parent/child role structure to announce controls and support keyboard navigation accurately.',
+        causes: ['Using ARIA role attributes on generic wrappers without the full pattern', 'Putting required children outside the owned subtree', 'Hiding required children with `display:none` or `aria-hidden`'],
+        verify: ['Inspect the element role and its direct/owned descendants', 'Compare the structure against the ARIA Authoring Practices pattern', 'Test with keyboard and a screen reader after fixing'],
+        fix: 'Prefer native HTML first. If ARIA is necessary, add the required child roles inside the owned structure or change the parent role to match the real markup.',
+        reference: 'WAI-ARIA required owned elements; WCAG 4.1.2 Name, Role, Value',
+      },
+      'color-contrast': {
+        meaning: 'Text contrast is below the required ratio against its effective background.',
+        matters: 'Low contrast makes content hard or impossible to read for low-vision users, color-vision differences, glare, and small screens.',
+        causes: ['Muted text token on a tinted background', 'Text over images or translucent layers', 'Disabled-looking styles used for active content'],
+        verify: ['Sample computed foreground and effective background colors', 'Check normal text at 4.5:1 minimum and large text at 3:1 minimum', 'Re-test both light and dark mode'],
+        fix: 'Fix the color token or surface pairing, not just one instance. Raise foreground contrast or simplify the background behind the text.',
+        reference: 'WCAG 1.4.3 Contrast (Minimum)',
+      },
+      'button-name': {
+        meaning: 'A button has no accessible name.',
+        matters: 'Screen reader and voice-control users cannot tell what the button does.',
+        causes: ['Icon-only button without `aria-label`', 'Empty button text after visually hiding content', 'SVG used without a text alternative on the button'],
+        verify: ['Inspect the accessibility tree name', 'Tab to the control and check what is announced', 'Confirm the label describes the action, not the icon shape'],
+        fix: 'Add visible text when possible. For icon-only controls, add `aria-label` on the button and keep decorative SVGs `aria-hidden="true"`.',
+        reference: 'WCAG 4.1.2 Name, Role, Value; WCAG 2.5.3 Label in Name when visible text exists',
+      },
+      'landmark-one-main': {
+        meaning: 'The page does not expose exactly one main landmark.',
+        matters: 'Landmarks let keyboard and screen reader users jump directly to the primary content.',
+        causes: ['Missing `<main>` element', 'Multiple visible `<main>` landmarks', 'Main content wrapped in a `div` without `role="main"`'],
+        verify: ['Check the landmarks list in browser accessibility tools', 'Confirm only one visible main landmark exists per page', 'Make sure skipped/hidden layouts do not leave duplicate mains'],
+        fix: 'Wrap the primary page content in one `<main id="main-content">`. Use other landmarks like `nav`, `aside`, and `footer` for surrounding regions.',
+        reference: 'WCAG 1.3.1 Info and Relationships; ARIA landmark guidance',
+      },
+      'link-name': {
+        meaning: 'A link has no accessible name.',
+        matters: 'Users navigating by links cannot know the destination or action.',
+        causes: ['Icon-only link without text', 'Empty anchor around decorative content', 'Image link where the image has empty alt text'],
+        verify: ['Inspect the accessibility tree name for the anchor', 'Use a screen reader links list', 'Check that repeated labels are distinguishable by context'],
+        fix: 'Add descriptive link text, an image alt when the image is the label, or an `aria-label` when the link is intentionally icon-only.',
+        reference: 'WCAG 2.4.4 Link Purpose (In Context); WCAG 4.1.2 Name, Role, Value',
+      },
+      'image-alt': {
+        meaning: 'An informative image is missing alternative text.',
+        matters: 'Non-visual users miss information conveyed only by the image.',
+        causes: ['CMS image inserted without alt text', 'Icon or image acting as content but marked decorative', 'Linked image with no text alternative'],
+        verify: ['Decide whether the image is decorative or informative', 'Inspect the computed accessible name', 'Check linked images in context'],
+        fix: 'Use meaningful `alt` text for informative images. Use `alt=""` only for decorative images that add no information.',
+        reference: 'WCAG 1.1.1 Non-text Content',
+      },
+      'nested-interactive': {
+        meaning: 'An interactive control is nested inside another interactive control.',
+        matters: 'Nested controls create confusing focus, click, and screen reader behavior.',
+        causes: ['A button inside a link card', 'A link inside a button-like row', 'Custom card components wrapping their entire contents in an anchor'],
+        verify: ['Tab through the component and watch focus order', 'Inspect the DOM for `a`, `button`, inputs, or role-based controls inside another control', 'Test pointer and keyboard activation separately'],
+        fix: 'Split the controls into siblings. Make the card itself non-interactive, or keep one primary link and move secondary actions outside it.',
+        reference: 'HTML interactive content rules; WCAG 4.1.2 Name, Role, Value',
+      },
+    };
+
+    function pastedAccessibilityFindings(text) {
+      const found = [];
+      const lower = String(text || '').toLowerCase();
+      for (const key of Object.keys(A11Y_FINDING_GUIDE)) {
+        if (lower.includes(key)) found.push(key);
+      }
+      return found;
+    }
+
+    function renderAccessibilityDiagnosis(ids) {
+      const primary = ids[0];
+      const item = A11Y_FINDING_GUIDE[primary];
+      if (!item) return '';
+      const multiple = ids.length > 1
+        ? `<br><span class="text-muted">I see multiple findings (${ids.map(escapeHtml).join(', ')}). Starting with <strong>${escapeHtml(primary)}</strong>; fix the others with the same diagnosis pattern.</span><br>`
+        : '';
+      const list = (label, values) => `<strong>${label}</strong><ul class="mai-list">${values.map((value) => `<li>${escapeHtml(value)}</li>`).join('')}</ul>`;
+      return `${multiple}<strong>What it means</strong><br>${escapeHtml(item.meaning)}<br><br>` +
+        `<strong>Why it matters</strong><br>${escapeHtml(item.matters)}<br><br>` +
+        list('Likely causes', item.causes) +
+        list('How to verify', item.verify) +
+        `<strong>Suggested fix</strong><br>${escapeHtml(item.fix)}<br><br>` +
+        `<strong>Reference</strong><br>${escapeHtml(item.reference)}`;
     }
 
     // ---------- Fuzzy spell-fix against the index vocabulary ----------
@@ -1207,6 +1401,28 @@ AI, like design, is only as useful as the intent we bring to it.
       return out;
     }
 
+    function applyContextBoost(scored, query, manifest) {
+      const currentPath = normalizeManifestPath(window.location.pathname || '/');
+      const currentEntry = currentManifestEntry(manifest);
+      const relatedPaths = new Set(
+        (currentEntry?.relatedPages || []).map((page) => normalizeManifestPath(page.url)),
+      );
+      const q = normalize(query);
+      const toyboxIntent = /\b(toybox|tool|playbook|prompt|template|pattern|prototype|audit|accessibility|component|design system|fluent|material|carbon)\b/.test(q);
+      return scored
+        .map((row) => {
+          const docPath = normalizeManifestPath(row.d.url || '/');
+          let boost = 0;
+          if (docPath === currentPath) boost += 3.5;
+          if (relatedPaths.has(docPath)) boost += 1.25;
+          if (toyboxIntent && row.d.collection === 'toybox') boost += 1.0;
+          const updatedTime = Date.parse(row.d.updated || '') || 0;
+          if (toyboxIntent && updatedTime) boost += Math.min(0.8, Math.max(0, (updatedTime - Date.parse('2026-05-01')) / 86_400_000) / 60);
+          return { ...row, s: row.s + boost };
+        })
+        .sort((a, b) => b.s - a.s);
+    }
+
     function pickOldestPlaybook(index) {
       const bySlug = new Map();
       for (const d of index?.docs || []) {
@@ -1352,7 +1568,7 @@ AI, like design, is only as useful as the intent we bring to it.
     }
 
     function noMatchAnswer(query) {
-      return `I couldn't find anything for <em>${escapeHtml(query)}</em> in what Flora has published so far. Try the <a class="text-accent underline" href="${base}about">About page</a>, the <a class="text-accent underline" href="${base}toybox">Toybox</a>, or one of the chips below.`;
+      return `I couldn't find a strong match for <em>${escapeHtml(query)}</em> in the current site index. Try the <a class="text-accent underline" href="${base}toybox">Toybox</a>, the <a class="text-accent underline" href="${base}writing">Writing</a> index, or one of the chips below.`;
     }
 
     // ---------- LLM tier (optional) ----------
@@ -2040,7 +2256,7 @@ AI, like design, is only as useful as the intent we bring to it.
     function intentReply(kind) {
       switch (kind) {
         case 'empty':
-          return `Type a few words about Flora's work, writing, or anything in the Toybox — I'll look across the site.`;
+          return `Type a few words about this page, a Toybox tool, a pasted finding, or the topic you want to explore.`;
         case 'too-short':
           return `A little more to go on, please — even one full word helps me find the right page.`;
         case 'gibberish':
@@ -2048,19 +2264,19 @@ AI, like design, is only as useful as the intent we bring to it.
         case 'too-long':
           return `That's a lot to take in at once — try a shorter question (a sentence or two) and I'll work from there.`;
         case 'pii':
-          return `Please keep personal numbers out of the chat — I only need to know what to look up on Flora's site.`;
+          return `Please keep personal numbers out of the chat — I only need the page, finding, or topic you want help with.`;
         case 'jailbreak':
-          return `I don't take instructions from inside the chat. Ask about a topic on Flora's site and I'll work from what's actually there.`;
+          return `I don't take instructions from inside the chat. Ask about a page, tool, finding, or published topic and I'll work from the available context.`;
         case 'nsfw':
           return `That's not what I'm here for. Ask about Flora's writing, her work, or anything in the Toybox.`;
         case 'hostile':
-          return `Let's keep it kind. Ask about Flora's work, her writing, or any page on the site and I'll help.`;
+          return `Let's keep it kind. Ask about the current page, a tool result, writing, work, or Toybox resource and I'll help.`;
         case 'small-talk':
-          return `That sits outside what I can speak to — I work from what Flora has published. Try a topic from the chips below.`;
+          return `That sits outside what I can speak to here. Try a page-specific question, a Toybox topic, or a finding from an audit report.`;
         case 'meta':
-          return `I'm M.ai — a thoughtful guide to Flora's work, writing, and ideas. I read across her published pages and synthesize an answer with citations. Not a general chatbot, and I won't speak to anything she hasn't put on the site.`;
+          return `I'm M.ai — a context-aware site assistant. I use the current page, the latest site manifest, and relevant published pages to answer with citations when useful.`;
         case 'capability':
-          return `I can read across anything Flora has published — her <a class="text-accent underline" href="${base}writing">writing</a>, <a class="text-accent underline" href="${base}work">work</a>, <a class="text-accent underline" href="${base}toybox">Toybox</a>, and <a class="text-accent underline" href="${base}play">play</a> pages — and pull the relevant pieces together. Try a name, a topic, or a phrase from a post.`;
+          return `I can help with the current page, pasted accessibility findings, Toybox tools and playbooks, <a class="text-accent underline" href="${base}writing">writing</a>, <a class="text-accent underline" href="${base}work">work</a>, and <a class="text-accent underline" href="${base}play">play</a> pages. Try “what can this page do?”, “show newest Toybox updates”, or paste a finding like <em>color-contrast</em>.`;
         case 'action':
           return `I don't take actions on Flora's behalf — no bookings, no signups. For anything that needs her directly, <a class="text-accent underline" href="https://linkedin.com/in/floramaydelacruz">LinkedIn</a> is the clearest path.`;
         default:
@@ -2133,10 +2349,16 @@ AI, like design, is only as useful as the intent we bring to it.
     function getPageContext() {
       const h1 = document.querySelector('main h1, h1');
       const { hasForm, hasDecision, hasWarning } = isComplexPage();
+      const manifestEntry = currentManifestEntry(_manifestReady);
       return {
         path: window.location.pathname,
         title: trimText(document.title, 120),
         heading: trimText(h1 ? h1.textContent : '', 120),
+        section: trimText(manifestEntry?.section || '', 80),
+        contentType: trimText(manifestEntry?.contentType || '', 80),
+        pageIntent: trimText(manifestEntry?.pageIntent || '', 220),
+        summary: trimText(manifestEntry?.summary || '', 220),
+        lastUpdatedDate: trimText(manifestEntry?.lastUpdatedDate || '', 40),
         hasForm,
         hasDecision,
         hasWarning,
@@ -2242,7 +2464,7 @@ AI, like design, is only as useful as the intent we bring to it.
         const role = bubble.getAttribute('data-role') || '';
         const text = trimText(stripHtml(bubble.innerHTML || ''), 320);
         if (!text) continue;
-        if (/^(looking through|reading the relevant pages|transcribing with whisper|sending)/i.test(text)) continue;
+        if (/^(gathering relevant context|reviewing this page|checking related playbooks|looking for the latest toybox updates|reading the relevant pages|transcribing with whisper|sending)/i.test(text)) continue;
         rows.push({ role, content: text });
       }
       return rows.slice(-maxItems);
@@ -2270,6 +2492,7 @@ AI, like design, is only as useful as the intent we bring to it.
       function runWarm() {
         _warmTimer = null;
         loadVocab();
+        loadManifest();
       }
 
       // Let first paint settle before warming retrieval assets.
@@ -2736,6 +2959,34 @@ AI, like design, is only as useful as the intent we bring to it.
         return;
       }
 
+      const pastedFindings = pastedAccessibilityFindings(clean);
+      if (pastedFindings.length) {
+        const reply = renderAccessibilityDiagnosis(pastedFindings);
+        addBubble('mai', reply);
+        renderChips(['How do I verify this?', 'Show accessibility playbooks', 'Open Accessibility Audit']);
+        if (shouldSpeakThisTurn) speak(stripHtml(reply));
+        return;
+      }
+
+      if (isFreshnessQuery(clean)) {
+        const pendingId = addBubble(
+          'mai',
+          '<span class="mai-thinking text-muted">Looking for the latest Toybox updates<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>',
+        );
+        loadManifest().then((manifest) => {
+          const bubble = document.getElementById(pendingId);
+          if (!bubble) return;
+          const reply = manifest
+            ? renderManifestAnswer(manifest, clean)
+            : `I could not load the latest site manifest just now. Try the <a class="text-accent underline" href="${base}toybox">Toybox</a> index.`;
+          bubble.innerHTML = reply;
+          renderChips(['What tools are available?', 'What playbooks exist?', 'What can this page do?']);
+          if (shouldSpeakThisTurn) speak(stripHtml(reply));
+          saveTranscript();
+        });
+        return;
+      }
+
       // 2.5) Deterministic context/navigation intents. These should not
       // depend on keyword retrieval quality.
       const asksPageContext = /\b(what page am i(?: in| on)?|where am i|what page is this|which page am i on)\b/i.test(clean);
@@ -2794,7 +3045,7 @@ AI, like design, is only as useful as the intent we bring to it.
       }
 
       // 4) Otherwise, search the site. Index loads lazily on first query.
-      const thinkingId = addBubble('mai', '<span class="mai-thinking text-muted">Looking through Flora&rsquo;s work<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>');
+      const thinkingId = addBubble('mai', '<span class="mai-thinking text-muted">Gathering relevant context<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>');
       loadIndex().then(async (index) => {
         // Replace the placeholder bubble in-place so it doesn't pile up.
         const bubble = document.getElementById(thinkingId);
@@ -2808,8 +3059,9 @@ AI, like design, is only as useful as the intent we bring to it.
         // query race), do it now against the loaded vocab so BM25 has
         // a fair shot at matching mis-spelled proper nouns.
         if (!_vocabReady) await loadVocab();
+        if (!_manifestReady) await loadManifest();
         if (_vocabReady) retrievalQuery = fuzzyCorrectQuery(clean, _vocabReady);
-        const scored = rank(index, retrievalQuery);
+        const scored = applyContextBoost(rank(index, retrievalQuery), retrievalQuery, _manifestReady);
         // Send a wider context to the LLM — it can pick the relevant bits
         // and ignore the rest. Cheaper than refusing a question we COULD have
         // answered if we'd looked further down the list.
