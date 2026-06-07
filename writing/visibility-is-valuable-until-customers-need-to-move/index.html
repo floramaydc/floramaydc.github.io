@@ -516,8 +516,8 @@ AI, like design, is only as useful as the intent we bring to it.
       {
         id: 'hi',
         patterns: ['hi', 'hello', 'hey', 'yo', 'sup', 'greetings'],
-        answer: `Hello. Ask about this page, paste an audit finding, or ask what is new in the Toybox. I will use the current page and latest site index first.`,
-        followups: ['What can this page do?', 'Show newest Toybox updates', 'What tools are available?'],
+        answer: `Hello. I can help you understand this page, choose where to go next, or work through a pasted audit finding. Tell me what you are trying to do and I will meet you there.`,
+        followups: ['What can this page do?', 'Help me choose where to start', 'What tools are available?'],
       },
       {
         id: 'thanks',
@@ -533,7 +533,7 @@ AI, like design, is only as useful as the intent we bring to it.
       },
     ];
 
-    const STARTER_CHIPS = ['What playbooks exist?', 'Show me case studies', 'Explore the Toybox', 'Send a message'];
+    const STARTER_CHIPS = ['Help me choose where to start', 'What can this page do?', 'Explore the Toybox', 'Send a message'];
 
     function uniqueChips(items, max = 4) {
       const out = [];
@@ -558,6 +558,10 @@ AI, like design, is only as useful as the intent we bring to it.
       const chips = [];
       const add = (...items) => chips.push(...items);
 
+      if (/\b(start|where to go|navigate|guide|choose|recommend|next)\b/.test(q)) {
+        add('Take me to Toybox', 'Show me case studies', 'Take me to Writing');
+      }
+
       // Query-driven suggestions (context-aware defaults if no retrieval yet)
       if (/\b(dark|theme|contrast|accessib)\w*\b/.test(q)) {
         add('Turn on dark mode', 'Show dark mode one-pager', 'Run accessibility checklist');
@@ -569,7 +573,7 @@ AI, like design, is only as useful as the intent we bring to it.
         add('Show me case studies', 'Take me to Work', 'Compare flagship projects');
       }
       if (/\b(writing|article|blog|post|essay|reflection)\b/.test(q)) {
-        add('Take me to Writing', 'Show recent writing', 'What did Flora publish lately?');
+        add('Take me to Writing', 'Show recent writing', 'What changed recently?');
       }
       if (/\b(about|background|experience|career|who is flora|who\s+is\s+flora)\b/.test(q)) {
         add('Take me to About', 'What is Flora working on?', 'Show me case studies');
@@ -691,7 +695,7 @@ AI, like design, is only as useful as the intent we bring to it.
       return best.score >= 1.0 ? best.entry : null;
     }
 
-    // ---------- Retrieval over the site index ----------
+    // ---------- Grounding from published source chunks ----------
     // Loaded lazily on the first real question. The index is precomputed by
     // scripts/build-mai-index.mjs and served from /mai-index.json. Each doc
     // already carries a field-weighted tf map and we have global df + N \u2014
@@ -810,7 +814,8 @@ AI, like design, is only as useful as the intent we bring to it.
         const related = Array.isArray(entry.relatedPages) && entry.relatedPages.length
           ? `<br><br>Related next stops:<ul class="mai-list">${entry.relatedPages.slice(0, 3).map((page) => `<li><a class="text-accent underline" href="${base}${String(page.url || '/').replace(/^\//, '')}">${escapeHtml(page.title || page.url)}</a></li>`).join('')}</ul>`
           : '';
-        return `<strong>${escapeHtml(entry.title || 'This page')}</strong><br>${escapeHtml(entry.pageIntent || entry.summary || 'Use the page content as the main context signal.')}${related}`;
+        const summary = entry.pageIntent || entry.summary || 'Use this page as the main context for what you want to do next.';
+        return `<strong>${escapeHtml(entry.title || 'This page')}</strong><br>${escapeHtml(summary)}<br><br>I can help interpret what is here, move you to a related page, or narrow the next step based on what you are trying to accomplish.${related}`;
       }
       if (request === 'playbooks') {
         return renderManifestList(
@@ -831,6 +836,45 @@ AI, like design, is only as useful as the intent we bring to it.
         'Newest Toybox updates first:',
         `I could not find recent Toybox entries in the current manifest.`,
       );
+    }
+
+    const NAV_DESTINATIONS = {
+      toybox: { url: `${base}toybox`, label: 'Toybox', reason: 'tools, playbooks, prototypes, and practical experiments' },
+      work: { url: `${base}work`, label: 'Work', reason: 'case studies and enterprise systems work' },
+      writing: { url: `${base}writing`, label: 'Writing', reason: 'essays, reflections, and systems-thinking notes' },
+      play: { url: `${base}play`, label: 'Play', reason: 'visual work and creative experiments' },
+      about: { url: `${base}about`, label: 'About', reason: 'background, contact paths, and a fuller introduction' },
+    };
+
+    function destinationFromText(text) {
+      const q = normalize(text || '');
+      if (/\b(toybox|toolbox|tools?|playbooks?|patterns?|prototypes?|experiments?)\b/.test(q)) return NAV_DESTINATIONS.toybox;
+      if (/\b(work|case stud(?:y|ies)|projects?|portfolio|enterprise|security|ai systems?|governance)\b/.test(q)) return NAV_DESTINATIONS.work;
+      if (/\b(writing|essays?|articles?|posts?|blog|reflection|reflections)\b/.test(q)) return NAV_DESTINATIONS.writing;
+      if (/\b(play|art|creative|visual|book|pale and bright|tabulas)\b/.test(q)) return NAV_DESTINATIONS.play;
+      if (/\b(about|background|bio|contact|who is flora|reach|message)\b/.test(q)) return NAV_DESTINATIONS.about;
+      return null;
+    }
+
+    function isNavigationIntent(text) {
+      return /\b(take me|send me|bring me|go to|open|navigate|explore|show me|where should i|where do i|where to|start|start here|guide me|show me around|recommend|next step|choose)\b/i.test(text);
+    }
+
+    function renderNavigationGuide(text) {
+      const dest = destinationFromText(text);
+      if (dest) {
+        pendingNav = { url: dest.url, label: dest.label };
+        return `Yes — <strong>${escapeHtml(dest.label)}</strong> is the right next stop for ${escapeHtml(dest.reason)}.${renderNavCta(dest.url, dest.label)}`;
+      }
+
+      return `Let’s choose by intent, not by menu label.<br><br>` +
+        `<ul class="mai-list">` +
+          `<li><strong>Use a tool or find a reusable method:</strong> start in <a class="text-accent underline" href="${NAV_DESTINATIONS.toybox.url}">Toybox</a>.</li>` +
+          `<li><strong>Evaluate work examples:</strong> go to <a class="text-accent underline" href="${NAV_DESTINATIONS.work.url}">Work</a>.</li>` +
+          `<li><strong>Read the thinking:</strong> browse <a class="text-accent underline" href="${NAV_DESTINATIONS.writing.url}">Writing</a>.</li>` +
+          `<li><strong>Get background or contact paths:</strong> use <a class="text-accent underline" href="${NAV_DESTINATIONS.about.url}">About</a>.</li>` +
+        `</ul>` +
+        `Tell me what you came here to do, and I can narrow it to one path instead of making you browse.`;
     }
 
     const A11Y_FINDING_GUIDE = {
@@ -1355,11 +1399,11 @@ AI, like design, is only as useful as the intent we bring to it.
             <p class="mt-1 text-ink/80">${snippet(d.text, query)}</p>
           </div>`;
       }).join('');
-      return `<p class="text-[11px] text-muted mb-2">Here's what I found on the site:</p>${parts}`;
+      return `<p class="text-[11px] text-muted mb-2">I found a few grounded starting points. The fuller assistant answer is not available right now, but these should still help you move.</p>${parts}`;
     }
 
     function noMatchAnswer(query) {
-      return `I couldn't find a strong match for <em>${escapeHtml(query)}</em> in the current site index. Try the <a class="text-accent underline" href="${base}toybox">Toybox</a>, the <a class="text-accent underline" href="${base}writing">Writing</a> index, or one of the chips below.`;
+      return `I do not have enough grounded context for <em>${escapeHtml(query)}</em> yet. Try asking what you want to do next, paste a finding/result, or start with <a class="text-accent underline" href="${base}toybox">Toybox</a> for tools and playbooks.`;
     }
 
     // ---------- LLM tier (optional) ----------
@@ -1788,7 +1832,7 @@ AI, like design, is only as useful as the intent we bring to it.
       const b = document.createElement('div');
       b.id = 'mai-paused-banner';
       b.className = 'text-[11px] text-muted bg-cream border border-muted/20 rounded px-2 py-1 mb-2';
-      b.textContent = message || 'AI mode paused for this month. Using site search instead.';
+      b.textContent = message || 'The full answer mode is paused right now. I can still guide you with page context and grounded starting points.';
       log.prepend(b);
     }
 
@@ -1830,7 +1874,7 @@ AI, like design, is only as useful as the intent we bring to it.
       }
       if (res.status === 402) {
         aiPaused = true;
-        showPausedBanner('AI mode paused for this month. Using site search instead.');
+        showPausedBanner('The full answer mode is paused for this month. I can still guide you with page context and grounded starting points.');
         return false;
       }
       if (res.status === 429) {
@@ -1846,7 +1890,7 @@ AI, like design, is only as useful as the intent we bring to it.
         } catch {}
         setTimeout(() => { aiPaused = false; }, retry);
         showPausedBanner(
-          'AI answers are paused for this window — chat limit reached. Falling back to site search below.',
+          'The full answer mode is paused for this window — chat limit reached. I can still offer grounded starting points below.',
         );
         return false; // let caller render the retrieval list under the banner
       }
@@ -2767,6 +2811,14 @@ AI, like design, is only as useful as the intent we bring to it.
         return;
       }
 
+      if (isNavigationIntent(clean)) {
+        const reply = renderNavigationGuide(clean);
+        addBubble('mai', reply);
+        renderChips(getDynamicChips(clean));
+        if (shouldSpeakThisTurn) speak(stripHtml(reply));
+        return;
+      }
+
       if (isFreshnessQuery(clean)) {
         const pendingId = addBubble(
           'mai',
@@ -3316,7 +3368,7 @@ AI, like design, is only as useful as the intent we bring to it.
         startWhisperSilenceMonitor();
         listeningBubbleId = addBubble(
           'mai',
-          '<span class="text-muted">Listening... I will send automatically when you pause.</span>',
+          '<span class="text-muted">Whisper is listening... pause and I will transcribe automatically.</span>',
         );
         micTimeout = setTimeout(() => {
           stopWhisperRecorder();
