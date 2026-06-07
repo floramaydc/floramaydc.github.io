@@ -1125,14 +1125,10 @@ AI, like design, is only as useful as the intent we bring to it.
         return `<strong>${escapeHtml(dest.label)}</strong> feels like the right next room for this: ${escapeHtml(dest.reason)}. I can take you there if you want to keep moving.${renderNavCta(dest.url, dest.label)}`;
       }
 
-      return `Let’s choose by what you are carrying, not by the menu label.<br><br>` +
-        `<ul class="mai-list">` +
-          `<li><strong>Use a tool or find a reusable method:</strong> start in <a class="text-accent underline" href="${NAV_DESTINATIONS.toybox.url}">Toybox</a>.</li>` +
-          `<li><strong>Evaluate work examples:</strong> go to <a class="text-accent underline" href="${NAV_DESTINATIONS.work.url}">Work</a>.</li>` +
-          `<li><strong>Read the thinking:</strong> browse <a class="text-accent underline" href="${NAV_DESTINATIONS.writing.url}">Writing</a>.</li>` +
-          `<li><strong>Get background or contact paths:</strong> use <a class="text-accent underline" href="${NAV_DESTINATIONS.about.url}">About</a>.</li>` +
-        `</ul>` +
-        `Tell me what you are trying to understand, and I can narrow it to one path instead of making you browse.`;
+      const dest = NAV_DESTINATIONS.toybox;
+      pendingNav = { url: dest.url, label: dest.label };
+      return `It sounds like you are not choosing a page yet; you are choosing a level of engagement. If you want something you can use immediately, start with <a class="text-accent underline" href="${dest.url}">Toybox</a>. It is the most practical doorway because the tools and playbooks turn messy product judgment into repeatable moves.<br><br>` +
+        `If you would rather understand the philosophy underneath the tools, <a class="text-accent underline" href="${NAV_DESTINATIONS.writing.url}">Writing</a> is the slower, more reflective path. My first nudge would still be Toybox: it gives you something to hold, and you can follow the thread into essays or work examples after that.${renderNavCta(dest.url, dest.label)}`;
     }
 
     const A11Y_FINDING_GUIDE = {
