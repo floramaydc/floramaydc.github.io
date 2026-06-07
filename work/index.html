@@ -887,6 +887,98 @@ AI, like design, is only as useful as the intent we bring to it.
         `<strong>Reference</strong><br>${escapeHtml(item.reference)}`;
     }
 
+    function isAuditPayloadPaste(text) {
+      const value = String(text || '').toLowerCase();
+      return (
+        value.includes('## element inventory') ||
+        value.includes('element inventory') ||
+        value.includes('component inventory') ||
+        value.includes('## findings') ||
+        value.includes('| annotation | severity | rule |') ||
+        value.includes('| id | type | text | role | selector |') ||
+        value.includes('m.ai context') ||
+        pastedAccessibilityFindings(value).length > 0
+      );
+    }
+
+    function parseMarkdownRows(text) {
+      const value = String(text || '');
+      const lineRows = value
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter((line) => line.startsWith('|') && line.endsWith('|') && !/^\|\s*-+/.test(line))
+        .map((line) => line.slice(1, -1).split('|').map((cell) => cell.trim()))
+        .filter((cells) => cells.length >= 3);
+
+      const inlineRows = [];
+      const inventoryPattern = /\|\s*([^|]+?)\s*\|\s*(button|link|input|heading|image|landmark|table|form|nav|dialog|menu|tab|component)\s*\|\s*([^|]*?)\s*\|\s*([^|]*?)\s*\|\s*([^|]*?)\s*(?=\||$)/gi;
+      let match;
+      while ((match = inventoryPattern.exec(value)) !== null) {
+        inlineRows.push(match.slice(1).map((cell) => cell.trim()));
+      }
+
+      return [...lineRows, ...inlineRows];
+    }
+
+    function topCounts(items, max = 5) {
+      const counts = new Map();
+      for (const item of items) {
+        const key = String(item || '').trim() || 'empty';
+        counts.set(key, (counts.get(key) || 0) + 1);
+      }
+      return [...counts.entries()]
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .slice(0, max)
+        .map(([label, count]) => `${count} ${label}`);
+    }
+
+    function summarizePastedAuditPayload(text) {
+      const rows = parseMarkdownRows(text);
+      const findingIds = pastedAccessibilityFindings(text);
+      const inventoryRows = [];
+      const findingRows = [];
+
+      for (const cells of rows) {
+        const first = (cells[0] || '').toLowerCase();
+        const second = (cells[1] || '').toLowerCase();
+        const looksInventoryHeader = first === 'id' && second === 'type';
+        const looksFindingsHeader = first === 'annotation' && second === 'severity';
+        if (looksInventoryHeader || looksFindingsHeader) continue;
+        if (/^(el|cmp|component|button|link|input|heading|image|landmark|table|form|nav|dialog|menu|tab)/i.test(cells[0] || '') || ['button', 'link', 'input', 'heading', 'image', 'landmark'].includes(second)) {
+          inventoryRows.push(cells);
+        }
+        if (/^(critical|serious|moderate|minor|high|medium|low)$/i.test(second) || findingIds.some((id) => cells.join(' ').toLowerCase().includes(id))) {
+          findingRows.push(cells);
+        }
+      }
+
+      const types = topCounts(inventoryRows.map((cells) => cells[1]), 6);
+      const roles = topCounts(inventoryRows.map((cells) => cells[3]), 6).filter((item) => !item.endsWith(' empty'));
+      const emptyNames = inventoryRows.filter((cells) => {
+        const type = String(cells[1] || '').toLowerCase();
+        const textCell = String(cells[2] || '').trim();
+        return ['button', 'link', 'input'].includes(type) && (!textCell || /^n\/?a$/i.test(textCell));
+      });
+
+      if (findingIds.length) return renderAccessibilityDiagnosis(findingIds);
+
+      const facts = [];
+      if (inventoryRows.length) facts.push(`${inventoryRows.length} inventory row${inventoryRows.length === 1 ? '' : 's'}`);
+      if (findingRows.length) facts.push(`${findingRows.length} finding row${findingRows.length === 1 ? '' : 's'}`);
+      const factLine = facts.length ? `I can work with this paste. I see ${facts.join(' and ')}.` : `I can work with this audit paste.`;
+
+      const next = [];
+      if (emptyNames.length) next.push(`${emptyNames.length} interactive item${emptyNames.length === 1 ? '' : 's'} may need accessible-name review.`);
+      if (types.length) next.push(`Inventory mix: ${types.join(', ')}.`);
+      if (roles.length) next.push(`Common roles: ${roles.join(', ')}.`);
+      next.push('For triage, paste one finding row or rule ID next, or ask me to focus on names, landmarks, contrast, keyboard risk, or component source.');
+
+      return `${escapeHtml(factLine)}<br><br>` +
+        `<strong>What this is good for</strong><br>` +
+        `The inventory tells us what the scanner observed; it does not prove every item is accessible. Use it to spot unnamed controls, odd roles, missing landmarks, and custom widgets that need keyboard checks.<br><br>` +
+        `<strong>Next checks</strong><ul class="mai-list">${next.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`;
+    }
+
     // ---------- Fuzzy spell-fix against the index vocabulary ----------
     // The hand-listed SPEECH_FIXES table catches the *known* mishearings
     // ("toy box", "M A I", "pac bot") — but it can't anticipate every way
@@ -1897,15 +1989,15 @@ AI, like design, is only as useful as the intent we bring to it.
       action: /\b(book|buy|order|schedule|sign (me )?up|subscribe|register|download|install|log ?in|sign ?in)\b/i,
     };
 
-    // Hard cap on input length — anything bigger is almost certainly a
-    // paste-bomb or injection payload; not worth tokens.
+    // Hard cap on ordinary input length. Long audit/report pastes are handled
+    // by a deterministic parser below so users can paste Element Inventory or
+    // exported findings without being told to shorten the payload.
     const MAX_INPUT_CHARS = 500;
 
     function classifyIntent(text) {
       const t = text.trim();
       if (!t) return 'empty';
       if (t.length < 3) return 'too-short';
-      if (t.length > MAX_INPUT_CHARS) return 'too-long';
       // Single "word" with no vowels and no digits — likely keysmash.
       const compact = t.replace(/\s+/g, '');
       if (compact.length >= 4 && !/[aeiouy0-9]/i.test(compact)) return 'gibberish';
@@ -1915,6 +2007,7 @@ AI, like design, is only as useful as the intent we bring to it.
       if (INTENT.jailbreak.test(t)) return 'jailbreak';
       if (INTENT.nsfw.test(t)) return 'nsfw';
       if (INTENT.hostile.test(t)) return 'hostile';
+      if (t.length > MAX_INPUT_CHARS) return 'too-long';
       if (INTENT.smallTalk.test(t)) return 'small-talk';
       if (INTENT.meta.test(t)) return 'meta';
       if (INTENT.capability.test(t)) return 'capability';
@@ -2610,6 +2703,13 @@ AI, like design, is only as useful as the intent we bring to it.
       // we burn any tokens calling the worker. The KB matcher doesn't get
       // a chance to misroute these either.
       const preIntent = classifyIntent(clean);
+      if (preIntent === 'too-long' && isAuditPayloadPaste(clean)) {
+        const reply = summarizePastedAuditPayload(clean);
+        addBubble('mai', reply);
+        renderChips(['Focus on unnamed controls', 'Check landmark structure', 'Explain one finding row']);
+        if (shouldSpeakThisTurn) speak(stripHtml(reply));
+        return;
+      }
       const HARD_BLOCK = new Set(['hostile', 'nsfw', 'jailbreak', 'pii', 'too-long', 'meta']);
       if (HARD_BLOCK.has(preIntent)) {
         const reply = intentReply(preIntent);
@@ -2630,7 +2730,7 @@ AI, like design, is only as useful as the intent we bring to it.
 
       const pastedFindings = pastedAccessibilityFindings(clean);
       if (pastedFindings.length) {
-        const reply = renderAccessibilityDiagnosis(pastedFindings);
+        const reply = summarizePastedAuditPayload(clean);
         addBubble('mai', reply);
         renderChips(['How do I verify this?', 'Show accessibility playbooks', 'Open Accessibility Audit']);
         if (shouldSpeakThisTurn) speak(stripHtml(reply));
