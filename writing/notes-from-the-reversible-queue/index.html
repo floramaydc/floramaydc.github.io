@@ -450,7 +450,7 @@ AI, like design, is only as useful as the intent we bring to it.
     // M.ai stays in keyword-only mode (the original behavior). See
     // workers/mai/README.md for deploy steps.
     const MAI_WORKER_URL = 'https://mai.floramaydc-mai.workers.dev';
-    const MAI_CLIENT_VERSION = '2026-06-07-judgment-v2';
+    const MAI_CLIENT_VERSION = '2026-06-07-perf-v3';
 
     function maiStorageKey(name) {
       return `mai:${MAI_CLIENT_VERSION}:${name}`;
@@ -701,6 +701,55 @@ AI, like design, is only as useful as the intent we bring to it.
       'would','could','should','have','has','had','more','most','some','any','all',
       'what','who','how','where','when','why','show','tell','give','find',
     ]);
+    const MAI_INDEX_TIMEOUT_MS = 8_000;
+    const MAI_WORKER_START_TIMEOUT_MS = 14_000;
+    const MAI_WORKER_IDLE_TIMEOUT_MS = 18_000;
+
+    async function fetchJsonWithTimeout(url, timeoutMs = MAI_INDEX_TIMEOUT_MS) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const r = await fetch(url, { signal: controller.signal });
+        return r.ok ? r.json() : null;
+      } catch {
+        return null;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    function readWithTimeout(reader, timeoutMs) {
+      return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error('mai_stream_idle_timeout')), timeoutMs);
+        reader.read().then(
+          (value) => {
+            clearTimeout(timer);
+            resolve(value);
+          },
+          (err) => {
+            clearTimeout(timer);
+            reject(err);
+          },
+        );
+      });
+    }
+
+    function settleWithin(promise, timeoutMs, fallback = null) {
+      return new Promise((resolve) => {
+        const timer = setTimeout(() => resolve(fallback), timeoutMs);
+        Promise.resolve(promise).then(
+          (value) => {
+            clearTimeout(timer);
+            resolve(value);
+          },
+          () => {
+            clearTimeout(timer);
+            resolve(fallback);
+          },
+        );
+      });
+    }
+
     function tokenizeQ(s) {
       return s
         .toLowerCase()
@@ -712,9 +761,7 @@ AI, like design, is only as useful as the intent we bring to it.
     let _indexPromise = null;
     function loadIndex() {
       if (!_indexPromise) {
-        _indexPromise = fetch(`${base}mai-index.json?v=${encodeURIComponent(MAI_CLIENT_VERSION)}`)
-          .then((r) => (r.ok ? r.json() : null))
-          .catch(() => null);
+        _indexPromise = fetchJsonWithTimeout(`${base}mai-index.json?v=${encodeURIComponent(MAI_CLIENT_VERSION)}`);
       }
       return _indexPromise;
     }
@@ -723,8 +770,7 @@ AI, like design, is only as useful as the intent we bring to it.
     let _manifestReady = null;
     function loadManifest() {
       if (!_manifestPromise) {
-        _manifestPromise = fetch(`${base}ai-manifest.json?v=${encodeURIComponent(MAI_CLIENT_VERSION)}`)
-          .then((r) => (r.ok ? r.json() : null))
+        _manifestPromise = fetchJsonWithTimeout(`${base}ai-manifest.json?v=${encodeURIComponent(MAI_CLIENT_VERSION)}`)
           .then((manifest) => {
             _manifestReady = manifest;
             return manifest;
@@ -1059,7 +1105,7 @@ AI, like design, is only as useful as the intent we bring to it.
     let _vocabReady = null; // resolved value (set when the promise lands)
     function loadVocab() {
       if (_vocabPromise) return _vocabPromise;
-      _vocabPromise = loadIndex().then((idx) => {
+      _vocabPromise = settleWithin(loadIndex(), MAI_INDEX_TIMEOUT_MS, null).then((idx) => {
         if (!idx) return null;
         // df keys are every term that appears anywhere on the site, already
         // normalized by the index builder. Bucket by length for fast lookup
@@ -1824,6 +1870,17 @@ AI, like design, is only as useful as the intent we bring to it.
       log.prepend(b);
     }
 
+    function guardThinkingBubble(id, fallbackHtml, chips = STARTER_CHIPS, timeoutMs = 22_000) {
+      setTimeout(() => {
+        const bubble = document.getElementById(id);
+        if (!bubble || !bubble.querySelector('.mai-thinking')) return;
+        const reply = typeof fallbackHtml === 'function' ? fallbackHtml() : fallbackHtml;
+        bubble.innerHTML = reply;
+        renderChips(chips);
+        saveTranscript();
+      }, timeoutMs);
+    }
+
     // Render the "Sources" footer beneath an LLM answer so people can verify.
     function renderSources(top) {
       const items = top.map((r) => {
@@ -1851,14 +1908,19 @@ AI, like design, is only as useful as the intent we bring to it.
       const pageContext = getLiveContextPacket();
       const conversation = getRecentConversation(10);
       let res;
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), MAI_WORKER_START_TIMEOUT_MS);
       try {
         res = await fetch(MAI_WORKER_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
           body: JSON.stringify({ question, chunks, pageContext, conversation }),
         });
       } catch {
         return false; // network error \u2014 fall back silently
+      } finally {
+        clearTimeout(timer);
       }
       if (res.status === 402) {
         aiPaused = true;
@@ -1903,29 +1965,36 @@ AI, like design, is only as useful as the intent we bring to it.
       function stripTrailingMarker(s) {
         return s.replace(NAV_TRAILING_RE, '').replace(ACTION_TRAILING_RE, '');
       }
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        acc += decoder.decode(value, { stream: true });
-        if (target) {
-          // Render incrementally through the safe allowlist renderer so
-          // emphasis/links/lists from the model show up properly while
-          // partial markup can't break out. Hide any in-flight nav marker
-          // (full or partial) so it never flashes visible.
-          const display = stripTrailingMarker(acc);
-          target.innerHTML = safeRenderModelHtml(display);
-          log.scrollTop = log.scrollHeight;
+      try {
+        while (true) {
+          const { done, value } = await readWithTimeout(reader, MAI_WORKER_IDLE_TIMEOUT_MS);
+          if (done) break;
+          acc += decoder.decode(value, { stream: true });
+          if (target) {
+            // Render incrementally through the safe allowlist renderer so
+            // emphasis/links/lists from the model show up properly while
+            // partial markup can't break out. Hide any in-flight nav marker
+            // (full or partial) so it never flashes visible.
+            const display = stripTrailingMarker(acc);
+            target.innerHTML = safeRenderModelHtml(display);
+            log.scrollTop = log.scrollHeight;
 
-          if (shouldSpeak && !spokeEarly) {
-            const plain = display.replace(/\s+/g, ' ').trim();
-            const firstSentence = plain.match(/^(.{40,220}?[.!?])(?:\s|$)/);
-            if (firstSentence?.[1]) {
-              spokeEarly = true;
-              speak(firstSentence[1]);
+            if (shouldSpeak && !spokeEarly) {
+              const plain = display.replace(/\s+/g, ' ').trim();
+              const firstSentence = plain.match(/^(.{40,220}?[.!?])(?:\s|$)/);
+              if (firstSentence?.[1]) {
+                spokeEarly = true;
+                speak(firstSentence[1]);
+              }
             }
           }
         }
+      } catch {
+        try { await reader.cancel(); } catch {}
+        return false;
       }
+
+      if (!acc.trim()) return false;
 
       // Stream done. Pull out the NAV marker (if any), strip it from the
       // visible answer, and decide whether to surface a navigation CTA.
@@ -2812,7 +2881,13 @@ AI, like design, is only as useful as the intent we bring to it.
           'mai',
           '<span class="mai-thinking text-muted">Looking for the latest Toybox updates<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>',
         );
-        loadManifest().then((manifest) => {
+        guardThinkingBubble(
+          pendingId,
+          () => `I could not load the latest site manifest just now. My best nudge is still Toybox if you want the most practical, current material.`,
+          getDynamicChips(clean),
+          12_000,
+        );
+        settleWithin(loadManifest(), MAI_INDEX_TIMEOUT_MS, null).then((manifest) => {
           const bubble = document.getElementById(pendingId);
           if (!bubble) return;
           const reply = manifest
@@ -2820,6 +2895,13 @@ AI, like design, is only as useful as the intent we bring to it.
             : `I could not load the latest site manifest just now. My best nudge is still Toybox if you want the most practical, current material.`;
           bubble.innerHTML = reply;
           renderChips(['What tools are available?', 'What playbooks exist?', 'What can this page do?']);
+          if (shouldSpeakThisTurn) speak(stripHtml(reply));
+          saveTranscript();
+        }).catch(() => {
+          const bubble = document.getElementById(pendingId);
+          const reply = `I could not load the latest site manifest just now. My best nudge is still Toybox if you want the most practical, current material.`;
+          if (bubble) bubble.innerHTML = reply;
+          renderChips(getDynamicChips(clean));
           if (shouldSpeakThisTurn) speak(stripHtml(reply));
           saveTranscript();
         });
@@ -2847,7 +2929,13 @@ AI, like design, is only as useful as the intent we bring to it.
           'mai',
           '<span class="mai-thinking text-muted">Checking the Toybox chronology<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>',
         );
-        loadIndex().then((index) => {
+        guardThinkingBubble(
+          pendingId,
+          () => `${pageLine}<br><br>I could not resolve the playbook chronology right now. The useful next move is still Toybox if you want to browse the playbooks directly.`,
+          getDynamicChips(clean),
+          12_000,
+        );
+        settleWithin(loadIndex(), MAI_INDEX_TIMEOUT_MS, null).then((index) => {
           const bubble = document.getElementById(pendingId);
           if (!bubble) return;
           const oldest = pickOldestPlaybook(index);
@@ -2869,6 +2957,13 @@ AI, like design, is only as useful as the intent we bring to it.
           renderChips(getDynamicChips(clean));
           if (shouldSpeakThisTurn) speak(stripHtml(`${pageLine} ${tieMsg}`));
           saveTranscript();
+        }).catch(() => {
+          const bubble = document.getElementById(pendingId);
+          const reply = `${pageLine}<br><br>I could not resolve the playbook chronology right now. The useful next move is still Toybox if you want to browse the playbooks directly.`;
+          if (bubble) bubble.innerHTML = reply;
+          renderChips(getDynamicChips(clean));
+          if (shouldSpeakThisTurn) speak(stripHtml(reply));
+          saveTranscript();
         });
         return;
       }
@@ -2885,7 +2980,8 @@ AI, like design, is only as useful as the intent we bring to it.
 
       // 4) Otherwise, search the site. Index loads lazily on first query.
       const thinkingId = addBubble('mai', '<span class="mai-thinking text-muted">Gathering relevant context<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>');
-      loadIndex().then(async (index) => {
+      guardThinkingBubble(thinkingId, () => noMatchAnswer(raw), getDynamicChips(clean), 24_000);
+      settleWithin(loadIndex(), MAI_INDEX_TIMEOUT_MS, null).then(async (index) => {
         // Replace the placeholder bubble in-place so it doesn't pile up.
         const bubble = document.getElementById(thinkingId);
         if (!index || !index.docs?.length) {
@@ -2897,8 +2993,8 @@ AI, like design, is only as useful as the intent we bring to it.
         // If fuzzy correction didn't get a chance pre-KB (first-ever
         // query race), do it now against the loaded vocab so BM25 has
         // a fair shot at matching mis-spelled proper nouns.
-        if (!_vocabReady) await loadVocab();
-        if (!_manifestReady) await loadManifest();
+        if (!_vocabReady) await settleWithin(loadVocab(), MAI_INDEX_TIMEOUT_MS, null);
+        if (!_manifestReady) await settleWithin(loadManifest(), MAI_INDEX_TIMEOUT_MS, null);
         if (_vocabReady) retrievalQuery = fuzzyCorrectQuery(clean, _vocabReady);
         const scored = applyContextBoost(rank(index, retrievalQuery), retrievalQuery, _manifestReady);
         // Send a wider context to the LLM — it can pick the relevant bits
@@ -2936,6 +3032,13 @@ AI, like design, is only as useful as the intent we bring to it.
           const first = top[0].d;
           speak(`${first.title}. ${stripHtml(snippet(first.text, clean))}`);
         }
+      }).catch(() => {
+        const bubble = document.getElementById(thinkingId);
+        const reply = noMatchAnswer(raw);
+        if (bubble) bubble.innerHTML = reply;
+        renderChips(getDynamicChips(clean));
+        if (shouldSpeakThisTurn) speak(stripHtml(reply));
+        saveTranscript();
       });
     }
 
