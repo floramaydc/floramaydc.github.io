@@ -12,6 +12,7 @@ The site is a small public workshop for messy product problems: tools, playbooks
 - [Component Audit bookmarklet](https://floramaydc.com/toybox/component-audit-bookmarklet/) — a browser bookmarklet for auditing pages that a server-side scan cannot reach.
 - [Writing](https://floramaydc.com/writing/) — essays and notes about product design, systems, trust, AI, and the parts of work that are hard to name.
 - [Work](https://floramaydc.com/work/) — selected public case-study pages and project context.
+- [Play](https://floramaydc.com/play/) — creative projects, visual experiments, and personal artifacts.
 - [M.ai](https://floramaydc.com/mai/) — the site assistant that helps visitors find relevant pages, tools, and writing.
 
 ## What is public here
@@ -32,3 +33,4 @@ That boundary keeps the public site easy to inspect while keeping the implementa
 - Toybox: [floramaydc.com/toybox](https://floramaydc.com/toybox/)
 - Writing: [floramaydc.com/writing](https://floramaydc.com/writing/)
 - Work: [floramaydc.com/work](https://floramaydc.com/work/)
+- Play: [floramaydc.com/play](https://floramaydc.com/play/)
