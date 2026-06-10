@@ -732,6 +732,36 @@ AI, like design, is only as useful as the intent we bring to it.
       for (const key of legacyKeys) sessionStorage.removeItem(key);
     }
 
+    // "Since last visit" tracking. The persistent key records when the
+    // visitor was last active; the session marker keeps the comparison
+    // anchored to the PREVIOUS browsing session, so in-session navigation
+    // doesn't keep resetting the baseline. _previousVisitAt is the value we
+    // compare manifest dates against when answering "what changed recently".
+    const MAI_LAST_VISIT_KEY = 'mai:last-visit';
+    let _previousVisitAt = null;
+    function parseVisitTs(raw) {
+      const ts = raw ? Date.parse(raw) : NaN;
+      return Number.isNaN(ts) ? null : ts;
+    }
+    function initVisitTracking() {
+      try {
+        const sessionFlag = maiStorageKey('visit-session');
+        const sessionPrevKey = maiStorageKey('visit-previous');
+        if (sessionStorage.getItem(sessionFlag)) {
+          _previousVisitAt = parseVisitTs(sessionStorage.getItem(sessionPrevKey));
+          return;
+        }
+        const prior = parseVisitTs(localStorage.getItem(MAI_LAST_VISIT_KEY));
+        _previousVisitAt = prior;
+        sessionStorage.setItem(sessionFlag, '1');
+        sessionStorage.setItem(sessionPrevKey, prior ? new Date(prior).toISOString() : '');
+        localStorage.setItem(MAI_LAST_VISIT_KEY, new Date().toISOString());
+      } catch (e) {
+        _previousVisitAt = null;
+      }
+    }
+    initVisitTracking();
+
     function safeJsonParse(raw) {
       if (!raw) return null;
       try {
@@ -1140,10 +1170,60 @@ AI, like design, is only as useful as the intent we bring to it.
           `I could not find published tools in the current manifest.`,
         );
       }
+      const dest = destinationFromText(query);
+      if (dest && dest.label) {
+        const section = dest.label;
+        return renderManifestList(
+          newestEntries(manifest, { section }),
+          `Newest ${section} updates first:`,
+          `I could not find recent ${section} entries in the current manifest.`,
+        );
+      }
+      // No section named: tell the truth across Toybox, Writing, and Work,
+      // scoped to what actually changed since the visitor's last visit.
+      return renderRecentChanges(manifest);
+    }
+
+    const RECENT_CHANGE_SECTIONS = new Set(['toybox', 'writing', 'work']);
+
+    function recentChangeEntries(manifest) {
+      return manifestEntries(manifest)
+        .filter((entry) => {
+          if (!RECENT_CHANGE_SECTIONS.has(String(entry.section || '').toLowerCase())) return false;
+          if (String(entry.status || '').toLowerCase() === 'draft') return false;
+          return true;
+        })
+        .sort((a, b) => {
+          const ad = Date.parse(a.lastUpdatedDate || a.publishedDate || '') || 0;
+          const bd = Date.parse(b.lastUpdatedDate || b.publishedDate || '') || 0;
+          return bd - ad || String(a.title || '').localeCompare(String(b.title || ''));
+        });
+    }
+
+    function renderRecentChanges(manifest) {
+      const all = recentChangeEntries(manifest);
+      if (!all.length) {
+        return `I could not find recent Toybox, Writing, or Work entries in the current manifest.`;
+      }
+      if (_previousVisitAt) {
+        const changed = all.filter((entry) => {
+          const ts = Date.parse(entry.lastUpdatedDate || entry.publishedDate || '');
+          return !Number.isNaN(ts) && ts > _previousVisitAt;
+        });
+        const since = formatDate(new Date(_previousVisitAt).toISOString());
+        if (!changed.length) {
+          return `Nothing has changed across Toybox, Writing, or Work since your last visit${since ? ` (${since})` : ''}.`;
+        }
+        return renderManifestList(
+          changed,
+          `Changed across Toybox, Writing, and Work since your last visit${since ? ` (${since})` : ''}, newest first:`,
+          `Nothing has changed since your last visit.`,
+        );
+      }
       return renderManifestList(
-        newestEntries(manifest, { section: 'Toybox' }),
-        'Newest Toybox updates first:',
-        `I could not find recent Toybox entries in the current manifest.`,
+        all,
+        'Newest across Toybox, Writing, and Work:',
+        `I could not find recent entries in the current manifest.`,
       );
     }
 
@@ -3150,11 +3230,11 @@ AI, like design, is only as useful as the intent we bring to it.
       if (isFreshnessQuery(clean)) {
         const pendingId = addBubble(
           'mai',
-          '<span class="mai-thinking text-muted">Looking for the latest Toybox updates<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>',
+          '<span class="mai-thinking text-muted">Looking for the latest updates<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>',
         );
         guardThinkingBubble(
           pendingId,
-          () => `I could not load the latest site manifest just now. My best nudge is still Toybox if you want the most practical, current material.`,
+          () => `I could not load the latest site manifest just now. Try again in a moment.`,
           getDynamicChips(clean),
           12_000,
         );
@@ -3163,14 +3243,14 @@ AI, like design, is only as useful as the intent we bring to it.
           if (!bubble) return;
           const reply = manifest
             ? renderManifestAnswer(manifest, clean)
-            : `I could not load the latest site manifest just now. My best nudge is still Toybox if you want the most practical, current material.`;
+            : `I could not load the latest site manifest just now. Try again in a moment.`;
           bubble.innerHTML = reply;
           renderChips(['What tools are available?', 'What playbooks exist?', 'What can this page do?']);
           if (shouldSpeakThisTurn) speak(stripHtml(reply));
           saveTranscript();
         }).catch(() => {
           const bubble = document.getElementById(pendingId);
-          const reply = `I could not load the latest site manifest just now. My best nudge is still Toybox if you want the most practical, current material.`;
+          const reply = `I could not load the latest site manifest just now. Try again in a moment.`;
           if (bubble) bubble.innerHTML = reply;
           renderChips(getDynamicChips(clean));
           if (shouldSpeakThisTurn) speak(stripHtml(reply));
