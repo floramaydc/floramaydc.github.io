@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-rhjqujsj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Finishing Figma sign-in…</title><link rel="stylesheet" href="/assets/about.CklSgJtb.css">
+<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:15px;line-height:1.5;color:#303636;background:#fff;padding:2rem;text-align:center}@media(prefers-color-scheme:dark){body{color:#e8e3d7;background:#1c2422}}
+</style></head> <body data-astro-cid-rhjqujsj> <p id="relay-msg" data-astro-cid-rhjqujsj>Finishing Figma sign-in… you can close this window.</p> <script>
+      (function () {
+        var msgEl = document.getElementById('relay-msg');
+        var payload = null;
+        try {
+          var raw = (window.location.hash || '').replace(/^#/, '');
+          if (raw) payload = JSON.parse(decodeURIComponent(raw));
+        } catch (e) {
+          payload = null;
+        }
+
+        // Strip the token from the URL straight away so it never lingers in
+        // history or gets copied.
+        try {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        } catch (e) {}
+
+        if (!payload || payload.source !== 'figma-inference-oauth') {
+          if (msgEl) msgEl.textContent = 'Nothing to finish here — you can close this window.';
+          return;
+        }
+
+        // Hand the result to the tool tab over every same-origin channel that
+        // survives the OAuth popup (window.opener may have been severed).
+        try {
+          var bc = new BroadcastChannel('figma-inference-oauth');
+          bc.postMessage(payload);
+          setTimeout(function () { try { bc.close(); } catch (e) {} }, 100);
+        } catch (e) {}
+
+        try {
+          localStorage.setItem(
+            'figma-inference-oauth',
+            JSON.stringify(Object.assign({ t: Date.now() }, payload)),
+          );
+          setTimeout(function () {
+            try { localStorage.removeItem('figma-inference-oauth'); } catch (e) {}
+          }, 1500);
+        } catch (e) {}
+
+        // Best-effort direct hand-back too, in case the opener survived.
+        try {
+          if (window.opener) window.opener.postMessage(payload, window.location.origin);
+        } catch (e) {}
+
+        if (msgEl) {
+          msgEl.textContent =
+            payload.status === 'success'
+              ? 'Signed in. You can close this window.'
+              : 'Sign-in did not complete — you can close this window.';
+        }
+
+        setTimeout(function () { try { window.close(); } catch (e) {} }, 350);
+      })();
+    </script> </body> </html>
