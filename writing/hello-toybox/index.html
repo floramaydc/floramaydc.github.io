@@ -1116,8 +1116,34 @@ AI, like design, is only as useful as the intent we bring to it.
         value.includes('| annotation | severity | rule |') ||
         value.includes('| id | type | text | role | selector |') ||
         value.includes('m.ai context') ||
+        parseInferenceContext(text) !== null ||
         pastedAccessibilityFindings(value).length > 0
       );
+    }
+
+    // The Component Inference tool's "Copy M.ai context" button hands over a
+    // JSON object (summary / findings / componentMapping / metadata). Pull it
+    // out of whatever wrapper it arrives in so M.ai can summarize it instead of
+    // rejecting it as an over-long paste.
+    function parseInferenceContext(text) {
+      const value = String(text || '');
+      const start = value.indexOf('{');
+      const end = value.lastIndexOf('}');
+      if (start === -1 || end <= start) return null;
+      let data;
+      try {
+        data = JSON.parse(value.slice(start, end + 1));
+      } catch {
+        return null;
+      }
+      if (!data || typeof data !== 'object') return null;
+      const hasShape =
+        !!data.componentMapping ||
+        !!data.metadata ||
+        (data.summary && typeof data.summary === 'object' && 'detectedPattern' in data.summary) ||
+        (Array.isArray(data.findings) &&
+          data.findings.some((f) => f && (f.currentStructure || f.recommendation)));
+      return hasShape ? data : null;
     }
 
     function parseMarkdownRows(text) {
@@ -1196,6 +1222,44 @@ AI, like design, is only as useful as the intent we bring to it.
         `<strong>What this is good for</strong><br>` +
         `The inventory tells us what the scanner observed; it does not prove every item is accessible. Use it to spot unnamed controls, odd roles, missing landmarks, and custom widgets that need keyboard checks.<br><br>` +
         `<strong>Next checks</strong><ul class="mai-list">${next.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`;
+    }
+
+    function summarizeInferencePayload(data) {
+      const s = data.summary && typeof data.summary === 'object' ? data.summary : {};
+      const findings = Array.isArray(data.findings) ? data.findings : [];
+      const map = data.componentMapping && typeof data.componentMapping === 'object' ? data.componentMapping : {};
+      const meta = data.metadata && typeof data.metadata === 'object' ? data.metadata : {};
+
+      const pattern = s.detectedPattern || 'unknown pattern';
+      const confidence = typeof s.confidence === 'number' ? `${s.confidence}%` : null;
+      const risk = s.risk || null;
+      const lead =
+        `This is a Figma Component Inference context. Detected pattern: <strong>${escapeHtml(pattern)}</strong>` +
+        (confidence ? ` at ${escapeHtml(confidence)} confidence` : '') +
+        (risk ? `, ${escapeHtml(risk)} risk` : '') + '.';
+
+      const next = [];
+      if (findings.length) {
+        const severities = topCounts(findings.map((f) => f && f.severity).filter(Boolean), 6);
+        const categories = topCounts(findings.map((f) => f && f.category).filter(Boolean), 6);
+        next.push(`${findings.length} inferred finding${findings.length === 1 ? '' : 's'}.`);
+        if (severities.length) next.push(`By severity: ${severities.join(', ')}.`);
+        if (categories.length) next.push(`By category: ${categories.join(', ')}.`);
+      } else {
+        next.push('No issues were inferred in this context.');
+      }
+      if (map.generic) {
+        next.push(`Suggested mapping: ${map.generic}${map.designSystem ? ` (design system: ${map.designSystem})` : ''}.`);
+      }
+      if (typeof meta.nodesAnalyzed === 'number') {
+        next.push(`Scope: ${meta.nodesAnalyzed} node${meta.nodesAnalyzed === 1 ? '' : 's'} analyzed, ${meta.componentsInferred ?? 0} component${meta.componentsInferred === 1 ? '' : 's'} inferred.`);
+      }
+      next.push('Tell me which finding to dig into, or ask how to verify one — I\u2019ll work from the rows above.');
+
+      return `${lead}<br><br>` +
+        `<strong>What this is</strong><br>` +
+        `Inference reasons about structure and intent from the frame; it is not a render check and does not prove the live component is accessible. Use it to spot misused patterns, missing structure, and risks worth verifying.<br><br>` +
+        `<strong>What I see</strong><ul class="mai-list">${next.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`;
     }
 
     // ---------- Fuzzy spell-fix against the index vocabulary ----------
@@ -2946,9 +3010,12 @@ AI, like design, is only as useful as the intent we bring to it.
       // a chance to misroute these either.
       const preIntent = classifyIntent(clean);
       if (preIntent === 'too-long' && isAuditPayloadPaste(clean)) {
-        const reply = summarizePastedAuditPayload(clean);
+        const inferenceData = parseInferenceContext(clean);
+        const reply = inferenceData ? summarizeInferencePayload(inferenceData) : summarizePastedAuditPayload(clean);
         addBubble('mai', reply);
-        renderChips(['Focus on unnamed controls', 'Check landmark structure', 'Explain one finding row']);
+        renderChips(inferenceData
+          ? ['Explain the top finding', 'How do I verify this?', 'Suggest a component mapping']
+          : ['Focus on unnamed controls', 'Check landmark structure', 'Explain one finding row']);
         if (shouldSpeakThisTurn) speak(stripHtml(reply));
         return;
       }
