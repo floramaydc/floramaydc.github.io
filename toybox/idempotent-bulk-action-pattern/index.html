@@ -1623,6 +1623,10 @@ AI, like design, is only as useful as the intent we bring to it.
         (risk ? `, ${escapeHtml(risk)} risk` : '') + '.';
 
       const next = [];
+      const components = Array.isArray(s.detectedComponents) ? s.detectedComponents : [];
+      if (components.length > 1) {
+        next.push(`${components.length} components detected: ${components.map((c) => c && c.pattern).filter(Boolean).join(', ')}.`);
+      }
       if (findings.length) {
         const severities = topCounts(findings.map((f) => f && f.severity).filter(Boolean), 6);
         const categories = topCounts(findings.map((f) => f && f.category).filter(Boolean), 6);
