@@ -557,6 +557,10 @@ This space reflects years of practice, curiosity, and a habit of refining things
 
       var canAnimate = typeof Element !== 'undefined' && !!Element.prototype.animate;
 
+      // Collected per-word triggers so the page can "dance" once on first load,
+      // then fall back to interaction-only (hover/tap) — never a loop.
+      var plays = [];
+
       words.forEach(function (word) {
         var text = word.textContent || '';
         if (!text) return;
@@ -641,7 +645,19 @@ This space reflects years of practice, curiosity, and a habit of refining things
 
         word.addEventListener('mouseenter', play);
         word.addEventListener('click', play);
+        plays.push(play);
       });
+
+      // First-load "dance": play each word's effect ONCE, gently staggered, so
+      // the hero greets visitors with an unexpected flourish. After that it's
+      // interaction-only (the listeners above). Skipped under reduced-motion.
+      if (canAnimate && !reduce && plays.length) {
+        var introStart = 480; // let the hero settle in first
+        var introGap = 420;   // space the two words so they read as a sequence
+        plays.forEach(function (trigger, i) {
+          window.setTimeout(trigger, introStart + i * introGap);
+        });
+      }
     })();
   </script>  </main> <footer class="relative z-10 mt-24 border-t border-ink/10 bg-paper"> <div class="flex w-full flex-col items-start gap-4 px-6 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between md:gap-0 lg:px-10"> <span>© 2026 Flora May dela Cruz</span> <p class="italic md:hidden">
 AI, like design, is only as useful as the intent we bring to it.
