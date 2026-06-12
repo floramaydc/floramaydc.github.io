@@ -1,4 +1,23 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-rhjqujsj> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Finishing Figma sign-in…</title><link rel="stylesheet" href="/assets/style._vKNk43h.css"></head> <body data-astro-cid-rhjqujsj> <p id="relay-msg" data-astro-cid-rhjqujsj>Finishing Figma sign-in… you can close this window.</p> <script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Finishing Figma sign-in…</title><link rel="stylesheet" href="/assets/style.FGcRoAkg.css"></head> <body> <p id="relay-msg">Finishing Figma sign-in… you can close this window.</p> <script>
+      // Apply full-viewport centered layout ONLY to this OAuth relay page.
+      // Using a script instead of CSS avoids global stylesheet pollution.
+      (function applyOAuthRelayStyles() {
+        // Early application of styles before any async operations
+        document.documentElement.style.cssText =
+          'margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center;';
+        document.body.style.cssText =
+          'margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; ' +
+          'font-family: system-ui, -apple-system, "Segoe UI", sans-serif; ' +
+          'font-size: 15px; line-height: 1.5; ' +
+          'color: #303636; background: #ffffff; padding: 2rem; text-align: center;';
+        
+        // Apply dark mode colors if needed
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.body.style.color = '#e8e3d7';
+          document.body.style.background = '#1c2422';
+        }
+      })();
+    </script> <script>
       (function () {
         var msgEl = document.getElementById('relay-msg');
         var payload = null;
