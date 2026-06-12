@@ -423,7 +423,9 @@ Start scan
 The first scan opens a Figma sign-in so the scanner can read <em>only the file you link</em>.
 			Your authorization is used once for that single read and is <strong>never stored or cached</strong> —
 			not the token, not your file contents, not the result. It runs server-side, then is discarded.
-</p> </div> <div id="inference-result-container" class="mt-4" aria-live="polite" aria-atomic="true"></div> </section> <script type="module" src="/assets/ComponentInferenceForm.astro_astro_type_script_index_0_lang.HzqRdBmo.js"></script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="what-this-does">What This Does</h2>
+</p> </div> <div id="inference-result-container" class="mt-4" aria-live="polite" aria-atomic="true"></div> </section> <script type="module" src="/assets/ComponentInferenceForm.astro_astro_type_script_index_0_lang.HzqRdBmo.js"></script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
+<p>A screenshot can’t tell you whether a Figma frame is structurally honest. A detached instance, a group that should be a frame, a row with no auto-layout — they all look fine on the surface, then surface late, at code review or after handoff. This reads the layer and component tree and flags the structure before it costs anyone a round-trip.</p>
+<h2 id="what-this-does">What This Does</h2>
 <p><strong>Figma Component Inference</strong> is a semantic-inference engine powered by the <span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span> agent. Where the <a href="/toybox/component-audit-tool">Component Audit</a> reads a <em>live page’s</em> real DOM, this tool reads a <em>Figma design’s</em> real <strong>layer and component tree</strong> and infers what it was <strong>meant</strong> to be — then tells you whether the structure is honest about that intent. The point is exactly the structure a screenshot can’t reveal: a detached instance, a group that should be a frame, a row with no auto-layout.</p>
 <p>You sign in with Figma and paste the link to a frame. The tool:</p>
 <ol>
@@ -522,7 +524,11 @@ Copy as markdown
 </button> <button type="button" class="download-btn rounded-md border border-ink/20 bg-paper px-4 py-2 text-sm font-medium text-ink hover:bg-cream transition-colors">
 Download .md
 </button> </div> <p class="action-status mt-2 text-xs text-muted" aria-live="polite"></p> </div> </section> <!-- Raw body is embedded as a non-rendered template so the script can read it
-     without escaping pitfalls. --> <template class="playbook-raw" data-for="component-inference">## What This Does
+     without escaping pitfalls. --> <template class="playbook-raw" data-for="component-inference">## Purpose
+
+A screenshot can&#39;t tell you whether a Figma frame is structurally honest. A detached instance, a group that should be a frame, a row with no auto-layout — they all look fine on the surface, then surface late, at code review or after handoff. This reads the layer and component tree and flags the structure before it costs anyone a round-trip.
+
+## What This Does
 
 **Figma Component Inference** is a semantic-inference engine powered by the &lt;span class=&quot;mai-wordmark&quot;&gt;M&lt;span class=&quot;mai-dot&quot;&gt;.&lt;/span&gt;ai&lt;/span&gt; agent. Where the [Component Audit](/toybox/component-audit-tool) reads a *live page&#39;s* real DOM, this tool reads a *Figma design&#39;s* real **layer and component tree** and infers what it was **meant** to be — then tells you whether the structure is honest about that intent. The point is exactly the structure a screenshot can&#39;t reveal: a detached instance, a group that should be a frame, a row with no auto-layout.
 

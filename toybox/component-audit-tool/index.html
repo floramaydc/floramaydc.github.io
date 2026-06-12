@@ -406,7 +406,9 @@ Page behind sign-in or only reachable from inside a corporate network? Try the  
 Component Audit bookmarklet
 </a> 
 — same detector, runs locally on whatever page you're already viewing.
-</p> <div id="component-audit-scope-panel" class="mt-4" aria-live="polite"></div> <div id="component-result-container" class="mt-4" aria-live="polite" aria-atomic="true"></div> </section> <script type="module" src="/assets/ComponentAuditForm.astro_astro_type_script_index_0_lang.DHuAvXLZ.js"></script>  <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="what-this-does">What This Does</h2>
+</p> <div id="component-audit-scope-panel" class="mt-4" aria-live="polite"></div> <div id="component-result-container" class="mt-4" aria-live="polite" aria-atomic="true"></div> </section> <script type="module" src="/assets/ComponentAuditForm.astro_astro_type_script_index_0_lang.DHuAvXLZ.js"></script>  <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
+<p>Open an unfamiliar product and the question shows up fast: what is this actually built on? That button <em>looks</em> like Fluent — but is it Fluent, or something shaped like it, or a custom one-off that only resembles it? Checking by hand is slow and partial; you read class names, second-guess yourself, and still only see the few components you happened to click. This reads the whole page at once and names the likely source library, component by component.</p>
+<h2 id="what-this-does">What This Does</h2>
 <p><strong>Component Audit</strong> is a component intelligence engine powered by the <span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span> agent that transforms a URL into a structured component report.</p>
 <p>You paste a URL. The tool:</p>
 <ol>
@@ -544,7 +546,11 @@ Copy as markdown
 </button> <button type="button" class="download-btn rounded-md border border-ink/20 bg-paper px-4 py-2 text-sm font-medium text-ink hover:bg-cream transition-colors">
 Download .md
 </button> </div> <p class="action-status mt-2 text-xs text-muted" aria-live="polite"></p> </div> </section> <!-- Raw body is embedded as a non-rendered template so the script can read it
-     without escaping pitfalls. --> <template class="playbook-raw" data-for="component-audit-tool">## What This Does
+     without escaping pitfalls. --> <template class="playbook-raw" data-for="component-audit-tool">## Purpose
+
+Open an unfamiliar product and the question shows up fast: what is this actually built on? That button *looks* like Fluent — but is it Fluent, or something shaped like it, or a custom one-off that only resembles it? Checking by hand is slow and partial; you read class names, second-guess yourself, and still only see the few components you happened to click. This reads the whole page at once and names the likely source library, component by component.
+
+## What This Does
 
 **Component Audit** is a component intelligence engine powered by the &lt;span class=&quot;mai-wordmark&quot;&gt;M&lt;span class=&quot;mai-dot&quot;&gt;.&lt;/span&gt;ai&lt;/span&gt; agent that transforms a URL into a structured component report.
 
