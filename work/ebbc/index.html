@@ -603,10 +603,20 @@ AI, like design, is only as useful as the intent we bring to it.
           // unreliable (a card grid can be shorter than the viewport on a big
           // screen), so we also look at structure.
           var shouldDescend = function (el, depth) {
-            if (depth >= 4) return false;
+            if (depth >= 6) return false;
             var n = el.children ? el.children.length : 0;
-            if (n < 2) return false;
+            if (n < 1) return false;
             var tag = el.tagName;
+            var isContainer = tag === 'DIV' || tag === 'SECTION' || tag === 'ARTICLE' ||
+              tag === 'MAIN' || tag === 'HEADER' || tag === 'FOOTER' || tag === 'ASIDE' ||
+              tag === 'NAV' || tag === 'UL' || tag === 'OL' || tag === 'FORM';
+            // Pass through a single-child structural wrapper (e.g. a layout
+            // band like `section > div.inner > ul.grid`) so we reach the real
+            // blocks inside instead of tagging the whole wrapper as one slab.
+            if (n === 1) {
+              var only = el.children[0];
+              return isContainer && only.children && only.children.length > 0;
+            }
             // Structural groupings and lists: always reveal their contents
             // individually rather than as one slab.
             if (tag === 'UL' || tag === 'OL' || tag === 'SECTION' || tag === 'ARTICLE') return true;
