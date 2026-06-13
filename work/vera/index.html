@@ -562,32 +562,102 @@ AI, like design, is only as useful as the intent we bring to it.
         if (!root.classList.contains('motion-ok')) return;
 
         // 1 ─ Scroll reveal (auto-tag + observe)
+        // Tag the real content blocks so they reveal one-by-one on scroll.
+        // We don't just tag the direct children of #main-content: a tall
+        // wrapper (a case-study <article>, or a <ul> grid of cards) would
+        // then reveal as a single block. Instead, when a candidate is taller
+        // than most of the viewport AND has multiple children, we descend
+        // into it and tag those children instead — so the cards / sections /
+        // paragraphs inside animate individually as they scroll into view.
         var main = document.getElementById('main-content');
         if (main) {
-          var kids = main.children;
-          var order = 0;
-          for (var i = 0; i < kids.length; i++) {
-            var el = kids[i];
-            if (el.hasAttribute('data-reveal')) continue;
-            if (el.querySelector && el.querySelector('[data-reveal]')) continue;
-            el.setAttribute('data-reveal', '');
-            el.style.setProperty('--reveal-order', String(order % 4));
-            order++;
+          var revealEls = [];
+          var vh = window.innerHeight || 800;
+          // Should we descend into `el` and reveal its children individually,
+          // rather than tag `el` as one block? Yes when it's a tall wrapper
+          // (a case-study <article> or its prose body), a list, or a row/grid
+          // of similar cards (children that share a tag). Height alone is
+          // unreliable (a card grid can be shorter than the viewport on a big
+          // screen), so we also look at structure.
+          var shouldDescend = function (el, depth) {
+            if (depth >= 4) return false;
+            var n = el.children ? el.children.length : 0;
+            if (n < 2) return false;
+            var tag = el.tagName;
+            // Structural groupings and lists: always reveal their contents
+            // individually rather than as one slab.
+            if (tag === 'UL' || tag === 'OL' || tag === 'SECTION' || tag === 'ARTICLE') return true;
+            var h = el.getBoundingClientRect ? el.getBoundingClientRect().height : 0;
+            if (h > vh * 0.9) return true;
+            // A grid/row of like items (cards): every child shares a tag.
+            var firstTag = el.children[0].tagName;
+            for (var c = 1; c < n; c++) {
+              if (el.children[c].tagName !== firstTag) return false;
+            }
+            return true;
+          };
+          var tagBlocks = function (parent, depth) {
+            var kids = parent.children;
+            for (var i = 0; i < kids.length; i++) {
+              var el = kids[i];
+              // Skip non-rendered nodes (scripts, styles, hidden elements).
+              var tag = el.tagName;
+              if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'TEMPLATE' ||
+                  tag === 'LINK' || tag === 'META' || tag === 'NOSCRIPT') continue;
+              if (el.getClientRects && el.getClientRects().length === 0) continue;
+              // Leave hand-curated reveals (and their wrappers) untouched —
+              // they carry their own stagger and are observed below.
+              if (el.hasAttribute('data-reveal')) continue;
+              if (el.querySelector && el.querySelector('[data-reveal]')) continue;
+              if (shouldDescend(el, depth)) {
+                tagBlocks(el, depth + 1);
+              } else {
+                el.setAttribute('data-reveal', '');
+                revealEls.push(el);
+              }
+            }
+          };
+          tagBlocks(main, 0);
+          for (var r = 0; r < revealEls.length; r++) {
+            revealEls[r].style.setProperty('--reveal-order', String(r % 4));
           }
         }
-        var items = document.querySelectorAll('[data-reveal]');
-        if (!('IntersectionObserver' in window) || !items.length) {
-          for (var j = 0; j < items.length; j++) items[j].classList.add('is-revealed');
+        // Reveal blocks as they reach the bottom-ninth of the viewport, and
+        // keep revealing anything that's at or above that line. A plain
+        // rAF-throttled scroll check (not IntersectionObserver) is used on
+        // purpose: it can never leave a block stuck invisible after a fast
+        // fling, an anchor jump, or a restored scroll position — any element
+        // whose top has passed the line is shown; only the still-below ones
+        // stay hidden until you reach them.
+        var pending = [].slice.call(document.querySelectorAll('[data-reveal]'));
+        if (!pending.length) {
+          // nothing to do
+        } else if (!('requestAnimationFrame' in window)) {
+          for (var j = 0; j < pending.length; j++) pending[j].classList.add('is-revealed');
         } else {
-          var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-revealed');
-                io.unobserve(entry.target);
+          var revealVisible = function () {
+            var line = (window.innerHeight || 800) * 0.9;
+            for (var k = pending.length - 1; k >= 0; k--) {
+              var el = pending[k];
+              if (el.getBoundingClientRect().top < line) {
+                el.classList.add('is-revealed');
+                pending.splice(k, 1);
               }
-            });
-          }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
-          items.forEach(function (el) { io.observe(el); });
+            }
+            if (!pending.length) {
+              window.removeEventListener('scroll', onScroll);
+              window.removeEventListener('resize', onScroll);
+            }
+          };
+          var ticking = false;
+          var onScroll = function () {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(function () { revealVisible(); ticking = false; });
+          };
+          window.addEventListener('scroll', onScroll, { passive: true });
+          window.addEventListener('resize', onScroll);
+          revealVisible();
         }
 
         // 2 ─ Page exit fade (intercept same-origin navigations)
