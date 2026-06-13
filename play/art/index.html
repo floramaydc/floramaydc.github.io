@@ -135,11 +135,11 @@
             syncThemeToggleUi();
           }
 
-          /* Brand-colored "shape overlay" wave — a single translucent
-             band that sweeps top → bottom once, like a wave passing over.
-             The palette flip happens instantly on click (soft-instant, as
-             before); this wave is decorative garnish layered on top, never
-             a curtain that gates the toggle. Returns true if it ran. */
+          /* Soft translucent wave that washes top → bottom on theme change.
+             It's a faded veil, not opaque paint: low opacity + soft tones so
+             you see the new palette fading in through it, the band shape just
+             carrying the motion. Decorative garnish on top of the palette
+             flip — never gates the toggle. Returns true if it ran. */
           var themeWaveAnimating = false;
           function runThemeWave(goingDark) {
             var wave = document.querySelector('[data-theme-wave]');
@@ -147,69 +147,98 @@
             var paths = wave.querySelectorAll('path');
             if (!paths.length) return false;
 
-            /* Soft, water-like palette — leans on the cool teal/sage and
-               cream tones so the sweep reads as a calm wave, not a splash
-               of saturated accent. */
+            /* Soft, water-like palette — cool teal/sage and cream tones so
+               the sweep reads as a calm wave, not a splash of saturated
+               accent. The opacity is carried by CSS (faint, translucent). */
             var colors = goingDark
               ? ['rgb(176,196,191)', 'rgb(138,163,158)', 'rgb(110,134,129)']
               : ['rgb(150,168,164)', 'rgb(120,140,137)', 'rgb(229,227,220)'];
+            // Each band is feathered via a vertical gradient (see SVG defs):
+            // transparent edges, solid core. Tint every stop with the band's
+            // colour so the feather stays the same hue, only the alpha varies.
             for (var c = 0; c < paths.length; c++) {
-              paths[c].setAttribute('fill', colors[c % colors.length]);
+              var grad = wave.querySelector('#theme-wave-grad-' + c);
+              if (grad) {
+                var stops = grad.querySelectorAll('stop');
+                for (var st = 0; st < stops.length; st++) {
+                  stops[st].setAttribute('stop-color', colors[c % colors.length]);
+                }
+              }
             }
 
-            var numPoints = 14;
-            /* duration: time for an edge to cross the full height.
-               bandGap:  how far (in ms) the trailing edge lags the leading
-                         edge — i.e. the band's thickness. A finite band
-                         sweeping past reads as a wave, not a curtain. */
-            var duration = 560;
-            var bandGap = 240;
-            var delayPointsMax = 90;
-            var delayPerPath = 90;
-            var delays = [];
-            for (var i = 0; i < numPoints; i++) {
-              delays[i] = Math.random() * delayPointsMax;
-            }
+            // Band edge = the EXACT curve of the background top-wave ribbon,
+            // so the toggle wave reads as that same wave continuing across the
+            // screen. Derived from the first ribbon path in the top-wave SVG
+            // (M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150
+            //  C1260,120 1440,200 1620,170): x normalized to a 0–100 viewBox
+            // and y de-trended to a pure undulation offset (anchors at
+            // indices 0,3,6,9; the rest are the cubic control points). The
+            // whole profile is translated vertically over the sweep, keeping
+            // its shape identical to the background ribbon.
+            var profX = [0, 13.4, 24.4, 35.4, 46.3, 56.1, 67.1, 78.0, 89.0, 100];
+            var profY = [0, -52, 38, -1.86, -41.67, 49.5, 9.6, -30.2, 39.9, 0];
+            var profMax = 52;
+
+            var duration = 1700;
+            var waveAmp = 18;    // how tall the ribbon's swells are (viewBox units)
+            var thickness = 40;  // band thickness top→bottom — wide so the
+                                 // three staggered layers overlap heavily and
+                                 // compound into a soft gradient rather than
+                                 // falling as separate ribbons.
+            var delayPerPath = 95;
+            var s = waveAmp / profMax;
+            var margin = waveAmp + 10;
+            var startY = -margin;
+            var endY = 100 + thickness + margin;
 
             function ease(t) {
-              /* easeInOutSine — gentle in and out, no hard snap. */
-              return 0.5 * (1 - Math.cos(Math.PI * t));
+              /* easeInOutCubic — a longer, softer breath than sine: eases in
+                 gently, glides through the middle, and settles slowly at the
+                 end, so the wave reads as "swooooshhh" rather than a quick
+                 "swosh". */
+              return t < 0.5
+                ? 4 * t * t * t
+                : 1 - Math.pow(-2 * t + 2, 3) / 2;
             }
 
-            var step = (1 / (numPoints - 1)) * 100;
+            // Top edge of the band, left → right, at vertical offset Y.
+            function edgeLR(Y) {
+              var segs = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+              var d = '';
+              for (var i = 0; i < segs.length; i++) {
+                var a = segs[i][0], b = segs[i][1], c = segs[i][2];
+                d += 'C ' + profX[a] + ' ' + (Y + profY[a] * s) + ' ' +
+                            profX[b] + ' ' + (Y + profY[b] * s) + ' ' +
+                            profX[c] + ' ' + (Y + profY[c] * s) + ' ';
+              }
+              return d;
+            }
+            // Bottom edge, right → left (reversed control points), at Y.
+            function edgeRL(Y) {
+              var segs = [[8, 7, 6], [5, 4, 3], [2, 1, 0]];
+              var d = '';
+              for (var i = 0; i < segs.length; i++) {
+                var a = segs[i][0], b = segs[i][1], c = segs[i][2];
+                d += 'C ' + profX[a] + ' ' + (Y + profY[a] * s) + ' ' +
+                            profX[b] + ' ' + (Y + profY[b] * s) + ' ' +
+                            profX[c] + ' ' + (Y + profY[c] * s) + ' ';
+              }
+              return d;
+            }
 
-            /* A single wavy band travelling downward. `lead` is the lower
-               edge (further along), `trail` is the upper edge lagging by
-               bandGap. The filled region between them is the wave. */
             function buildBand(time, off) {
-              var lead = [];
-              var trail = [];
-              for (var i = 0; i < numPoints; i++) {
-                var t0 = (time - off - delays[i]) / duration;
-                var t1 = (time - off - delays[i] - bandGap) / duration;
-                lead[i] = ease(Math.min(Math.max(t0, 0), 1)) * 100;
-                trail[i] = ease(Math.min(Math.max(t1, 0), 1)) * 100;
-              }
-              // Top edge (trail), left → right.
-              var d = 'M 0 ' + trail[0] + ' ';
-              for (var j = 0; j < numPoints - 1; j++) {
-                var p = (j + 1) * step;
-                var cp = p - step / 2;
-                d += 'C ' + cp + ' ' + trail[j] + ' ' + cp + ' ' + trail[j + 1] + ' ' + p + ' ' + trail[j + 1] + ' ';
-              }
-              // Down the right edge to the lead band.
-              d += 'L 100 ' + lead[numPoints - 1] + ' ';
-              // Bottom edge (lead), right → left.
-              for (var k = numPoints - 1; k > 0; k--) {
-                var pp = (k - 1) * step;
-                var cpp = pp + step / 2;
-                d += 'C ' + cpp + ' ' + lead[k] + ' ' + cpp + ' ' + lead[k - 1] + ' ' + pp + ' ' + lead[k - 1] + ' ';
-              }
+              var p = ease(Math.min(Math.max((time - off) / duration, 0), 1));
+              var leadY = startY + p * (endY - startY);
+              var trailY = leadY - thickness;
+              var d = 'M 0 ' + (trailY + profY[0] * s) + ' ';
+              d += edgeLR(trailY);
+              d += 'L 100 ' + (leadY + profY[9] * s) + ' ';
+              d += edgeRL(leadY);
               d += 'Z';
               return d;
             }
 
-            var total = duration + bandGap + delayPerPath * (paths.length - 1) + delayPointsMax;
+            var total = duration + delayPerPath * (paths.length - 1) + 80;
             var start = (window.performance && performance.now) ? performance.now() : Date.now();
             wave.classList.add('is-active');
 
@@ -238,15 +267,31 @@
             if (btn.dataset.themeToggleBound === 'true') return;
             btn.dataset.themeToggleBound = 'true';
             btn.addEventListener('click', function () {
+              var prefersReduced = reducedMotion && reducedMotion.matches;
               var goingDark = !document.documentElement.classList.contains('dark');
-              // Soft-instant: flip the palette right away so the toggle
-              // never feels gated. The wave is purely decorative on top.
-              applyThemeFlip();
-              if (reducedMotion && reducedMotion.matches) return;
-              if (themeWaveAnimating) return;
-              themeWaveAnimating = true;
-              if (!runThemeWave(goingDark)) {
-                themeWaveAnimating = false;
+
+              // Reduced motion: flip instantly, no animation.
+              if (prefersReduced) {
+                applyThemeFlip();
+                return;
+              }
+
+              // The palette dissolves from one theme to the next via a View
+              // Transition crossfade (a true fade, not a snap), and a soft
+              // translucent wave washes over the top to carry the motion.
+              if (typeof document.startViewTransition === 'function') {
+                document.startViewTransition(function () {
+                  applyThemeFlip();
+                });
+              } else {
+                applyThemeFlip();
+              }
+
+              if (!themeWaveAnimating) {
+                themeWaveAnimating = true;
+                if (!runThemeWave(goingDark)) {
+                  themeWaveAnimating = false;
+                }
               }
             });
           });
@@ -348,7 +393,7 @@
           } catch (e) {}
         }, { passive: true });
       })();
-    </script><title>Art — Flora May dela Cruz</title><script type="application/ld+json">[{"@context":"https://schema.org","@type":"CreativeWork","name":"Art","headline":"Art","description":"A working catalog of pieces I've made on weekends and quiet evenings — paintings and a few drawings. No specific style, no rules; just how I clear my head.","url":"https://floramaydc.com/play/art/","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"genre":"Play"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Play","item":"https://floramaydc.com/play/"},{"@type":"ListItem","position":2,"name":"Art","item":"https://floramaydc.com/play/art/"}]}]</script><link rel="stylesheet" href="/assets/style.BFfM-hOj.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="theme-wave" data-theme-wave aria-hidden="true"> <svg class="theme-wave__svg" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> <path d="M 0 0 H 0 V 100 H 0 Z"></path> <path d="M 0 0 H 0 V 100 H 0 Z"></path> <path d="M 0 0 H 0 V 100 H 0 Z"></path> </svg> </div>  <div class="top-wave text-ink/20 dark:text-ink/[0.18]" aria-hidden="true"> <svg viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg"> <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path> <path d="M-20,192 C200,152 380,252 560,222 C740,192 900,292 1080,262 C1260,232 1440,312 1620,282"></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <header class="site-header fixed inset-x-0 top-0 z-40"> <nav class="relative z-30 flex w-full items-center px-6 py-5 lg:px-10"> <a href="/" class="font-script text-4xl min-[960px]:text-5xl leading-none text-ink hover:text-accent transition-colors">Flora May</a> <ul class="hidden min-[960px]:absolute min-[960px]:left-1/2 min-[960px]:z-30 min-[960px]:flex min-[960px]:-translate-x-1/2 min-[960px]:items-baseline min-[960px]:gap-6 min-[960px]:text-base"> <li> <button type="button" class="ask-mai-nav-link" aria-label="Ask M.ai" aria-haspopup="dialog" aria-controls="mai-panel" aria-expanded="false" data-mai-open data-mai-source="desktop_nav_ask_mai"> <span class="ask-mai-nav-lockup"> <span class="ask-mai-nav-label">Ask</span> <span class="ask-mai-nav-mark"><span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span></span> </span> </button> </li> <li><a href="/toybox" class="hover:text-accent">Toybox</a></li> <li><a href="/writing" class="hover:text-accent">Writing</a></li> <li><a href="/work" class="hover:text-accent">Work</a></li> <li><a href="/play" class="hover:text-accent">Play</a></li> <li><a href="/about" class="hover:text-accent">About</a></li> </ul> <div class="relative z-30 ml-auto flex items-center gap-3 md:gap-5"> <a href="/contact" data-mai-open data-mai-source="desktop_nav_feedback" data-mai-prompt="I'd like to send Flora a message." data-mai-autosend="true" class="hidden min-[960px]:inline-flex items-center text-[0.72rem] font-bold uppercase tracking-[0.12em] text-muted hover:text-accent transition-colors">
+    </script><title>Art — Flora May dela Cruz</title><script type="application/ld+json">[{"@context":"https://schema.org","@type":"CreativeWork","name":"Art","headline":"Art","description":"A working catalog of pieces I've made on weekends and quiet evenings — paintings and a few drawings. No specific style, no rules; just how I clear my head.","url":"https://floramaydc.com/play/art/","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"genre":"Play"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Play","item":"https://floramaydc.com/play/"},{"@type":"ListItem","position":2,"name":"Art","item":"https://floramaydc.com/play/art/"}]}]</script><link rel="stylesheet" href="/assets/style.JUozQNe6.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="theme-wave" data-theme-wave aria-hidden="true"> <svg class="theme-wave__svg" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">  <defs> <linearGradient id="theme-wave-grad-0" x1="0" y1="0" x2="0" y2="1"> <stop offset="0%" stop-opacity="0"></stop> <stop offset="50%" stop-opacity="1"></stop> <stop offset="100%" stop-opacity="0"></stop> </linearGradient> <linearGradient id="theme-wave-grad-1" x1="0" y1="0" x2="0" y2="1"> <stop offset="0%" stop-opacity="0"></stop> <stop offset="50%" stop-opacity="1"></stop> <stop offset="100%" stop-opacity="0"></stop> </linearGradient> <linearGradient id="theme-wave-grad-2" x1="0" y1="0" x2="0" y2="1"> <stop offset="0%" stop-opacity="0"></stop> <stop offset="50%" stop-opacity="1"></stop> <stop offset="100%" stop-opacity="0"></stop> </linearGradient> </defs> <path d="M 0 0 H 0 V 100 H 0 Z" fill="url(#theme-wave-grad-0)"></path> <path d="M 0 0 H 0 V 100 H 0 Z" fill="url(#theme-wave-grad-1)"></path> <path d="M 0 0 H 0 V 100 H 0 Z" fill="url(#theme-wave-grad-2)"></path> </svg> </div>  <div class="top-wave text-ink/20 dark:text-ink/[0.18]" aria-hidden="true"> <svg viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg"> <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path> <path d="M-20,192 C200,152 380,252 560,222 C740,192 900,292 1080,262 C1260,232 1440,312 1620,282"></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <header class="site-header fixed inset-x-0 top-0 z-40"> <nav class="relative z-30 flex w-full items-center px-6 py-5 lg:px-10"> <a href="/" class="font-script text-4xl min-[960px]:text-5xl leading-none text-ink hover:text-accent transition-colors">Flora May</a> <ul class="hidden min-[960px]:absolute min-[960px]:left-1/2 min-[960px]:z-30 min-[960px]:flex min-[960px]:-translate-x-1/2 min-[960px]:items-baseline min-[960px]:gap-6 min-[960px]:text-base"> <li> <button type="button" class="ask-mai-nav-link" aria-label="Ask M.ai" aria-haspopup="dialog" aria-controls="mai-panel" aria-expanded="false" data-mai-open data-mai-source="desktop_nav_ask_mai"> <span class="ask-mai-nav-lockup"> <span class="ask-mai-nav-label">Ask</span> <span class="ask-mai-nav-mark"><span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span></span> </span> </button> </li> <li><a href="/toybox" class="hover:text-accent">Toybox</a></li> <li><a href="/writing" class="hover:text-accent">Writing</a></li> <li><a href="/work" class="hover:text-accent">Work</a></li> <li><a href="/play" class="hover:text-accent">Play</a></li> <li><a href="/about" class="hover:text-accent">About</a></li> </ul> <div class="relative z-30 ml-auto flex items-center gap-3 md:gap-5"> <a href="/contact" data-mai-open data-mai-source="desktop_nav_feedback" data-mai-prompt="I'd like to send Flora a message." data-mai-autosend="true" class="hidden min-[960px]:inline-flex items-center text-[0.72rem] font-bold uppercase tracking-[0.12em] text-muted hover:text-accent transition-colors">
 Send feedback
 </a> <button id="theme-toggle" type="button" data-theme-toggle data-theme-toggle-desktop aria-label="Switch to dark mode" aria-pressed="false" title="Switch theme" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-ink/20 bg-paper text-ink shadow-sm transition-colors hover:text-accent hover:border-accent/60 dark:bg-cream dark:border-ink/25 md:h-8 md:w-8"> <svg id="theme-icon-moon" data-theme-icon-dark width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> <svg id="theme-icon-sun" data-theme-icon-light hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <line x1="12" y1="2" x2="12" y2="5"></line> <line x1="12" y1="19" x2="12" y2="22"></line> <line x1="2" y1="12" x2="5" y2="12"></line> <line x1="19" y1="12" x2="22" y2="12"></line> <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"></line> <line x1="16.95" y1="16.95" x2="19.07" y2="19.07"></line> <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"></line> <line x1="16.95" y1="7.05" x2="19.07" y2="4.93"></line> </svg> </button> <button id="nav-toggle" class="min-[960px]:hidden relative inline-flex h-9 w-9 items-center justify-center text-ink hover:text-accent transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-state="closed"> <svg class="nav-toggle-icon nav-toggle-icon--open" data-nav-icon-open width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="20" y2="17"></line> </svg> <svg class="nav-toggle-icon nav-toggle-icon--close" data-nav-icon-close width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="6" y1="6" x2="18" y2="18"></line> <line x1="6" y1="18" x2="18" y2="6"></line> </svg> </button> </div> </nav> <!--
         Mobile menu — an off-canvas drawer that overlays the page rather
