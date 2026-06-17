@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net; media-src 'self' blob:; font-src 'self'; connect-src 'self' https://floramaydc-audit-api.vercel.app https://mai.floramaydc-mai.workers.dev https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://cloudflareinsights.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com; form-action 'self' https://floramaydc-audit-api.vercel.app https://mai.floramaydc-mai.workers.dev; upgrade-insecure-requests"><meta name="description" content="A resilient pattern for hamburger drawers that avoids jumpy scroll, stuck pages, and iOS lag when opening mid-scroll."><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" href="/fonts/ballet-400.woff2" as="font" type="font/woff2" crossorigin><link rel="canonical" href="https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern/"><link rel="alternate" type="application/rss+xml" title="Flora May dela Cruz — Writing" href="https://floramaydc.com/rss.xml"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Flora May dela Cruz"><meta property="og:title" content="The Mobile Drawer Scroll-Lock Pattern | Toybox by Flora May dela Cruz"><meta property="og:description" content="A resilient pattern for hamburger drawers that avoids jumpy scroll, stuck pages, and iOS lag when opening mid-scroll."><meta property="og:url" content="https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern/"><meta property="og:image" content="https://floramaydc.com/og-default.png"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Mobile Drawer Scroll-Lock Pattern | Toybox by Flora May dela Cruz"><meta name="twitter:description" content="A resilient pattern for hamburger drawers that avoids jumpy scroll, stuck pages, and iOS lag when opening mid-scroll."><meta name="twitter:image" content="https://floramaydc.com/og-default.png"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.18.1"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net; media-src 'self' blob:; font-src 'self'; connect-src 'self' https://floramaydc-audit-api.vercel.app https://mai.floramaydc-mai.workers.dev https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.google.com https://stats.g.doubleclick.net https://cloudflareinsights.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com; form-action 'self' https://floramaydc-audit-api.vercel.app https://mai.floramaydc-mai.workers.dev; upgrade-insecure-requests"><meta name="description" content="A resilient pattern for hamburger drawers that avoids jumpy scroll, stuck pages, and iOS lag when opening mid-scroll."><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="canonical" href="https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern"><link rel="alternate" type="application/rss+xml" title="Flora May dela Cruz — Writing" href="https://floramaydc.com/rss.xml"><!-- Open Graph --><meta property="og:type" content="article"><meta property="og:site_name" content="Flora May dela Cruz"><meta property="og:title" content="The Mobile Drawer Scroll-Lock Pattern | Toybox by Flora May dela Cruz"><meta property="og:description" content="A resilient pattern for hamburger drawers that avoids jumpy scroll, stuck pages, and iOS lag when opening mid-scroll."><meta property="og:url" content="https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern"><meta property="og:image" content="https://floramaydc.com/og-default.png"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Mobile Drawer Scroll-Lock Pattern | Toybox by Flora May dela Cruz"><meta name="twitter:description" content="A resilient pattern for hamburger drawers that avoids jumpy scroll, stuck pages, and iOS lag when opening mid-scroll."><meta name="twitter:image" content="https://floramaydc.com/og-default.png"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.18.1"><script>
       (function () {
         try {
           var stored = localStorage.getItem('theme');
@@ -7,20 +7,6 @@
           if (dark) document.documentElement.classList.add('dark');
           requestAnimationFrame(function () {
             document.documentElement.classList.add('theme-ready');
-          });
-        } catch (e) {}
-      })();
-    </script><script>
-      (function () {
-        try {
-          if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: no-preference)').matches)) return;
-          var root = document.documentElement;
-          root.classList.add('motion-ok');
-          root.classList.add('page-init');
-          requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-              root.classList.remove('page-init');
-            });
           });
         } catch (e) {}
       })();
@@ -141,40 +127,15 @@
 
           syncThemeToggleUi();
 
-          function applyThemeFlip() {
-            var isDark = document.documentElement.classList.toggle('dark');
-            try {
-              localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            } catch (e) {}
-            syncThemeToggleUi();
-          }
-
-          var reducedMotion = null;
-          try {
-            reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-          } catch (e) {}
-
           toggles.forEach(function (btn) {
             if (btn.dataset.themeToggleBound === 'true') return;
             btn.dataset.themeToggleBound = 'true';
             btn.addEventListener('click', function () {
-              var prefersReduced = reducedMotion && reducedMotion.matches;
-
-              // Reduced motion: flip instantly, no animation.
-              if (prefersReduced) {
-                applyThemeFlip();
-                return;
-              }
-
-              // The palette dissolves from one theme to the next via a View
-              // Transition crossfade — a simple, gentle fade in/out, no wave.
-              if (typeof document.startViewTransition === 'function') {
-                document.startViewTransition(function () {
-                  applyThemeFlip();
-                });
-              } else {
-                applyThemeFlip();
-              }
+              var isDark = document.documentElement.classList.toggle('dark');
+              try {
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+              } catch (e) {}
+              syncThemeToggleUi();
             });
           });
           } catch (e) {}
@@ -233,7 +194,7 @@
           // Fallback: if no interaction happens, still load analytics soon after paint.
           window.setTimeout(loadGtag, 4000);
         })();
-      })();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&#34;token&#34;:&#34;029a002a40ff4e7ea088c5d627e31e20&#34;}"></script><script>
+      })();</script><script>
       (function () {
         function trackSiteEvent(name, params) {
           try {
@@ -275,7 +236,9 @@
           } catch (e) {}
         }, { passive: true });
       })();
-    </script><title>The Mobile Drawer Scroll-Lock Pattern | Toybox by Flora May dela Cruz</title><script type="application/ld+json">[{"@context":"https://schema.org","@type":"CreativeWork","name":"The Mobile Drawer Scroll-Lock Pattern","headline":"The Mobile Drawer Scroll-Lock Pattern","description":"A resilient pattern for hamburger drawers that avoids jumpy scroll, stuck pages, and iOS lag when opening mid-scroll.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"url":"https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern/","license":"https://creativecommons.org/publicdomain/zero/1.0/","dateModified":"2026-05-26T00:00:00.000Z","keywords":"navigation, mobile, accessibility, interaction-design","genre":"Patterns"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Toybox","item":"https://floramaydc.com/toybox/"},{"@type":"ListItem","position":2,"name":"Patterns","item":"https://floramaydc.com/toybox/#pattern"},{"@type":"ListItem","position":3,"name":"The Mobile Drawer Scroll-Lock Pattern","item":"https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern/"}]}]</script><link rel="stylesheet" href="/assets/style.DMhJdMNE.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave text-ink/20 dark:text-ink/[0.18]" aria-hidden="true"> <svg viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg"> <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path> <path d="M-20,192 C200,152 380,252 560,222 C740,192 900,292 1080,262 C1260,232 1440,312 1620,282"></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <header class="site-header fixed inset-x-0 top-0 z-40"> <nav class="relative z-30 flex w-full items-center px-6 py-5 lg:px-10"> <a href="/" class="font-script text-4xl min-[960px]:text-5xl leading-none text-ink hover:text-accent transition-colors">Flora May</a> <ul class="hidden min-[960px]:absolute min-[960px]:left-1/2 min-[960px]:z-30 min-[960px]:flex min-[960px]:-translate-x-1/2 min-[960px]:items-baseline min-[960px]:gap-6 min-[960px]:text-base"> <li> <button type="button" class="ask-mai-nav-link" aria-label="Ask M.ai" aria-haspopup="dialog" aria-controls="mai-panel" aria-expanded="false" data-mai-open data-mai-source="desktop_nav_ask_mai"> <span class="ask-mai-nav-lockup"> <span class="ask-mai-nav-label">Ask</span> <span class="ask-mai-nav-mark"><span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span></span> </span> </button> </li> <li><a href="/toybox" class="hover:text-accent">Toybox</a></li> <li><a href="/writing" class="hover:text-accent">Writing</a></li> <li><a href="/work" class="hover:text-accent">Work</a></li> <li><a href="/play" class="hover:text-accent">Play</a></li> <li><a href="/about" class="hover:text-accent">About</a></li> </ul> <div class="relative z-30 ml-auto flex items-center gap-3 md:gap-5"> <a href="/contact" data-mai-open data-mai-source="desktop_nav_feedback" data-mai-prompt="I'd like to send Flora a message." data-mai-autosend="true" class="hidden min-[960px]:inline-flex items-center text-[0.72rem] font-bold uppercase tracking-[0.12em] text-muted hover:text-accent transition-colors">
+    </script><title>The Mobile Drawer Scroll-Lock Pattern | Toybox by Flora May dela Cruz</title><script type="application/ld+json">[{"@context":"https://schema.org","@type":"CreativeWork","name":"The Mobile Drawer Scroll-Lock Pattern","headline":"The Mobile Drawer Scroll-Lock Pattern","description":"A resilient pattern for hamburger drawers that avoids jumpy scroll, stuck pages, and iOS lag when opening mid-scroll.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"url":"https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern/","license":"https://creativecommons.org/publicdomain/zero/1.0/","dateModified":"2026-05-26T00:00:00.000Z","keywords":"navigation, mobile, accessibility, interaction-design","genre":"Patterns"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Toybox","item":"https://floramaydc.com/toybox/"},{"@type":"ListItem","position":2,"name":"Patterns","item":"https://floramaydc.com/toybox/#pattern"},{"@type":"ListItem","position":3,"name":"The Mobile Drawer Scroll-Lock Pattern","item":"https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern/"}]}]</script><link rel="stylesheet" href="/assets/about.DV-oQ1pB.css">
+<link rel="stylesheet" href="/assets/about.DYks48Zi.css">
+<link rel="stylesheet" href="/assets/_slug_.By1Gu4mS.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave text-ink/20 dark:text-ink/[0.18]" aria-hidden="true"> <svg viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg"> <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path> <path d="M-20,192 C200,152 380,252 560,222 C740,192 900,292 1080,262 C1260,232 1440,312 1620,282"></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <header class="site-header fixed inset-x-0 top-0 z-40"> <nav class="relative z-30 flex w-full items-center px-6 py-5 lg:px-10"> <a href="/" class="font-script text-4xl md:text-5xl leading-none text-ink hover:text-accent transition-colors">Flora May</a> <ul class="hidden min-[960px]:absolute min-[960px]:left-1/2 min-[960px]:z-30 min-[960px]:flex min-[960px]:-translate-x-1/2 min-[960px]:items-baseline min-[960px]:gap-6 min-[960px]:text-base"> <li> <button type="button" class="ask-mai-nav-link" aria-label="Ask M.ai" aria-haspopup="dialog" aria-controls="mai-panel" aria-expanded="false" data-mai-open data-mai-source="desktop_nav_ask_mai"> <span class="ask-mai-nav-lockup"> <span class="ask-mai-nav-label">Ask</span> <span class="ask-mai-nav-mark"><span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span></span> </span> </button> </li> <li><a href="/toybox" class="hover:text-accent">Toybox</a></li> <li><a href="/writing" class="hover:text-accent">Writing</a></li> <li><a href="/work" class="hover:text-accent">Work</a></li> <li><a href="/play" class="hover:text-accent">Play</a></li> <li><a href="/about" class="hover:text-accent">About</a></li> </ul> <div class="relative z-30 ml-auto flex items-center gap-3 md:gap-5"> <a href="/contact" data-mai-open data-mai-source="desktop_nav_feedback" data-mai-prompt="I'd like to send Flora a message." data-mai-autosend="true" class="hidden min-[960px]:inline-flex items-center text-[0.72rem] font-bold uppercase tracking-[0.12em] text-muted hover:text-accent transition-colors">
 Send feedback
 </a> <button id="theme-toggle" type="button" data-theme-toggle data-theme-toggle-desktop aria-label="Switch to dark mode" aria-pressed="false" title="Switch theme" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-ink/20 bg-paper text-ink shadow-sm transition-colors hover:text-accent hover:border-accent/60 dark:bg-cream dark:border-ink/25 md:h-8 md:w-8"> <svg id="theme-icon-moon" data-theme-icon-dark width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> <svg id="theme-icon-sun" data-theme-icon-light hidden width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <line x1="12" y1="2" x2="12" y2="5"></line> <line x1="12" y1="19" x2="12" y2="22"></line> <line x1="2" y1="12" x2="5" y2="12"></line> <line x1="19" y1="12" x2="22" y2="12"></line> <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"></line> <line x1="16.95" y1="16.95" x2="19.07" y2="19.07"></line> <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"></line> <line x1="16.95" y1="7.05" x2="19.07" y2="4.93"></line> </svg> </button> <button id="nav-toggle" class="min-[960px]:hidden relative inline-flex h-9 w-9 items-center justify-center text-ink hover:text-accent transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-state="closed"> <svg class="nav-toggle-icon nav-toggle-icon--open" data-nav-icon-open width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="20" y2="17"></line> </svg> <svg class="nav-toggle-icon nav-toggle-icon--close" data-nav-icon-close width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"> <line x1="6" y1="6" x2="18" y2="18"></line> <line x1="6" y1="18" x2="18" y2="6"></line> </svg> </button> </div> </nav> <!--
         Mobile menu — an off-canvas drawer that overlays the page rather
@@ -758,145 +721,6 @@ AI, like design, is only as useful as the intent we bring to it.
         } else {
           init();
         }
-      })();
-    </script>  <script>
-      (function () {
-        var root = document.documentElement;
-        if (!root.classList.contains('motion-ok')) return;
-
-        // 1 ─ Scroll reveal (auto-tag + observe)
-        // Tag the real content blocks so they reveal one-by-one on scroll.
-        // We don't just tag the direct children of #main-content: a tall
-        // wrapper (a case-study <article>, or a <ul> grid of cards) would
-        // then reveal as a single block. Instead, when a candidate is taller
-        // than most of the viewport AND has multiple children, we descend
-        // into it and tag those children instead — so the cards / sections /
-        // paragraphs inside animate individually as they scroll into view.
-        var main = document.getElementById('main-content');
-        if (main) {
-          var revealEls = [];
-          var vh = window.innerHeight || 800;
-          // Should we descend into `el` and reveal its children individually,
-          // rather than tag `el` as one block? Yes when it's a tall wrapper
-          // (a case-study <article> or its prose body), a list, or a row/grid
-          // of similar cards (children that share a tag). Height alone is
-          // unreliable (a card grid can be shorter than the viewport on a big
-          // screen), so we also look at structure.
-          var shouldDescend = function (el, depth) {
-            if (depth >= 6) return false;
-            var n = el.children ? el.children.length : 0;
-            if (n < 1) return false;
-            var tag = el.tagName;
-            var isContainer = tag === 'DIV' || tag === 'SECTION' || tag === 'ARTICLE' ||
-              tag === 'MAIN' || tag === 'HEADER' || tag === 'FOOTER' || tag === 'ASIDE' ||
-              tag === 'NAV' || tag === 'UL' || tag === 'OL' || tag === 'FORM';
-            // Pass through a single-child structural wrapper (e.g. a layout
-            // band like `section > div.inner > ul.grid`) so we reach the real
-            // blocks inside instead of tagging the whole wrapper as one slab.
-            if (n === 1) {
-              var only = el.children[0];
-              return isContainer && only.children && only.children.length > 0;
-            }
-            // Structural groupings and lists: always reveal their contents
-            // individually rather than as one slab.
-            if (tag === 'UL' || tag === 'OL' || tag === 'SECTION' || tag === 'ARTICLE') return true;
-            var h = el.getBoundingClientRect ? el.getBoundingClientRect().height : 0;
-            if (h > vh * 0.9) return true;
-            // A grid/row of like items (cards): every child shares a tag.
-            var firstTag = el.children[0].tagName;
-            for (var c = 1; c < n; c++) {
-              if (el.children[c].tagName !== firstTag) return false;
-            }
-            return true;
-          };
-          var tagBlocks = function (parent, depth) {
-            var kids = parent.children;
-            for (var i = 0; i < kids.length; i++) {
-              var el = kids[i];
-              // Skip non-rendered nodes (scripts, styles, hidden elements).
-              var tag = el.tagName;
-              if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'TEMPLATE' ||
-                  tag === 'LINK' || tag === 'META' || tag === 'NOSCRIPT') continue;
-              if (el.getClientRects && el.getClientRects().length === 0) continue;
-              // Leave hand-curated reveals (and their wrappers) untouched —
-              // they carry their own stagger and are observed below.
-              if (el.hasAttribute('data-reveal')) continue;
-              if (el.querySelector && el.querySelector('[data-reveal]')) continue;
-              if (shouldDescend(el, depth)) {
-                tagBlocks(el, depth + 1);
-              } else {
-                el.setAttribute('data-reveal', '');
-                revealEls.push(el);
-              }
-            }
-          };
-          tagBlocks(main, 0);
-          for (var r = 0; r < revealEls.length; r++) {
-            revealEls[r].style.setProperty('--reveal-order', String(r % 4));
-          }
-        }
-        // Reveal blocks as they reach the bottom-ninth of the viewport, and
-        // keep revealing anything that's at or above that line. A plain
-        // rAF-throttled scroll check (not IntersectionObserver) is used on
-        // purpose: it can never leave a block stuck invisible after a fast
-        // fling, an anchor jump, or a restored scroll position — any element
-        // whose top has passed the line is shown; only the still-below ones
-        // stay hidden until you reach them.
-        var pending = [].slice.call(document.querySelectorAll('[data-reveal]'));
-        if (!pending.length) {
-          // nothing to do
-        } else if (!('requestAnimationFrame' in window)) {
-          for (var j = 0; j < pending.length; j++) pending[j].classList.add('is-revealed');
-        } else {
-          var revealVisible = function () {
-            var line = (window.innerHeight || 800) * 0.9;
-            for (var k = pending.length - 1; k >= 0; k--) {
-              var el = pending[k];
-              if (el.getBoundingClientRect().top < line) {
-                el.classList.add('is-revealed');
-                pending.splice(k, 1);
-              }
-            }
-            if (!pending.length) {
-              window.removeEventListener('scroll', onScroll);
-              window.removeEventListener('resize', onScroll);
-            }
-          };
-          var ticking = false;
-          var onScroll = function () {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(function () { revealVisible(); ticking = false; });
-          };
-          window.addEventListener('scroll', onScroll, { passive: true });
-          window.addEventListener('resize', onScroll);
-          revealVisible();
-        }
-
-        // 2 ─ Page exit fade (intercept same-origin navigations)
-        document.addEventListener('click', function (e) {
-          if (e.defaultPrevented || e.button !== 0) return;
-          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-          var a = e.target.closest && e.target.closest('a[href]');
-          if (!a) return;
-          if (a.target && a.target !== '_self') return;
-          if (a.hasAttribute('download')) return;
-          if (a.hasAttribute('data-no-fade')) return;
-          var rel = a.getAttribute('rel') || '';
-          if (rel.indexOf('external') !== -1) return;
-          var href = a.getAttribute('href');
-          if (!href || href.charAt(0) === '#') return;
-          var url;
-          try { url = new URL(a.href, location.href); } catch (err) { return; }
-          if (url.origin !== location.origin) return;           // external / mailto / tel
-          if (url.pathname === location.pathname && url.search === location.search) return; // same page (hash)
-          e.preventDefault();
-          root.classList.add('is-leaving');
-          setTimeout(function () { window.location.href = a.href; }, 240);
-        });
-        window.addEventListener('pageshow', function () {
-          root.classList.remove('is-leaving');
-        });
       })();
     </script> <div id="mai-root" class="print:hidden"> <!-- Backdrop (mobile only — desktop keeps the page interactive behind the
        panel so M.ai can guide the user through the UI bidirectionally). --> <div id="mai-backdrop" hidden class="fixed inset-0 z-40 bg-ink/30 backdrop-blur-[1px] transition-opacity md:hidden"></div> <!-- Right-side drawer panel. On mobile it floats over the page; on
