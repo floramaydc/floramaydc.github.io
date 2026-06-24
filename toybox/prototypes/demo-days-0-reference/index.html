@@ -1132,6 +1132,40 @@ AI, like design, is only as useful as the intent we bring to it.
       return '';
     }
 
+    // A real, considered question — a goal, a constraint, or advice-seeking —
+    // as opposed to a bare inventory/nav chip ("what tools", "playbooks
+    // exist"). When true we SKIP the keyword shortcuts (freshness / manifest
+    // / nav) so the message reaches retrieval + the worker, which can
+    // actually reason about it. Flora's bar: an accessibility question with a
+    // sign-in constraint must never be answered with "Newest Toybox
+    // playbooks first". Written against normalized text, where apostrophes
+    // and "?" are already stripped ("can't" -> "can t", "we're" -> "we re").
+    function looksSubstantive(text) {
+      const q = normalize(text);
+      if (!q) return false;
+      const SIGNAL = /\b(my team|our team|for us|help us|helps us|we need|we want|we are|we re|our (?:org|company|product|site|app|stack|team|users?|pages?|workflow|process)|my (?:org|company|team|product|site)|better (?:at|in)|do better|get better|more (?:useful|helpful|effective)|which (?:tools?|playbooks?|patterns?)|recommend|suggest|advice|concern|worried|struggl|hard part|behind (?:a )?(?:login|sign in|signin|auth|paywall)|sign in|signed in|signing in|authenticat|gated|can t (?:use|access|sign)|cannot (?:use|access)|how (?:do|can|should) (?:we|i)|what (?:should|would) (?:we|i)|improve)\b/;
+      if (SIGNAL.test(q)) return true;
+      // Long, multi-clause natural question (not a 2-4 word chip).
+      if (q.split(/\s+/).filter(Boolean).length >= 16) return true;
+      return false;
+    }
+
+    // Flora's flagship empathy case: a team wants to do better at
+    // accessibility but their product sits behind a login, so most online
+    // scanners (which only crawl public URLs) can't help. Answer it
+    // directly and reliably — real suggestions, then the bookmarklet that
+    // actually solves the sign-in constraint — rather than leaving it to the
+    // worker, which may not surface the right artifact. Fires only when BOTH
+    // an accessibility term AND an access/sign-in constraint are present.
+    function accessibilityAccessConcern(text) {
+      const q = normalize(text);
+      if (!q) return false;
+      const a11y = /\b(accessib\w*|a11y|wcag|contrast|screen reader|aria|alt text|keyboard|color contrast|colour contrast)\b/.test(q);
+      if (!a11y) return false;
+      const gated = /\b(sign in|signin|signed in|signing in|log in|login|logged in|behind (?:a )?(?:login|sign in|signin|auth|paywall|wall)|authenticat\w*|gated|private (?:page|app|site|tool)|internal (?:app|tool|site|portal)|can t (?:use|access|share|paste)|cannot (?:use|access|share)|paste (?:a )?url|public url|share (?:a )?url|requires? (?:a )?(?:login|sign in|account)|need to (?:sign in|log in))\b/.test(q);
+      return a11y && gated;
+    }
+
     function renderManifestList(entries, intro, emptyText) {
       const rows = entries.slice(0, 6).map((entry) => {
         const url = `${base}${String(entry.url || '/').replace(/^\//, '')}`;
@@ -3176,7 +3210,28 @@ AI, like design, is only as useful as the intent we bring to it.
         return;
       }
 
-      if (isNavigationIntent(clean)) {
+      // 2.4) Accessibility + a sign-in constraint: answer it directly and
+      // reliably, leading with the bookmarklet that runs on authenticated
+      // pages. Sits BEFORE the keyword shortcuts so it can't be misrouted.
+      if (accessibilityAccessConcern(clean)) {
+        const bm = `${base}toybox/accessibility-audit-bookmarklet`;
+        const tool = `${base}toybox/accessibility-audit-tool`;
+        const ops = `${base}toybox/accessibility-audit-ops-playbook`;
+        const reply = `Since your pages sit behind a sign-in, most online scanners won't help — they only reach public URLs. Here's how I'd approach it:`
+          + `<ul class="mai-list">`
+          + `<li><strong><a class="text-accent underline" href="${bm}">Accessibility Audit bookmarklet</a></strong> — this is the one for your constraint. It runs entirely in your browser on whatever page you're already signed into, and checks contrast, accessible names, alt text, headings, landmarks, and keyboard reachability, then draws an interactive overlay. Nothing leaves the device, so authenticated and internal pages are fine.</li>`
+          + `<li><a class="text-accent underline" href="${tool}">Accessibility Audit web tool</a> — for any public URLs (marketing pages, docs, the sign-in screens themselves), paste the link and get an annotated report.</li>`
+          + `<li><a class="text-accent underline" href="${ops}">Accessibility Audit Ops Playbook</a> — the process side: how to fold these checks into review, what to triage first, and how to keep fixes from regressing.</li>`
+          + `</ul>`
+          + `If you tell me what your team's pages are built with, I can point you to the most relevant playbook next.`;
+        addBubble('mai', reply);
+        renderChips(['Show accessibility playbooks', 'Run accessibility checklist', 'Open Accessibility Audit']);
+        if (shouldSpeakThisTurn) speak(stripHtml(reply));
+        saveTranscript();
+        return;
+      }
+
+      if (!looksSubstantive(clean) && isNavigationIntent(clean)) {
         const reply = renderNavigationGuide(clean);
         addBubble('mai', reply);
         renderChips(getDynamicChips(clean));
@@ -3184,7 +3239,7 @@ AI, like design, is only as useful as the intent we bring to it.
         return;
       }
 
-      if (isFreshnessQuery(clean)) {
+      if (!looksSubstantive(clean) && isFreshnessQuery(clean)) {
         const pendingId = addBubble(
           'mai',
           '<span class="mai-thinking text-muted">Looking for the latest Toybox updates<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>',
