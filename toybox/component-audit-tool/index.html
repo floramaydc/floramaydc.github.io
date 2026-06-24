@@ -568,7 +568,7 @@ Honestly? I built these tools for myself. The checks I rely on professionally we
 <li>You’re auditing design system adoption or drift across a product surface</li>
 <li>You want to detect custom components that might be missing keyboard support or ARIA semantics</li>
 <li>You’re doing a component migration and need to know what’s currently on the page before you start</li>
-</ul> </div> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
+</ul> </div>  <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
 Have feedback? <a class="private-reply__link" href="mailto:floramaydelacruz@gmail.com?subject=Re%3A%20Component%20Audit">Send Flora a note</a>.
 </p> </aside> <dialog id="reply-overlay" aria-labelledby="reply-overlay-title" class="reply-overlay" data-astro-cid-rjpe63gb> <form method="dialog" class="reply-overlay__form" id="reply-overlay-form" novalidate data-astro-cid-rjpe63gb> <header class="reply-overlay__header" data-astro-cid-rjpe63gb> <h2 id="reply-overlay-title" class="reply-overlay__title" data-astro-cid-rjpe63gb>Send Flora a private note</h2> <button type="button" class="reply-overlay__close" data-close aria-label="Close" data-astro-cid-rjpe63gb>×</button> </header> <p class="reply-overlay__context" data-astro-cid-rjpe63gb>
 About: <span class="reply-overlay__context-title" data-astro-cid-rjpe63gb>Component Audit</span> </p> <div class="reply-overlay__field" data-astro-cid-rjpe63gb> <label class="reply-overlay__label" for="reply-message" data-astro-cid-rjpe63gb>
@@ -577,137 +577,7 @@ Your name <span class="reply-overlay__optional" data-astro-cid-rjpe63gb>optional
 Reply email <span class="reply-overlay__optional" data-astro-cid-rjpe63gb>optional</span> </label> <input id="reply-email" name="email" type="email" maxlength="120" placeholder="you@example.com" class="reply-overlay__input" autocomplete="email" aria-describedby="reply-email-hint" data-astro-cid-rjpe63gb> <p id="reply-email-hint" class="reply-overlay__hint" data-astro-cid-rjpe63gb>
 Only if you'd like Flora to be able to write back.
 </p> </div> <!-- Honeypot: hidden from people and assistive tech; bots that
-         autofill every field will fill this and be silently dropped. --> <div class="reply-overlay__honeypot" aria-hidden="true" data-astro-cid-rjpe63gb> <label for="reply-website" data-astro-cid-rjpe63gb>Website</label> <input id="reply-website" name="website" type="text" tabindex="-1" autocomplete="off" data-astro-cid-rjpe63gb> </div> <input type="hidden" name="post" value="Component Audit" data-astro-cid-rjpe63gb> <p id="reply-overlay-status" class="reply-overlay__status" role="status" aria-live="polite" data-astro-cid-rjpe63gb></p> <div class="reply-overlay__actions" data-astro-cid-rjpe63gb> <button type="submit" class="reply-overlay__send" data-astro-cid-rjpe63gb>Send note</button> <button type="button" class="reply-overlay__cancel" data-close data-astro-cid-rjpe63gb>Cancel</button> </div> </form> </dialog> <script type="module">(function(){const a=document.getElementById("reply-overlay");if(!(a instanceof HTMLDialogElement))return;const t=document.getElementById("reply-overlay-form"),r=document.getElementById("reply-overlay-status"),c=document.getElementById("reply-message");function s(n){r&&(r.textContent=n)}function f(){s(""),t instanceof HTMLFormElement&&t.reset();try{a.showModal()}catch{return}window.requestAnimationFrame(()=>{c instanceof HTMLTextAreaElement&&c.focus()})}function i(){try{a.close()}catch{}}document.querySelectorAll(".private-reply__link").forEach(n=>{n.addEventListener("click",e=>{typeof a.showModal=="function"&&(e.preventDefault(),f())})}),a.addEventListener("click",n=>{const e=n.target;if(e instanceof HTMLElement){if(e.hasAttribute("data-close")){i();return}e===a&&i()}}),t instanceof HTMLFormElement&&t.addEventListener("submit",async n=>{if(n.preventDefault(),!t.checkValidity()){t.reportValidity();return}const e=new FormData(t),o=t.querySelector(".reply-overlay__send");o&&(o.disabled=!0),s("Sending…");const m=["localhost","127.0.0.1"].includes(location.hostname)?"/api/contact":"https://floramaydc-audit-api.vercel.app/api/contact";try{const l=await fetch(m,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:e.get("message"),name:e.get("name"),email:e.get("email"),post:e.get("post"),website:e.get("website")})});if(l.ok)s("Sent. Thank you."),setTimeout(i,1400);else{const d=await l.json().catch(()=>({})),u=d&&d.error||"Could not send. Try again or use email.";s(u),o&&(o.disabled=!1)}}catch{s("Network error. Try again or use email."),o&&(o.disabled=!1)}})})();</script>  <section class="mt-12" aria-labelledby="related-toybox"> <h2 id="related-toybox" class="text-2xl">Related across the toybox</h2> <ul class="mt-4 grid gap-3 sm:grid-cols-2"> <li class="rounded-lg border border-ink/10 p-4"> <a href="/toybox/component-audit-bookmarklet" class="group block"> <p class="text-xs uppercase tracking-widest text-muted">Tool</p> <p class="mt-2 text-base group-hover:text-accent">Component Audit bookmarklet</p> <p class="mt-2 text-sm text-muted line-clamp-3">Component audit on pages behind login — same detection as the web tool, running entirely in your browser. No data leaves your device.</p> </a> </li><li class="rounded-lg border border-ink/10 p-4"> <a href="/toybox/component-inference" class="group block"> <p class="text-xs uppercase tracking-widest text-muted">Tool</p> <p class="mt-2 text-base group-hover:text-accent">Figma Component Inference</p> <p class="mt-2 text-sm text-muted line-clamp-3">Sign in with Figma and the M.ai agent reads your frame&#39;s layer and component tree — the structure a screenshot can&#39;t show — to infer the pattern, flag detached instances, pointless groups, missing auto-layout and accessibility risks, and pin each finding on a render of your frame. Nothing is stored or cached.</p> </a> </li><li class="rounded-lg border border-ink/10 p-4"> <a href="/toybox/accessibility-audit-tool" class="group block"> <p class="text-xs uppercase tracking-widest text-muted">Tool</p> <p class="mt-2 text-base group-hover:text-accent">Accessibility Audit</p> <p class="mt-2 text-sm text-muted line-clamp-3">WCAG accessibility audit for any URL — annotated report with element inventory, contrast findings, missing labels, and actionable fixes. For designers doing pre-handoff reviews and developers catching issues before ship.</p> </a> </li><li class="rounded-lg border border-ink/10 p-4"> <a href="/toybox/accessibility-audit-bookmarklet" class="group block"> <p class="text-xs uppercase tracking-widest text-muted">Tool</p> <p class="mt-2 text-base group-hover:text-accent">Accessibility Audit bookmarklet</p> <p class="mt-2 text-sm text-muted line-clamp-3">WCAG-aligned accessibility checks on pages behind login — contrast, accessible names, alt text, structure, and keyboard reachability, running entirely in your browser. No data leaves your device.</p> </a> </li> </ul> </section> <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="component-audit-tool" data-title="Component Audit" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="component-audit-tool.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
-Drop your email to copy the markdown or download the file. One email unlocks every playbook in the Toybox.
-</p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-component-audit-tool">Email address</label> <input id="pb-email-component-audit-tool" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
-Unlock copy &amp; download
-</button> </form> <p class="form-status mt-2 text-xs text-muted" aria-live="polite"></p> <p class="mt-3 text-xs text-muted">
-No spam. Occasional notes on new playbooks. Unsubscribe in one click.
-</p> </div> <!-- UNLOCKED VIEW --> <div class="unlocked hidden"> <p class="text-sm font-medium text-ink">Yours to use</p> <p class="mt-1 text-sm text-muted">
-Free to use anywhere under <a class="underline hover:text-accent" href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0 1.0</a> — public domain, no attribution required. Author credit lives in the file's frontmatter.
-</p> <div class="mt-3 flex flex-wrap gap-2"> <button type="button" class="copy-btn rounded-md border border-ink/20 bg-paper px-4 py-2 text-sm font-medium text-ink hover:bg-cream transition-colors">
-Copy as markdown
-</button> <button type="button" class="download-btn rounded-md border border-ink/20 bg-paper px-4 py-2 text-sm font-medium text-ink hover:bg-cream transition-colors">
-Download .md
-</button> </div> <p class="action-status mt-2 text-xs text-muted" aria-live="polite"></p> </div> </section> <!-- Raw body is embedded as a non-rendered template so the script can read it
-     without escaping pitfalls. --> <template class="playbook-raw" data-for="component-audit-tool">## Purpose
-
-Open an unfamiliar product and the question shows up fast: what is this actually built on? That button *looks* like Fluent — but is it Fluent, or something shaped like it, or a custom one-off that only resembles it? Checking by hand is slow and partial; you read class names, second-guess yourself, and still only see the few components you happened to click. This reads the whole page at once and names the likely source library, component by component.
-
-## What This Does
-
-**Component Audit** is a component intelligence engine powered by the &lt;span class=&quot;mai-wordmark&quot;&gt;M&lt;span class=&quot;mai-dot&quot;&gt;.&lt;/span&gt;ai&lt;/span&gt; agent that transforms a URL into a structured component report.
-
-You paste a URL. The tool:
-1. Visits the page and captures a full-page screenshot
-2. Builds a **component inventory** — every button, input, dropdown, dialog, table, tab, menu, tree, nav, card, heading, link, and image with metadata
-3. Detects **component source** — native HTML, Carbon, Fluent UI, Material UI, or custom implementation — with a confidence score
-4. Applies the **matching library rule pack** (Carbon, Fluent UI, or Material UI) to flag risky implementations — every supported library has its own pack
-5. Generates **annotated findings** with bounding boxes on the screenshot
-6. Produces **recommendations** mapped to the appropriate library component with explanation and benefits
-7. Lets you export to **PDF** or **Markdown** for sharing
-8. Gives you an **M.ai context payload** for follow-up questions about specific findings
-
-### Core Concept
-
-This is an **observe → inventory → annotate → recommend** engine. The same architecture that powers the Accessibility Audit applied to component-level analysis. The engine detects the major Material-spec implementations and their peers today:
-
-- **Carbon** (IBM) — `cds--*`, `bx--*`, `c4p--*`
-- **Fluent UI** (Microsoft) — `fui-*`, `ms-*`
-- **MUI** (the React library, `@mui/material`) — `Mui[Component]-root`, `mui-*`
-- **Material Web** (Google&#39;s current Material 3 web components, `@material/web`) — `md-*` elements, `md-typescale-*`
-- **MWC** (legacy Material web components, `@material/mwc-*`) — `mwc-*`
-- **MDC Web** (archived Material Components for Web, `@material/*`) — `mdc-*`
-- **Angular Material** (`@angular/material`) — `mat-*`
-
-Each library has its own rule pack, so a Material-heavy page is evaluated against the right rules — MUI is not Material Web is not MDC. Pages with no detected design system get cross-library options side-by-side so you can compare before picking.
-
-### Inventory Captures
-
-For each detected component:
-- **Component type** — button, input, dropdown, combobox, dialog, table, tabs, menu, tree, navigation, card, form, link, heading, image
-- **Selector** — CSS path to the element
-- **Role** — ARIA or implicit role
-- **Accessible name** — aria-label, title, or label text
-- **Visible text** — trimmed text content
-- **Classes** — applied CSS class names
-- **Attributes** — type, disabled, aria-expanded, aria-haspopup, and others
-- **Bounding box** — pixel coordinates for annotation overlay
-- **Possible source** — native / carbon / fluent / material / custom / unknown
-- **Confidence score** — how confident the engine is in the source classification
-
-### Risk Evaluation
-
-| Risk | Description |
-|---|---|
-| **Low** | Native HTML controls used correctly, or confirmed Carbon / Fluent UI / Material UI components |
-| **Medium** | Wrapped natives, partially customized controls, unknown source on interactive elements |
-| **High** | Custom dropdowns, custom tree views, custom menus, custom tables, custom dialogs, custom tab implementations |
-
-### Library Recommendations
-
-When a risky implementation is found, the report includes:
-- The specific **library component** to use — today this resolves to Fluent UI (`@fluentui/react-components`); Material UI (`@mui/material`) and Carbon (`@carbon/react`) suggestions are coming next
-- **Why the custom implementation carries risk** — what keyboard and accessibility behaviors it likely misses
-- **Benefits of switching** — consistency, keyboard support, focus behavior, screen reader support
-
-### Limitations (v0)
-
-- Detection covers Fluent UI, Material UI, and Carbon. Prescriptive **rule pack** (recommendations) is currently Fluent-only — Material UI and Carbon recommendations are being added next.
-- Single page only (no multi-page crawl)
-- Automated detection only — manual review recommended for nuance
-- Source detection is heuristic (class-name and ARIA-based), not build-artifact analysis
-- No saved history or user accounts
-
-### Reach: pages this tool can and can&#39;t see
-
-It works best on pages a normal browser can reach with no sign-in. Public marketing sites, public docs, public product pages. For those, it loads the page, takes the screenshot, builds the component inventory, and runs the rule packs.
-
-It does **not** sign in for you. It does **not** click through region pickers, cookie walls, or anti-bot challenges. If a page redirects to a login screen, the inventory will be from the login screen — not the app you were trying to study.
-
-&lt;div class=&quot;not-prose my-6 rounded-lg border border-accent/40 bg-accent/10 p-5 dark:bg-accent/15&quot;&gt;
-  &lt;p class=&quot;m-0 text-xs uppercase tracking-wide text-muted&quot;&gt;For sign-in, region locks, or any page in your own browser&lt;/p&gt;
-  &lt;p class=&quot;m-0 mt-2 font-serif text-xl text-ink&quot;&gt;Use the Component Audit bookmarklet&lt;/p&gt;
-  &lt;p class=&quot;m-0 mt-2 text-sm text-muted&quot;&gt;Same detection logic, runs locally, sees whatever your browser sees. Nothing leaves your device.&lt;/p&gt;
-  &lt;p class=&quot;m-0 mt-4&quot;&gt;
-    &lt;a href=&quot;/toybox/component-audit-bookmarklet&quot; class=&quot;inline-flex items-center rounded-md border border-accent bg-accent px-4 py-2 text-sm font-semibold text-paper no-underline hover:bg-accent/90&quot;&gt;
-      Open the bookmarklet tool →
-    &lt;/a&gt;
-  &lt;/p&gt;
-&lt;/div&gt;
-
-### FAQ
-
-**Can I use this for a client&#39;s product?**
-Yes. The tool is public and free. Export the report and share with your engineering and design team.
-
-**Is this only useful for Fluent codebases?**
-No. Detection works for Fluent UI, Material UI ([m3.material.io](https://m3.material.io)), and Carbon ([carbondesignsystem.com](https://carbondesignsystem.com)), and the inventory is useful for any page regardless of stack. Prescriptive recommendations are currently Fluent-only — Material and Carbon recommendation packs are being added next.
-
-**How does source detection work?**
-The engine checks class-name prefixes and custom-element tags for each supported library — Fluent UI (`fui-`, `ms-`, `data-automationid`), Carbon (`cds--`, `bx--`, `c4p--`), MUI (`Mui[Component]-root`, `mui-`), Material Web / M3 (`md-*` elements, `md-typescale-*`), MWC (`mwc-*`), MDC Web (`mdc-*`), and Angular Material (`mat-*`) — and falls back to native HTML / custom / unknown. Confidence scores reflect how certain the heuristic is.
-
-**Can I ask M.ai follow-up questions about my report?**
-Yes. The report includes an M.ai context payload you can paste into M.ai to ask detailed questions about specific findings.
-
-**Why no accounts or history?**
-Honestly? I built these tools for myself. The checks I rely on professionally were never shareable — permissioning, licensing, infrastructure always got in the way. I wanted teammates and other designers to have the same visibility I had, so I built something anyone can just open and use. No sign-up, no setup, no cost. If saved reports and team features turn out to be useful down the line, that&#39;s a problem I&#39;d be glad to solve — but right now the goal is simple: run the check, get the answer, move on.
-
-## Companion artifacts
-
-- [Component Audit bookmarklet](/toybox/component-audit-bookmarklet) — the local-browser counterpart. Use it for pages behind sign-in, region locks, or anything a server-side scan can&#39;t reach. Same detector, runs entirely on your machine.
-- [Design System Audit Playbook](/toybox/design-system-audit-playbook) — the conceptual framing for how to triage findings (Inventory → Drift → Duplication → Risk → Action). Read this first if you&#39;re auditing systematically, not ad-hoc.
-- [Accessibility Audit Tool](/toybox/accessibility-audit-tool) — the sibling tool. Run them together: Component Audit answers &quot;what&#39;s on the page?&quot;; Accessibility Audit answers &quot;does it pass WCAG?&quot;
-- [Audit Command Center Template](/toybox/audit-command-center-template) — when findings from multiple audits pile up, this template gives you one tracker to triage and assign them.
-- [Accessibility Compliance Baseline Playbook](/toybox/accessibility-compliance-baseline-playbook) — non-negotiable interaction and contrast checks every finding should be measured against.
-
-## Try it when
-
-- You need to inventory the components on a live page — what&#39;s there, what library it came from, confidence score
-- You want to check if a page uses Fluent UI, Material, or Carbon and whether they&#39;re implemented to spec
-- You&#39;re auditing design system adoption or drift across a product surface
-- You want to detect custom components that might be missing keyboard support or ARIA semantics
-- You&#39;re doing a component migration and need to know what&#39;s currently on the page before you start</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <nav class="mt-10 grid gap-3 sm:grid-cols-2 text-sm" aria-label="More in this category"> <a href="/toybox/accessibility-audit-bookmarklet" class="rounded-md py-4 hover:text-accent transition-colors"> <p class="text-[10px] uppercase tracking-widest text-muted">← Previous tool</p> <p class="mt-1 text-ink">Accessibility Audit bookmarklet</p> </a> <a href="/toybox/component-audit-bookmarklet" class="rounded-md py-4 hover:text-accent transition-colors sm:text-right"> <p class="text-[10px] uppercase tracking-widest text-muted">Next tool →</p> <p class="mt-1 text-ink">Component Audit bookmarklet</p> </a> </nav> <footer class="mt-10 border-t border-ink/10 pt-6 text-sm text-muted space-y-3"> <p>
+         autofill every field will fill this and be silently dropped. --> <div class="reply-overlay__honeypot" aria-hidden="true" data-astro-cid-rjpe63gb> <label for="reply-website" data-astro-cid-rjpe63gb>Website</label> <input id="reply-website" name="website" type="text" tabindex="-1" autocomplete="off" data-astro-cid-rjpe63gb> </div> <input type="hidden" name="post" value="Component Audit" data-astro-cid-rjpe63gb> <p id="reply-overlay-status" class="reply-overlay__status" role="status" aria-live="polite" data-astro-cid-rjpe63gb></p> <div class="reply-overlay__actions" data-astro-cid-rjpe63gb> <button type="submit" class="reply-overlay__send" data-astro-cid-rjpe63gb>Send note</button> <button type="button" class="reply-overlay__cancel" data-close data-astro-cid-rjpe63gb>Cancel</button> </div> </form> </dialog> <script type="module">(function(){const a=document.getElementById("reply-overlay");if(!(a instanceof HTMLDialogElement))return;const t=document.getElementById("reply-overlay-form"),r=document.getElementById("reply-overlay-status"),c=document.getElementById("reply-message");function s(n){r&&(r.textContent=n)}function f(){s(""),t instanceof HTMLFormElement&&t.reset();try{a.showModal()}catch{return}window.requestAnimationFrame(()=>{c instanceof HTMLTextAreaElement&&c.focus()})}function i(){try{a.close()}catch{}}document.querySelectorAll(".private-reply__link").forEach(n=>{n.addEventListener("click",e=>{typeof a.showModal=="function"&&(e.preventDefault(),f())})}),a.addEventListener("click",n=>{const e=n.target;if(e instanceof HTMLElement){if(e.hasAttribute("data-close")){i();return}e===a&&i()}}),t instanceof HTMLFormElement&&t.addEventListener("submit",async n=>{if(n.preventDefault(),!t.checkValidity()){t.reportValidity();return}const e=new FormData(t),o=t.querySelector(".reply-overlay__send");o&&(o.disabled=!0),s("Sending…");const m=["localhost","127.0.0.1"].includes(location.hostname)?"/api/contact":"https://floramaydc-audit-api.vercel.app/api/contact";try{const l=await fetch(m,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:e.get("message"),name:e.get("name"),email:e.get("email"),post:e.get("post"),website:e.get("website")})});if(l.ok)s("Sent. Thank you."),setTimeout(i,1400);else{const d=await l.json().catch(()=>({})),u=d&&d.error||"Could not send. Try again or use email.";s(u),o&&(o.disabled=!1)}}catch{s("Network error. Try again or use email."),o&&(o.disabled=!1)}})})();</script>  <section class="mt-12" aria-labelledby="related-toybox"> <h2 id="related-toybox" class="text-2xl">Related across the toybox</h2> <ul class="mt-4 grid gap-3 sm:grid-cols-2"> <li class="rounded-lg border border-ink/10 p-4"> <a href="/toybox/component-audit-bookmarklet" class="group block"> <p class="text-xs uppercase tracking-widest text-muted">Tool</p> <p class="mt-2 text-base group-hover:text-accent">Component Audit bookmarklet</p> <p class="mt-2 text-sm text-muted line-clamp-3">Component audit on pages behind login — same detection as the web tool, running entirely in your browser. No data leaves your device.</p> </a> </li><li class="rounded-lg border border-ink/10 p-4"> <a href="/toybox/component-inference" class="group block"> <p class="text-xs uppercase tracking-widest text-muted">Tool</p> <p class="mt-2 text-base group-hover:text-accent">Figma Component Inference</p> <p class="mt-2 text-sm text-muted line-clamp-3">Sign in with Figma and the M.ai agent reads your frame&#39;s layer and component tree — the structure a screenshot can&#39;t show — to infer the pattern, flag detached instances, pointless groups, missing auto-layout and accessibility risks, and pin each finding on a render of your frame. Nothing is stored or cached.</p> </a> </li><li class="rounded-lg border border-ink/10 p-4"> <a href="/toybox/accessibility-audit-tool" class="group block"> <p class="text-xs uppercase tracking-widest text-muted">Tool</p> <p class="mt-2 text-base group-hover:text-accent">Accessibility Audit</p> <p class="mt-2 text-sm text-muted line-clamp-3">WCAG accessibility audit for any URL — annotated report with element inventory, contrast findings, missing labels, and actionable fixes. For designers doing pre-handoff reviews and developers catching issues before ship.</p> </a> </li><li class="rounded-lg border border-ink/10 p-4"> <a href="/toybox/accessibility-audit-bookmarklet" class="group block"> <p class="text-xs uppercase tracking-widest text-muted">Tool</p> <p class="mt-2 text-base group-hover:text-accent">Accessibility Audit bookmarklet</p> <p class="mt-2 text-sm text-muted line-clamp-3">WCAG-aligned accessibility checks on pages behind login — contrast, accessible names, alt text, structure, and keyboard reachability, running entirely in your browser. No data leaves your device.</p> </a> </li> </ul> </section> <nav class="mt-10 grid gap-3 sm:grid-cols-2 text-sm" aria-label="More in this category"> <a href="/toybox/accessibility-audit-bookmarklet" class="rounded-md py-4 hover:text-accent transition-colors"> <p class="text-[10px] uppercase tracking-widest text-muted">← Previous tool</p> <p class="mt-1 text-ink">Accessibility Audit bookmarklet</p> </a> <a href="/toybox/component-audit-bookmarklet" class="rounded-md py-4 hover:text-accent transition-colors sm:text-right"> <p class="text-[10px] uppercase tracking-widest text-muted">Next tool →</p> <p class="mt-1 text-ink">Component Audit bookmarklet</p> </a> </nav> <footer class="mt-10 border-t border-ink/10 pt-6 text-sm text-muted space-y-3"> <p>
 By Flora May dela Cruz · Released into the
         public domain under
 <a class="underline hover:text-accent" href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0 1.0</a>.
