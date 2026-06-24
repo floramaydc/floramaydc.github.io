@@ -2312,8 +2312,8 @@ AI, like design, is only as useful as the intent we bring to it.
 
     // ---------- Message-to-Flora flow ----------
     // Multi-turn conversation that collects name -> email -> message and
-    // POSTs to the worker's /message endpoint (which forwards via
-    // Web3Forms to floramaydelacruz@gmail.com).
+    // POSTs to /api/contact (Vercel function → Gmail SMTP), the same
+    // endpoint the reply-overlay uses. Forwards to floramaydelacruz@gmail.com.
     //
     // Stage machine (linear):
     //   null -> 'name' -> 'email' -> 'message' -> 'confirm' -> 'sending' -> null
@@ -2444,15 +2444,13 @@ AI, like design, is only as useful as the intent we bring to it.
       }
     }
 
-    // Web3Forms's free tier blocks server-side callers (their classifier
-    // returns 403 / error 1106 to anything that doesn't look like a
-    // browser request), so we hit their API directly from the client.
-    // Per their docs (docs.web3forms.com), the access key is intended to
-    // be public — it only authorizes sending TO Flora's verified inbox,
-    // and Web3Forms enforces its own per-IP rate limits and spam screens.
-    // We still run our own content filters in JS before posting so the
-    // common abuse cases never reach them.
-    const WEB3FORMS_KEY = 'd2a3b55f-b53d-494f-8d3f-241a1f32875e';
+    // POST to /api/contact (Vercel function → Gmail SMTP). Same endpoint
+    // the reply-overlay uses (api/contact.js). When the site is served
+    // from GitHub Pages we cross-origin to floramaydc-audit-api.vercel.app
+    // (already whitelisted in CSP connect-src); in dev we hit /api/contact
+    // same-origin so a contributor running `vercel dev` just works.
+    // Client-side spam filters below run BEFORE the network call as a
+    // first line of defense; the server adds a honeypot + length caps.
     const MSG_ABUSE_RE = /\b(fuck|shit|bitch|asshole|cunt|dick|piss|kill (you|yourself)|porn|nude|naked|horny|onlyfans|sexy|sex|boobs|penis|vagina)\b/i;
     const MSG_INJECTION_RE = /(ignore (all |any |your |previous |prior )?(instructions|rules|prompt|system)|disregard (the |your |previous )?(above|prior|prompt|instructions)|you are (now |actually )?(dan|developer mode|jailbroken|unrestricted)|reveal (your|the) (system )?prompt)/i;
     const MSG_SOLICITATION_RE = /\b(seo|search engine optimization|backlink|link[- ]building|guest post|guest[- ]blog|sponsored post|paid post|paid review|monetize your (site|blog|website)|increase (your )?traffic|drive traffic|rank (higher|on google|on the first page)|google rank|page one of google|first page of google|website redesign|web design services|i (visited|came across|stumbled (up)?on|noticed) your (website|site|blog)|i (have|got) an? (great |amazing |interesting )?(offer|proposition|opportunity)|business proposal|investment opportunity|crypto(currency)?|bitcoin|forex|trading bot|loan offer|make \$?\d+|earn \$?\d+|click (here|the link below)|whatsapp (me|us)|telegram (me|us|us on)|hire me to|i can (help|rank|optimize) your)\b/i;
@@ -2466,7 +2464,12 @@ AI, like design, is only as useful as the intent we bring to it.
       if ((t.match(/\$\d|\b\d+%/g) || []).length >= 2) score += 1;
       return score;
     }
-    const MESSAGE_OWNER_EMAIL = 'floramaydelacruz@gmail.com';
+    // Skip the client-side spam filter for Flora's own inbox(es) so she
+    // can always test end-to-end. Both addresses route to the same Gmail.
+    const MESSAGE_OWNER_EMAILS = new Set([
+      'floramaydelacruz@gmail.com',
+      'floramaydc@gmail.com',
+    ]);
 
     async function sendMessageFlow() {
       if (!messageFlow || messageFlow.stage !== 'confirm') return;
@@ -2478,10 +2481,10 @@ AI, like design, is only as useful as the intent we bring to it.
       );
 
       // Client-side content filtering. Bypassable if a user crafts their
-      // own fetch — Web3Forms's own spam screen + rate limit are still
-      // there as a second line of defense. Skip filters for Flora's own
-      // address so she can always test end-to-end.
-      const isOwner = (data.email || '').toLowerCase() === MESSAGE_OWNER_EMAIL;
+      // own fetch — the /api/contact honeypot + Vercel rate limits act as
+      // a second line of defense. Skip filters for Flora's own inbox so
+      // she can always test end-to-end.
+      const isOwner = MESSAGE_OWNER_EMAILS.has((data.email || '').toLowerCase());
       if (!isOwner) {
         const msg = data.message || '';
         const nm = data.name || '';
@@ -2509,23 +2512,28 @@ AI, like design, is only as useful as the intent we bring to it.
       }
 
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
+        const contactUrl = isLocal
+          ? '/api/contact'
+          : 'https://floramaydc-audit-api.vercel.app/api/contact';
+        let pageContext = 'M.ai chat';
+        try { pageContext = `M.ai chat — ${location.pathname}`; } catch {}
+        const res = await fetch(contactUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            access_key: WEB3FORMS_KEY,
-            subject: `M.ai message from ${data.name}`,
-            from_name: 'M.ai (floramaydc.com)',
             name: data.name,
             email: data.email,
             message: data.message,
-            botcheck: '', // Web3Forms's built-in honeypot field
+            post: pageContext,
+            source: 'mai',
+            website: '', // honeypot — must stay empty
           }),
         });
         const pendingBubble = document.getElementById(pendingId);
         let body = null;
         try { body = await res.json(); } catch {}
-        if (res.ok && body && body.success) {
+        if (res.ok && body && body.ok) {
           track('mai_message_flow_submit', { status: 'success' });
           const prompt = `Sent. Flora will see it in her inbox and get back to you at ${data.email}. Thank you for reaching out.`;
           if (pendingBubble) {
@@ -2535,12 +2543,12 @@ AI, like design, is only as useful as the intent we bring to it.
         } else {
           track('mai_message_flow_submit', { status: 'error', code: String(res.status) });
           const status = res.status;
-          const w3msg = (body && body.message) || '';
-          const human = status === 429
-            ? `Looks like a lot of messages have come from this network already. Try again in an hour, or email Flora directly at floramaydelacruz@gmail.com.`
-            : status === 403
-            ? `That message was flagged as spam by our filter. If this is a real note, please email Flora directly at floramaydelacruz@gmail.com.`
-            : `Something went wrong sending that (${w3msg || status}). You can reach Flora directly at floramaydelacruz@gmail.com.`;
+          const serverMsg = (body && body.error) || '';
+          const human = status === 400
+            ? `${serverMsg || `That message didn't quite go through — mind double-checking it?`} You can also email Flora directly at floramaydelacruz@gmail.com.`
+            : status === 429
+            ? `A lot of messages have come through recently. Try again in a bit, or email Flora directly at floramaydelacruz@gmail.com.`
+            : `Something went wrong sending that${serverMsg ? ` (${serverMsg})` : ''}. You can reach Flora directly at floramaydelacruz@gmail.com.`;
           if (pendingBubble) pendingBubble.innerHTML = human;
           if (speakReplies) speak(human);
         }
