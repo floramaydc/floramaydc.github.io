@@ -428,129 +428,7 @@ Send feedback
             // Prevent nav script failures from breaking page interactivity.
           }
         })();
-      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="Secret Handshakes for Designers Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">Secret Handshakes for Designers Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">Secret Handshakes for Designers Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">A lightweight pattern for hidden prototype controls that let designers switch personas, maturity states, and reset context during reviews without exposing debug UI.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">prototyping</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">design-ops</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">ux</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">demo-strategy</span> </div>    <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
-<p>Design demos need two conflicting qualities: they should look production-real, and they should still let the designer steer scenarios on demand. “Secret handshakes” are hidden, intentional controls that unlock scenario switching without polluting the visible product UI. This playbook standardizes those controls so demos stay elegant, reproducible, and honest.</p>
-<h2 id="when-to-use-it">When to use it</h2>
-<ul>
-<li>You demo multiple audience scenarios from one prototype build</li>
-<li>You need rapid context switching during critiques or usability sessions</li>
-<li>Visible debug controls undermine trust in the product story</li>
-<li>Your team repeatedly asks, “How did you get to that state?”</li>
-</ul>
-<p>Skip it when: the prototype is public-facing and cannot include hidden controls, or when a static click-through file is enough.</p>
-<h2 id="core-framework">Core framework</h2>
-<p>Use a collaboration model with three handshakes:</p>
-<ol>
-<li>
-<p>Scenario handshake
-What it does: switch role/capability context (for example: owner, contributor, viewer)
-How to trigger: keyboard shortcut and optional URL seed</p>
-</li>
-<li>
-<p>Timeline handshake
-What it does: jump across predefined maturity checkpoints (for example Day 0, 1, 3, 7, 8, 14)
-How to trigger: compact control in internal demo chrome</p>
-</li>
-<li>
-<p>Reset handshake
-What it does: clear all ephemeral demo memory and return to first-run behavior
-How to trigger: explicit reset action only</p>
-</li>
-</ol>
-<p>Operating principles:</p>
-<ul>
-<li>Hidden by default, discoverable by the demo operator</li>
-<li>Persisted only at session scope unless there is a strong reason otherwise</li>
-<li>Reversible in one interaction</li>
-<li>Never changes the core information architecture</li>
-</ul>
-<h2 id="reusable-template">Reusable template</h2>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Secret handshakes spec: &#x3C;prototype name></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Handshake inventory</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Handshake | Trigger | Stored key | Scope | Reset behavior |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|---|---|---|---|---|</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Scenario | &#x3C;shortcut + optional query param> | &#x3C;scenario-key> | session | reset clears |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Timeline | &#x3C;control + optional query param> | &#x3C;timeline-key> | session | reset clears |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Reset | &#x3C;explicit action> | n/a | n/a | clears all demo keys |</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Allowed values</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Scenario: &#x3C;owner | contributor | viewer></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Timeline: &#x3C;0 | 1 | 3 | 7 | 8 | 14></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Guardrails</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Handshake controls are hidden in captures by default</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Any URL seed is consumed once, then removed from the URL</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Reset always restores first-run guidance</span></span></code></pre>
-<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
-<p>Use AI to draft your handshake contract before implementation.</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>I need a hidden-control spec for a design prototype with three controls:</span></span>
-<span class="line"><span>1) scenario switch</span></span>
-<span class="line"><span>2) timeline/day switch</span></span>
-<span class="line"><span>3) full reset</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Generate:</span></span>
-<span class="line"><span>- trigger strategy (keyboard + optional URL seed)</span></span>
-<span class="line"><span>- persistence strategy (session vs local)</span></span>
-<span class="line"><span>- guardrails to avoid leaking debug controls into screenshots</span></span>
-<span class="line"><span>- failure cases and mitigation</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Constraints:</span></span>
-<span class="line"><span>- Keep it tool-agnostic and implementation-neutral.</span></span>
-<span class="line"><span>- Do not include confidential product names or internal terminology.</span></span></code></pre>
-<p>Use AI again as a QA checklist generator:</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Given this handshake spec, create a test checklist for:</span></span>
-<span class="line"><span>- first load behavior</span></span>
-<span class="line"><span>- switching scenario repeatedly</span></span>
-<span class="line"><span>- switching timeline repeatedly</span></span>
-<span class="line"><span>- reset correctness</span></span>
-<span class="line"><span>- keyboard discoverability by the operator</span></span>
-<span class="line"><span>- non-discoverability by normal end users</span></span></code></pre>
-<h2 id="collaboration-considerations">Collaboration considerations</h2>
-<ul>
-<li>For PMs: align on which scenarios must be demoable and which are intentionally excluded</li>
-<li>For developers: centralize handshake state and avoid ad hoc toggles across pages</li>
-<li>For research: decide whether to expose or hide handshakes during moderated sessions</li>
-<li>For accessibility: keyboard triggers must not conflict with assistive-tech critical shortcuts</li>
-</ul>
-<h2 id="common-failure-patterns">Common failure patterns</h2>
-<ol>
-<li>Hidden controls that accidentally appear in screenshots or recordings</li>
-<li>Mixing demo state with production feature flags</li>
-<li>Non-reversible toggles that require reload gymnastics</li>
-<li>Timeline toggles that mutate IA instead of only state</li>
-<li>Reset that clears some keys but leaves stale guidance state behind</li>
-</ol>
-<h2 id="companion-artifacts">Companion artifacts</h2>
-<ul>
-<li><a href="/toybox/demo-days-0-to-14-time-machine-playbook">Demo Days 0 to 14 Time-Machine Playbook</a> for the timeline model these controls typically operate</li>
-<li><a href="/toybox/demo-days-0-reference-prototype">Demo days 0 to 14 reference</a> for a live prototype showing this pattern in use</li>
-<li><a href="/toybox/audit-command-center-template">Audit Command Center Template</a> for capturing prototype-review findings from handshake testing</li>
-</ul>
-<h2 id="generalized-example">Generalized example</h2>
-<p>A fictional analytics prototype uses:</p>
-<ul>
-<li>Cmd/Ctrl+Shift+P to open a small operator-only scenario panel</li>
-<li>A compact day selector for Day 0/1/3/7/8/14 progression checks</li>
-<li>A “Reset prototype” action that clears all session-scoped demo keys</li>
-</ul>
-<p>During review, the designer can answer “What would a new user see?” and “What does this look like two weeks in?” in seconds, without changing visible production-like UI chrome.</p>
-<hr>
-<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
-<ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
-</ul> </div> <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="secret-handshakes-for-designers-playbook" data-title="Secret Handshakes for Designers Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="secret-handshakes-for-designers-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
+      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="Secret Handshakes for Designers Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">Secret Handshakes for Designers Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">Secret Handshakes for Designers Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">A lightweight pattern for hidden prototype controls that let designers switch personas, maturity states, and reset context during reviews without exposing debug UI.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">prototyping</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">design-ops</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">ux</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">demo-strategy</span> </div>    <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="secret-handshakes-for-designers-playbook" data-title="Secret Handshakes for Designers Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="secret-handshakes-for-designers-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
 Drop your email to copy the markdown or download the file. One email unlocks everything in the Toybox.
 </p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-secret-handshakes-for-designers-playbook">Email address</label> <input id="pb-email-secret-handshakes-for-designers-playbook" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
 Unlock copy &amp; download
@@ -700,7 +578,129 @@ During review, the designer can answer &quot;What would a new user see?&quot; an
 - [x] No screenshots showing real chrome, real data, or recognizable surfaces
 - [x] No internal-only workflows, tools, or terminology
 - [x] Every example is fictional or abstracted; numbers are illustrative
-- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
+- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
+<p>Design demos need two conflicting qualities: they should look production-real, and they should still let the designer steer scenarios on demand. “Secret handshakes” are hidden, intentional controls that unlock scenario switching without polluting the visible product UI. This playbook standardizes those controls so demos stay elegant, reproducible, and honest.</p>
+<h2 id="when-to-use-it">When to use it</h2>
+<ul>
+<li>You demo multiple audience scenarios from one prototype build</li>
+<li>You need rapid context switching during critiques or usability sessions</li>
+<li>Visible debug controls undermine trust in the product story</li>
+<li>Your team repeatedly asks, “How did you get to that state?”</li>
+</ul>
+<p>Skip it when: the prototype is public-facing and cannot include hidden controls, or when a static click-through file is enough.</p>
+<h2 id="core-framework">Core framework</h2>
+<p>Use a collaboration model with three handshakes:</p>
+<ol>
+<li>
+<p>Scenario handshake
+What it does: switch role/capability context (for example: owner, contributor, viewer)
+How to trigger: keyboard shortcut and optional URL seed</p>
+</li>
+<li>
+<p>Timeline handshake
+What it does: jump across predefined maturity checkpoints (for example Day 0, 1, 3, 7, 8, 14)
+How to trigger: compact control in internal demo chrome</p>
+</li>
+<li>
+<p>Reset handshake
+What it does: clear all ephemeral demo memory and return to first-run behavior
+How to trigger: explicit reset action only</p>
+</li>
+</ol>
+<p>Operating principles:</p>
+<ul>
+<li>Hidden by default, discoverable by the demo operator</li>
+<li>Persisted only at session scope unless there is a strong reason otherwise</li>
+<li>Reversible in one interaction</li>
+<li>Never changes the core information architecture</li>
+</ul>
+<h2 id="reusable-template">Reusable template</h2>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Secret handshakes spec: &#x3C;prototype name></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Handshake inventory</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Handshake | Trigger | Stored key | Scope | Reset behavior |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|---|---|---|---|---|</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Scenario | &#x3C;shortcut + optional query param> | &#x3C;scenario-key> | session | reset clears |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Timeline | &#x3C;control + optional query param> | &#x3C;timeline-key> | session | reset clears |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Reset | &#x3C;explicit action> | n/a | n/a | clears all demo keys |</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Allowed values</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Scenario: &#x3C;owner | contributor | viewer></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Timeline: &#x3C;0 | 1 | 3 | 7 | 8 | 14></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Guardrails</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Handshake controls are hidden in captures by default</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Any URL seed is consumed once, then removed from the URL</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Reset always restores first-run guidance</span></span></code></pre>
+<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
+<p>Use AI to draft your handshake contract before implementation.</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>I need a hidden-control spec for a design prototype with three controls:</span></span>
+<span class="line"><span>1) scenario switch</span></span>
+<span class="line"><span>2) timeline/day switch</span></span>
+<span class="line"><span>3) full reset</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Generate:</span></span>
+<span class="line"><span>- trigger strategy (keyboard + optional URL seed)</span></span>
+<span class="line"><span>- persistence strategy (session vs local)</span></span>
+<span class="line"><span>- guardrails to avoid leaking debug controls into screenshots</span></span>
+<span class="line"><span>- failure cases and mitigation</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Constraints:</span></span>
+<span class="line"><span>- Keep it tool-agnostic and implementation-neutral.</span></span>
+<span class="line"><span>- Do not include confidential product names or internal terminology.</span></span></code></pre>
+<p>Use AI again as a QA checklist generator:</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Given this handshake spec, create a test checklist for:</span></span>
+<span class="line"><span>- first load behavior</span></span>
+<span class="line"><span>- switching scenario repeatedly</span></span>
+<span class="line"><span>- switching timeline repeatedly</span></span>
+<span class="line"><span>- reset correctness</span></span>
+<span class="line"><span>- keyboard discoverability by the operator</span></span>
+<span class="line"><span>- non-discoverability by normal end users</span></span></code></pre>
+<h2 id="collaboration-considerations">Collaboration considerations</h2>
+<ul>
+<li>For PMs: align on which scenarios must be demoable and which are intentionally excluded</li>
+<li>For developers: centralize handshake state and avoid ad hoc toggles across pages</li>
+<li>For research: decide whether to expose or hide handshakes during moderated sessions</li>
+<li>For accessibility: keyboard triggers must not conflict with assistive-tech critical shortcuts</li>
+</ul>
+<h2 id="common-failure-patterns">Common failure patterns</h2>
+<ol>
+<li>Hidden controls that accidentally appear in screenshots or recordings</li>
+<li>Mixing demo state with production feature flags</li>
+<li>Non-reversible toggles that require reload gymnastics</li>
+<li>Timeline toggles that mutate IA instead of only state</li>
+<li>Reset that clears some keys but leaves stale guidance state behind</li>
+</ol>
+<h2 id="companion-artifacts">Companion artifacts</h2>
+<ul>
+<li><a href="/toybox/demo-days-0-to-14-time-machine-playbook">Demo Days 0 to 14 Time-Machine Playbook</a> for the timeline model these controls typically operate</li>
+<li><a href="/toybox/demo-days-0-reference-prototype">Demo days 0 to 14 reference</a> for a live prototype showing this pattern in use</li>
+<li><a href="/toybox/audit-command-center-template">Audit Command Center Template</a> for capturing prototype-review findings from handshake testing</li>
+</ul>
+<h2 id="generalized-example">Generalized example</h2>
+<p>A fictional analytics prototype uses:</p>
+<ul>
+<li>Cmd/Ctrl+Shift+P to open a small operator-only scenario panel</li>
+<li>A compact day selector for Day 0/1/3/7/8/14 progression checks</li>
+<li>A “Reset prototype” action that clears all session-scoped demo keys</li>
+</ul>
+<p>During review, the designer can answer “What would a new user see?” and “What does this look like two weeks in?” in seconds, without changing visible production-like UI chrome.</p>
+<hr>
+<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
+</ul> </div> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
 Have feedback? <a class="private-reply__link" href="mailto:floramaydelacruz@gmail.com?subject=Re%3A%20Secret%20Handshakes%20for%20Designers%20Playbook">Send Flora a note</a>.
 </p> </aside> <dialog id="reply-overlay" aria-labelledby="reply-overlay-title" class="reply-overlay" data-astro-cid-rjpe63gb> <form method="dialog" class="reply-overlay__form" id="reply-overlay-form" novalidate data-astro-cid-rjpe63gb> <header class="reply-overlay__header" data-astro-cid-rjpe63gb> <h2 id="reply-overlay-title" class="reply-overlay__title" data-astro-cid-rjpe63gb>Send Flora a private note</h2> <button type="button" class="reply-overlay__close" data-close aria-label="Close" data-astro-cid-rjpe63gb>×</button> </header> <p class="reply-overlay__context" data-astro-cid-rjpe63gb>
 About: <span class="reply-overlay__context-title" data-astro-cid-rjpe63gb>Secret Handshakes for Designers Playbook</span> </p> <div class="reply-overlay__field" data-astro-cid-rjpe63gb> <label class="reply-overlay__label" for="reply-message" data-astro-cid-rjpe63gb>

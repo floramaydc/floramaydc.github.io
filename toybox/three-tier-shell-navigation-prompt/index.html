@@ -428,151 +428,7 @@ Send feedback
             // Prevent nav script failures from breaking page interactivity.
           }
         })();
-      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="Three-Tier Shell Navigation Prompt | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#prompt" class="hover:text-accent underline">Prompts</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">Three-Tier Shell Navigation Prompt</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Prompts </span> </p> <h1 class="mt-3 text-4xl">Three-Tier Shell Navigation Prompt</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">A copy-paste prompt that produces a complete app-rail + section-nav + content shell, including the mobile overlay pattern. Hand to Cursor, Copilot, or v0 when you need the chrome in an hour, not a sprint.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">navigation</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">shell</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">ai-prompt</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">responsive</span> </div>    <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="what-this-is">What this is</h2>
-<p>A working prompt that asks an LLM (Cursor, Copilot, v0, Lovable, anything that codes) to scaffold the three-tier shell most enterprise apps end up with: a thin app-level rail, a section-level collapsible nav, a top bar, and a content area — plus the mobile overlay transformation. Paste it as-is or tune the values inline.</p>
-<p>The reason this exists as a prompt and not a component library: every team ends up with their own tokens, their own router, their own component primitives. What’s reusable is the <em>structure</em> — the layout regions, the breakpoint behavior, and the mobile collapse rules. Hand the LLM the structure; let it adapt to your stack.</p>
-<h2 id="when-to-use-it">When to use it</h2>
-<ul>
-<li>You’re starting a new prototype and want the shell out of the way in an hour</li>
-<li>You’re inheriting an app without a shell and want a clean baseline</li>
-<li>You’re moving from a single-pane layout to a sectioned app and need the bones</li>
-<li>You want a fluency test for an AI coding tool — this prompt exercises layout, state, hooks, responsive, and accessibility in one shot</li>
-</ul>
-<h2 id="the-prompt">The prompt</h2>
-<p>Copy from here. Adjust the bold values in the first section to match your project. Leave the structural rules alone unless you have a reason.</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>You are scaffolding the application shell for a multi-page enterprise</span></span>
-<span class="line"><span>web app. Use the following stack and conventions.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>STACK</span></span>
-<span class="line"><span>- Framework: &#x3C;React 19 + TypeScript + Vite | Next.js App Router | etc.></span></span>
-<span class="line"><span>- Routing: &#x3C;React Router 7 | Next.js routing | TanStack Router></span></span>
-<span class="line"><span>- Component library: &#x3C;component library of choice></span></span>
-<span class="line"><span>- Styling: &#x3C;CSS-in-JS | CSS Modules | Tailwind></span></span>
-<span class="line"><span>- Icons: &#x3C;icon set of choice></span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>LAYOUT REGIONS</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>The shell is composed of four regions, stacked as follows:</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>  +----------------------------------------------------------+</span></span>
-<span class="line"><span>  |  TopBar     (full width, fixed height ~48px)             |</span></span>
-<span class="line"><span>  +-----+----------------+-----------------------------------+</span></span>
-<span class="line"><span>  |     |                |                                   |</span></span>
-<span class="line"><span>  | App | Section nav    | Main content                      |</span></span>
-<span class="line"><span>  | rail| (collapsible)  | (rounded card, scrollable)        |</span></span>
-<span class="line"><span>  |     |                |                                   |</span></span>
-<span class="line"><span>  +-----+----------------+-----------------------------------+</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>- App rail (L1): fixed ~68px wide. Holds app-level destinations.</span></span>
-<span class="line"><span>- Section nav (L2): 240px expanded / 48px collapsed. Holds the nav</span></span>
-<span class="line"><span>  for the currently active L1 app. Collapsible via a hamburger.</span></span>
-<span class="line"><span>- TopBar: 48px. Holds brand mark on the left, icon actions on the</span></span>
-<span class="line"><span>  right.</span></span>
-<span class="line"><span>- Main: fills the remaining space. Content sits on a rounded card</span></span>
-<span class="line"><span>  with the top corners rounded.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>BREAKPOINT BEHAVIOR</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>There is exactly ONE structural breakpoint at 900px.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>- Above 900px: all three navigation regions visible. Section nav</span></span>
-<span class="line"><span>  can be toggled between 240px expanded and 48px collapsed by the</span></span>
-<span class="line"><span>  user via a hamburger.</span></span>
-<span class="line"><span>- Below 900px:</span></span>
-<span class="line"><span>  - Section nav is display: none.</span></span>
-<span class="line"><span>  - A hamburger is rendered inside the main content card.</span></span>
-<span class="line"><span>  - Clicking the hamburger opens an overlay panel using</span></span>
-<span class="line"><span>    position: absolute, z-index above content, sliding in from</span></span>
-<span class="line"><span>    under the app rail (left offset = app rail width).</span></span>
-<span class="line"><span>  - The overlay panel reuses the same nav-item rendering as the</span></span>
-<span class="line"><span>    desktop section nav.</span></span>
-<span class="line"><span>  - A semi-transparent backdrop sits behind the overlay panel.</span></span>
-<span class="line"><span>  - Clicking the backdrop, selecting a nav item, or pressing</span></span>
-<span class="line"><span>    Escape closes the overlay.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>A single resize listener auto-collapses the section nav and closes</span></span>
-<span class="line"><span>the overlay when the viewport crosses 900px in either direction.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>ACCESSIBILITY (NON-NEGOTIABLE)</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>- Skip-to-content link is the first tabbable element. Visually</span></span>
-<span class="line"><span>  hidden until focused. Target: an element with id="main-content".</span></span>
-<span class="line"><span>- &#x3C;main id="main-content" tabIndex={-1}> exactly once in the tree.</span></span>
-<span class="line"><span>- The overlay panel is role="dialog", aria-modal="true", with an</span></span>
-<span class="line"><span>  aria-label such as "Section navigation".</span></span>
-<span class="line"><span>- Hamburger buttons carry an aria-label ("Open navigation",</span></span>
-<span class="line"><span>  "Close navigation").</span></span>
-<span class="line"><span>- Focus moves into the overlay panel when it opens and returns to</span></span>
-<span class="line"><span>  the hamburger trigger on close.</span></span>
-<span class="line"><span>- Escape closes the overlay.</span></span>
-<span class="line"><span>- All horizontal scroll at the page level is prevented:</span></span>
-<span class="line"><span>  overflow-x: hidden on both the outer wrapper and the main</span></span>
-<span class="line"><span>  content container. (Data tables may scroll horizontally WITHIN</span></span>
-<span class="line"><span>  their own container.)</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>OUTPUT</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Generate the following files. Use the stack listed above; do not</span></span>
-<span class="line"><span>mix in other libraries.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>1. The shell component as a single file, including the layout,</span></span>
-<span class="line"><span>   the resize listener, the mobile overlay, and the skip link.</span></span>
-<span class="line"><span>2. The app rail as its own component.</span></span>
-<span class="line"><span>3. The section nav as its own component, with an exported version</span></span>
-<span class="line"><span>   of its nav-item list suitable for reuse inside the mobile</span></span>
-<span class="line"><span>   overlay. Do not duplicate the nav-item rendering.</span></span>
-<span class="line"><span>4. The top bar as its own component.</span></span>
-<span class="line"><span>5. A short README describing the breakpoint behavior, the four</span></span>
-<span class="line"><span>   regions, and how to add a new top-level destination.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Each component should be self-contained and runnable with the</span></span>
-<span class="line"><span>stack listed above.</span></span></code></pre>
-<p>End of prompt. Paste, adjust the bracketed values, run.</p>
-<h2 id="what-you-should-expect-from-a-good-output">What you should expect from a good output</h2>
-<ul>
-<li>One structural breakpoint, not five</li>
-<li>A single resize listener, not one per region</li>
-<li>The mobile overlay reuses the section-nav’s nav-item rendering — no duplicated list</li>
-<li>Skip link present and tabIndex working</li>
-<li><code>overflow-x: hidden</code> on the outer wrapper and main</li>
-<li>Hamburger has an <code>aria-label</code> and Escape closes the overlay</li>
-</ul>
-<p>If the output skips the skip link, hardcodes a second breakpoint, or duplicates the nav-item rendering, send back this follow-up:</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>You skipped one or more of the non-negotiables:</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>- skip-to-content link as the first tabbable element</span></span>
-<span class="line"><span>- single 900px structural breakpoint (no others)</span></span>
-<span class="line"><span>- mobile overlay reuses the same nav-item rendering, no duplicate list</span></span>
-<span class="line"><span>- overflow-x: hidden on outer wrapper AND main</span></span>
-<span class="line"><span>- overlay has role="dialog", aria-modal, Escape handler, focus restore</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>List which ones are missing and fix only those. Do not rewrite</span></span>
-<span class="line"><span>anything else.</span></span></code></pre>
-<h2 id="why-the-prompt-looks-like-this">Why the prompt looks like this</h2>
-<ul>
-<li><strong>Stack section first.</strong> LLMs hallucinate the wrong library if you bury the stack mid-prompt.</li>
-<li><strong>ASCII layout.</strong> A diagram in monospace beats prose for spatial layout — the model lays it out the same way.</li>
-<li><strong>One breakpoint stated explicitly.</strong> Otherwise you get four.</li>
-<li><strong>A11y as “NON-NEGOTIABLE.”</strong> Models reliably skip a11y when it’s stated as preference. Stating it as a constraint costs nothing and changes the output.</li>
-<li><strong>The follow-up prompt.</strong> Pre-writing the “fix only the misses” reply is what separates a working prompt from a half-working one.</li>
-</ul>
-<h2 id="companion-playbooks">Companion playbooks</h2>
-<p>This prompt produces the shell. To make it feel like a real app:</p>
-<ul>
-<li><a href="/toybox/enterprise-reflow-playbook">The Enterprise Reflow Playbook</a> for the breakpoint and breadcrumb behavior the section nav doesn’t cover</li>
-<li><a href="/toybox/sticky-view-state-playbook">The Sticky View State Playbook</a> for keeping section state across navigation</li>
-<li><a href="/toybox/accessibility-compliance-baseline-playbook">The Accessibility Compliance Baseline Playbook</a> for everything the skip link and live region don’t reach</li>
-</ul>
-<hr>
-<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
-<ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No customer or segment data</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No real route paths, package names, or component names</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No real brand hex values or class hashes</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> All structural decisions stated generically and would apply to any enterprise app shell</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
-</ul> </div> <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="three-tier-shell-navigation-prompt" data-title="Three-Tier Shell Navigation Prompt" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="three-tier-shell-navigation-prompt.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this prompt with you</p> <p class="mt-1 text-sm text-muted">
+      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="Three-Tier Shell Navigation Prompt | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#prompt" class="hover:text-accent underline">Prompts</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">Three-Tier Shell Navigation Prompt</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Prompts </span> </p> <h1 class="mt-3 text-4xl">Three-Tier Shell Navigation Prompt</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">A copy-paste prompt that produces a complete app-rail + section-nav + content shell, including the mobile overlay pattern. Hand to Cursor, Copilot, or v0 when you need the chrome in an hour, not a sprint.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">navigation</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">shell</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">ai-prompt</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">responsive</span> </div>    <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="three-tier-shell-navigation-prompt" data-title="Three-Tier Shell Navigation Prompt" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="three-tier-shell-navigation-prompt.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this prompt with you</p> <p class="mt-1 text-sm text-muted">
 Drop your email to copy the markdown or download the file. One email unlocks everything in the Toybox.
 </p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-three-tier-shell-navigation-prompt">Email address</label> <input id="pb-email-three-tier-shell-navigation-prompt" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
 Unlock copy &amp; download
@@ -743,7 +599,151 @@ This prompt produces the shell. To make it feel like a real app:
 - [x] No real route paths, package names, or component names
 - [x] No real brand hex values or class hashes
 - [x] All structural decisions stated generically and would apply to any enterprise app shell
-- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
+- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="what-this-is">What this is</h2>
+<p>A working prompt that asks an LLM (Cursor, Copilot, v0, Lovable, anything that codes) to scaffold the three-tier shell most enterprise apps end up with: a thin app-level rail, a section-level collapsible nav, a top bar, and a content area — plus the mobile overlay transformation. Paste it as-is or tune the values inline.</p>
+<p>The reason this exists as a prompt and not a component library: every team ends up with their own tokens, their own router, their own component primitives. What’s reusable is the <em>structure</em> — the layout regions, the breakpoint behavior, and the mobile collapse rules. Hand the LLM the structure; let it adapt to your stack.</p>
+<h2 id="when-to-use-it">When to use it</h2>
+<ul>
+<li>You’re starting a new prototype and want the shell out of the way in an hour</li>
+<li>You’re inheriting an app without a shell and want a clean baseline</li>
+<li>You’re moving from a single-pane layout to a sectioned app and need the bones</li>
+<li>You want a fluency test for an AI coding tool — this prompt exercises layout, state, hooks, responsive, and accessibility in one shot</li>
+</ul>
+<h2 id="the-prompt">The prompt</h2>
+<p>Copy from here. Adjust the bold values in the first section to match your project. Leave the structural rules alone unless you have a reason.</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>You are scaffolding the application shell for a multi-page enterprise</span></span>
+<span class="line"><span>web app. Use the following stack and conventions.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>STACK</span></span>
+<span class="line"><span>- Framework: &#x3C;React 19 + TypeScript + Vite | Next.js App Router | etc.></span></span>
+<span class="line"><span>- Routing: &#x3C;React Router 7 | Next.js routing | TanStack Router></span></span>
+<span class="line"><span>- Component library: &#x3C;component library of choice></span></span>
+<span class="line"><span>- Styling: &#x3C;CSS-in-JS | CSS Modules | Tailwind></span></span>
+<span class="line"><span>- Icons: &#x3C;icon set of choice></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>LAYOUT REGIONS</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>The shell is composed of four regions, stacked as follows:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  +----------------------------------------------------------+</span></span>
+<span class="line"><span>  |  TopBar     (full width, fixed height ~48px)             |</span></span>
+<span class="line"><span>  +-----+----------------+-----------------------------------+</span></span>
+<span class="line"><span>  |     |                |                                   |</span></span>
+<span class="line"><span>  | App | Section nav    | Main content                      |</span></span>
+<span class="line"><span>  | rail| (collapsible)  | (rounded card, scrollable)        |</span></span>
+<span class="line"><span>  |     |                |                                   |</span></span>
+<span class="line"><span>  +-----+----------------+-----------------------------------+</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- App rail (L1): fixed ~68px wide. Holds app-level destinations.</span></span>
+<span class="line"><span>- Section nav (L2): 240px expanded / 48px collapsed. Holds the nav</span></span>
+<span class="line"><span>  for the currently active L1 app. Collapsible via a hamburger.</span></span>
+<span class="line"><span>- TopBar: 48px. Holds brand mark on the left, icon actions on the</span></span>
+<span class="line"><span>  right.</span></span>
+<span class="line"><span>- Main: fills the remaining space. Content sits on a rounded card</span></span>
+<span class="line"><span>  with the top corners rounded.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>BREAKPOINT BEHAVIOR</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>There is exactly ONE structural breakpoint at 900px.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- Above 900px: all three navigation regions visible. Section nav</span></span>
+<span class="line"><span>  can be toggled between 240px expanded and 48px collapsed by the</span></span>
+<span class="line"><span>  user via a hamburger.</span></span>
+<span class="line"><span>- Below 900px:</span></span>
+<span class="line"><span>  - Section nav is display: none.</span></span>
+<span class="line"><span>  - A hamburger is rendered inside the main content card.</span></span>
+<span class="line"><span>  - Clicking the hamburger opens an overlay panel using</span></span>
+<span class="line"><span>    position: absolute, z-index above content, sliding in from</span></span>
+<span class="line"><span>    under the app rail (left offset = app rail width).</span></span>
+<span class="line"><span>  - The overlay panel reuses the same nav-item rendering as the</span></span>
+<span class="line"><span>    desktop section nav.</span></span>
+<span class="line"><span>  - A semi-transparent backdrop sits behind the overlay panel.</span></span>
+<span class="line"><span>  - Clicking the backdrop, selecting a nav item, or pressing</span></span>
+<span class="line"><span>    Escape closes the overlay.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>A single resize listener auto-collapses the section nav and closes</span></span>
+<span class="line"><span>the overlay when the viewport crosses 900px in either direction.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>ACCESSIBILITY (NON-NEGOTIABLE)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- Skip-to-content link is the first tabbable element. Visually</span></span>
+<span class="line"><span>  hidden until focused. Target: an element with id="main-content".</span></span>
+<span class="line"><span>- &#x3C;main id="main-content" tabIndex={-1}> exactly once in the tree.</span></span>
+<span class="line"><span>- The overlay panel is role="dialog", aria-modal="true", with an</span></span>
+<span class="line"><span>  aria-label such as "Section navigation".</span></span>
+<span class="line"><span>- Hamburger buttons carry an aria-label ("Open navigation",</span></span>
+<span class="line"><span>  "Close navigation").</span></span>
+<span class="line"><span>- Focus moves into the overlay panel when it opens and returns to</span></span>
+<span class="line"><span>  the hamburger trigger on close.</span></span>
+<span class="line"><span>- Escape closes the overlay.</span></span>
+<span class="line"><span>- All horizontal scroll at the page level is prevented:</span></span>
+<span class="line"><span>  overflow-x: hidden on both the outer wrapper and the main</span></span>
+<span class="line"><span>  content container. (Data tables may scroll horizontally WITHIN</span></span>
+<span class="line"><span>  their own container.)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>OUTPUT</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Generate the following files. Use the stack listed above; do not</span></span>
+<span class="line"><span>mix in other libraries.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1. The shell component as a single file, including the layout,</span></span>
+<span class="line"><span>   the resize listener, the mobile overlay, and the skip link.</span></span>
+<span class="line"><span>2. The app rail as its own component.</span></span>
+<span class="line"><span>3. The section nav as its own component, with an exported version</span></span>
+<span class="line"><span>   of its nav-item list suitable for reuse inside the mobile</span></span>
+<span class="line"><span>   overlay. Do not duplicate the nav-item rendering.</span></span>
+<span class="line"><span>4. The top bar as its own component.</span></span>
+<span class="line"><span>5. A short README describing the breakpoint behavior, the four</span></span>
+<span class="line"><span>   regions, and how to add a new top-level destination.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Each component should be self-contained and runnable with the</span></span>
+<span class="line"><span>stack listed above.</span></span></code></pre>
+<p>End of prompt. Paste, adjust the bracketed values, run.</p>
+<h2 id="what-you-should-expect-from-a-good-output">What you should expect from a good output</h2>
+<ul>
+<li>One structural breakpoint, not five</li>
+<li>A single resize listener, not one per region</li>
+<li>The mobile overlay reuses the section-nav’s nav-item rendering — no duplicated list</li>
+<li>Skip link present and tabIndex working</li>
+<li><code>overflow-x: hidden</code> on the outer wrapper and main</li>
+<li>Hamburger has an <code>aria-label</code> and Escape closes the overlay</li>
+</ul>
+<p>If the output skips the skip link, hardcodes a second breakpoint, or duplicates the nav-item rendering, send back this follow-up:</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>You skipped one or more of the non-negotiables:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- skip-to-content link as the first tabbable element</span></span>
+<span class="line"><span>- single 900px structural breakpoint (no others)</span></span>
+<span class="line"><span>- mobile overlay reuses the same nav-item rendering, no duplicate list</span></span>
+<span class="line"><span>- overflow-x: hidden on outer wrapper AND main</span></span>
+<span class="line"><span>- overlay has role="dialog", aria-modal, Escape handler, focus restore</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>List which ones are missing and fix only those. Do not rewrite</span></span>
+<span class="line"><span>anything else.</span></span></code></pre>
+<h2 id="why-the-prompt-looks-like-this">Why the prompt looks like this</h2>
+<ul>
+<li><strong>Stack section first.</strong> LLMs hallucinate the wrong library if you bury the stack mid-prompt.</li>
+<li><strong>ASCII layout.</strong> A diagram in monospace beats prose for spatial layout — the model lays it out the same way.</li>
+<li><strong>One breakpoint stated explicitly.</strong> Otherwise you get four.</li>
+<li><strong>A11y as “NON-NEGOTIABLE.”</strong> Models reliably skip a11y when it’s stated as preference. Stating it as a constraint costs nothing and changes the output.</li>
+<li><strong>The follow-up prompt.</strong> Pre-writing the “fix only the misses” reply is what separates a working prompt from a half-working one.</li>
+</ul>
+<h2 id="companion-playbooks">Companion playbooks</h2>
+<p>This prompt produces the shell. To make it feel like a real app:</p>
+<ul>
+<li><a href="/toybox/enterprise-reflow-playbook">The Enterprise Reflow Playbook</a> for the breakpoint and breadcrumb behavior the section nav doesn’t cover</li>
+<li><a href="/toybox/sticky-view-state-playbook">The Sticky View State Playbook</a> for keeping section state across navigation</li>
+<li><a href="/toybox/accessibility-compliance-baseline-playbook">The Accessibility Compliance Baseline Playbook</a> for everything the skip link and live region don’t reach</li>
+</ul>
+<hr>
+<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No customer or segment data</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No real route paths, package names, or component names</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No real brand hex values or class hashes</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> All structural decisions stated generically and would apply to any enterprise app shell</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
+</ul> </div> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
 Have feedback? <a class="private-reply__link" href="mailto:floramaydelacruz@gmail.com?subject=Re%3A%20Three-Tier%20Shell%20Navigation%20Prompt">Send Flora a note</a>.
 </p> </aside> <dialog id="reply-overlay" aria-labelledby="reply-overlay-title" class="reply-overlay" data-astro-cid-rjpe63gb> <form method="dialog" class="reply-overlay__form" id="reply-overlay-form" novalidate data-astro-cid-rjpe63gb> <header class="reply-overlay__header" data-astro-cid-rjpe63gb> <h2 id="reply-overlay-title" class="reply-overlay__title" data-astro-cid-rjpe63gb>Send Flora a private note</h2> <button type="button" class="reply-overlay__close" data-close aria-label="Close" data-astro-cid-rjpe63gb>×</button> </header> <p class="reply-overlay__context" data-astro-cid-rjpe63gb>
 About: <span class="reply-overlay__context-title" data-astro-cid-rjpe63gb>Three-Tier Shell Navigation Prompt</span> </p> <div class="reply-overlay__field" data-astro-cid-rjpe63gb> <label class="reply-overlay__label" for="reply-message" data-astro-cid-rjpe63gb>

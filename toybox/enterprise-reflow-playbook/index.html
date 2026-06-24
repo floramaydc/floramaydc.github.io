@@ -428,221 +428,7 @@ Send feedback
             // Prevent nav script failures from breaking page interactivity.
           }
         })();
-      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="The Enterprise Reflow Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">The Enterprise Reflow Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">The Enterprise Reflow Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">Take a dense enterprise app from 1440 to 375 in one pass — without horizontal scroll, without a separate mobile codebase, and without the breadcrumb eating the page.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">responsive-design</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">layout</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">navigation</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">css</span> </div>    <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
-<p>Most enterprise UIs are designed at 1440 and tested at 1440. They run on field laptops, on shared kiosks, on the auditor’s iPad, on the analyst’s phone during a Slack reply. Reflow isn’t a separate feature — it’s the part of design that decides whether the product is usable for half its actual sessions.</p>
-<p>This playbook is the small set of moves that take a desktop-dense enterprise UI to mobile in one pass: the breakpoints that matter, the layout primitives that survive, the navigation that has to transform, and the breadcrumb trick that’s almost always missing.</p>
-<h2 id="when-to-use-it">When to use it</h2>
-<ul>
-<li>A dense enterprise app being adapted to mobile or tablet for the first time</li>
-<li>A surface where the desktop layout already exists and you can’t start over</li>
-<li>A prototype that needs to demo on a phone in a stakeholder review</li>
-<li>Any product targeting WCAG 2.1 SC 1.4.10 (Reflow at 320 CSS pixels)</li>
-<li>Apps with sidebars, breadcrumbs, dense data grids, or large hero titles — all of which break in characteristic ways at narrow widths</li>
-</ul>
-<p>This is not a full responsive design system. It’s the minimum set of moves to get from “horizontal scrollbar on a phone” to “usable on a phone.”</p>
-<h2 id="core-framework">Core framework</h2>
-<p>Five layout shifts and one breadcrumb trick. In order of how much pain they remove.</p>
-<h3 id="1-kill-horizontal-page-scroll-at-the-shell">1. Kill horizontal page scroll at the shell</h3>
-<p>The single most common reflow bug: somewhere deep in a flex row, a fixed-width element pushes the layout wider than the viewport, and the entire page gains a horizontal scrollbar. Don’t hunt for it. Set <code>overflow-x: hidden</code> on the outer shell wrappers and on the main content container. This is one of the few places where a blanket clipping rule is the right answer — page-level horizontal scroll is almost never intentional.</p>
-<h3 id="2-pick-one-breakpoint-not-five">2. Pick one breakpoint, not five</h3>
-<p>For enterprise apps the worst pattern is a different layout at 1200, 1024, 900, 768, and 480. You end up with five intermediate states, four of which nobody tests. Pick one structural breakpoint — usually around <strong>900px</strong> — and treat it as the line between “desktop layout” and “mobile layout.” Within each side, use fluid sizing rather than more breakpoints. The 900px line is wide enough that tablets in portrait pick up the mobile layout (which is what you want — a sidebar collapsed at 768 is more usable than a sidebar squeezed).</p>
-<h3 id="3-side-nav-becomes-an-overlay-not-a-thinner-side-nav">3. Side nav becomes an overlay, not a thinner side nav</h3>
-<p>Below the breakpoint the side nav <code>display: none</code>s. In its place, a hamburger in the page content area opens an overlay panel that sits on top of the content (<code>position: absolute, z-index: high, top: 0, left: 0, height: 100%</code>). Reuse the same nav-item component inside the overlay so the user’s mental model doesn’t shift.</p>
-<p>The reason this beats “make the side nav thinner”: a 48-px-wide icon rail still costs you real estate the page needs, and the icons-only state is less learnable than a hamburger-and-overlay. Pick one of the two states (full or hidden), not three.</p>
-<h3 id="4-page-header-actions-wrap-never-clip">4. Page header actions wrap, never clip</h3>
-<p>The title row almost always has a primary CTA and 2–4 secondary actions. At narrow widths they get cropped. The fix is two lines:</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>display: flex</span></span>
-<span class="line"><span>flex-wrap: wrap</span></span>
-<span class="line"><span>gap: 8px</span></span></code></pre>
-<p>On the row containing the title and the action group. The actions drop to a second row instead of clipping off the edge. The title stays where the eye expects it.</p>
-<h3 id="5-card-grids-auto-fill-then-a-1fr-fallback">5. Card grids: auto-fill, then a 1fr fallback</h3>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>grid-template-columns: repeat(auto-fill, minmax(260px, 1fr))</span></span></code></pre>
-<p>…handles 1440 down to about 600. Below 600, override to a single column:</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@media (max-width: 600px) { grid-template-columns: 1fr; }</span></span></code></pre>
-<p>The two-rule version is more predictable than trying to make <code>auto-fill</code> resolve to one column on its own (which it sometimes does and sometimes doesn’t, depending on padding and gap math). Be explicit.</p>
-<h3 id="6-large-hero-titles-use-clamp-not-breakpoints">6. Large hero titles use <code>clamp()</code>, not breakpoints</h3>
-<p>Desktop hero titles at 40px collide with mobile hero titles that need to be 24px. Don’t define a font size at each breakpoint. Use one rule:</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>font-size: clamp(24px, 4.5vw, 40px)</span></span></code></pre>
-<p>24 is the floor (readable on phones), 40 is the ceiling (impressive on desktops), 4.5vw is the linear interpolation between them. One rule, no breakpoint, scales monotonically.</p>
-<h3 id="7-the-breadcrumb-trick">7. The breadcrumb trick</h3>
-<p>This is the part most teams skip and most users notice. On a narrow viewport, a breadcrumb of “Root › Category › Sub-category” becomes either truncated (ugly), wrapped to multiple lines (steals vertical space), or horizontally scrolling (genuinely bad). The right solution is <strong>overflow at the beginning, not at the end</strong>, with a <code>...</code> menu that contains the collapsed ancestors.</p>
-<p>Three rules underneath that:</p>
-<ul>
-<li><strong>The current page name is never in the breadcrumb.</strong> It’s the <code>&#x3C;h1></code> of the page. Duplicating it wastes the most valuable line of UI on the screen.</li>
-<li><strong>Priorities matter.</strong> Root collapses first; the most-recent ancestor collapses last. The breadcrumb’s job at narrow widths is “where am I in the hierarchy <em>relative to my current branch</em>” — the immediate parent is more valuable than the global root.</li>
-<li><strong>The <code>...</code> always lives at the start.</strong> Putting it at the end (which is what naive overflow components do) hides the most useful information first.</li>
-</ul>
-<p>The resulting behavior, in two columns:</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Viewport</th><th>What the user sees</th></tr></thead><tbody><tr><td>Wide</td><td><code>Root › Parent › </code> <em>(then the page h1 below)</em></td></tr><tr><td>Narrow</td><td><code>... › Parent › </code> <em>(<code>...</code> is a menu containing “Root”)</em></td></tr><tr><td>Very narrow</td><td><code>...</code> <em>(menu contains “Root” and “Parent”)</em></td></tr></tbody></table>
-<p>The chevron between items should also conditionally render — only show the divider when the item before it is still visible — otherwise you get orphan <code>›</code> characters next to the <code>...</code>.</p>
-<h3 id="8-table-scroll-container">8. Table scroll container</h3>
-<p>On viewports narrower than your breakpoint, data tables need their own scroll boundary so they can reflow horizontally without the page scrolling. The WCAG 1.4.10 exception permits this: tables get to scroll within their container, but the page doesn’t.</p>
-<p>Wrap the table in a scroll container with these rules:</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="css"><code><span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">.table-wrapper</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> {</span></span>
-<span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">  display</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">: </span><span style="color:#023B95;--shiki-dark:#91CBFF">block</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">;</span></span>
-<span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">  overflow-x</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">: </span><span style="color:#023B95;--shiki-dark:#91CBFF">auto</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">;</span></span>
-<span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">  -webkit-overflow-scrolling</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">: </span><span style="color:#023B95;--shiki-dark:#91CBFF">touch</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">;  </span><span style="color:#66707B;--shiki-dark:#BDC4CC">/* Smooth momentum scroll on iOS */</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">}</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#A0111F;--shiki-dark:#FF9492">@media</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> (</span><span style="color:#023B95;--shiki-dark:#91CBFF">min-width</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">: </span><span style="color:#023B95;--shiki-dark:#91CBFF">900</span><span style="color:#A0111F;--shiki-dark:#FF9492">px</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">) {</span></span>
-<span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">  .table-wrapper</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> {</span></span>
-<span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">    overflow-x</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">: </span><span style="color:#023B95;--shiki-dark:#91CBFF">visible</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">;  </span><span style="color:#66707B;--shiki-dark:#BDC4CC">/* Desktop: no scroll needed */</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  }</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">}</span></span></code></pre>
-<p>Markup structure:</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;</span><span style="color:#024C1A;--shiki-dark:#72F088">div</span><span style="color:#023B95;--shiki-dark:#91CBFF"> class</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">=</span><span style="color:#032563;--shiki-dark:#ADDCFF">"table-wrapper"</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">></span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  &#x3C;</span><span style="color:#024C1A;--shiki-dark:#72F088">table</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">></span><span style="color:#66707B;--shiki-dark:#BDC4CC">&#x3C;!-- your data --></span><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;/</span><span style="color:#024C1A;--shiki-dark:#72F088">table</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">></span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;/</span><span style="color:#024C1A;--shiki-dark:#72F088">div</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">></span></span></code></pre>
-<p>Three key points:</p>
-<ul>
-<li><strong>Wrap only; don’t modify the <code>&#x3C;table></code> itself.</strong> This preserves table semantics and allows screen readers to announce the table as a complete unit.</li>
-<li><strong><code>display: block</code> creates the scroll container.</strong> The wrapper absorbs horizontal overflow; the page maintains <code>overflow-x: hidden</code> for stability.</li>
-<li><strong>Test at your structural breakpoint.</strong> Verify the table still fits comfortably on desktop and doesn’t force scroll when it shouldn’t.</li>
-</ul>
-<h2 id="reusable-template">Reusable template</h2>
-<p>Drop this into the design doc for any page being reflowed.</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Reflow plan — &#x3C;page name></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Breakpoint</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Structural breakpoint: &#x3C;px></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Below: &#x3C;describe layout></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Above: &#x3C;describe layout></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Shell</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] overflow-x: hidden on outermost wrapper</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] overflow-x: hidden on main content container</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Nav</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Side nav display: none below breakpoint</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Hamburger in page content area below breakpoint</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Nav overlay component (position: absolute, z-index, full height)</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Overlay reuses the same nav-item component</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Page header</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Title row uses flex-wrap: wrap</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] gap: 8px between title and actions</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Hero title font-size uses clamp(min, vw, max)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Card grid</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] grid-template-columns: repeat(auto-fill, minmax(&#x3C;n>px, 1fr))</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] @media (max-width: 600px) { grid-template-columns: 1fr }</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Breadcrumb</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Current page name NOT in breadcrumb (it's the h1)</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] ... menu at the START, not the end</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Root has lowest priority (collapses first)</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Immediate parent has highest priority (collapses last)</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Dividers conditionally render based on visibility</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Tables</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Wrap each data table in a scroll container (see section 8: Table scroll container)</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] display: block + overflow-x: auto on mobile breakpoint</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] overflow-x: visible on desktop breakpoint</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Table renders correctly without forcing page-level horizontal scroll</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Keyboard navigation (arrow keys) scrolls the table horizontally</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Test viewports</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] 1440 (laptop wide)</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] 1024 (laptop narrow / tablet landscape)</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] 768 (tablet portrait — should pick up mobile layout)</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] 375 (phone)</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] 320 (WCAG minimum)</span></span></code></pre>
-<p>The test-viewports list is the actual deliverable. Reflow is something you prove by looking, not by inference.</p>
-<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
-<h3 id="prompt-surface-reflow-risk-in-an-existing-layout">Prompt: surface reflow risk in an existing layout</h3>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Below is a description (or screenshot) of an enterprise page at desktop</span></span>
-<span class="line"><span>width. Identify everything that will break or clip at a 375px viewport.</span></span>
-<span class="line"><span>For each item, name:</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>1. What breaks (element + symptom)</span></span>
-<span class="line"><span>2. Whether the fix is layout (flex/grid), structural (overlay swap),</span></span>
-<span class="line"><span>   or sizing (clamp / responsive units)</span></span>
-<span class="line"><span>3. The minimal change that resolves it</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Do not invent generic responsive advice — point at specific elements</span></span>
-<span class="line"><span>in the layout.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>&#x3C;paste description or attach screenshot></span></span></code></pre>
-<h3 id="prompt-name-the-breakpoint">Prompt: name the breakpoint</h3>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Given the following layout regions (sidebar, header with title + N</span></span>
-<span class="line"><span>actions, card grid with min card width X, optional breadcrumb of depth</span></span>
-<span class="line"><span>D), recommend a single structural breakpoint below which the sidebar</span></span>
-<span class="line"><span>becomes a hamburger overlay. Justify with one sentence each:</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>- Why this breakpoint and not 100px lower</span></span>
-<span class="line"><span>- Why this breakpoint and not 100px higher</span></span>
-<span class="line"><span>- Which tablets / common viewports land on which side</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>&#x3C;paste the layout></span></span></code></pre>
-<p>The point of both prompts is to <em>narrow</em> decisions, not to scatter more advice into the document.</p>
-<h2 id="collaboration-considerations">Collaboration considerations</h2>
-<ul>
-<li><strong>For engineers:</strong> the <code>overflow-x: hidden</code> on shell wrappers feels like a hack but it’s the right call for product surfaces. Reserve “find the actual offender” debugging for cases where the clipping is hiding intended scroll.</li>
-<li><strong>For PMs:</strong> reflow is often dropped from scope under deadline pressure because it looks cosmetic. It’s not — WCAG 2.1 SC 1.4.10 makes it a compliance requirement at 320 CSS pixels, which is the spec target enterprise customers procure against.</li>
-<li><strong>For research / user testing:</strong> test on a real phone, not in a desktop browser’s responsive mode. Touch targets, thumb-zone reachability, and overlay-vs-content depth perception change on a real device.</li>
-<li><strong>For QA:</strong> automate visual regression at the four target viewports. One screenshot per viewport per route is enough to catch 80% of reflow bugs before they ship.</li>
-<li><strong>For design systems teams:</strong> the breadcrumb pattern in this playbook is the single most-reusable component. Centralize it once; every product team gets it for free.</li>
-</ul>
-<h2 id="common-failure-patterns">Common failure patterns</h2>
-<ol>
-<li><strong>Five breakpoints, four of them broken.</strong> Pick one structural breakpoint. Use fluid sizing within each side.</li>
-<li><strong><code>overflow-x: hidden</code> missing.</strong> A single fixed-width element somewhere produces a page-wide horizontal scrollbar.</li>
-<li><strong>Side nav gets thinner instead of disappearing.</strong> Icon-only side rails are the worst of both worlds — they cost width and lose learnability.</li>
-<li><strong>Header actions clip.</strong> No <code>flex-wrap</code>. Fix is two CSS properties.</li>
-<li><strong>Hero title sized per breakpoint.</strong> Use <code>clamp()</code> once.</li>
-<li><strong>Breadcrumb shows the current page.</strong> It’s already the h1.</li>
-<li><strong><code>...</code> overflow at the end of the breadcrumb.</strong> Hides the most useful ancestor first.</li>
-<li><strong>Orphan dividers.</strong> The <code>›</code> next to <code>...</code> because the divider isn’t conditionally rendered.</li>
-<li><strong>Page scrolls horizontally because the data table does.</strong> Wrap the table in a scroll container (<code>display: block; overflow-x: auto</code>). Tables get to scroll <em>within their container</em>. The page doesn’t (see section 8).</li>
-<li><strong>Testing only in browser devtools.</strong> A real phone exposes touch-target bugs that devtools hide.</li>
-</ol>
-<h2 id="generalized-example">Generalized example</h2>
-<p>A fictional <strong>factory floor analytics console</strong>. Desktop layout: 240px side nav, 1200px+ content area with a hero title, three primary action buttons, a card grid of machine status, a breadcrumb three deep (“Plants › North › Press Shop”).</p>
-<p>Reflow plan applied:</p>
-<ul>
-<li>Breakpoint: 900px</li>
-<li>Below 900: side nav hidden, hamburger in content area opens an overlay panel reusing the same nav items</li>
-<li>Page header: <code>flex-wrap: wrap</code>, gap 8px — actions drop below title when needed</li>
-<li>Hero title: <code>font-size: clamp(24px, 4.5vw, 40px)</code></li>
-<li>Card grid: <code>repeat(auto-fill, minmax(260px, 1fr))</code>, with <code>grid-template-columns: 1fr</code> below 600px</li>
-<li>Breadcrumb: current page (“Press Shop”) removed (it’s the h1); <code>...</code> always at the start; “Plants” priority 1, “North” priority 3; conditional dividers</li>
-<li>Data tables inside cards: allowed to scroll horizontally inside their container; the page does not</li>
-</ul>
-<p>The dashboard then renders without horizontal page scroll from 1440 down to 320, the nav transforms cleanly, the breadcrumb still tells the user where they are without eating the title row, and the card grid collapses to a single column without any code branching by viewport width.</p>
-<hr>
-<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
-<ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
-</ul> </div> <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="enterprise-reflow-playbook" data-title="The Enterprise Reflow Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="enterprise-reflow-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
+      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="The Enterprise Reflow Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">The Enterprise Reflow Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">The Enterprise Reflow Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">Take a dense enterprise app from 1440 to 375 in one pass — without horizontal scroll, without a separate mobile codebase, and without the breadcrumb eating the page.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">responsive-design</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">layout</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">navigation</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">css</span> </div>    <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="enterprise-reflow-playbook" data-title="The Enterprise Reflow Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="enterprise-reflow-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
 Drop your email to copy the markdown or download the file. One email unlocks everything in the Toybox.
 </p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-enterprise-reflow-playbook">Email address</label> <input id="pb-email-enterprise-reflow-playbook" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
 Unlock copy &amp; download
@@ -920,7 +706,221 @@ The dashboard then renders without horizontal page scroll from 1440 down to 320,
 - [x] No screenshots showing real chrome, real data, or recognizable surfaces
 - [x] No internal-only workflows, tools, or terminology
 - [x] Every example is fictional or abstracted; numbers are illustrative
-- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
+- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
+<p>Most enterprise UIs are designed at 1440 and tested at 1440. They run on field laptops, on shared kiosks, on the auditor’s iPad, on the analyst’s phone during a Slack reply. Reflow isn’t a separate feature — it’s the part of design that decides whether the product is usable for half its actual sessions.</p>
+<p>This playbook is the small set of moves that take a desktop-dense enterprise UI to mobile in one pass: the breakpoints that matter, the layout primitives that survive, the navigation that has to transform, and the breadcrumb trick that’s almost always missing.</p>
+<h2 id="when-to-use-it">When to use it</h2>
+<ul>
+<li>A dense enterprise app being adapted to mobile or tablet for the first time</li>
+<li>A surface where the desktop layout already exists and you can’t start over</li>
+<li>A prototype that needs to demo on a phone in a stakeholder review</li>
+<li>Any product targeting WCAG 2.1 SC 1.4.10 (Reflow at 320 CSS pixels)</li>
+<li>Apps with sidebars, breadcrumbs, dense data grids, or large hero titles — all of which break in characteristic ways at narrow widths</li>
+</ul>
+<p>This is not a full responsive design system. It’s the minimum set of moves to get from “horizontal scrollbar on a phone” to “usable on a phone.”</p>
+<h2 id="core-framework">Core framework</h2>
+<p>Five layout shifts and one breadcrumb trick. In order of how much pain they remove.</p>
+<h3 id="1-kill-horizontal-page-scroll-at-the-shell">1. Kill horizontal page scroll at the shell</h3>
+<p>The single most common reflow bug: somewhere deep in a flex row, a fixed-width element pushes the layout wider than the viewport, and the entire page gains a horizontal scrollbar. Don’t hunt for it. Set <code>overflow-x: hidden</code> on the outer shell wrappers and on the main content container. This is one of the few places where a blanket clipping rule is the right answer — page-level horizontal scroll is almost never intentional.</p>
+<h3 id="2-pick-one-breakpoint-not-five">2. Pick one breakpoint, not five</h3>
+<p>For enterprise apps the worst pattern is a different layout at 1200, 1024, 900, 768, and 480. You end up with five intermediate states, four of which nobody tests. Pick one structural breakpoint — usually around <strong>900px</strong> — and treat it as the line between “desktop layout” and “mobile layout.” Within each side, use fluid sizing rather than more breakpoints. The 900px line is wide enough that tablets in portrait pick up the mobile layout (which is what you want — a sidebar collapsed at 768 is more usable than a sidebar squeezed).</p>
+<h3 id="3-side-nav-becomes-an-overlay-not-a-thinner-side-nav">3. Side nav becomes an overlay, not a thinner side nav</h3>
+<p>Below the breakpoint the side nav <code>display: none</code>s. In its place, a hamburger in the page content area opens an overlay panel that sits on top of the content (<code>position: absolute, z-index: high, top: 0, left: 0, height: 100%</code>). Reuse the same nav-item component inside the overlay so the user’s mental model doesn’t shift.</p>
+<p>The reason this beats “make the side nav thinner”: a 48-px-wide icon rail still costs you real estate the page needs, and the icons-only state is less learnable than a hamburger-and-overlay. Pick one of the two states (full or hidden), not three.</p>
+<h3 id="4-page-header-actions-wrap-never-clip">4. Page header actions wrap, never clip</h3>
+<p>The title row almost always has a primary CTA and 2–4 secondary actions. At narrow widths they get cropped. The fix is two lines:</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>display: flex</span></span>
+<span class="line"><span>flex-wrap: wrap</span></span>
+<span class="line"><span>gap: 8px</span></span></code></pre>
+<p>On the row containing the title and the action group. The actions drop to a second row instead of clipping off the edge. The title stays where the eye expects it.</p>
+<h3 id="5-card-grids-auto-fill-then-a-1fr-fallback">5. Card grids: auto-fill, then a 1fr fallback</h3>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>grid-template-columns: repeat(auto-fill, minmax(260px, 1fr))</span></span></code></pre>
+<p>…handles 1440 down to about 600. Below 600, override to a single column:</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>@media (max-width: 600px) { grid-template-columns: 1fr; }</span></span></code></pre>
+<p>The two-rule version is more predictable than trying to make <code>auto-fill</code> resolve to one column on its own (which it sometimes does and sometimes doesn’t, depending on padding and gap math). Be explicit.</p>
+<h3 id="6-large-hero-titles-use-clamp-not-breakpoints">6. Large hero titles use <code>clamp()</code>, not breakpoints</h3>
+<p>Desktop hero titles at 40px collide with mobile hero titles that need to be 24px. Don’t define a font size at each breakpoint. Use one rule:</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>font-size: clamp(24px, 4.5vw, 40px)</span></span></code></pre>
+<p>24 is the floor (readable on phones), 40 is the ceiling (impressive on desktops), 4.5vw is the linear interpolation between them. One rule, no breakpoint, scales monotonically.</p>
+<h3 id="7-the-breadcrumb-trick">7. The breadcrumb trick</h3>
+<p>This is the part most teams skip and most users notice. On a narrow viewport, a breadcrumb of “Root › Category › Sub-category” becomes either truncated (ugly), wrapped to multiple lines (steals vertical space), or horizontally scrolling (genuinely bad). The right solution is <strong>overflow at the beginning, not at the end</strong>, with a <code>...</code> menu that contains the collapsed ancestors.</p>
+<p>Three rules underneath that:</p>
+<ul>
+<li><strong>The current page name is never in the breadcrumb.</strong> It’s the <code>&#x3C;h1></code> of the page. Duplicating it wastes the most valuable line of UI on the screen.</li>
+<li><strong>Priorities matter.</strong> Root collapses first; the most-recent ancestor collapses last. The breadcrumb’s job at narrow widths is “where am I in the hierarchy <em>relative to my current branch</em>” — the immediate parent is more valuable than the global root.</li>
+<li><strong>The <code>...</code> always lives at the start.</strong> Putting it at the end (which is what naive overflow components do) hides the most useful information first.</li>
+</ul>
+<p>The resulting behavior, in two columns:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Viewport</th><th>What the user sees</th></tr></thead><tbody><tr><td>Wide</td><td><code>Root › Parent › </code> <em>(then the page h1 below)</em></td></tr><tr><td>Narrow</td><td><code>... › Parent › </code> <em>(<code>...</code> is a menu containing “Root”)</em></td></tr><tr><td>Very narrow</td><td><code>...</code> <em>(menu contains “Root” and “Parent”)</em></td></tr></tbody></table>
+<p>The chevron between items should also conditionally render — only show the divider when the item before it is still visible — otherwise you get orphan <code>›</code> characters next to the <code>...</code>.</p>
+<h3 id="8-table-scroll-container">8. Table scroll container</h3>
+<p>On viewports narrower than your breakpoint, data tables need their own scroll boundary so they can reflow horizontally without the page scrolling. The WCAG 1.4.10 exception permits this: tables get to scroll within their container, but the page doesn’t.</p>
+<p>Wrap the table in a scroll container with these rules:</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="css"><code><span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">.table-wrapper</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> {</span></span>
+<span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">  display</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">: </span><span style="color:#023B95;--shiki-dark:#91CBFF">block</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">;</span></span>
+<span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">  overflow-x</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">: </span><span style="color:#023B95;--shiki-dark:#91CBFF">auto</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">;</span></span>
+<span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">  -webkit-overflow-scrolling</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">: </span><span style="color:#023B95;--shiki-dark:#91CBFF">touch</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">;  </span><span style="color:#66707B;--shiki-dark:#BDC4CC">/* Smooth momentum scroll on iOS */</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A0111F;--shiki-dark:#FF9492">@media</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> (</span><span style="color:#023B95;--shiki-dark:#91CBFF">min-width</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">: </span><span style="color:#023B95;--shiki-dark:#91CBFF">900</span><span style="color:#A0111F;--shiki-dark:#FF9492">px</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">) {</span></span>
+<span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">  .table-wrapper</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> {</span></span>
+<span class="line"><span style="color:#023B95;--shiki-dark:#91CBFF">    overflow-x</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">: </span><span style="color:#023B95;--shiki-dark:#91CBFF">visible</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">;  </span><span style="color:#66707B;--shiki-dark:#BDC4CC">/* Desktop: no scroll needed */</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  }</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">}</span></span></code></pre>
+<p>Markup structure:</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;</span><span style="color:#024C1A;--shiki-dark:#72F088">div</span><span style="color:#023B95;--shiki-dark:#91CBFF"> class</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">=</span><span style="color:#032563;--shiki-dark:#ADDCFF">"table-wrapper"</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">></span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  &#x3C;</span><span style="color:#024C1A;--shiki-dark:#72F088">table</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">></span><span style="color:#66707B;--shiki-dark:#BDC4CC">&#x3C;!-- your data --></span><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;/</span><span style="color:#024C1A;--shiki-dark:#72F088">table</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">></span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;/</span><span style="color:#024C1A;--shiki-dark:#72F088">div</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">></span></span></code></pre>
+<p>Three key points:</p>
+<ul>
+<li><strong>Wrap only; don’t modify the <code>&#x3C;table></code> itself.</strong> This preserves table semantics and allows screen readers to announce the table as a complete unit.</li>
+<li><strong><code>display: block</code> creates the scroll container.</strong> The wrapper absorbs horizontal overflow; the page maintains <code>overflow-x: hidden</code> for stability.</li>
+<li><strong>Test at your structural breakpoint.</strong> Verify the table still fits comfortably on desktop and doesn’t force scroll when it shouldn’t.</li>
+</ul>
+<h2 id="reusable-template">Reusable template</h2>
+<p>Drop this into the design doc for any page being reflowed.</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Reflow plan — &#x3C;page name></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Breakpoint</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Structural breakpoint: &#x3C;px></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Below: &#x3C;describe layout></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Above: &#x3C;describe layout></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Shell</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] overflow-x: hidden on outermost wrapper</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] overflow-x: hidden on main content container</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Nav</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Side nav display: none below breakpoint</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Hamburger in page content area below breakpoint</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Nav overlay component (position: absolute, z-index, full height)</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Overlay reuses the same nav-item component</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Page header</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Title row uses flex-wrap: wrap</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] gap: 8px between title and actions</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Hero title font-size uses clamp(min, vw, max)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Card grid</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] grid-template-columns: repeat(auto-fill, minmax(&#x3C;n>px, 1fr))</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] @media (max-width: 600px) { grid-template-columns: 1fr }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Breadcrumb</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Current page name NOT in breadcrumb (it's the h1)</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] ... menu at the START, not the end</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Root has lowest priority (collapses first)</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Immediate parent has highest priority (collapses last)</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Dividers conditionally render based on visibility</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Tables</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Wrap each data table in a scroll container (see section 8: Table scroll container)</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] display: block + overflow-x: auto on mobile breakpoint</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] overflow-x: visible on desktop breakpoint</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Table renders correctly without forcing page-level horizontal scroll</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] Keyboard navigation (arrow keys) scrolls the table horizontally</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Test viewports</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] 1440 (laptop wide)</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] 1024 (laptop narrow / tablet landscape)</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] 768 (tablet portrait — should pick up mobile layout)</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] 375 (phone)</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> [ ] 320 (WCAG minimum)</span></span></code></pre>
+<p>The test-viewports list is the actual deliverable. Reflow is something you prove by looking, not by inference.</p>
+<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
+<h3 id="prompt-surface-reflow-risk-in-an-existing-layout">Prompt: surface reflow risk in an existing layout</h3>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Below is a description (or screenshot) of an enterprise page at desktop</span></span>
+<span class="line"><span>width. Identify everything that will break or clip at a 375px viewport.</span></span>
+<span class="line"><span>For each item, name:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1. What breaks (element + symptom)</span></span>
+<span class="line"><span>2. Whether the fix is layout (flex/grid), structural (overlay swap),</span></span>
+<span class="line"><span>   or sizing (clamp / responsive units)</span></span>
+<span class="line"><span>3. The minimal change that resolves it</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Do not invent generic responsive advice — point at specific elements</span></span>
+<span class="line"><span>in the layout.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;paste description or attach screenshot></span></span></code></pre>
+<h3 id="prompt-name-the-breakpoint">Prompt: name the breakpoint</h3>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Given the following layout regions (sidebar, header with title + N</span></span>
+<span class="line"><span>actions, card grid with min card width X, optional breadcrumb of depth</span></span>
+<span class="line"><span>D), recommend a single structural breakpoint below which the sidebar</span></span>
+<span class="line"><span>becomes a hamburger overlay. Justify with one sentence each:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- Why this breakpoint and not 100px lower</span></span>
+<span class="line"><span>- Why this breakpoint and not 100px higher</span></span>
+<span class="line"><span>- Which tablets / common viewports land on which side</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;paste the layout></span></span></code></pre>
+<p>The point of both prompts is to <em>narrow</em> decisions, not to scatter more advice into the document.</p>
+<h2 id="collaboration-considerations">Collaboration considerations</h2>
+<ul>
+<li><strong>For engineers:</strong> the <code>overflow-x: hidden</code> on shell wrappers feels like a hack but it’s the right call for product surfaces. Reserve “find the actual offender” debugging for cases where the clipping is hiding intended scroll.</li>
+<li><strong>For PMs:</strong> reflow is often dropped from scope under deadline pressure because it looks cosmetic. It’s not — WCAG 2.1 SC 1.4.10 makes it a compliance requirement at 320 CSS pixels, which is the spec target enterprise customers procure against.</li>
+<li><strong>For research / user testing:</strong> test on a real phone, not in a desktop browser’s responsive mode. Touch targets, thumb-zone reachability, and overlay-vs-content depth perception change on a real device.</li>
+<li><strong>For QA:</strong> automate visual regression at the four target viewports. One screenshot per viewport per route is enough to catch 80% of reflow bugs before they ship.</li>
+<li><strong>For design systems teams:</strong> the breadcrumb pattern in this playbook is the single most-reusable component. Centralize it once; every product team gets it for free.</li>
+</ul>
+<h2 id="common-failure-patterns">Common failure patterns</h2>
+<ol>
+<li><strong>Five breakpoints, four of them broken.</strong> Pick one structural breakpoint. Use fluid sizing within each side.</li>
+<li><strong><code>overflow-x: hidden</code> missing.</strong> A single fixed-width element somewhere produces a page-wide horizontal scrollbar.</li>
+<li><strong>Side nav gets thinner instead of disappearing.</strong> Icon-only side rails are the worst of both worlds — they cost width and lose learnability.</li>
+<li><strong>Header actions clip.</strong> No <code>flex-wrap</code>. Fix is two CSS properties.</li>
+<li><strong>Hero title sized per breakpoint.</strong> Use <code>clamp()</code> once.</li>
+<li><strong>Breadcrumb shows the current page.</strong> It’s already the h1.</li>
+<li><strong><code>...</code> overflow at the end of the breadcrumb.</strong> Hides the most useful ancestor first.</li>
+<li><strong>Orphan dividers.</strong> The <code>›</code> next to <code>...</code> because the divider isn’t conditionally rendered.</li>
+<li><strong>Page scrolls horizontally because the data table does.</strong> Wrap the table in a scroll container (<code>display: block; overflow-x: auto</code>). Tables get to scroll <em>within their container</em>. The page doesn’t (see section 8).</li>
+<li><strong>Testing only in browser devtools.</strong> A real phone exposes touch-target bugs that devtools hide.</li>
+</ol>
+<h2 id="generalized-example">Generalized example</h2>
+<p>A fictional <strong>factory floor analytics console</strong>. Desktop layout: 240px side nav, 1200px+ content area with a hero title, three primary action buttons, a card grid of machine status, a breadcrumb three deep (“Plants › North › Press Shop”).</p>
+<p>Reflow plan applied:</p>
+<ul>
+<li>Breakpoint: 900px</li>
+<li>Below 900: side nav hidden, hamburger in content area opens an overlay panel reusing the same nav items</li>
+<li>Page header: <code>flex-wrap: wrap</code>, gap 8px — actions drop below title when needed</li>
+<li>Hero title: <code>font-size: clamp(24px, 4.5vw, 40px)</code></li>
+<li>Card grid: <code>repeat(auto-fill, minmax(260px, 1fr))</code>, with <code>grid-template-columns: 1fr</code> below 600px</li>
+<li>Breadcrumb: current page (“Press Shop”) removed (it’s the h1); <code>...</code> always at the start; “Plants” priority 1, “North” priority 3; conditional dividers</li>
+<li>Data tables inside cards: allowed to scroll horizontally inside their container; the page does not</li>
+</ul>
+<p>The dashboard then renders without horizontal page scroll from 1440 down to 320, the nav transforms cleanly, the breadcrumb still tells the user where they are without eating the title row, and the card grid collapses to a single column without any code branching by viewport width.</p>
+<hr>
+<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
+</ul> </div> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
 Have feedback? <a class="private-reply__link" href="mailto:floramaydelacruz@gmail.com?subject=Re%3A%20The%20Enterprise%20Reflow%20Playbook">Send Flora a note</a>.
 </p> </aside> <dialog id="reply-overlay" aria-labelledby="reply-overlay-title" class="reply-overlay" data-astro-cid-rjpe63gb> <form method="dialog" class="reply-overlay__form" id="reply-overlay-form" novalidate data-astro-cid-rjpe63gb> <header class="reply-overlay__header" data-astro-cid-rjpe63gb> <h2 id="reply-overlay-title" class="reply-overlay__title" data-astro-cid-rjpe63gb>Send Flora a private note</h2> <button type="button" class="reply-overlay__close" data-close aria-label="Close" data-astro-cid-rjpe63gb>×</button> </header> <p class="reply-overlay__context" data-astro-cid-rjpe63gb>
 About: <span class="reply-overlay__context-title" data-astro-cid-rjpe63gb>The Enterprise Reflow Playbook</span> </p> <div class="reply-overlay__field" data-astro-cid-rjpe63gb> <label class="reply-overlay__label" for="reply-message" data-astro-cid-rjpe63gb>

@@ -428,215 +428,7 @@ Send feedback
             // Prevent nav script failures from breaking page interactivity.
           }
         })();
-      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="The Sticky View State Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">The Sticky View State Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">The Sticky View State Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">How to make a multi-page app feel like one continuous surface — filters, tabs, scroll position, and selection survive navigation without a global store or a backend.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">interaction-design</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">state-management</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">navigation</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">prototyping</span> </div>    <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
-<p>A lot of enterprise apps get this wrong in the same boring way: the user filters a list, clicks into a detail, comes back — and everything has reset. Filters cleared, tab back to default, scroll position at the top, selection gone. It reads as broken. The fix usually feels like it requires a state library, a server, or both. It doesn’t. For most product surfaces — and especially for prototypes that need to test feeling — a small set of conventions around browser-native storage is enough.</p>
-<p>This playbook is the rule set, the table you fill in once per page, and the three specific decisions that separate sticky-state-that-helps from sticky-state-that-haunts.</p>
-<h2 id="when-to-use-it">When to use it</h2>
-<ul>
-<li>A multi-page app where users frequently navigate list → detail → back</li>
-<li>A prototype that needs to feel like a real product during user testing</li>
-<li>A surface with filters, search, tabs, view-mode toggles, or selection that should outlive a navigation</li>
-<li>Apps where URL-as-state is too heavy (filter combinations are messy, you don’t want every selection in the address bar) but local memory is the right scope</li>
-</ul>
-<p>Don’t use this for cross-device sync, cross-session memory, or anything that should be shareable via copy-link. Those need URL state or a backend. Sticky view state is <em>within this tab, while this session is open</em> — that’s the contract.</p>
-<h2 id="core-framework">Core framework</h2>
-<p>Three decisions, in this order. Skip any of them and the persistence either feels missing or feels haunted.</p>
-<h3 id="1-what-survives--and-what-is-allowed-to-die">1. What survives — and what is allowed to die</h3>
-<p>Sort every piece of state on the page into one of three buckets.</p>
-<p><strong>Persisted (survives navigation, dies on hard refresh or tab close):</strong></p>
-<ul>
-<li>Active tab on a multi-tab page</li>
-<li>View mode (list vs. grid, dense vs. comfortable)</li>
-<li>Search query</li>
-<li>Active filters / facet selections</li>
-<li>Selection (with a caveat — see decision 3)</li>
-<li>Per-entity sub-tab on detail pages (keyed by entity ID)</li>
-</ul>
-<p><strong>In-memory only (survives navigation via Back/Forward, dies on any fresh visit):</strong></p>
-<ul>
-<li>Scroll position of the main content area</li>
-<li>Cursor position inside an editor</li>
-</ul>
-<p><strong>Never persisted (always starts fresh on mount):</strong></p>
-<ul>
-<li>Dialog open/closed state</li>
-<li>Popover position or anchor target</li>
-<li>Loading flags</li>
-<li>Animation progress, gauge widths measured from the DOM</li>
-<li>Drag-in-progress state</li>
-<li>Hover state</li>
-</ul>
-<p>The first bucket goes to sessionStorage. The second goes to an in-memory <code>Map</code> keyed by the browser’s per-history-entry key. The third stays in plain local component state. The reason this matters: persist a dialog’s open state and the dialog flashes open every time the user returns to the page. Persist a loading flag and the page comes back stuck in a spinner. Persist scroll position to sessionStorage instead of the in-memory map and a fresh nav-bar click leaves the user scrolled halfway down a page they think they just opened.</p>
-<h3 id="2-the-keying-convention">2. The keying convention</h3>
-<p>Every persisted key needs a prefix and, for per-entity state, an ID suffix.</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;page>-&#x3C;state>            // list-page state</span></span>
-<span class="line"><span>&#x3C;page>-&#x3C;state>-&#x3C;entityId> // detail-page state, one entry per entity</span></span></code></pre>
-<p>Prefixes do two things: they group related state in DevTools (<code>Application → Session Storage</code> becomes scannable), and they prevent collisions when two pages happen to have a “tab” or “search” field. The entity suffix is the rule that lets a user open three different detail pages in different tabs without their states stomping each other.</p>
-<h3 id="3-when-selection-clears">3. When selection clears</h3>
-<p>This is the decision most teams get wrong. Selection feels like persistent state — and it is — but it’s persistent state with a <em>task lifecycle</em>. Sort the triggers:</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table><thead><tr><th>Trigger</th><th>Clear selection?</th><th>Why</th></tr></thead><tbody><tr><td>User navigates away and comes back</td><td>❌ No</td><td>Their work is in progress</td></tr><tr><td>User cancels a bulk-action dialog</td><td>❌ No</td><td>They may retry</td></tr><tr><td>User closes a dialog via the ✕</td><td>❌ No</td><td>Same as cancel</td></tr><tr><td>The action’s success callback fires</td><td>✅ <strong>Yes</strong></td><td>The task is done</td></tr><tr><td>Dialog auto-dismisses after success</td><td>❌ No</td><td>Too late; clearing should have happened at <code>onSuccess</code></td></tr><tr><td>User explicitly clicks “Clear selection”</td><td>✅ Yes</td><td>They asked</td></tr></tbody></table>
-<p>The rule under all of this: <strong>clear selection on action success, not on dialog close.</strong> Leaving items selected after a completed action implies there is still pending work — and if the user reopens the same dialog, the already-completed items pre-select again. Both are confusing.</p>
-<h2 id="reusable-template">Reusable template</h2>
-<p>Drop this table into the design doc for each page that has sticky view state. The exercise of filling it in usually surfaces the bugs before code is written.</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Sticky view state — &#x3C;page name></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## State inventory</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| State | Key | Type | Default | Cleared when |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|---|---|---|---|---|</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Active tab           | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-tab`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">        | string  | "overview" | Never        |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| View mode            | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-view`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">       | string  | "list"     | Never        |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Search               | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-search`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">     | string  | ""         | Never        |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Filter selections    | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-filters`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">    | object  | {}         | Never        |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Selected items       | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-selected`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">   | string[]| []         | Action success |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Scroll position      | (in-memory only)    | number  | 0          | Fresh visit  |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Dialog open?         | (component state)   | boolean | false      | Always       |</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Per-entity state (one row per state, keyed by entity ID)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| State | Key pattern | Type | Default |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|---|---|---|---|</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Detail tab | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-tab-{id}`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> | string | "overview" |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Show-all toggle | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-showall-{id}`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> | boolean | false |</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Reset behavior</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Hard refresh: all sessionStorage cleared (browser behavior).</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> "Reset prototype" button: </span><span style="color:#023B95;--shiki-dark:#91CBFF">`sessionStorage.clear()`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> + reload.</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Filter "Clear" button: each filter reset to default, written back to storage.</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Action success: clear the affected selection only.</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Explicitly not persisted</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Dialog open/closed</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Popover anchor</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Loading flags</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Hover state</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Drag state</span></span></code></pre>
-<p>The “Explicitly not persisted” section is the one most teams forget. Make it part of the template — naming what isn’t persisted is how you prevent someone from quietly persisting it six months later.</p>
-<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
-<p>Two prompts. Both stress-test the state inventory before code touches the page.</p>
-<h3 id="prompt-detect-would-be-haunted-state">Prompt: detect would-be haunted state</h3>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Here is a state inventory for a page in a multi-page app. For each</span></span>
-<span class="line"><span>entry marked "persisted," tell me whether persisting it across</span></span>
-<span class="line"><span>navigation would create a confusing or stuck experience. Specifically</span></span>
-<span class="line"><span>flag:</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>- Anything dialog- or popover-related</span></span>
-<span class="line"><span>- Anything driven by current DOM measurement (sizes, positions)</span></span>
-<span class="line"><span>- Anything that represents an "in-progress" interaction (drag, hover,</span></span>
-<span class="line"><span>  loading)</span></span>
-<span class="line"><span>- Anything that would re-trigger an action or animation on return</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Output: a list of entries that should be moved to "never persisted,"</span></span>
-<span class="line"><span>with one sentence of reasoning each.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>&#x3C;paste the inventory></span></span></code></pre>
-<h3 id="prompt-derive-the-keying-scheme">Prompt: derive the keying scheme</h3>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Below is a list of pages and the state they need to persist. Generate</span></span>
-<span class="line"><span>a keying scheme that:</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>- Uses a consistent prefix per page</span></span>
-<span class="line"><span>- Uses an entity-ID suffix for detail-page state</span></span>
-<span class="line"><span>- Avoids collisions across pages</span></span>
-<span class="line"><span>- Is human-readable in DevTools</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Output: a table of (page, state, key pattern).</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>&#x3C;paste the list></span></span></code></pre>
-<p>These prompts are most useful as a checkpoint, not a generator. The point is to make the inventory sit in writing before any hook is touched.</p>
-<h2 id="collaboration-considerations">Collaboration considerations</h2>
-<ul>
-<li><strong>For PMs:</strong> the state inventory belongs in the PRD or design spec, not in implementation. It’s a product decision <em>what survives a navigation</em> — engineers should not be inferring this.</li>
-<li><strong>For engineers:</strong> the cost of getting this wrong is asymmetric. Persisting too much costs a few hours of cleanup. Persisting too little costs the entire feeling-like-a-real-app illusion the team is trying to build.</li>
-<li><strong>For research / user testing:</strong> sticky state is one of the highest-leverage things to validate in a prototype. Run two test sessions with persistence on, two with it off. The difference is usually obvious to participants without them being able to articulate why.</li>
-<li><strong>For QA:</strong> the test matrix is small and specific: hard refresh resets, Back/Forward preserves, navigation away and back preserves, action success clears the right selection, dialog cancel does not.</li>
-</ul>
-<h2 id="common-failure-patterns">Common failure patterns</h2>
-<ol>
-<li><strong>Persisting dialog open state.</strong> The dialog flashes open on every return. Almost always a copy-paste from a “persist everything” pattern.</li>
-<li><strong>Persisting scroll position in sessionStorage instead of an in-memory map.</strong> A fresh nav click lands the user mid-page on a page they think they just opened.</li>
-<li><strong>Forgetting the entity-ID suffix on detail pages.</strong> Open detail A, switch tab to “history,” navigate to detail B — and B’s history tab is also active, because the key collided.</li>
-<li><strong>Clearing selection on dialog close instead of on action success.</strong> Selection clears even when the user cancels, losing their work.</li>
-<li><strong>Not clearing selection on action success.</strong> Reopening the action pre-selects already-completed items.</li>
-<li><strong>Storing non-serializable values without a bridge.</strong> <code>Set</code> and <code>Map</code> need to be serialized to arrays/entries and reconstructed; otherwise stored values come back as <code>{}</code> and silently default.</li>
-<li><strong>No prefix.</strong> DevTools fills with <code>tab</code>, <code>search</code>, <code>view</code> — collisions across pages are inevitable.</li>
-<li><strong>Sessions that live too long.</strong> Persisting to <code>localStorage</code> instead of <code>sessionStorage</code> means a state from three weeks ago greets the user on Monday. Use the shortest scope that meets the need.</li>
-</ol>
-<h2 id="generalized-example">Generalized example</h2>
-<p>A fictional <strong>fleet-management dashboard</strong>. Three pages: Vehicle List, Vehicle Detail, Route Planner. Each has filters, tabs, and selection.</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Sticky view state — Vehicle List</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| State              | Key                  | Type   | Default     | Cleared when      |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|--------------------|----------------------|--------|-------------|-------------------|</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Active tab         | fleet-tab            | string | "active"    | Never             |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| View mode          | fleet-view           | string | "list"      | Never             |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Search             | fleet-search         | string | ""          | Never             |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Status filters     | fleet-filters        | object | {}          | Never             |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Selected vehicles  | fleet-selected       | string[]| []         | Recall action OK  |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Scroll position    | (in-memory)          | number | 0           | Fresh visit       |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Recall dialog open | (component)          | boolean| false       | Always            |</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Sticky view state — Vehicle Detail</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| State              | Key pattern              | Default      |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|--------------------|--------------------------|--------------|</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Active tab         | vehicle-tab-{vehicleId}  | "overview"   |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Maintenance toggle | vehicle-maint-{vehicleId}| false        |</span></span></code></pre>
-<p>The user filters down to 12 vans flagged for inspection, multi-selects 4, clicks “Schedule recall,” confirms the dialog. The recall succeeds → those 4 deselect at <code>onSuccess</code>. Filters stay. Tab stays. They click a vehicle to see detail, come back — same filters, same selection state (now zero), same scroll position. Switch to the Route Planner, switch back — same. Hard refresh → clean slate. That sequence is the whole product feeling.</p>
-<hr>
-<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
-<ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
-</ul> </div> <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="sticky-view-state-playbook" data-title="The Sticky View State Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="sticky-view-state-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
+      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="The Sticky View State Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">The Sticky View State Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">The Sticky View State Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">How to make a multi-page app feel like one continuous surface — filters, tabs, scroll position, and selection survive navigation without a global store or a backend.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">interaction-design</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">state-management</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">navigation</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">prototyping</span> </div>    <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="sticky-view-state-playbook" data-title="The Sticky View State Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="sticky-view-state-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
 Drop your email to copy the markdown or download the file. One email unlocks everything in the Toybox.
 </p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-sticky-view-state-playbook">Email address</label> <input id="pb-email-sticky-view-state-playbook" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
 Unlock copy &amp; download
@@ -863,7 +655,215 @@ The user filters down to 12 vans flagged for inspection, multi-selects 4, clicks
 - [x] No screenshots showing real chrome, real data, or recognizable surfaces
 - [x] No internal-only workflows, tools, or terminology
 - [x] Every example is fictional or abstracted; numbers are illustrative
-- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
+- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
+<p>A lot of enterprise apps get this wrong in the same boring way: the user filters a list, clicks into a detail, comes back — and everything has reset. Filters cleared, tab back to default, scroll position at the top, selection gone. It reads as broken. The fix usually feels like it requires a state library, a server, or both. It doesn’t. For most product surfaces — and especially for prototypes that need to test feeling — a small set of conventions around browser-native storage is enough.</p>
+<p>This playbook is the rule set, the table you fill in once per page, and the three specific decisions that separate sticky-state-that-helps from sticky-state-that-haunts.</p>
+<h2 id="when-to-use-it">When to use it</h2>
+<ul>
+<li>A multi-page app where users frequently navigate list → detail → back</li>
+<li>A prototype that needs to feel like a real product during user testing</li>
+<li>A surface with filters, search, tabs, view-mode toggles, or selection that should outlive a navigation</li>
+<li>Apps where URL-as-state is too heavy (filter combinations are messy, you don’t want every selection in the address bar) but local memory is the right scope</li>
+</ul>
+<p>Don’t use this for cross-device sync, cross-session memory, or anything that should be shareable via copy-link. Those need URL state or a backend. Sticky view state is <em>within this tab, while this session is open</em> — that’s the contract.</p>
+<h2 id="core-framework">Core framework</h2>
+<p>Three decisions, in this order. Skip any of them and the persistence either feels missing or feels haunted.</p>
+<h3 id="1-what-survives--and-what-is-allowed-to-die">1. What survives — and what is allowed to die</h3>
+<p>Sort every piece of state on the page into one of three buckets.</p>
+<p><strong>Persisted (survives navigation, dies on hard refresh or tab close):</strong></p>
+<ul>
+<li>Active tab on a multi-tab page</li>
+<li>View mode (list vs. grid, dense vs. comfortable)</li>
+<li>Search query</li>
+<li>Active filters / facet selections</li>
+<li>Selection (with a caveat — see decision 3)</li>
+<li>Per-entity sub-tab on detail pages (keyed by entity ID)</li>
+</ul>
+<p><strong>In-memory only (survives navigation via Back/Forward, dies on any fresh visit):</strong></p>
+<ul>
+<li>Scroll position of the main content area</li>
+<li>Cursor position inside an editor</li>
+</ul>
+<p><strong>Never persisted (always starts fresh on mount):</strong></p>
+<ul>
+<li>Dialog open/closed state</li>
+<li>Popover position or anchor target</li>
+<li>Loading flags</li>
+<li>Animation progress, gauge widths measured from the DOM</li>
+<li>Drag-in-progress state</li>
+<li>Hover state</li>
+</ul>
+<p>The first bucket goes to sessionStorage. The second goes to an in-memory <code>Map</code> keyed by the browser’s per-history-entry key. The third stays in plain local component state. The reason this matters: persist a dialog’s open state and the dialog flashes open every time the user returns to the page. Persist a loading flag and the page comes back stuck in a spinner. Persist scroll position to sessionStorage instead of the in-memory map and a fresh nav-bar click leaves the user scrolled halfway down a page they think they just opened.</p>
+<h3 id="2-the-keying-convention">2. The keying convention</h3>
+<p>Every persisted key needs a prefix and, for per-entity state, an ID suffix.</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;page>-&#x3C;state>            // list-page state</span></span>
+<span class="line"><span>&#x3C;page>-&#x3C;state>-&#x3C;entityId> // detail-page state, one entry per entity</span></span></code></pre>
+<p>Prefixes do two things: they group related state in DevTools (<code>Application → Session Storage</code> becomes scannable), and they prevent collisions when two pages happen to have a “tab” or “search” field. The entity suffix is the rule that lets a user open three different detail pages in different tabs without their states stomping each other.</p>
+<h3 id="3-when-selection-clears">3. When selection clears</h3>
+<p>This is the decision most teams get wrong. Selection feels like persistent state — and it is — but it’s persistent state with a <em>task lifecycle</em>. Sort the triggers:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Trigger</th><th>Clear selection?</th><th>Why</th></tr></thead><tbody><tr><td>User navigates away and comes back</td><td>❌ No</td><td>Their work is in progress</td></tr><tr><td>User cancels a bulk-action dialog</td><td>❌ No</td><td>They may retry</td></tr><tr><td>User closes a dialog via the ✕</td><td>❌ No</td><td>Same as cancel</td></tr><tr><td>The action’s success callback fires</td><td>✅ <strong>Yes</strong></td><td>The task is done</td></tr><tr><td>Dialog auto-dismisses after success</td><td>❌ No</td><td>Too late; clearing should have happened at <code>onSuccess</code></td></tr><tr><td>User explicitly clicks “Clear selection”</td><td>✅ Yes</td><td>They asked</td></tr></tbody></table>
+<p>The rule under all of this: <strong>clear selection on action success, not on dialog close.</strong> Leaving items selected after a completed action implies there is still pending work — and if the user reopens the same dialog, the already-completed items pre-select again. Both are confusing.</p>
+<h2 id="reusable-template">Reusable template</h2>
+<p>Drop this table into the design doc for each page that has sticky view state. The exercise of filling it in usually surfaces the bugs before code is written.</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Sticky view state — &#x3C;page name></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## State inventory</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| State | Key | Type | Default | Cleared when |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|---|---|---|---|---|</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Active tab           | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-tab`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">        | string  | "overview" | Never        |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| View mode            | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-view`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">       | string  | "list"     | Never        |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Search               | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-search`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">     | string  | ""         | Never        |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Filter selections    | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-filters`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">    | object  | {}         | Never        |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Selected items       | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-selected`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6">   | string[]| []         | Action success |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Scroll position      | (in-memory only)    | number  | 0          | Fresh visit  |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Dialog open?         | (component state)   | boolean | false      | Always       |</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Per-entity state (one row per state, keyed by entity ID)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| State | Key pattern | Type | Default |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|---|---|---|---|</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Detail tab | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-tab-{id}`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> | string | "overview" |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Show-all toggle | </span><span style="color:#023B95;--shiki-dark:#91CBFF">`&#x3C;page>-showall-{id}`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> | boolean | false |</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Reset behavior</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Hard refresh: all sessionStorage cleared (browser behavior).</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> "Reset prototype" button: </span><span style="color:#023B95;--shiki-dark:#91CBFF">`sessionStorage.clear()`</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> + reload.</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Filter "Clear" button: each filter reset to default, written back to storage.</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Action success: clear the affected selection only.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Explicitly not persisted</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Dialog open/closed</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Popover anchor</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Loading flags</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Hover state</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Drag state</span></span></code></pre>
+<p>The “Explicitly not persisted” section is the one most teams forget. Make it part of the template — naming what isn’t persisted is how you prevent someone from quietly persisting it six months later.</p>
+<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
+<p>Two prompts. Both stress-test the state inventory before code touches the page.</p>
+<h3 id="prompt-detect-would-be-haunted-state">Prompt: detect would-be haunted state</h3>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Here is a state inventory for a page in a multi-page app. For each</span></span>
+<span class="line"><span>entry marked "persisted," tell me whether persisting it across</span></span>
+<span class="line"><span>navigation would create a confusing or stuck experience. Specifically</span></span>
+<span class="line"><span>flag:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- Anything dialog- or popover-related</span></span>
+<span class="line"><span>- Anything driven by current DOM measurement (sizes, positions)</span></span>
+<span class="line"><span>- Anything that represents an "in-progress" interaction (drag, hover,</span></span>
+<span class="line"><span>  loading)</span></span>
+<span class="line"><span>- Anything that would re-trigger an action or animation on return</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Output: a list of entries that should be moved to "never persisted,"</span></span>
+<span class="line"><span>with one sentence of reasoning each.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;paste the inventory></span></span></code></pre>
+<h3 id="prompt-derive-the-keying-scheme">Prompt: derive the keying scheme</h3>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Below is a list of pages and the state they need to persist. Generate</span></span>
+<span class="line"><span>a keying scheme that:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- Uses a consistent prefix per page</span></span>
+<span class="line"><span>- Uses an entity-ID suffix for detail-page state</span></span>
+<span class="line"><span>- Avoids collisions across pages</span></span>
+<span class="line"><span>- Is human-readable in DevTools</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Output: a table of (page, state, key pattern).</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;paste the list></span></span></code></pre>
+<p>These prompts are most useful as a checkpoint, not a generator. The point is to make the inventory sit in writing before any hook is touched.</p>
+<h2 id="collaboration-considerations">Collaboration considerations</h2>
+<ul>
+<li><strong>For PMs:</strong> the state inventory belongs in the PRD or design spec, not in implementation. It’s a product decision <em>what survives a navigation</em> — engineers should not be inferring this.</li>
+<li><strong>For engineers:</strong> the cost of getting this wrong is asymmetric. Persisting too much costs a few hours of cleanup. Persisting too little costs the entire feeling-like-a-real-app illusion the team is trying to build.</li>
+<li><strong>For research / user testing:</strong> sticky state is one of the highest-leverage things to validate in a prototype. Run two test sessions with persistence on, two with it off. The difference is usually obvious to participants without them being able to articulate why.</li>
+<li><strong>For QA:</strong> the test matrix is small and specific: hard refresh resets, Back/Forward preserves, navigation away and back preserves, action success clears the right selection, dialog cancel does not.</li>
+</ul>
+<h2 id="common-failure-patterns">Common failure patterns</h2>
+<ol>
+<li><strong>Persisting dialog open state.</strong> The dialog flashes open on every return. Almost always a copy-paste from a “persist everything” pattern.</li>
+<li><strong>Persisting scroll position in sessionStorage instead of an in-memory map.</strong> A fresh nav click lands the user mid-page on a page they think they just opened.</li>
+<li><strong>Forgetting the entity-ID suffix on detail pages.</strong> Open detail A, switch tab to “history,” navigate to detail B — and B’s history tab is also active, because the key collided.</li>
+<li><strong>Clearing selection on dialog close instead of on action success.</strong> Selection clears even when the user cancels, losing their work.</li>
+<li><strong>Not clearing selection on action success.</strong> Reopening the action pre-selects already-completed items.</li>
+<li><strong>Storing non-serializable values without a bridge.</strong> <code>Set</code> and <code>Map</code> need to be serialized to arrays/entries and reconstructed; otherwise stored values come back as <code>{}</code> and silently default.</li>
+<li><strong>No prefix.</strong> DevTools fills with <code>tab</code>, <code>search</code>, <code>view</code> — collisions across pages are inevitable.</li>
+<li><strong>Sessions that live too long.</strong> Persisting to <code>localStorage</code> instead of <code>sessionStorage</code> means a state from three weeks ago greets the user on Monday. Use the shortest scope that meets the need.</li>
+</ol>
+<h2 id="generalized-example">Generalized example</h2>
+<p>A fictional <strong>fleet-management dashboard</strong>. Three pages: Vehicle List, Vehicle Detail, Route Planner. Each has filters, tabs, and selection.</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Sticky view state — Vehicle List</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| State              | Key                  | Type   | Default     | Cleared when      |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|--------------------|----------------------|--------|-------------|-------------------|</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Active tab         | fleet-tab            | string | "active"    | Never             |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| View mode          | fleet-view           | string | "list"      | Never             |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Search             | fleet-search         | string | ""          | Never             |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Status filters     | fleet-filters        | object | {}          | Never             |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Selected vehicles  | fleet-selected       | string[]| []         | Recall action OK  |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Scroll position    | (in-memory)          | number | 0           | Fresh visit       |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Recall dialog open | (component)          | boolean| false       | Always            |</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Sticky view state — Vehicle Detail</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| State              | Key pattern              | Default      |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|--------------------|--------------------------|--------------|</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Active tab         | vehicle-tab-{vehicleId}  | "overview"   |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Maintenance toggle | vehicle-maint-{vehicleId}| false        |</span></span></code></pre>
+<p>The user filters down to 12 vans flagged for inspection, multi-selects 4, clicks “Schedule recall,” confirms the dialog. The recall succeeds → those 4 deselect at <code>onSuccess</code>. Filters stay. Tab stays. They click a vehicle to see detail, come back — same filters, same selection state (now zero), same scroll position. Switch to the Route Planner, switch back — same. Hard refresh → clean slate. That sequence is the whole product feeling.</p>
+<hr>
+<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
+</ul> </div> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
 Have feedback? <a class="private-reply__link" href="mailto:floramaydelacruz@gmail.com?subject=Re%3A%20The%20Sticky%20View%20State%20Playbook">Send Flora a note</a>.
 </p> </aside> <dialog id="reply-overlay" aria-labelledby="reply-overlay-title" class="reply-overlay" data-astro-cid-rjpe63gb> <form method="dialog" class="reply-overlay__form" id="reply-overlay-form" novalidate data-astro-cid-rjpe63gb> <header class="reply-overlay__header" data-astro-cid-rjpe63gb> <h2 id="reply-overlay-title" class="reply-overlay__title" data-astro-cid-rjpe63gb>Send Flora a private note</h2> <button type="button" class="reply-overlay__close" data-close aria-label="Close" data-astro-cid-rjpe63gb>×</button> </header> <p class="reply-overlay__context" data-astro-cid-rjpe63gb>
 About: <span class="reply-overlay__context-title" data-astro-cid-rjpe63gb>The Sticky View State Playbook</span> </p> <div class="reply-overlay__field" data-astro-cid-rjpe63gb> <label class="reply-overlay__label" for="reply-message" data-astro-cid-rjpe63gb>

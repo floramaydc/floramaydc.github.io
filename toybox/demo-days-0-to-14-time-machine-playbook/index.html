@@ -428,135 +428,7 @@ Send feedback
             // Prevent nav script failures from breaking page interactivity.
           }
         })();
-      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="Demo Days 0 to 14 Time-Machine Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">Demo Days 0 to 14 Time-Machine Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">Demo Days 0 to 14 Time-Machine Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">How to demo product maturity over time without faking production data: stage states from Day 0 to Day 14 and let people jump between them instantly.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">prototyping</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">demo-strategy</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">state-design</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">ux</span> </div>    <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
-<p>Most prototypes fail the same demo test: they only represent one maturity state. Either everything is empty and looks unfinished, or everything is fully populated and looks fake. A day-based time machine solves this by treating maturity as a first-class axis. You can show realistic progression from first run to stabilized usage, while preserving one interface and one narrative.</p>
-<h2 id="when-to-use-it">When to use it</h2>
-<ul>
-<li>You need to demo onboarding, activation, and follow-through as one coherent story</li>
-<li>Stakeholders ask, “What does this look like at launch vs. two weeks in?”</li>
-<li>Your team keeps hard-coding fake “final state” screenshots that skip early-state UX</li>
-<li>You want honest Day 0 empty states without losing confidence in the later experience</li>
-</ul>
-<p>Skip it when: your product has no meaningful state progression over time, or when legal/compliance requirements prohibit synthetic demo states.</p>
-<h2 id="core-framework">Core framework</h2>
-<p>Use a state model with six demo checkpoints:</p>
-<ol>
-<li>Day 0: first-run state, unknowns visible, setup prompts clear</li>
-<li>Day 1: initial setup complete, first recommendations/actions available</li>
-<li>Day 3: early usage patterns visible, first outcomes measurable</li>
-<li>Day 7: patterns stabilize, prioritization starts to shift</li>
-<li>Day 8: post-adjustment state after one optimization pass</li>
-<li>Day 14: mature short-term state, routine operations and refinements</li>
-</ol>
-<p>Design rule: each day must change user-relevant signals, not just numbers. If the workflow does not change, the day should not exist.</p>
-<p>Use this transition map:</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">flowchart LR</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D0["Day 0 First Run"] --> D1["Day 1 Activated"]</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D1 --> D3["Day 3 Early Pattern"]</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D3 --> D7["Day 7 Stabilizing"]</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D7 --> D8["Day 8 After Tuning"]</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D8 --> D14["Day 14 Operational"]</span></span></code></pre>
-<h2 id="reusable-template">Reusable template</h2>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Demo-day state plan: &#x3C;surface></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Day checkpoints</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Day | User reality | UI signals | Allowed actions | Success signal |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|---|---|---|---|---|</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 0  | &#x3C;first run> | &#x3C;empty/unknown states> | &#x3C;setup actions only> | &#x3C;activation started> |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 1  | &#x3C;newly configured> | &#x3C;first meaningful indicators> | &#x3C;guided actions> | &#x3C;first task completed> |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 3  | &#x3C;early rhythm> | &#x3C;emerging patterns> | &#x3C;selective optimizations> | &#x3C;repeat behavior visible> |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 7  | &#x3C;stabilizing> | &#x3C;clear priorities> | &#x3C;targeted interventions> | &#x3C;fewer unknowns> |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 8  | &#x3C;post-adjustment> | &#x3C;state shift after change> | &#x3C;fine tuning> | &#x3C;delta acknowledged> |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 14 | &#x3C;operational> | &#x3C;steady-state indicators> | &#x3C;maintenance + refinement> | &#x3C;routine confidence> |</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Invariants (must stay true every day)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;navigation model></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;information architecture></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;core action semantics></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Variables (can change by day)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;status labels></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;counts / trend direction></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;recommended next actions></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;coachmark / guidance emphasis></span></span></code></pre>
-<h2 id="live-reference-prototype">Live reference prototype</h2>
-<ul>
-<li>View the interactive day-switch reference at /toybox/prototypes/demo-days-0-reference/</li>
-<li>Use it to sanity-check whether each day changes user meaning (not just numbers)</li>
-</ul>
-<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
-<p>Use AI to generate a coherent progression before writing UI copy.</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>You are helping me design a six-checkpoint demo timeline for a product</span></span>
-<span class="line"><span>experience. Given the product surface and goal, produce Day 0, 1, 3, 7, 8,</span></span>
-<span class="line"><span>and 14 states.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Output format:</span></span>
-<span class="line"><span>1. User reality for each day</span></span>
-<span class="line"><span>2. What the interface should visibly change</span></span>
-<span class="line"><span>3. What must remain invariant</span></span>
-<span class="line"><span>4. One anti-pattern to avoid for each day</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Constraints:</span></span>
-<span class="line"><span>- Do not invent internal metrics or confidential product facts.</span></span>
-<span class="line"><span>- Keep all examples generic and reusable.</span></span>
-<span class="line"><span>- Day 0 must show honest unknown/empty states.</span></span></code></pre>
-<p>Then validate consistency:</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Review this day-based state plan and flag timeline breaks:</span></span>
-<span class="line"><span>- sudden jumps that skip required setup</span></span>
-<span class="line"><span>- repeated days that add no user value</span></span>
-<span class="line"><span>- contradictions between allowed actions and visible state</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Return:</span></span>
-<span class="line"><span>1. broken transitions</span></span>
-<span class="line"><span>2. minimal fix per transition</span></span></code></pre>
-<h2 id="collaboration-considerations">Collaboration considerations</h2>
-<ul>
-<li>For PMs: define what each day means in user terms, not business terms</li>
-<li>For developers: isolate day fixtures from production pathways to prevent accidental coupling</li>
-<li>For research: test comprehension of progression, especially Day 0 credibility and Day 14 trust</li>
-<li>For accessibility: ensure every day variation preserves contrast, focus order, and semantic clarity</li>
-</ul>
-<h2 id="common-failure-patterns">Common failure patterns</h2>
-<ol>
-<li>Turning days into number swaps with no workflow change</li>
-<li>Hiding Day 0 emptiness with fake completed states</li>
-<li>Adding too many checkpoints and diluting the narrative</li>
-<li>Changing IA between days so demos feel like different products</li>
-<li>Using irreversible demo controls that make side-by-side comparison impossible</li>
-</ol>
-<h2 id="companion-artifacts">Companion artifacts</h2>
-<ul>
-<li><a href="/toybox/secret-handshakes-for-designers-playbook">Secret Handshakes for Designers Playbook</a> for hidden controls that make day switching repeatable in review</li>
-<li><a href="/toybox/demo-days-0-reference-prototype">Demo days 0 to 14 reference</a> for a live implementation of this progression model</li>
-<li><a href="/toybox/audit-command-center-template">Audit Command Center Template</a> for tracking day-specific quality issues as findings</li>
-</ul>
-<h2 id="generalized-example">Generalized example</h2>
-<p>A fictional workflow automation dashboard uses this timeline:</p>
-<ul>
-<li>Day 0 shows no active automations, clear setup prompts, and unknown trend cards</li>
-<li>Day 1 introduces one configured workflow and one recommended next step</li>
-<li>Day 3 shows repeated runs and first exception alerts</li>
-<li>Day 7 highlights highest-friction step and targeted optimization actions</li>
-<li>Day 8 reflects post-optimization improvements in flow stability</li>
-<li>Day 14 presents routine operations with periodic tuning tasks</li>
-</ul>
-<p>All numbers are illustrative. The value is the sequence logic, not specific metrics.</p>
-<hr>
-<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
-<ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
-</ul> </div> <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="demo-days-0-to-14-time-machine-playbook" data-title="Demo Days 0 to 14 Time-Machine Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="demo-days-0-to-14-time-machine-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
+      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="Demo Days 0 to 14 Time-Machine Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">Demo Days 0 to 14 Time-Machine Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">Demo Days 0 to 14 Time-Machine Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">How to demo product maturity over time without faking production data: stage states from Day 0 to Day 14 and let people jump between them instantly.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">prototyping</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">demo-strategy</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">state-design</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">ux</span> </div>    <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="demo-days-0-to-14-time-machine-playbook" data-title="Demo Days 0 to 14 Time-Machine Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="demo-days-0-to-14-time-machine-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
 Drop your email to copy the markdown or download the file. One email unlocks everything in the Toybox.
 </p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-demo-days-0-to-14-time-machine-playbook">Email address</label> <input id="pb-email-demo-days-0-to-14-time-machine-playbook" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
 Unlock copy &amp; download
@@ -721,7 +593,135 @@ All numbers are illustrative. The value is the sequence logic, not specific metr
 - [x] No screenshots showing real chrome, real data, or recognizable surfaces
 - [x] No internal-only workflows, tools, or terminology
 - [x] Every example is fictional or abstracted; numbers are illustrative
-- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
+- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
+<p>Most prototypes fail the same demo test: they only represent one maturity state. Either everything is empty and looks unfinished, or everything is fully populated and looks fake. A day-based time machine solves this by treating maturity as a first-class axis. You can show realistic progression from first run to stabilized usage, while preserving one interface and one narrative.</p>
+<h2 id="when-to-use-it">When to use it</h2>
+<ul>
+<li>You need to demo onboarding, activation, and follow-through as one coherent story</li>
+<li>Stakeholders ask, “What does this look like at launch vs. two weeks in?”</li>
+<li>Your team keeps hard-coding fake “final state” screenshots that skip early-state UX</li>
+<li>You want honest Day 0 empty states without losing confidence in the later experience</li>
+</ul>
+<p>Skip it when: your product has no meaningful state progression over time, or when legal/compliance requirements prohibit synthetic demo states.</p>
+<h2 id="core-framework">Core framework</h2>
+<p>Use a state model with six demo checkpoints:</p>
+<ol>
+<li>Day 0: first-run state, unknowns visible, setup prompts clear</li>
+<li>Day 1: initial setup complete, first recommendations/actions available</li>
+<li>Day 3: early usage patterns visible, first outcomes measurable</li>
+<li>Day 7: patterns stabilize, prioritization starts to shift</li>
+<li>Day 8: post-adjustment state after one optimization pass</li>
+<li>Day 14: mature short-term state, routine operations and refinements</li>
+</ol>
+<p>Design rule: each day must change user-relevant signals, not just numbers. If the workflow does not change, the day should not exist.</p>
+<p>Use this transition map:</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">flowchart LR</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D0["Day 0 First Run"] --> D1["Day 1 Activated"]</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D1 --> D3["Day 3 Early Pattern"]</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D3 --> D7["Day 7 Stabilizing"]</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D7 --> D8["Day 8 After Tuning"]</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D8 --> D14["Day 14 Operational"]</span></span></code></pre>
+<h2 id="reusable-template">Reusable template</h2>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Demo-day state plan: &#x3C;surface></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Day checkpoints</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Day | User reality | UI signals | Allowed actions | Success signal |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|---|---|---|---|---|</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 0  | &#x3C;first run> | &#x3C;empty/unknown states> | &#x3C;setup actions only> | &#x3C;activation started> |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 1  | &#x3C;newly configured> | &#x3C;first meaningful indicators> | &#x3C;guided actions> | &#x3C;first task completed> |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 3  | &#x3C;early rhythm> | &#x3C;emerging patterns> | &#x3C;selective optimizations> | &#x3C;repeat behavior visible> |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 7  | &#x3C;stabilizing> | &#x3C;clear priorities> | &#x3C;targeted interventions> | &#x3C;fewer unknowns> |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 8  | &#x3C;post-adjustment> | &#x3C;state shift after change> | &#x3C;fine tuning> | &#x3C;delta acknowledged> |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| 14 | &#x3C;operational> | &#x3C;steady-state indicators> | &#x3C;maintenance + refinement> | &#x3C;routine confidence> |</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Invariants (must stay true every day)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;navigation model></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;information architecture></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;core action semantics></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Variables (can change by day)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;status labels></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;counts / trend direction></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;recommended next actions></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;coachmark / guidance emphasis></span></span></code></pre>
+<h2 id="live-reference-prototype">Live reference prototype</h2>
+<ul>
+<li>View the interactive day-switch reference at /toybox/prototypes/demo-days-0-reference/</li>
+<li>Use it to sanity-check whether each day changes user meaning (not just numbers)</li>
+</ul>
+<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
+<p>Use AI to generate a coherent progression before writing UI copy.</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>You are helping me design a six-checkpoint demo timeline for a product</span></span>
+<span class="line"><span>experience. Given the product surface and goal, produce Day 0, 1, 3, 7, 8,</span></span>
+<span class="line"><span>and 14 states.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Output format:</span></span>
+<span class="line"><span>1. User reality for each day</span></span>
+<span class="line"><span>2. What the interface should visibly change</span></span>
+<span class="line"><span>3. What must remain invariant</span></span>
+<span class="line"><span>4. One anti-pattern to avoid for each day</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Constraints:</span></span>
+<span class="line"><span>- Do not invent internal metrics or confidential product facts.</span></span>
+<span class="line"><span>- Keep all examples generic and reusable.</span></span>
+<span class="line"><span>- Day 0 must show honest unknown/empty states.</span></span></code></pre>
+<p>Then validate consistency:</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Review this day-based state plan and flag timeline breaks:</span></span>
+<span class="line"><span>- sudden jumps that skip required setup</span></span>
+<span class="line"><span>- repeated days that add no user value</span></span>
+<span class="line"><span>- contradictions between allowed actions and visible state</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Return:</span></span>
+<span class="line"><span>1. broken transitions</span></span>
+<span class="line"><span>2. minimal fix per transition</span></span></code></pre>
+<h2 id="collaboration-considerations">Collaboration considerations</h2>
+<ul>
+<li>For PMs: define what each day means in user terms, not business terms</li>
+<li>For developers: isolate day fixtures from production pathways to prevent accidental coupling</li>
+<li>For research: test comprehension of progression, especially Day 0 credibility and Day 14 trust</li>
+<li>For accessibility: ensure every day variation preserves contrast, focus order, and semantic clarity</li>
+</ul>
+<h2 id="common-failure-patterns">Common failure patterns</h2>
+<ol>
+<li>Turning days into number swaps with no workflow change</li>
+<li>Hiding Day 0 emptiness with fake completed states</li>
+<li>Adding too many checkpoints and diluting the narrative</li>
+<li>Changing IA between days so demos feel like different products</li>
+<li>Using irreversible demo controls that make side-by-side comparison impossible</li>
+</ol>
+<h2 id="companion-artifacts">Companion artifacts</h2>
+<ul>
+<li><a href="/toybox/secret-handshakes-for-designers-playbook">Secret Handshakes for Designers Playbook</a> for hidden controls that make day switching repeatable in review</li>
+<li><a href="/toybox/demo-days-0-reference-prototype">Demo days 0 to 14 reference</a> for a live implementation of this progression model</li>
+<li><a href="/toybox/audit-command-center-template">Audit Command Center Template</a> for tracking day-specific quality issues as findings</li>
+</ul>
+<h2 id="generalized-example">Generalized example</h2>
+<p>A fictional workflow automation dashboard uses this timeline:</p>
+<ul>
+<li>Day 0 shows no active automations, clear setup prompts, and unknown trend cards</li>
+<li>Day 1 introduces one configured workflow and one recommended next step</li>
+<li>Day 3 shows repeated runs and first exception alerts</li>
+<li>Day 7 highlights highest-friction step and targeted optimization actions</li>
+<li>Day 8 reflects post-optimization improvements in flow stability</li>
+<li>Day 14 presents routine operations with periodic tuning tasks</li>
+</ul>
+<p>All numbers are illustrative. The value is the sequence logic, not specific metrics.</p>
+<hr>
+<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
+</ul> </div> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
 Have feedback? <a class="private-reply__link" href="mailto:floramaydelacruz@gmail.com?subject=Re%3A%20Demo%20Days%200%20to%2014%20Time-Machine%20Playbook">Send Flora a note</a>.
 </p> </aside> <dialog id="reply-overlay" aria-labelledby="reply-overlay-title" class="reply-overlay" data-astro-cid-rjpe63gb> <form method="dialog" class="reply-overlay__form" id="reply-overlay-form" novalidate data-astro-cid-rjpe63gb> <header class="reply-overlay__header" data-astro-cid-rjpe63gb> <h2 id="reply-overlay-title" class="reply-overlay__title" data-astro-cid-rjpe63gb>Send Flora a private note</h2> <button type="button" class="reply-overlay__close" data-close aria-label="Close" data-astro-cid-rjpe63gb>×</button> </header> <p class="reply-overlay__context" data-astro-cid-rjpe63gb>
 About: <span class="reply-overlay__context-title" data-astro-cid-rjpe63gb>Demo Days 0 to 14 Time-Machine Playbook</span> </p> <div class="reply-overlay__field" data-astro-cid-rjpe63gb> <label class="reply-overlay__label" for="reply-message" data-astro-cid-rjpe63gb>

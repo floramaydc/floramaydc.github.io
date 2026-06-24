@@ -428,140 +428,7 @@ Send feedback
             // Prevent nav script failures from breaking page interactivity.
           }
         })();
-      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="The Subtraction Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">The Subtraction Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">The Subtraction Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">How to remove a feature, ship the removal as the headline, and write up the reasoning so it survives the next reorg. The design move almost nobody documents.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">product-strategy</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">decision-design</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">scoping</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">senior-ic</span> </div>    <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
-<p>Most designer write-ups document what the team <em>shipped</em>. The harder, more senior move is to document what the team <em>refused to ship</em> — and to make the refusal legible enough that it survives the next planning cycle, the next reorg, and the next well-meaning stakeholder who’d really like that feature back, please.</p>
-<p>This playbook is the structure for that write-up. It’s also a way of thinking about a product: every product has a shadow, the set of features it pointedly does not have. The shadow is where most of the leverage lives. Designers who can name and defend the shadow tend to be the ones who shape the product, not just decorate it.</p>
-<h2 id="when-to-use-it">When to use it</h2>
-<ul>
-<li>A product team is debating whether to bring back a feature the previous version had</li>
-<li>A 2.0 or rewrite explicitly removed something — and the reason is sitting in someone’s head, not anywhere persistent</li>
-<li>You’re scoping a product down from a maximalist v1 to a focused v2 and need to defend the cuts</li>
-<li>You’re inheriting a product full of “why is this here” features and want to start naming what should not be</li>
-<li>A stakeholder is pushing for a feature and you have a strong design reason to say no, but it keeps coming back</li>
-</ul>
-<p>Skip it when the removal is mechanical (deprecation of a dependency, fixing a bug). Subtraction here means <em>design subtraction</em> — refusing a <em>capability</em> the product could plausibly have.</p>
-<h2 id="core-framework">Core framework</h2>
-<p>A Subtraction Playbook is built on five claims. Each claim is a paragraph in the write-up, in this order. Skip any one and the playbook collapses into a complaint.</p>
-<h3 id="1-the-thing-the-previous-version-did">1. The thing the previous version did</h3>
-<p>Name it neutrally. Not “the old version’s mistake” — that’s how you lose the people who built it. Describe the capability the previous version provided and the legitimate need it tried to serve. If the previous designers were senior people doing senior work, treat it that way. You’re not winning an argument; you’re documenting a redirection.</p>
-<h3 id="2-the-thing-the-new-version-refuses-to-do">2. The thing the new version refuses to do</h3>
-<p>State the refusal as a flat sentence, not a hedge. <em>“Groups do not have aggregate scores.”</em> <em>“There is no portfolio detail page.”</em> <em>“Bulk actions do not span workspaces.”</em> Refusals work better as nouns than as principles. A noun is auditable; a principle is negotiable.</p>
-<h3 id="3-the-canaries--what-tells-you-the-refusal-is-being-violated">3. The “canaries” — what tells you the refusal is being violated</h3>
-<p>Three or four observable signals that the refusal is slipping. <em>“If you find yourself adding a ‘view all’ route, the refusal is slipping.”</em> <em>“If a PRD has the word ‘rollup’ in it, the refusal is slipping.”</em> <em>“If you’re adding a checkbox toolbar above a group view, the refusal is slipping.”</em> Canaries are the playbook’s enforcement mechanism — they let a reviewer six months from now spot the violation without rereading the whole document.</p>
-<h3 id="4-the-trade-off-you-accepted">4. The trade-off you accepted</h3>
-<p>Every refusal costs something. The user who could do X in the old version can no longer do X. Name the cost. <em>“Users who previously triaged at the group level now triage at the individual level — that’s more clicks for power users.”</em> <em>“Teams that depended on the rollup metric will need to recompose it from per-item data.”</em> If you can’t name the trade-off, your refusal isn’t strong yet; you’ve just hidden a regression.</p>
-<h3 id="5-how-you-defend-the-refusal-when-asked">5. How you defend the refusal when asked</h3>
-<p>The script. Not a tone — actual sentences. <em>“We removed group-level scores because they hid which member was the actual problem and slowed remediation. The metric isn’t gone; it’s at the individual level where the action is. Adding it back would re-introduce the hiding.”</em> The script is how the playbook outlives you. The next designer can paste it into a meeting and not have to reconstruct the reasoning.</p>
-<h2 id="reusable-template">Reusable template</h2>
-<p>Drop this into a design doc, a PRD addendum, or a tools wiki. Each section is one paragraph; the whole thing should fit on one page.</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># What this product refuses to do: &#x3C;feature name></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## 1. What v&#x3C;previous> did</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;Neutral description of the old capability. Two to four sentences. State</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">the legitimate need it served. No editorializing.></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## 2. What v&#x3C;current> refuses to do — flat statement</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;One sentence. A noun, not a principle. Example: "There is no portfolio</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">detail page."></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## 3. Canaries — signs the refusal is slipping</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;Observable signal #1></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;Observable signal #2></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;Observable signal #3></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## 4. The trade-off we accepted</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;Who loses what, plainly. Then what they get in return — usually</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">clarity, speed, or alignment with how users actually work.></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## 5. How to defend this in the room</span></span>
-<span class="line"><span style="color:#024C1A;--shiki-dark:#72F088">> &#x3C;Paste-ready paragraph the next designer can read out loud.></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">---</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">Owner: &#x3C;name></span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">Last reviewed: &#x3C;date></span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">Status: &#x3C;Active | Under review | Reversed (date)></span></span></code></pre>
-<p>The status line matters. A reversed refusal is still useful documentation — it tells the next team this was tried, and what changed. A refusal with no last-reviewed date is a refusal nobody is willing to defend anymore.</p>
-<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
-<p>AI is genuinely useful here in two narrow ways. Don’t ask it to make the decision; ask it to stress-test your draft.</p>
-<h3 id="prompt-steelman-the-feature-you-removed">Prompt: steelman the feature you removed</h3>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>You are an experienced product manager reviewing a design decision. The</span></span>
-<span class="line"><span>team removed the following feature from v2:</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>&#x3C;paste the description from section 1></span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Make the strongest possible case for putting the feature back. Argue</span></span>
-<span class="line"><span>from real user behavior, business value, and competitive positioning.</span></span>
-<span class="line"><span>Do not soften the argument. If the removal looks indefensible, say so.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Output: the three strongest reasons to reverse the decision, ranked.</span></span></code></pre>
-<p>If your defense script can’t withstand the AI’s strongest version of the counter-argument, the script isn’t ready. Either strengthen the defense or accept that you don’t yet have a strong enough reason for the cut.</p>
-<h3 id="prompt-surface-hidden-re-introduction">Prompt: surface hidden re-introduction</h3>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Below is a PRD / design spec / Figma description. The product</span></span>
-<span class="line"><span>explicitly refuses to do the following: &#x3C;paste from section 2>.</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Identify any element in the new spec that re-introduces the refused</span></span>
-<span class="line"><span>capability, even partially. List each by name and quote the language</span></span>
-<span class="line"><span>that re-introduces it. If none, say "no re-introduction detected."</span></span></code></pre>
-<p>This one catches the slow drift. The team keeps the rule for the first three quarters; by quarter four someone has added a “summary view” that’s the old hub with a new name. The prompt catches it during spec review, not during launch.</p>
-<h2 id="collaboration-considerations">Collaboration considerations</h2>
-<ul>
-<li><strong>For PMs:</strong> subtraction playbooks live in the PRD or adjacent to it, not in a designer’s folder. They’re product decisions. If the playbook only exists in design tooling, it won’t be referenced when the next feature is being scoped.</li>
-<li><strong>For engineers:</strong> a refusal that requires zero implementation is still a real piece of work — it’s the meetings and pushback you avoid. If your team is constantly answering “why don’t we just add a quick rollup,” you don’t have a tooling problem; you have a missing subtraction playbook.</li>
-<li><strong>For research:</strong> test the <em>defense script</em>, not just the feature. Show power users your defense paragraph and ask if they buy it. If they don’t, you need a better script or a better refusal.</li>
-<li><strong>For executives:</strong> these playbooks make scope conversations dramatically faster. A 30-minute “should we add X” debate compresses into “we have an active subtraction on this, here’s the canary that triggered the question, here’s the defense.”</li>
-<li><strong>For your own career:</strong> a folder of subtraction playbooks is one of the best portfolios a staff or principal designer can show. It demonstrates judgment, not just craft.</li>
-</ul>
-<h2 id="common-failure-patterns">Common failure patterns</h2>
-<ol>
-<li><strong>Principle, not noun.</strong> “We value focus over breadth” is not a refusal. “There is no settings page” is. Principles collapse under pressure; nouns hold.</li>
-<li><strong>No trade-off named.</strong> A refusal that costs nothing is suspect. Either you’re hiding a regression or the feature was never worth having and the playbook is overkill.</li>
-<li><strong>Defense by tone.</strong> Refusing in italics or with exclamation points doesn’t help the next designer in the room. The defense has to be a paste-ready sentence.</li>
-<li><strong>Stale playbook.</strong> Six-month-old refusals with no last-reviewed date get treated as outdated even when they’re still right. Re-date them on each planning cycle.</li>
-<li><strong>Refusing in private.</strong> A subtraction playbook that lives in your head is not a playbook. It’s a grudge. Write it down.</li>
-<li><strong>No canaries.</strong> Without observable canaries, the refusal can be re-introduced under a new label without anyone noticing. The “summary view” / “rollup” / “overview tab” pattern is the most common re-entry vector.</li>
-<li><strong>Steelman skipped.</strong> If the case for the feature is so weak that you don’t bother writing it down, you’ll be unprepared when a senior person makes that case in a meeting. Always write the strongest version of the counter, in the playbook itself.</li>
-<li><strong>Treating reversals as failure.</strong> A refusal that gets reversed two years later because conditions changed is a working playbook, not a failed one. Mark it reversed, note what changed, keep the document.</li>
-</ol>
-<h2 id="generalized-example">Generalized example</h2>
-<p>A fictional <strong>customer-support inbox tool</strong>, version 2. Inherited from a maximalist v1 that included a “Team Inbox” view — a shared dashboard showing every open ticket across every agent, with aggregate response-time scores per team, and a “reassign all” bulk action.</p>
-<h3 id="1-what-v1-did">1. What v1 did</h3>
-<p>The Team Inbox view aggregated every open ticket across the team into one dashboard. It exposed a team-level response-time score, a team-level resolution-rate score, and a “reassign all” bulk action that let a lead reassign a filtered subset of tickets to a different agent. The legitimate need: leads wanted a single place to see if their team was falling behind and a single mechanism to rebalance load.</p>
-<h3 id="2-what-v2-refuses-to-do--flat-statement">2. What v2 refuses to do — flat statement</h3>
-<blockquote>
-<p><strong>There is no Team Inbox.</strong> Tickets belong to individual agents. There is no team-level score and no cross-agent bulk reassignment.</p>
-</blockquote>
-<h3 id="3-canaries">3. Canaries</h3>
-<ul>
-<li>A spec mentions “team dashboard,” “shared queue,” or “rollup.”</li>
-<li>The interface acquires a checkbox toolbar that operates above an agent grouping.</li>
-<li>A new metric is proposed at the team-or-higher level.</li>
-<li>A lead asks for “their” view of the team’s tickets — a sign the implicit hierarchy is sneaking back.</li>
-</ul>
-<h3 id="4-trade-off">4. Trade-off</h3>
-<p>Leads who used to glance at the team dashboard once a morning now have to look at three to five individual-agent views to get the same picture, or wait for the weekly summary email. The team-level “reassign all” capability is gone; reassignment is per-ticket. In exchange: agents own their queues with no ambiguity about whose responsibility a ticket is, response-time data is no longer averaged to incoherence across very different ticket types, and the lead’s job shifts from queue management to coaching — which is what leads should have been doing the whole time.</p>
-<h3 id="5-defense-script">5. Defense script</h3>
-<blockquote>
-<p>We removed the Team Inbox because it produced a number — the team response-time score — that hid which agent was actually behind and which kinds of tickets were piling up. Aggregating across agents and across ticket types averaged the signal away. We didn’t delete the data; we moved it to where the action is, on each agent’s own queue and each ticket’s own thread. Bulk reassignment was the most-requested feature of the old view, and it was also where the most damage happened — leads would rebalance based on the aggregate without understanding why one agent was slow, and the underlying problem would show up again the next week. Reassignment now happens per ticket, by the agent or the lead, with the context visible. If you find yourself wanting a Team Inbox, the right question is which specific agent is behind on which specific kind of ticket — and that question is already answered on each agent’s individual view.</p>
-</blockquote>
-<h3 id="status-line">Status line</h3>
-<blockquote>
-<p>Owner: Design (Maya R.) · Last reviewed: 2026-04-12 · Status: Active</p>
-</blockquote>
-<p>That document, on one page, in the PRD folder, with the subject line “What our inbox refuses to do,” is the playbook.</p>
-<hr>
-<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
-<ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
-</ul> </div> <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="subtraction-playbook" data-title="The Subtraction Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="subtraction-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
+      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="The Subtraction Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">The Subtraction Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">The Subtraction Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">How to remove a feature, ship the removal as the headline, and write up the reasoning so it survives the next reorg. The design move almost nobody documents.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">product-strategy</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">decision-design</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">scoping</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">senior-ic</span> </div>    <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="subtraction-playbook" data-title="The Subtraction Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="subtraction-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
 Drop your email to copy the markdown or download the file. One email unlocks everything in the Toybox.
 </p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-subtraction-playbook">Email address</label> <input id="pb-email-subtraction-playbook" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
 Unlock copy &amp; download
@@ -748,7 +615,140 @@ That document, on one page, in the PRD folder, with the subject line &quot;What 
 - [x] No screenshots showing real chrome, real data, or recognizable surfaces
 - [x] No internal-only workflows, tools, or terminology
 - [x] Every example is fictional or abstracted; numbers are illustrative
-- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
+- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
+<p>Most designer write-ups document what the team <em>shipped</em>. The harder, more senior move is to document what the team <em>refused to ship</em> — and to make the refusal legible enough that it survives the next planning cycle, the next reorg, and the next well-meaning stakeholder who’d really like that feature back, please.</p>
+<p>This playbook is the structure for that write-up. It’s also a way of thinking about a product: every product has a shadow, the set of features it pointedly does not have. The shadow is where most of the leverage lives. Designers who can name and defend the shadow tend to be the ones who shape the product, not just decorate it.</p>
+<h2 id="when-to-use-it">When to use it</h2>
+<ul>
+<li>A product team is debating whether to bring back a feature the previous version had</li>
+<li>A 2.0 or rewrite explicitly removed something — and the reason is sitting in someone’s head, not anywhere persistent</li>
+<li>You’re scoping a product down from a maximalist v1 to a focused v2 and need to defend the cuts</li>
+<li>You’re inheriting a product full of “why is this here” features and want to start naming what should not be</li>
+<li>A stakeholder is pushing for a feature and you have a strong design reason to say no, but it keeps coming back</li>
+</ul>
+<p>Skip it when the removal is mechanical (deprecation of a dependency, fixing a bug). Subtraction here means <em>design subtraction</em> — refusing a <em>capability</em> the product could plausibly have.</p>
+<h2 id="core-framework">Core framework</h2>
+<p>A Subtraction Playbook is built on five claims. Each claim is a paragraph in the write-up, in this order. Skip any one and the playbook collapses into a complaint.</p>
+<h3 id="1-the-thing-the-previous-version-did">1. The thing the previous version did</h3>
+<p>Name it neutrally. Not “the old version’s mistake” — that’s how you lose the people who built it. Describe the capability the previous version provided and the legitimate need it tried to serve. If the previous designers were senior people doing senior work, treat it that way. You’re not winning an argument; you’re documenting a redirection.</p>
+<h3 id="2-the-thing-the-new-version-refuses-to-do">2. The thing the new version refuses to do</h3>
+<p>State the refusal as a flat sentence, not a hedge. <em>“Groups do not have aggregate scores.”</em> <em>“There is no portfolio detail page.”</em> <em>“Bulk actions do not span workspaces.”</em> Refusals work better as nouns than as principles. A noun is auditable; a principle is negotiable.</p>
+<h3 id="3-the-canaries--what-tells-you-the-refusal-is-being-violated">3. The “canaries” — what tells you the refusal is being violated</h3>
+<p>Three or four observable signals that the refusal is slipping. <em>“If you find yourself adding a ‘view all’ route, the refusal is slipping.”</em> <em>“If a PRD has the word ‘rollup’ in it, the refusal is slipping.”</em> <em>“If you’re adding a checkbox toolbar above a group view, the refusal is slipping.”</em> Canaries are the playbook’s enforcement mechanism — they let a reviewer six months from now spot the violation without rereading the whole document.</p>
+<h3 id="4-the-trade-off-you-accepted">4. The trade-off you accepted</h3>
+<p>Every refusal costs something. The user who could do X in the old version can no longer do X. Name the cost. <em>“Users who previously triaged at the group level now triage at the individual level — that’s more clicks for power users.”</em> <em>“Teams that depended on the rollup metric will need to recompose it from per-item data.”</em> If you can’t name the trade-off, your refusal isn’t strong yet; you’ve just hidden a regression.</p>
+<h3 id="5-how-you-defend-the-refusal-when-asked">5. How you defend the refusal when asked</h3>
+<p>The script. Not a tone — actual sentences. <em>“We removed group-level scores because they hid which member was the actual problem and slowed remediation. The metric isn’t gone; it’s at the individual level where the action is. Adding it back would re-introduce the hiding.”</em> The script is how the playbook outlives you. The next designer can paste it into a meeting and not have to reconstruct the reasoning.</p>
+<h2 id="reusable-template">Reusable template</h2>
+<p>Drop this into a design doc, a PRD addendum, or a tools wiki. Each section is one paragraph; the whole thing should fit on one page.</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># What this product refuses to do: &#x3C;feature name></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## 1. What v&#x3C;previous> did</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;Neutral description of the old capability. Two to four sentences. State</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">the legitimate need it served. No editorializing.></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## 2. What v&#x3C;current> refuses to do — flat statement</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;One sentence. A noun, not a principle. Example: "There is no portfolio</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">detail page."></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## 3. Canaries — signs the refusal is slipping</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;Observable signal #1></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;Observable signal #2></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> &#x3C;Observable signal #3></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## 4. The trade-off we accepted</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">&#x3C;Who loses what, plainly. Then what they get in return — usually</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">clarity, speed, or alignment with how users actually work.></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## 5. How to defend this in the room</span></span>
+<span class="line"><span style="color:#024C1A;--shiki-dark:#72F088">> &#x3C;Paste-ready paragraph the next designer can read out loud.></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">Owner: &#x3C;name></span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">Last reviewed: &#x3C;date></span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">Status: &#x3C;Active | Under review | Reversed (date)></span></span></code></pre>
+<p>The status line matters. A reversed refusal is still useful documentation — it tells the next team this was tried, and what changed. A refusal with no last-reviewed date is a refusal nobody is willing to defend anymore.</p>
+<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
+<p>AI is genuinely useful here in two narrow ways. Don’t ask it to make the decision; ask it to stress-test your draft.</p>
+<h3 id="prompt-steelman-the-feature-you-removed">Prompt: steelman the feature you removed</h3>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>You are an experienced product manager reviewing a design decision. The</span></span>
+<span class="line"><span>team removed the following feature from v2:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&#x3C;paste the description from section 1></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Make the strongest possible case for putting the feature back. Argue</span></span>
+<span class="line"><span>from real user behavior, business value, and competitive positioning.</span></span>
+<span class="line"><span>Do not soften the argument. If the removal looks indefensible, say so.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Output: the three strongest reasons to reverse the decision, ranked.</span></span></code></pre>
+<p>If your defense script can’t withstand the AI’s strongest version of the counter-argument, the script isn’t ready. Either strengthen the defense or accept that you don’t yet have a strong enough reason for the cut.</p>
+<h3 id="prompt-surface-hidden-re-introduction">Prompt: surface hidden re-introduction</h3>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>Below is a PRD / design spec / Figma description. The product</span></span>
+<span class="line"><span>explicitly refuses to do the following: &#x3C;paste from section 2>.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Identify any element in the new spec that re-introduces the refused</span></span>
+<span class="line"><span>capability, even partially. List each by name and quote the language</span></span>
+<span class="line"><span>that re-introduces it. If none, say "no re-introduction detected."</span></span></code></pre>
+<p>This one catches the slow drift. The team keeps the rule for the first three quarters; by quarter four someone has added a “summary view” that’s the old hub with a new name. The prompt catches it during spec review, not during launch.</p>
+<h2 id="collaboration-considerations">Collaboration considerations</h2>
+<ul>
+<li><strong>For PMs:</strong> subtraction playbooks live in the PRD or adjacent to it, not in a designer’s folder. They’re product decisions. If the playbook only exists in design tooling, it won’t be referenced when the next feature is being scoped.</li>
+<li><strong>For engineers:</strong> a refusal that requires zero implementation is still a real piece of work — it’s the meetings and pushback you avoid. If your team is constantly answering “why don’t we just add a quick rollup,” you don’t have a tooling problem; you have a missing subtraction playbook.</li>
+<li><strong>For research:</strong> test the <em>defense script</em>, not just the feature. Show power users your defense paragraph and ask if they buy it. If they don’t, you need a better script or a better refusal.</li>
+<li><strong>For executives:</strong> these playbooks make scope conversations dramatically faster. A 30-minute “should we add X” debate compresses into “we have an active subtraction on this, here’s the canary that triggered the question, here’s the defense.”</li>
+<li><strong>For your own career:</strong> a folder of subtraction playbooks is one of the best portfolios a staff or principal designer can show. It demonstrates judgment, not just craft.</li>
+</ul>
+<h2 id="common-failure-patterns">Common failure patterns</h2>
+<ol>
+<li><strong>Principle, not noun.</strong> “We value focus over breadth” is not a refusal. “There is no settings page” is. Principles collapse under pressure; nouns hold.</li>
+<li><strong>No trade-off named.</strong> A refusal that costs nothing is suspect. Either you’re hiding a regression or the feature was never worth having and the playbook is overkill.</li>
+<li><strong>Defense by tone.</strong> Refusing in italics or with exclamation points doesn’t help the next designer in the room. The defense has to be a paste-ready sentence.</li>
+<li><strong>Stale playbook.</strong> Six-month-old refusals with no last-reviewed date get treated as outdated even when they’re still right. Re-date them on each planning cycle.</li>
+<li><strong>Refusing in private.</strong> A subtraction playbook that lives in your head is not a playbook. It’s a grudge. Write it down.</li>
+<li><strong>No canaries.</strong> Without observable canaries, the refusal can be re-introduced under a new label without anyone noticing. The “summary view” / “rollup” / “overview tab” pattern is the most common re-entry vector.</li>
+<li><strong>Steelman skipped.</strong> If the case for the feature is so weak that you don’t bother writing it down, you’ll be unprepared when a senior person makes that case in a meeting. Always write the strongest version of the counter, in the playbook itself.</li>
+<li><strong>Treating reversals as failure.</strong> A refusal that gets reversed two years later because conditions changed is a working playbook, not a failed one. Mark it reversed, note what changed, keep the document.</li>
+</ol>
+<h2 id="generalized-example">Generalized example</h2>
+<p>A fictional <strong>customer-support inbox tool</strong>, version 2. Inherited from a maximalist v1 that included a “Team Inbox” view — a shared dashboard showing every open ticket across every agent, with aggregate response-time scores per team, and a “reassign all” bulk action.</p>
+<h3 id="1-what-v1-did">1. What v1 did</h3>
+<p>The Team Inbox view aggregated every open ticket across the team into one dashboard. It exposed a team-level response-time score, a team-level resolution-rate score, and a “reassign all” bulk action that let a lead reassign a filtered subset of tickets to a different agent. The legitimate need: leads wanted a single place to see if their team was falling behind and a single mechanism to rebalance load.</p>
+<h3 id="2-what-v2-refuses-to-do--flat-statement">2. What v2 refuses to do — flat statement</h3>
+<blockquote>
+<p><strong>There is no Team Inbox.</strong> Tickets belong to individual agents. There is no team-level score and no cross-agent bulk reassignment.</p>
+</blockquote>
+<h3 id="3-canaries">3. Canaries</h3>
+<ul>
+<li>A spec mentions “team dashboard,” “shared queue,” or “rollup.”</li>
+<li>The interface acquires a checkbox toolbar that operates above an agent grouping.</li>
+<li>A new metric is proposed at the team-or-higher level.</li>
+<li>A lead asks for “their” view of the team’s tickets — a sign the implicit hierarchy is sneaking back.</li>
+</ul>
+<h3 id="4-trade-off">4. Trade-off</h3>
+<p>Leads who used to glance at the team dashboard once a morning now have to look at three to five individual-agent views to get the same picture, or wait for the weekly summary email. The team-level “reassign all” capability is gone; reassignment is per-ticket. In exchange: agents own their queues with no ambiguity about whose responsibility a ticket is, response-time data is no longer averaged to incoherence across very different ticket types, and the lead’s job shifts from queue management to coaching — which is what leads should have been doing the whole time.</p>
+<h3 id="5-defense-script">5. Defense script</h3>
+<blockquote>
+<p>We removed the Team Inbox because it produced a number — the team response-time score — that hid which agent was actually behind and which kinds of tickets were piling up. Aggregating across agents and across ticket types averaged the signal away. We didn’t delete the data; we moved it to where the action is, on each agent’s own queue and each ticket’s own thread. Bulk reassignment was the most-requested feature of the old view, and it was also where the most damage happened — leads would rebalance based on the aggregate without understanding why one agent was slow, and the underlying problem would show up again the next week. Reassignment now happens per ticket, by the agent or the lead, with the context visible. If you find yourself wanting a Team Inbox, the right question is which specific agent is behind on which specific kind of ticket — and that question is already answered on each agent’s individual view.</p>
+</blockquote>
+<h3 id="status-line">Status line</h3>
+<blockquote>
+<p>Owner: Design (Maya R.) · Last reviewed: 2026-04-12 · Status: Active</p>
+</blockquote>
+<p>That document, on one page, in the PRD folder, with the subject line “What our inbox refuses to do,” is the playbook.</p>
+<hr>
+<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
+</ul> </div> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
 Have feedback? <a class="private-reply__link" href="mailto:floramaydelacruz@gmail.com?subject=Re%3A%20The%20Subtraction%20Playbook">Send Flora a note</a>.
 </p> </aside> <dialog id="reply-overlay" aria-labelledby="reply-overlay-title" class="reply-overlay" data-astro-cid-rjpe63gb> <form method="dialog" class="reply-overlay__form" id="reply-overlay-form" novalidate data-astro-cid-rjpe63gb> <header class="reply-overlay__header" data-astro-cid-rjpe63gb> <h2 id="reply-overlay-title" class="reply-overlay__title" data-astro-cid-rjpe63gb>Send Flora a private note</h2> <button type="button" class="reply-overlay__close" data-close aria-label="Close" data-astro-cid-rjpe63gb>×</button> </header> <p class="reply-overlay__context" data-astro-cid-rjpe63gb>
 About: <span class="reply-overlay__context-title" data-astro-cid-rjpe63gb>The Subtraction Playbook</span> </p> <div class="reply-overlay__field" data-astro-cid-rjpe63gb> <label class="reply-overlay__label" for="reply-message" data-astro-cid-rjpe63gb>

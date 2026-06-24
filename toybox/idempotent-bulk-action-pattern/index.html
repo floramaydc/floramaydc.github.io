@@ -428,7 +428,196 @@ Send feedback
             // Prevent nav script failures from breaking page interactivity.
           }
         })();
-      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="The Idempotent Bulk Action Pattern | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#pattern" class="hover:text-accent underline">Patterns</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">The Idempotent Bulk Action Pattern</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Patterns </span> </p> <h1 class="mt-3 text-4xl">The Idempotent Bulk Action Pattern</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">How to design a one-time action (upgrade, migrate, archive, enroll) that&#39;s surfaced from six different places without letting the user run it twice. The cross-surface enforcement table everyone forgets.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">interaction-design</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">patterns</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">bulk-actions</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">state</span> </div>    <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="what-this-is">What this is</h2>
+      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="The Idempotent Bulk Action Pattern | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#pattern" class="hover:text-accent underline">Patterns</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">The Idempotent Bulk Action Pattern</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Patterns </span> </p> <h1 class="mt-3 text-4xl">The Idempotent Bulk Action Pattern</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">How to design a one-time action (upgrade, migrate, archive, enroll) that&#39;s surfaced from six different places without letting the user run it twice. The cross-surface enforcement table everyone forgets.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">interaction-design</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">patterns</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">bulk-actions</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">state</span> </div>    <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="idempotent-bulk-action-pattern" data-title="The Idempotent Bulk Action Pattern" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="idempotent-bulk-action-pattern.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this pattern with you</p> <p class="mt-1 text-sm text-muted">
+Drop your email to copy the markdown or download the file. One email unlocks everything in the Toybox.
+</p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-idempotent-bulk-action-pattern">Email address</label> <input id="pb-email-idempotent-bulk-action-pattern" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
+Unlock copy &amp; download
+</button> </form> <p class="form-status mt-2 text-xs text-muted" aria-live="polite"></p> <p class="mt-3 text-xs text-muted">
+No spam. Occasional notes on new releases. Unsubscribe in one click.
+</p> </div> <!-- UNLOCKED VIEW --> <div class="unlocked hidden"> <p class="text-sm font-medium text-ink">Yours to use</p> <p class="mt-1 text-sm text-muted">
+Free to use anywhere under <a class="underline hover:text-accent" href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0 1.0</a> — public domain, no attribution required. Author credit lives in the file's frontmatter.
+</p> <div class="mt-3 flex flex-wrap gap-2"> <button type="button" class="copy-btn rounded-md border border-ink/20 bg-paper px-4 py-2 text-sm font-medium text-ink hover:bg-cream transition-colors">
+Copy as markdown
+</button> <button type="button" class="download-btn rounded-md border border-ink/20 bg-paper px-4 py-2 text-sm font-medium text-ink hover:bg-cream transition-colors">
+Download .md
+</button> </div> <p class="action-status mt-2 text-xs text-muted" aria-live="polite"></p> </div> </section> <!-- Raw body is embedded as a non-rendered template so the script can read it
+     without escaping pitfalls. --> <template class="playbook-raw" data-for="idempotent-bulk-action-pattern">## What this is
+
+A small, specific interaction pattern: an action that should run exactly once per item, but is exposed from many entry points across the product. Upgrade to AI. Migrate to v2. Enroll in beta. Archive. Mark verified. Apply baseline policy. The shape is always the same: from one entry point it&#39;s trivial; from six entry points it&#39;s where teams ship double-runs, ghost states, and bug reports that all start with &quot;I think I already did this.&quot;
+
+This pattern is the answer. It&#39;s not a playbook — it&#39;s a single page of interaction rules you apply per entry point and a small state model that&#39;s the same regardless of stack.
+
+## When to use it
+
+- The action is *destructive-when-repeated*: running it twice either doesn&#39;t help, costs the user something, or creates duplicate records
+- The action is surfaced from multiple places: a toolbar, a card footer, a row inline action, a recommendation card, a side drawer, a detail page
+- The action involves a multi-step dialog (confirm → loading → success)
+- The action can be triggered against single items, multiple items, or parents that aggregate children
+
+If the action is idempotent at the backend (re-running it is a safe no-op), the visual rules still apply — leaving the trigger enabled implies pending work. The pattern is about *what the user is told*, not just what the system does.
+
+## The pattern
+
+### 1. State model
+
+One map. Keyed by item ID. Value is whatever post-action information you need to display (new score, new tier, completion timestamp).
+
+```ts
+type ActionMap = Map&lt;string, ActionResult&gt;
+```
+
+Storage:
+- Prototype / session-scoped: sessionStorage, keyed by something like `&lt;feature&gt;-completed`.
+- Production: a server source of truth, with the map hydrated from API on mount.
+
+A derived helper for parents that aggregate children:
+
+```ts
+getParentInfo(parent) =&gt; {
+  hasAny: boolean   // at least one child is done
+  hasAll: boolean   // every child is done
+  partial: boolean  // some but not all
+  rollup: &lt;whatever aggregate value the parent displays&gt;
+}
+```
+
+That&#39;s the entire model. Every entry point reads from this map; no entry point maintains its own state.
+
+### 2. The three labels
+
+Every trigger, on every surface, uses exactly one of these labels — never anything else.
+
+| State | Label | Enabled? |
+|---|---|---|
+| Nothing in the target set is done | &quot;&lt;Action&gt;&quot; | Yes |
+| Some are done, some aren&#39;t | &quot;&lt;Action&gt; remaining&quot; | Yes — operates on the not-done subset only |
+| Everything in the target set is done | &quot;Already &lt;action verb past tense&gt;&quot; | No |
+
+For &quot;Upgrade&quot;: **Upgrade** / **Upgrade remaining** / **Already upgraded**.
+For &quot;Migrate&quot;: **Migrate** / **Migrate remaining** / **Already migrated**.
+For &quot;Enroll&quot;: **Enroll** / **Enroll remaining** / **Already enrolled**.
+
+The three-label rule is the entire UX of the pattern. It&#39;s also where almost every implementation fails — by surfacing four or five different labels across surfaces (&quot;Upgrade&quot;, &quot;Upgrade now&quot;, &quot;Upgrade selected&quot;, &quot;Re-upgrade&quot;, &quot;Upgrade again&quot;).
+
+### 3. The cross-surface enforcement table
+
+For each entry point, name the disabled rule and the relabel rule. The act of filling in this table is how you catch the surface that quietly accepts double-runs.
+
+| Entry point | Disabled when | Relabeled when |
+|---|---|---|
+| Toolbar primary button (selection-based) | All selected items are done | Some selected items are done |
+| Card footer button (single item) | That item is done | n/a (single item) |
+| Card footer button (parent of children) | All children are done | Some children are done |
+| List/grid row inline action (single item) | That item is done | n/a |
+| List/grid row inline action (parent row) | All children of that row are done | n/a — disable only |
+| Recommendation card | Hidden entirely when no targets remain | Targets filtered to not-done only |
+| Side drawer footer button | All items in drawer scope are done | Some items in drawer scope are done |
+
+The pattern is the same in every row: **the trigger is gated by the done state of its target set, and the label tells the user which state the trigger is in.** You write this table once per action. The product reviews use it for QA.
+
+### 4. The pre-filter rule
+
+Every entry point that opens the action dialog passes a target list. **That list must be pre-filtered to exclude already-done items before it reaches the dialog.** The dialog never has to know what&#39;s done — it always operates on a list of &quot;things to do.&quot; This pushes the filtering responsibility to the entry point where the context is, not to the dialog where the context is gone.
+
+A side benefit: the dialog&#39;s count and table never show items the action won&#39;t actually touch, eliminating the most common &quot;wait, why is that in the list&quot; reaction in user testing.
+
+### 5. The success-clears-selection rule
+
+When the action&#39;s success callback fires, clear any selection that triggered it. This is the same rule as in the Sticky View State Playbook, restated here because it&#39;s the most important rule for actions surfaced from a multi-select toolbar:
+
+- Clear on `onSuccess`, not on dialog close.
+- Don&#39;t clear on cancel.
+- Don&#39;t clear on dismiss with the ✕.
+
+Leaving items selected after success implies pending work. Clearing on cancel loses the user&#39;s work. Clear on `onSuccess` is the only correct timing.
+
+### 6. The dialog flow
+
+Three phases, named precisely so engineering can implement consistently:
+
+**Confirm.** Shows the impact: count of items, summary of before/after, table when there are multiple items. Primary button label matches the toolbar label (&quot;&lt;Action&gt;&quot; or &quot;&lt;Action&gt; (N)&quot;). When all targets are above some threshold and the action&#39;s benefit is marginal, the primary button becomes &quot;&lt;Action&gt; anyway&quot; — a small but meaningful nudge.
+
+**Loading.** A spinner with the action name as gerund. Fixed duration (1.5s is typical for prototypes; production uses the real call). The success callback fires at the *end* of loading, not the end of the success phase — this is what allows selection to clear visually while the success screen is still showing.
+
+**Success.** A checkmark, &quot;&lt;Action&gt; complete,&quot; a one-line contextual description. Auto-dismisses after 3 seconds, or on user-click. Dismissal calls `onClose` which is also where selection clearing is wired.
+
+### 7. Visual feedback on the item after success
+
+The pattern almost always benefits from a brief, contained visual celebration on the item that just got updated. Two specific rules keep this from getting cute:
+
+- **A pulse, not a sustained glow.** A 0.9-second ring that pulses out from the item border and ends in the natural state. Long-lived &quot;this is upgraded forever&quot; highlights become noise — the indicator is the new score / new badge / new state, not the lingering glow.
+- **A small permanent marker.** A 12px icon (sparkle, checkmark, badge) placed inline with the item&#39;s name or in a fixed corner of the card. This is what the user sees from then on. The pulse is the moment of change; the marker is the lasting state.
+
+## Reusable template
+
+Drop this into a design doc per action.
+
+```md
+# &lt;Action&gt; — cross-surface specification
+
+## State model
+- Done-map key: `&lt;feature&gt;-completed`
+- Stored value per item: { &lt;fields the UI displays after action&gt; }
+- Parent rollup rule: &lt;one sentence&gt;
+
+## Three labels
+- Default: &quot;&lt;Action&gt;&quot;
+- Mixed: &quot;&lt;Action&gt; remaining&quot;
+- All done: &quot;Already &lt;verb past tense&gt;&quot; (disabled)
+
+## Entry points
+| Entry point | Disabled when | Relabeled when |
+|---|---|---|
+| ...         | ...           | ...            |
+
+## Pre-filter rule
+Every entry point pre-filters to not-done items before opening the dialog.
+
+## Dialog phases
+1. Confirm — primary label matches the trigger label
+2. Loading — 1.5s spinner, success callback fires at the end of this phase
+3. Success — checkmark, auto-dismiss 3s, calls onClose which clears selection
+
+## Visual feedback on success
+- 0.9s pulse ring on the affected item (one-shot, ends at natural state)
+- 12px &lt;marker icon&gt; inline with the item name, persistent
+- Updated value (score / tier / badge) replaces the old value
+```
+
+## Common failure patterns
+
+1. **Per-surface state.** Each entry point tracks its own &quot;done&quot; set. They drift; the user sees one card with the sparkle and another without.
+2. **Re-runnable trigger.** Action stays enabled after completion because nobody owned the disabling rule for that surface.
+3. **Four labels instead of three.** &quot;Upgrade,&quot; &quot;Upgrade now,&quot; &quot;Re-upgrade,&quot; &quot;Upgrade again&quot; all in the same product. Pick three; the rules above tell you which.
+4. **Dialog filters internally.** Dialog receives all selected items including done ones, then quietly drops them. User sees a count that doesn&#39;t match the table. Filter at the entry point.
+5. **Selection persists after success.** Implies there&#39;s still work. Clear on `onSuccess`.
+6. **Selection clears on cancel.** User loses their work. Don&#39;t clear on cancel.
+7. **Sustained glow.** The upgraded item glows forever. The indicator should be the *new value*, not a permanent highlight. Use a one-shot pulse + a small persistent marker.
+8. **No partial-parent rule.** The parent (category, group, project) shows nothing changed even though three of its five children are done. Use a parent-rollup derivation that reflects the partial state.
+
+## Generalized example
+
+A fictional **vendor enrollment workflow**. Vendors can be enrolled into a verification program. The action is surfaced from: a recommendation card on the dashboard, a toolbar on the vendor list, an inline icon in each vendor row, a footer button on each vendor card, and a footer button in the bulk-actions side drawer. Five surfaces.
+
+The enrollment map is keyed by vendor ID. The three labels appear everywhere: **Enroll** / **Enroll remaining** / **Already enrolled**. The vendor list&#39;s toolbar button reads &quot;Enroll remaining&quot; when the user has selected nine vendors and three are already enrolled — and the dialog opens with six items, not nine. After confirmation, the six pulse, get a small check-badge next to their name, and the selection clears at the moment the success screen appears. The recommendation card disappears when zero vendors remain to enroll. Open a vendor&#39;s detail page and the &quot;Enroll&quot; button reads &quot;Already enrolled&quot; with the same disabled style as everywhere else.
+
+That sequence — same three labels, pre-filtered targets at every surface, success clears selection, pulse plus persistent marker — is the entire pattern.
+
+## Companion artifacts
+
+- [The Sticky View State Playbook](/toybox/sticky-view-state-playbook) — the selection-clearing rule applies identically
+- [The Accessibility Compliance Baseline Playbook](/toybox/accessibility-compliance-baseline-playbook) — the disabled state and the persistent marker each need a non-color companion (text and an icon, respectively)
+
+---
+
+### Public-safe review (verified before publish)
+
+- [x] No employer or client product names or codenames
+- [x] No customer data, metrics, or thresholds drawn from real systems
+- [x] No real component-library or package names
+- [x] No real route paths or class hashes
+- [x] All examples invented; the threshold numbers (1.5s, 0.9s, 3s, 12px) are illustrative defaults
+- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="what-this-is">What this is</h2>
 <p>A small, specific interaction pattern: an action that should run exactly once per item, but is exposed from many entry points across the product. Upgrade to AI. Migrate to v2. Enroll in beta. Archive. Mark verified. Apply baseline policy. The shape is always the same: from one entry point it’s trivial; from six entry points it’s where teams ship double-runs, ghost states, and bug reports that all start with “I think I already did this.”</p>
 <p>This pattern is the answer. It’s not a playbook — it’s a single page of interaction rules you apply per entry point and a small state model that’s the same regardless of stack.</p>
 <h2 id="when-to-use-it">When to use it</h2>
@@ -619,196 +808,7 @@ For “Enroll”: <strong>Enroll</strong> / <strong>Enroll remaining</strong> / 
 <li class="task-list-item"><input type="checkbox" checked disabled> No real route paths or class hashes</li>
 <li class="task-list-item"><input type="checkbox" checked disabled> All examples invented; the threshold numbers (1.5s, 0.9s, 3s, 12px) are illustrative defaults</li>
 <li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
-</ul> </div> <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="idempotent-bulk-action-pattern" data-title="The Idempotent Bulk Action Pattern" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="idempotent-bulk-action-pattern.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this pattern with you</p> <p class="mt-1 text-sm text-muted">
-Drop your email to copy the markdown or download the file. One email unlocks everything in the Toybox.
-</p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-idempotent-bulk-action-pattern">Email address</label> <input id="pb-email-idempotent-bulk-action-pattern" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
-Unlock copy &amp; download
-</button> </form> <p class="form-status mt-2 text-xs text-muted" aria-live="polite"></p> <p class="mt-3 text-xs text-muted">
-No spam. Occasional notes on new releases. Unsubscribe in one click.
-</p> </div> <!-- UNLOCKED VIEW --> <div class="unlocked hidden"> <p class="text-sm font-medium text-ink">Yours to use</p> <p class="mt-1 text-sm text-muted">
-Free to use anywhere under <a class="underline hover:text-accent" href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0 1.0</a> — public domain, no attribution required. Author credit lives in the file's frontmatter.
-</p> <div class="mt-3 flex flex-wrap gap-2"> <button type="button" class="copy-btn rounded-md border border-ink/20 bg-paper px-4 py-2 text-sm font-medium text-ink hover:bg-cream transition-colors">
-Copy as markdown
-</button> <button type="button" class="download-btn rounded-md border border-ink/20 bg-paper px-4 py-2 text-sm font-medium text-ink hover:bg-cream transition-colors">
-Download .md
-</button> </div> <p class="action-status mt-2 text-xs text-muted" aria-live="polite"></p> </div> </section> <!-- Raw body is embedded as a non-rendered template so the script can read it
-     without escaping pitfalls. --> <template class="playbook-raw" data-for="idempotent-bulk-action-pattern">## What this is
-
-A small, specific interaction pattern: an action that should run exactly once per item, but is exposed from many entry points across the product. Upgrade to AI. Migrate to v2. Enroll in beta. Archive. Mark verified. Apply baseline policy. The shape is always the same: from one entry point it&#39;s trivial; from six entry points it&#39;s where teams ship double-runs, ghost states, and bug reports that all start with &quot;I think I already did this.&quot;
-
-This pattern is the answer. It&#39;s not a playbook — it&#39;s a single page of interaction rules you apply per entry point and a small state model that&#39;s the same regardless of stack.
-
-## When to use it
-
-- The action is *destructive-when-repeated*: running it twice either doesn&#39;t help, costs the user something, or creates duplicate records
-- The action is surfaced from multiple places: a toolbar, a card footer, a row inline action, a recommendation card, a side drawer, a detail page
-- The action involves a multi-step dialog (confirm → loading → success)
-- The action can be triggered against single items, multiple items, or parents that aggregate children
-
-If the action is idempotent at the backend (re-running it is a safe no-op), the visual rules still apply — leaving the trigger enabled implies pending work. The pattern is about *what the user is told*, not just what the system does.
-
-## The pattern
-
-### 1. State model
-
-One map. Keyed by item ID. Value is whatever post-action information you need to display (new score, new tier, completion timestamp).
-
-```ts
-type ActionMap = Map&lt;string, ActionResult&gt;
-```
-
-Storage:
-- Prototype / session-scoped: sessionStorage, keyed by something like `&lt;feature&gt;-completed`.
-- Production: a server source of truth, with the map hydrated from API on mount.
-
-A derived helper for parents that aggregate children:
-
-```ts
-getParentInfo(parent) =&gt; {
-  hasAny: boolean   // at least one child is done
-  hasAll: boolean   // every child is done
-  partial: boolean  // some but not all
-  rollup: &lt;whatever aggregate value the parent displays&gt;
-}
-```
-
-That&#39;s the entire model. Every entry point reads from this map; no entry point maintains its own state.
-
-### 2. The three labels
-
-Every trigger, on every surface, uses exactly one of these labels — never anything else.
-
-| State | Label | Enabled? |
-|---|---|---|
-| Nothing in the target set is done | &quot;&lt;Action&gt;&quot; | Yes |
-| Some are done, some aren&#39;t | &quot;&lt;Action&gt; remaining&quot; | Yes — operates on the not-done subset only |
-| Everything in the target set is done | &quot;Already &lt;action verb past tense&gt;&quot; | No |
-
-For &quot;Upgrade&quot;: **Upgrade** / **Upgrade remaining** / **Already upgraded**.
-For &quot;Migrate&quot;: **Migrate** / **Migrate remaining** / **Already migrated**.
-For &quot;Enroll&quot;: **Enroll** / **Enroll remaining** / **Already enrolled**.
-
-The three-label rule is the entire UX of the pattern. It&#39;s also where almost every implementation fails — by surfacing four or five different labels across surfaces (&quot;Upgrade&quot;, &quot;Upgrade now&quot;, &quot;Upgrade selected&quot;, &quot;Re-upgrade&quot;, &quot;Upgrade again&quot;).
-
-### 3. The cross-surface enforcement table
-
-For each entry point, name the disabled rule and the relabel rule. The act of filling in this table is how you catch the surface that quietly accepts double-runs.
-
-| Entry point | Disabled when | Relabeled when |
-|---|---|---|
-| Toolbar primary button (selection-based) | All selected items are done | Some selected items are done |
-| Card footer button (single item) | That item is done | n/a (single item) |
-| Card footer button (parent of children) | All children are done | Some children are done |
-| List/grid row inline action (single item) | That item is done | n/a |
-| List/grid row inline action (parent row) | All children of that row are done | n/a — disable only |
-| Recommendation card | Hidden entirely when no targets remain | Targets filtered to not-done only |
-| Side drawer footer button | All items in drawer scope are done | Some items in drawer scope are done |
-
-The pattern is the same in every row: **the trigger is gated by the done state of its target set, and the label tells the user which state the trigger is in.** You write this table once per action. The product reviews use it for QA.
-
-### 4. The pre-filter rule
-
-Every entry point that opens the action dialog passes a target list. **That list must be pre-filtered to exclude already-done items before it reaches the dialog.** The dialog never has to know what&#39;s done — it always operates on a list of &quot;things to do.&quot; This pushes the filtering responsibility to the entry point where the context is, not to the dialog where the context is gone.
-
-A side benefit: the dialog&#39;s count and table never show items the action won&#39;t actually touch, eliminating the most common &quot;wait, why is that in the list&quot; reaction in user testing.
-
-### 5. The success-clears-selection rule
-
-When the action&#39;s success callback fires, clear any selection that triggered it. This is the same rule as in the Sticky View State Playbook, restated here because it&#39;s the most important rule for actions surfaced from a multi-select toolbar:
-
-- Clear on `onSuccess`, not on dialog close.
-- Don&#39;t clear on cancel.
-- Don&#39;t clear on dismiss with the ✕.
-
-Leaving items selected after success implies pending work. Clearing on cancel loses the user&#39;s work. Clear on `onSuccess` is the only correct timing.
-
-### 6. The dialog flow
-
-Three phases, named precisely so engineering can implement consistently:
-
-**Confirm.** Shows the impact: count of items, summary of before/after, table when there are multiple items. Primary button label matches the toolbar label (&quot;&lt;Action&gt;&quot; or &quot;&lt;Action&gt; (N)&quot;). When all targets are above some threshold and the action&#39;s benefit is marginal, the primary button becomes &quot;&lt;Action&gt; anyway&quot; — a small but meaningful nudge.
-
-**Loading.** A spinner with the action name as gerund. Fixed duration (1.5s is typical for prototypes; production uses the real call). The success callback fires at the *end* of loading, not the end of the success phase — this is what allows selection to clear visually while the success screen is still showing.
-
-**Success.** A checkmark, &quot;&lt;Action&gt; complete,&quot; a one-line contextual description. Auto-dismisses after 3 seconds, or on user-click. Dismissal calls `onClose` which is also where selection clearing is wired.
-
-### 7. Visual feedback on the item after success
-
-The pattern almost always benefits from a brief, contained visual celebration on the item that just got updated. Two specific rules keep this from getting cute:
-
-- **A pulse, not a sustained glow.** A 0.9-second ring that pulses out from the item border and ends in the natural state. Long-lived &quot;this is upgraded forever&quot; highlights become noise — the indicator is the new score / new badge / new state, not the lingering glow.
-- **A small permanent marker.** A 12px icon (sparkle, checkmark, badge) placed inline with the item&#39;s name or in a fixed corner of the card. This is what the user sees from then on. The pulse is the moment of change; the marker is the lasting state.
-
-## Reusable template
-
-Drop this into a design doc per action.
-
-```md
-# &lt;Action&gt; — cross-surface specification
-
-## State model
-- Done-map key: `&lt;feature&gt;-completed`
-- Stored value per item: { &lt;fields the UI displays after action&gt; }
-- Parent rollup rule: &lt;one sentence&gt;
-
-## Three labels
-- Default: &quot;&lt;Action&gt;&quot;
-- Mixed: &quot;&lt;Action&gt; remaining&quot;
-- All done: &quot;Already &lt;verb past tense&gt;&quot; (disabled)
-
-## Entry points
-| Entry point | Disabled when | Relabeled when |
-|---|---|---|
-| ...         | ...           | ...            |
-
-## Pre-filter rule
-Every entry point pre-filters to not-done items before opening the dialog.
-
-## Dialog phases
-1. Confirm — primary label matches the trigger label
-2. Loading — 1.5s spinner, success callback fires at the end of this phase
-3. Success — checkmark, auto-dismiss 3s, calls onClose which clears selection
-
-## Visual feedback on success
-- 0.9s pulse ring on the affected item (one-shot, ends at natural state)
-- 12px &lt;marker icon&gt; inline with the item name, persistent
-- Updated value (score / tier / badge) replaces the old value
-```
-
-## Common failure patterns
-
-1. **Per-surface state.** Each entry point tracks its own &quot;done&quot; set. They drift; the user sees one card with the sparkle and another without.
-2. **Re-runnable trigger.** Action stays enabled after completion because nobody owned the disabling rule for that surface.
-3. **Four labels instead of three.** &quot;Upgrade,&quot; &quot;Upgrade now,&quot; &quot;Re-upgrade,&quot; &quot;Upgrade again&quot; all in the same product. Pick three; the rules above tell you which.
-4. **Dialog filters internally.** Dialog receives all selected items including done ones, then quietly drops them. User sees a count that doesn&#39;t match the table. Filter at the entry point.
-5. **Selection persists after success.** Implies there&#39;s still work. Clear on `onSuccess`.
-6. **Selection clears on cancel.** User loses their work. Don&#39;t clear on cancel.
-7. **Sustained glow.** The upgraded item glows forever. The indicator should be the *new value*, not a permanent highlight. Use a one-shot pulse + a small persistent marker.
-8. **No partial-parent rule.** The parent (category, group, project) shows nothing changed even though three of its five children are done. Use a parent-rollup derivation that reflects the partial state.
-
-## Generalized example
-
-A fictional **vendor enrollment workflow**. Vendors can be enrolled into a verification program. The action is surfaced from: a recommendation card on the dashboard, a toolbar on the vendor list, an inline icon in each vendor row, a footer button on each vendor card, and a footer button in the bulk-actions side drawer. Five surfaces.
-
-The enrollment map is keyed by vendor ID. The three labels appear everywhere: **Enroll** / **Enroll remaining** / **Already enrolled**. The vendor list&#39;s toolbar button reads &quot;Enroll remaining&quot; when the user has selected nine vendors and three are already enrolled — and the dialog opens with six items, not nine. After confirmation, the six pulse, get a small check-badge next to their name, and the selection clears at the moment the success screen appears. The recommendation card disappears when zero vendors remain to enroll. Open a vendor&#39;s detail page and the &quot;Enroll&quot; button reads &quot;Already enrolled&quot; with the same disabled style as everywhere else.
-
-That sequence — same three labels, pre-filtered targets at every surface, success clears selection, pulse plus persistent marker — is the entire pattern.
-
-## Companion artifacts
-
-- [The Sticky View State Playbook](/toybox/sticky-view-state-playbook) — the selection-clearing rule applies identically
-- [The Accessibility Compliance Baseline Playbook](/toybox/accessibility-compliance-baseline-playbook) — the disabled state and the persistent marker each need a non-color companion (text and an icon, respectively)
-
----
-
-### Public-safe review (verified before publish)
-
-- [x] No employer or client product names or codenames
-- [x] No customer data, metrics, or thresholds drawn from real systems
-- [x] No real component-library or package names
-- [x] No real route paths or class hashes
-- [x] All examples invented; the threshold numbers (1.5s, 0.9s, 3s, 12px) are illustrative defaults
-- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
+</ul> </div> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
 Have feedback? <a class="private-reply__link" href="mailto:floramaydelacruz@gmail.com?subject=Re%3A%20The%20Idempotent%20Bulk%20Action%20Pattern">Send Flora a note</a>.
 </p> </aside> <dialog id="reply-overlay" aria-labelledby="reply-overlay-title" class="reply-overlay" data-astro-cid-rjpe63gb> <form method="dialog" class="reply-overlay__form" id="reply-overlay-form" novalidate data-astro-cid-rjpe63gb> <header class="reply-overlay__header" data-astro-cid-rjpe63gb> <h2 id="reply-overlay-title" class="reply-overlay__title" data-astro-cid-rjpe63gb>Send Flora a private note</h2> <button type="button" class="reply-overlay__close" data-close aria-label="Close" data-astro-cid-rjpe63gb>×</button> </header> <p class="reply-overlay__context" data-astro-cid-rjpe63gb>
 About: <span class="reply-overlay__context-title" data-astro-cid-rjpe63gb>The Idempotent Bulk Action Pattern</span> </p> <div class="reply-overlay__field" data-astro-cid-rjpe63gb> <label class="reply-overlay__label" for="reply-message" data-astro-cid-rjpe63gb>

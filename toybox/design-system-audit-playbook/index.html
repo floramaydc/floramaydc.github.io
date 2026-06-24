@@ -428,109 +428,7 @@ Send feedback
             // Prevent nav script failures from breaking page interactivity.
           }
         })();
-      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="Design System Audit Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">Design System Audit Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">Design System Audit Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">A repeatable way to audit design systems for token drift, component divergence, and implementation parity before inconsistency becomes product debt.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">design-systems</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">audit</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">tokens</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">governance</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">ux</span> </div>    <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
-<p>Design systems rarely fail all at once. They decay slowly: one-off tokens, nearly-identical components, and exceptions that never fold back into the system. This playbook gives you a repeatable audit loop so teams can find divergence early, decide what to fix now, and avoid redesigning the whole system every quarter.</p>
-<h2 id="when-to-use-it">When to use it</h2>
-<ul>
-<li>A shared design system exists, but product surfaces look increasingly inconsistent</li>
-<li>Teams are shipping “just this one exception” faster than they are paying system debt down</li>
-<li>You are preparing for a design-system refresh and need evidence, not opinion</li>
-<li>A new team inherited a system and needs a baseline before adding components</li>
-</ul>
-<p>Skip it when: there is no stable system yet (run a foundation sprint first), or a single feature team is still proving initial product-market fit.</p>
-<h2 id="core-framework">Core framework</h2>
-<p>Run a five-pass audit:</p>
-<ol>
-<li>Inventory pass: list all active tokens, components, and variants currently in use</li>
-<li>Drift pass: detect mismatch between source-of-truth specs and shipped implementation</li>
-<li>Duplication pass: identify near-duplicate components and style fragments</li>
-<li>Risk pass: rank findings by user impact, frequency, and migration cost</li>
-<li>Action pass: assign owners, deadlines, and merge criteria for each fix</li>
-</ol>
-<p>Use this flow:</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">flowchart LR</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  A[Inventory] --> B[Drift Detection]</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  B --> C[Duplication Detection]</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  C --> D[Risk Ranking]</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D --> E[Fix Plan]</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  E --> F[Re-audit]</span></span></code></pre>
-<h2 id="reusable-template">Reusable template</h2>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Design system audit report: &#x3C;team or product></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Snapshot</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Audit date: &#x3C;yyyy-mm-dd></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Scope: &#x3C;routes/components scanned></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Source of truth: &#x3C;design library + docs + code package></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Findings</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Finding ID | Type | Where found | User impact | Frequency | Migration cost | Priority | Owner | Due date |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|---|---|---|---|---|---|---|---|---|</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| DS-001 | Token drift | &#x3C;surface> | &#x3C;high/med/low> | &#x3C;high/med/low> | &#x3C;high/med/low> | &#x3C;P0/P1/P2> | &#x3C;name> | &#x3C;date> |</span></span>
-<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| DS-002 | Duplicate component | &#x3C;surface> | &#x3C;high/med/low> | &#x3C;high/med/low> | &#x3C;high/med/low> | &#x3C;P0/P1/P2> | &#x3C;name> | &#x3C;date> |</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Merge criteria</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> No new one-off tokens introduced</span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Duplicate variants reduced by &#x3C;target></span></span>
-<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Updated component guidance published in system docs</span></span></code></pre>
-<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
-<p>Use AI to accelerate triage and clustering, not as the source of truth.</p>
-<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>You are helping me audit design system consistency.</span></span>
-<span class="line"><span>Given this list of component usage snapshots and token declarations, cluster</span></span>
-<span class="line"><span>findings into:</span></span>
-<span class="line"><span>1) token drift</span></span>
-<span class="line"><span>2) duplicate components</span></span>
-<span class="line"><span>3) variant sprawl</span></span>
-<span class="line"><span>4) doc/code mismatch</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Return:</span></span>
-<span class="line"><span>- finding id</span></span>
-<span class="line"><span>- short rationale</span></span>
-<span class="line"><span>- impact estimate (high/medium/low)</span></span>
-<span class="line"><span>- suggested owner (design systems, product design, frontend)</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Constraints:</span></span>
-<span class="line"><span>- Do not invent components or tokens that are not in the input.</span></span>
-<span class="line"><span>- If evidence is weak, mark the finding as "needs verification".</span></span></code></pre>
-<h2 id="collaboration-considerations">Collaboration considerations</h2>
-<ul>
-<li>For PMs: use priority and migration-cost columns to sequence debt work into roadmap slices</li>
-<li>For developers: attach each finding to a concrete code reference and acceptance condition</li>
-<li>For research: include at least one user-facing inconsistency sample for high-priority drift</li>
-<li>For accessibility: every fix plan must confirm contrast, focus, and semantic behavior still pass after consolidation</li>
-</ul>
-<h2 id="common-failure-patterns">Common failure patterns</h2>
-<ol>
-<li>Treating all inconsistencies as equal and creating unfinishable backlogs</li>
-<li>Auditing only design files while code has already diverged</li>
-<li>Fixing visuals but leaving old docs and examples in place</li>
-<li>Closing findings without measurable merge criteria</li>
-<li>Running one big audit and never scheduling re-audits</li>
-</ol>
-<h2 id="companion-artifacts">Companion artifacts</h2>
-<ul>
-<li><a href="/toybox/audit-command-center-template">Audit Command Center Template</a> for unifying design-system findings with accessibility and dark-mode work</li>
-<li><a href="/toybox/accessibility-audit-ops-playbook">Accessibility Audit Ops Playbook</a> for shared severity and evidence discipline</li>
-<li><a href="/toybox/fluent-theme-toggle">Fluent theme toggle</a> for a live prototype baseline to inspect token behavior across themes</li>
-<li><a href="/toybox/accessibility-compliance-baseline-playbook">The Accessibility Compliance Baseline Playbook</a> for non-negotiable interaction and contrast checks during system consolidation</li>
-</ul>
-<h2 id="generalized-example">Generalized example</h2>
-<p>A fictional operations product audits 12 core routes and finds 3 button variants that represent the same intent. The team chooses one canonical variant, migrates high-traffic routes first, and updates system docs and component package examples in the same sprint. A two-week re-audit confirms no new one-off variants were introduced.</p>
-<hr>
-<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
-<ul class="contains-task-list">
-<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
-<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
-</ul> </div> <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="design-system-audit-playbook" data-title="Design System Audit Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="design-system-audit-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
+      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="Design System Audit Playbook | Toybox by Flora May dela Cruz" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <article class="mx-auto max-w-prose"> <nav class="text-sm text-muted" aria-label="Breadcrumb"> <ol class="flex flex-wrap items-center gap-1"> <li><a href="/toybox" class="hover:text-accent underline">Toybox</a></li> <li aria-hidden="true">/</li> <li> <a href="/toybox#playbook" class="hover:text-accent underline">Playbooks</a> </li> <li aria-hidden="true">/</li> <li class="text-ink/70 truncate">Design System Audit Playbook</li> </ol> </nav> <p class="mt-6"> <span class="inline-block text-[10px] uppercase tracking-widest rounded-md border border-accent/50 bg-accent/[0.06] px-2 py-0.5 text-accent"> Playbooks </span> </p> <h1 class="mt-3 text-4xl">Design System Audit Playbook</h1> <p class="mt-2 text-sm text-muted">By Flora May dela Cruz</p> <p class="mt-3 text-lg text-muted">A repeatable way to audit design systems for token drift, component divergence, and implementation parity before inconsistency becomes product debt.</p> <div class="mt-4 flex flex-wrap gap-2"> <span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">design-systems</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">audit</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">tokens</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">governance</span><span class="text-xs rounded-full border border-ink/15 px-2 py-0.5 text-muted">ux</span> </div>    <section class="playbook-actions mt-10 rounded-lg border border-ink/15 bg-cream/40 p-5" data-slug="design-system-audit-playbook" data-title="Design System Audit Playbook" data-endpoint="https://mai.floramaydc-mai.workers.dev/subscribe" data-filename="design-system-audit-playbook.md"> <!-- LOCKED VIEW --> <div class="locked"> <p class="text-sm font-medium text-ink">Take this playbook with you</p> <p class="mt-1 text-sm text-muted">
 Drop your email to copy the markdown or download the file. One email unlocks everything in the Toybox.
 </p> <form class="unlock-form mt-3 flex flex-wrap gap-2"> <label class="sr-only" for="pb-email-design-system-audit-playbook">Email address</label> <input id="pb-email-design-system-audit-playbook" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class="flex-1 min-w-[14rem] rounded-md border border-ink/20 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"> <button type="submit" class="rounded-md bg-teal px-4 py-2 text-sm font-medium text-paper hover:bg-ink transition-colors">
 Unlock copy &amp; download
@@ -664,7 +562,109 @@ A fictional operations product audits 12 core routes and finds 3 button variants
 - [x] No screenshots showing real chrome, real data, or recognizable surfaces
 - [x] No internal-only workflows, tools, or terminology
 - [x] Every example is fictional or abstracted; numbers are illustrative
-- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
+- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">const k="fmdc-playbook-unlocked",p="fmdc-playbook-email";function a(e,t={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:e,params:t}}))}catch{}}function m(){try{return localStorage.getItem(k)==="true"}catch{return!1}}function b(e){try{localStorage.setItem(k,"true"),e&&localStorage.setItem(p,e)}catch{}}function u(e){const t=e.querySelector(".locked"),o=e.querySelector(".unlocked");!t||!o||(m()?(t.classList.add("hidden"),o.classList.remove("hidden")):(t.classList.remove("hidden"),o.classList.add("hidden")))}function y(e){const t=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(e)}"]`);return t?t.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function c(e,t,o){const r=e.querySelector(t);r&&(r.textContent=o)}function f(e,t){const o=new Blob([t],{type:"text/markdown;charset=utf-8"}),r=URL.createObjectURL(o),n=document.createElement("a");n.href=r,n.download=e,document.body.appendChild(n),n.click(),document.body.removeChild(n),setTimeout(()=>URL.revokeObjectURL(r),1e3)}function w(e){const t=e.dataset.slug||"",o=e.dataset.endpoint||"",r=e.dataset.filename||`${t}.md`;u(e);const n=e.querySelector(".unlock-form");n?.addEventListener("submit",async l=>{l.preventDefault();const s=n.querySelector("input[type=email]").value.trim();if(s){if(a("playbook_unlock_submit",{slug:t}),c(e,".form-status","Saving…"),o)try{const d=await fetch(o,{method:"POST",mode:"cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:s,source:`playbook:${t}`})});if(!d.ok){const i=await d.json().catch(()=>({}));if(i.error==="invalid_email"){a("playbook_unlock_error",{slug:t,error:"invalid_email"}),c(e,".form-status","That email looks off — check the address and try again.");return}if(i.error==="rate_limited"){a("playbook_unlock_error",{slug:t,error:"rate_limited"}),c(e,".form-status","Too many tries — wait a bit and retry.");return}a("playbook_unlock_error",{slug:t,error:"server_error"}),console.warn("subscribe failed",d.status,i)}}catch(d){a("playbook_unlock_error",{slug:t,error:"network_error"}),console.warn("subscribe network error",d)}b(s),a("playbook_unlock_success",{slug:t}),u(e),c(e,".action-status",`Unlocked. Welcome, ${s}.`)}}),e.querySelector(".copy-btn")?.addEventListener("click",async()=>{const l=y(t);try{await navigator.clipboard.writeText(l),a("playbook_copy_markdown",{slug:t}),c(e,".action-status","Markdown copied to clipboard.")}catch{a("playbook_copy_markdown_error",{slug:t,error:"clipboard_blocked"}),c(e,".action-status","Copy blocked by browser. Use the download instead.")}}),e.querySelector(".download-btn")?.addEventListener("click",()=>{const l=y(t);f(r,l),a("playbook_download_markdown",{slug:t,filename:r}),c(e,".action-status",`Downloaded ${r}.`)})}document.querySelectorAll(".playbook-actions").forEach(e=>w(e));</script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none"> <h2 id="purpose">Purpose</h2>
+<p>Design systems rarely fail all at once. They decay slowly: one-off tokens, nearly-identical components, and exceptions that never fold back into the system. This playbook gives you a repeatable audit loop so teams can find divergence early, decide what to fix now, and avoid redesigning the whole system every quarter.</p>
+<h2 id="when-to-use-it">When to use it</h2>
+<ul>
+<li>A shared design system exists, but product surfaces look increasingly inconsistent</li>
+<li>Teams are shipping “just this one exception” faster than they are paying system debt down</li>
+<li>You are preparing for a design-system refresh and need evidence, not opinion</li>
+<li>A new team inherited a system and needs a baseline before adding components</li>
+</ul>
+<p>Skip it when: there is no stable system yet (run a foundation sprint first), or a single feature team is still proving initial product-market fit.</p>
+<h2 id="core-framework">Core framework</h2>
+<p>Run a five-pass audit:</p>
+<ol>
+<li>Inventory pass: list all active tokens, components, and variants currently in use</li>
+<li>Drift pass: detect mismatch between source-of-truth specs and shipped implementation</li>
+<li>Duplication pass: identify near-duplicate components and style fragments</li>
+<li>Risk pass: rank findings by user impact, frequency, and migration cost</li>
+<li>Action pass: assign owners, deadlines, and merge criteria for each fix</li>
+</ol>
+<p>Use this flow:</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">flowchart LR</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  A[Inventory] --> B[Drift Detection]</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  B --> C[Duplication Detection]</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  C --> D[Risk Ranking]</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  D --> E[Fix Plan]</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">  E --> F[Re-audit]</span></span></code></pre>
+<h2 id="reusable-template">Reusable template</h2>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="md"><code><span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold"># Design system audit report: &#x3C;team or product></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Snapshot</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Audit date: &#x3C;yyyy-mm-dd></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Scope: &#x3C;routes/components scanned></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Source of truth: &#x3C;design library + docs + code package></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Findings</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| Finding ID | Type | Where found | User impact | Frequency | Migration cost | Priority | Owner | Due date |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">|---|---|---|---|---|---|---|---|---|</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| DS-001 | Token drift | &#x3C;surface> | &#x3C;high/med/low> | &#x3C;high/med/low> | &#x3C;high/med/low> | &#x3C;P0/P1/P2> | &#x3C;name> | &#x3C;date> |</span></span>
+<span class="line"><span style="color:#0E1116;--shiki-dark:#F0F3F6">| DS-002 | Duplicate component | &#x3C;surface> | &#x3C;high/med/low> | &#x3C;high/med/low> | &#x3C;high/med/low> | &#x3C;P0/P1/P2> | &#x3C;name> | &#x3C;date> |</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#023B95;--shiki-light-font-weight:bold;--shiki-dark:#91CBFF;--shiki-dark-font-weight:bold">## Merge criteria</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> No new one-off tokens introduced</span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Duplicate variants reduced by &#x3C;target></span></span>
+<span class="line"><span style="color:#702C00;--shiki-dark:#FFB757">-</span><span style="color:#0E1116;--shiki-dark:#F0F3F6"> Updated component guidance published in system docs</span></span></code></pre>
+<h2 id="ai-assisted-workflow">AI-assisted workflow</h2>
+<p>Use AI to accelerate triage and clustering, not as the source of truth.</p>
+<pre class="astro-code astro-code-themes github-light-high-contrast github-dark-high-contrast" style="background-color:#ffffff;--shiki-dark-bg:#0a0c10;color:#0e1116;--shiki-dark:#f0f3f6; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>You are helping me audit design system consistency.</span></span>
+<span class="line"><span>Given this list of component usage snapshots and token declarations, cluster</span></span>
+<span class="line"><span>findings into:</span></span>
+<span class="line"><span>1) token drift</span></span>
+<span class="line"><span>2) duplicate components</span></span>
+<span class="line"><span>3) variant sprawl</span></span>
+<span class="line"><span>4) doc/code mismatch</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Return:</span></span>
+<span class="line"><span>- finding id</span></span>
+<span class="line"><span>- short rationale</span></span>
+<span class="line"><span>- impact estimate (high/medium/low)</span></span>
+<span class="line"><span>- suggested owner (design systems, product design, frontend)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Constraints:</span></span>
+<span class="line"><span>- Do not invent components or tokens that are not in the input.</span></span>
+<span class="line"><span>- If evidence is weak, mark the finding as "needs verification".</span></span></code></pre>
+<h2 id="collaboration-considerations">Collaboration considerations</h2>
+<ul>
+<li>For PMs: use priority and migration-cost columns to sequence debt work into roadmap slices</li>
+<li>For developers: attach each finding to a concrete code reference and acceptance condition</li>
+<li>For research: include at least one user-facing inconsistency sample for high-priority drift</li>
+<li>For accessibility: every fix plan must confirm contrast, focus, and semantic behavior still pass after consolidation</li>
+</ul>
+<h2 id="common-failure-patterns">Common failure patterns</h2>
+<ol>
+<li>Treating all inconsistencies as equal and creating unfinishable backlogs</li>
+<li>Auditing only design files while code has already diverged</li>
+<li>Fixing visuals but leaving old docs and examples in place</li>
+<li>Closing findings without measurable merge criteria</li>
+<li>Running one big audit and never scheduling re-audits</li>
+</ol>
+<h2 id="companion-artifacts">Companion artifacts</h2>
+<ul>
+<li><a href="/toybox/audit-command-center-template">Audit Command Center Template</a> for unifying design-system findings with accessibility and dark-mode work</li>
+<li><a href="/toybox/accessibility-audit-ops-playbook">Accessibility Audit Ops Playbook</a> for shared severity and evidence discipline</li>
+<li><a href="/toybox/fluent-theme-toggle">Fluent theme toggle</a> for a live prototype baseline to inspect token behavior across themes</li>
+<li><a href="/toybox/accessibility-compliance-baseline-playbook">The Accessibility Compliance Baseline Playbook</a> for non-negotiable interaction and contrast checks during system consolidation</li>
+</ul>
+<h2 id="generalized-example">Generalized example</h2>
+<p>A fictional operations product audits 12 core routes and finds 3 button variants that represent the same intent. The team chooses one canonical variant, migrates high-traffic routes first, and updates system docs and component package examples in the same sprint. A two-week re-audit confirms no new one-off variants were introduced.</p>
+<hr>
+<h3 id="public-safe-review-verified-before-publish">Public-safe review (verified before publish)</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> No employer or client product names, codenames, or org names</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No customer names, segment sizes, or identifiable details</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal metrics, thresholds, OKRs, or telemetry numbers</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No roadmap, ship dates, or future plans</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No architecture, service names, API shapes, or schema fields from real systems</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No screenshots showing real chrome, real data, or recognizable surfaces</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
+<li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
+</ul> </div> <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
 Have feedback? <a class="private-reply__link" href="mailto:floramaydelacruz@gmail.com?subject=Re%3A%20Design%20System%20Audit%20Playbook">Send Flora a note</a>.
 </p> </aside> <dialog id="reply-overlay" aria-labelledby="reply-overlay-title" class="reply-overlay" data-astro-cid-rjpe63gb> <form method="dialog" class="reply-overlay__form" id="reply-overlay-form" novalidate data-astro-cid-rjpe63gb> <header class="reply-overlay__header" data-astro-cid-rjpe63gb> <h2 id="reply-overlay-title" class="reply-overlay__title" data-astro-cid-rjpe63gb>Send Flora a private note</h2> <button type="button" class="reply-overlay__close" data-close aria-label="Close" data-astro-cid-rjpe63gb>×</button> </header> <p class="reply-overlay__context" data-astro-cid-rjpe63gb>
 About: <span class="reply-overlay__context-title" data-astro-cid-rjpe63gb>Design System Audit Playbook</span> </p> <div class="reply-overlay__field" data-astro-cid-rjpe63gb> <label class="reply-overlay__label" for="reply-message" data-astro-cid-rjpe63gb>
