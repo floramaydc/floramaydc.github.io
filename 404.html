@@ -580,23 +580,26 @@ Send feedback
       </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="Not found" class="relative z-10 mx-auto max-w-5xl px-6 py-12 focus:outline-none overflow-x-hidden">  <div class="py-24 text-center"> <p class="text-sm uppercase tracking-widest text-muted">404</p> <h1 class="mt-3 text-5xl"><em>Curiosity succeeded. Navigation did not.</em></h1> <a href="/" class="mt-8 inline-flex items-center gap-2 text-accent underline">← Return home</a> </div>  <script>
     (function () {
       var p = location.pathname.replace(/\/+$/, '');
-      var to = null;
-      // /blog/<anything> -> /writing index (specific posts are
-      // already handled by their own stub files).
-      if (/^\/blog(\/|$)/.test(p)) to = '/writing';
-      // /projects/<anything> -> /work index.
-      else if (/^\/projects(\/|$)/.test(p)) to = '/work';
-      // /home -> /
-      else if (p === '/home') to = '/';
-      // /contact -> /about (no contact page on this site).
-      else if (p === '/contact') to = '/about';
-      // /artwork -> /play/art
-      else if (p === '/artwork') to = '/play/art';
-      // /paleandbright -> /play/pale-and-bright
-      else if (p === '/paleandbright') to = '/play/pale-and-bright';
-      // Canonical M.ai route is /mai/ in static output; normalize /mai.
-      else if (p === '/mai') to = '/mai/';
+      // Exact-match legacy index pages only. No path-prefix wildcards.
+      var EXACT_REDIRECTS = {
+        '/blog': '/writing',
+        '/projects': '/work',
+        '/home': '/',
+        '/contact': '/about',
+        '/artwork': '/play/art',
+        '/paleandbright': '/play/pale-and-bright',
+        // Canonical M.ai route is /mai/ in static output; normalize /mai.
+        '/mai': '/mai/',
+      };
+      var to = Object.prototype.hasOwnProperty.call(EXACT_REDIRECTS, p)
+        ? EXACT_REDIRECTS[p]
+        : null;
       if (to) {
+        // Only forward search/hash for the /mai normalization (which is
+        // an internal route, not a foreign-origin landing page). For the
+        // Squarespace legacy redirects, intentionally drop bot-supplied
+        // query strings (?utm_*, ?ref=, ?q=, etc.) so they cannot ride
+        // along into the live site.
         var suffix = p === '/mai' ? (location.search || '') + (location.hash || '') : '';
         location.replace(to + suffix);
       }

@@ -581,8 +581,60 @@ Send feedback
     (function () {
       try {
         var params = new URLSearchParams(window.location.search || '');
-        var prompt = params.get('q') || params.get('prompt') || '';
-        var context = params.get('context') || '';
+        var rawPrompt = params.get('q') || params.get('prompt') || '';
+        var rawContext = params.get('context') || '';
+
+        // 1+2: cap length, strip control chars and angle brackets.
+        function sanitize(input) {
+          if (typeof input !== 'string') return '';
+          // Replace U+0000–U+001F and U+007F-U+009F (control chars) with space,
+          // strip angle brackets so injected markup can never reach the chat.
+          var cleaned = input
+            .replace(/[\u0000-\u001F\u007F-\u009F]+/g, ' ')
+            .replace(/[<>]/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+          if (cleaned.length > 200) cleaned = cleaned.slice(0, 200);
+          return cleaned;
+        }
+
+        // 3: drop anything that looks like a prompt-injection payload.
+        var injectionPatterns = [
+          /\bignore\s+(all\s+)?previous\b/i,
+          /\bsystem\s*[:\-]/i,
+          /\bassistant\s*[:\-]/i,
+          /\bjailbreak\b/i,
+          /```/,
+          /\bact\s+as\b/i,
+          /\brole\s*:\s*system\b/i,
+          /\bdisregard\b.*\binstructions?\b/i,
+        ];
+        function looksHostile(s) {
+          for (var i = 0; i < injectionPatterns.length; i++) {
+            if (injectionPatterns[i].test(s)) return true;
+          }
+          return false;
+        }
+
+        var prompt = sanitize(rawPrompt);
+        var context = sanitize(rawContext);
+        if (looksHostile(prompt) || looksHostile(context)) {
+          prompt = '';
+          context = '';
+        }
+
+        // 4: noindex if a query was supplied at all (clean or not).
+        var hasQuery = !!(rawPrompt || rawContext || window.location.search);
+        if (hasQuery) {
+          var m = document.createElement('meta');
+          m.name = 'robots';
+          m.content = 'noindex, follow';
+          document.head.appendChild(m);
+        }
+
+        // 5: only autoSend when sanitized input is non-empty.
+        var shouldAutoSend = prompt.length > 0;
+
         sessionStorage.setItem(
           'mai:pending-open',
           JSON.stringify({
@@ -590,7 +642,7 @@ Send feedback
             forceFullscreen: true,
             prompt: prompt || undefined,
             context: context || undefined,
-            autoSend: prompt ? true : false,
+            autoSend: shouldAutoSend,
           }),
         );
         sessionStorage.setItem('mai-open', 'true');

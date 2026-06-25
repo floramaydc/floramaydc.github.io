@@ -4,4 +4,12 @@ Allow: /
 # Don't index the placeholder unlock state or the secret project routes.
 Disallow: /projects/protected/
 
+# Bot-injection guard: never index parameterized /mai/ URLs. The home
+# page's WebSite/SearchAction JSON-LD legitimately publishes
+# /mai/?q={search_term_string} as the sitelinks search target, but every
+# CRAWL of that pattern should resolve to the canonical /mai/ page only.
+# /mai/ without a query stays fully indexable.
+Disallow: /mai/?
+Disallow: /mai?
+
 Sitemap: https://floramaydc.com/sitemap-index.xml
