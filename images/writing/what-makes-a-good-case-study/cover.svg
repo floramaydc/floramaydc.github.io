@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Three stacked case-study sheets, the top one marked up with revision lines, above a serif punchline reading 'The work explains what happened. The case study explains why it mattered.'">
+  <rect width="1600" height="1200" fill="#e5e3dc"/>
+
+  <g font-family="Almarai, system-ui, sans-serif">
+    <!-- Back sheet -->
+    <g transform="rotate(-4 800 470)">
+      <rect x="340" y="210" width="760" height="560" rx="14" fill="#ffffff" stroke="#303636" stroke-width="4" opacity="0.55"/>
+    </g>
+
+    <!-- Middle sheet -->
+    <g transform="rotate(3 800 470)">
+      <rect x="380" y="240" width="760" height="560" rx="14" fill="#ffffff" stroke="#303636" stroke-width="4" opacity="0.85"/>
+    </g>
+
+    <!-- Front sheet (the one being revised) -->
+    <g>
+      <rect x="420" y="200" width="760" height="600" rx="14" fill="#ffffff" stroke="#303636" stroke-width="5"/>
+
+      <!-- Eyebrow + title block -->
+      <text x="460" y="270" font-size="24" fill="#6b7373">Case study · v07</text>
+      <text x="460" y="332" font-size="40" font-family="Libre Baskerville, Georgia, serif" fill="#303636">A project worth revisiting</text>
+
+      <!-- "Body" lines — middle one struck through, last one rewritten in accent -->
+      <line x1="460" y1="400" x2="1140" y2="400" stroke="#6b7373" stroke-width="6" stroke-linecap="round"/>
+      <line x1="460" y1="450" x2="1020" y2="450" stroke="#6b7373" stroke-width="6" stroke-linecap="round"/>
+
+      <!-- Strikethrough line -->
+      <line x1="460" y1="500" x2="1100" y2="500" stroke="#6b7373" stroke-width="6" stroke-linecap="round"/>
+      <line x1="448" y1="500" x2="1112" y2="500" stroke="#a24a2a" stroke-width="5" stroke-linecap="round"/>
+
+      <line x1="460" y1="550" x2="980" y2="550" stroke="#6b7373" stroke-width="6" stroke-linecap="round"/>
+
+      <!-- Margin revision tick -->
+      <text x="1170" y="510" font-size="40" fill="#a24a2a" font-family="Libre Baskerville, Georgia, serif">↺</text>
+
+      <!-- A handwritten-style margin note -->
+      <text x="460" y="640" font-size="24" font-style="italic" fill="#6b7373" font-family="Libre Baskerville, Georgia, serif">not what made it matter —</text>
+      <text x="460" y="675" font-size="24" font-style="italic" fill="#6b7373" font-family="Libre Baskerville, Georgia, serif">try again.</text>
+
+      <!-- Page footer -->
+      <text x="460" y="755" font-size="22" fill="#6b7373">draft</text>
+      <text x="1140" y="755" text-anchor="end" font-size="22" fill="#6b7373">07 of ∞</text>
+    </g>
+  </g>
+
+  <!-- Punchline -->
+  <g font-family="Libre Baskerville, Georgia, serif" fill="#303636">
+    <text x="800" y="950" text-anchor="middle" font-size="38">The work explains what happened.</text>
+    <text x="800" y="1010" text-anchor="middle" font-size="38" font-style="italic">The case study explains why it mattered.</text>
+  </g>
+</svg>
