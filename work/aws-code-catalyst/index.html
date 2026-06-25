@@ -2308,6 +2308,9 @@ AI, like design, is only as useful as the intent we bring to it.
         sitekey: TURNSTILE_SITE_KEY,
         theme: 'auto',
         appearance: 'always',
+        // Chat bubbles are narrow (~280px on mobile). Compact widget is
+        // 150x140 — fits inside any bubble without horizontal overflow.
+        size: 'compact',
       });
     }
 
