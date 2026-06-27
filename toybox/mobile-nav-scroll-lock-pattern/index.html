@@ -3410,6 +3410,9 @@ AI, like design, is only as useful as the intent we bring to it.
     }
     function close() {
       const onMaiRoute = isMaiRoute();
+      // Captured before any reset: a non-null value means we reached /mai by
+      // expanding from a real page that is still mounted in this document.
+      const prevPath = _prevPathBeforeFullscreen;
       document.documentElement.classList.remove('mai-no-scroll');
       document.documentElement.classList.remove('mai-open');
       try {
@@ -3435,7 +3438,16 @@ AI, like design, is only as useful as the intent we bring to it.
           _triggerEl.focus({ preventScroll: true });
         }
         if (onMaiRoute) {
-          window.location.replace('/');
+          if (prevPath) {
+            // In-tab expand: the page we expanded from is still mounted.
+            // Restore its URL and reveal it — no navigation.
+            _prevPathBeforeFullscreen = null;
+            try { history.replaceState({}, '', prevPath); }
+            catch (e) { window.location.replace('/'); }
+          } else {
+            // Direct /mai: no real page beneath the chat — go to real home.
+            window.location.replace('/');
+          }
         }
       }, 220);
     }
@@ -3540,7 +3552,10 @@ AI, like design, is only as useful as the intent we bring to it.
         sessionStorage.getItem(maiStorageKey('open')) === 'true' ||
         sessionStorage.getItem('mai-open') === 'true'
       ) {
-        open({ restoring: true });
+        // On the /mai route open straight to fullscreen so the rail never
+        // appears transiently beside the (invisible) route body. On every
+        // other page this restores the rail exactly as before.
+        open({ restoring: true, fullscreen: isMaiRoute() });
       }
 
       consumePendingOpen();
@@ -3575,22 +3590,48 @@ AI, like design, is only as useful as the intent we bring to it.
 
     function toggleFullscreenFromUI() {
       const goingFullscreen = !fullscreen;
-      try {
-        if (goingFullscreen && !isMaiRoute()) {
-          _prevPathBeforeFullscreen =
-            window.location.pathname + window.location.search + window.location.hash;
-          history.pushState(
-            { mai: 'fullscreen', prev: _prevPathBeforeFullscreen },
-            '',
-            MAI_PATH,
-          );
-        } else if (!goingFullscreen && isMaiRoute()) {
-          const target = _prevPathBeforeFullscreen || '/';
+      if (goingFullscreen) {
+        // Expanding from a real page: push /mai so it is linkable, and
+        // remember the page so collapse/close can return to it.
+        try {
+          if (!isMaiRoute()) {
+            _prevPathBeforeFullscreen =
+              window.location.pathname + window.location.search + window.location.hash;
+            history.pushState(
+              { mai: 'fullscreen', prev: _prevPathBeforeFullscreen },
+              '',
+              MAI_PATH,
+            );
+          }
+        } catch (e) {}
+        setFullscreen(true);
+        return;
+      }
+      // Collapsing.
+      if (isMaiRoute()) {
+        if (_prevPathBeforeFullscreen) {
+          // In-tab expand → collapse: the page we expanded from is still
+          // mounted. Restore its URL and drop to the rail over it.
+          const target = _prevPathBeforeFullscreen;
           _prevPathBeforeFullscreen = null;
-          history.pushState({ mai: 'collapsed' }, '', target);
+          try { history.pushState({ mai: 'collapsed' }, '', target); } catch (e) {}
+          setFullscreen(false);
+        } else {
+          // Direct /mai document: no real page beneath the chat. Navigate to
+          // real home and reopen as a rail there. The transcript persists
+          // across the in-tab nav, so the conversation continues over home.
+          try {
+            sessionStorage.setItem(
+              'mai:pending-open',
+              JSON.stringify({ source: 'mai_collapse_to_home' }),
+            );
+            sessionStorage.setItem('mai-open', 'true');
+          } catch (e) {}
+          window.location.assign('/');
         }
-      } catch (e) {}
-      setFullscreen(goingFullscreen);
+        return;
+      }
+      setFullscreen(false);
     }
 
     expandBtn.addEventListener('click', toggleFullscreenFromUI);

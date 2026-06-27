@@ -577,7 +577,13 @@ Send feedback
             // Prevent nav script failures from breaking page interactivity.
           }
         })();
-      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="M.ai — Ask Flora's site anything" class="site-main relative z-10 mx-auto px-6 py-12 focus:outline-none overflow-x-hidden"> <script>
+      </script>  </header> <div class="h-[4.75rem]" aria-hidden="true"></div> <main id="main-content" tabindex="-1" aria-label="M.ai — Ask Flora's site anything" class="site-main relative z-10 mx-auto px-6 py-12 focus:outline-none overflow-x-hidden"> <div id="mai-route-fallback" class="py-24 text-center"> <h1 class="font-serif italic text-5xl leading-none"> <span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span> </h1> <p class="mx-auto mt-6 max-w-prose text-lg text-muted">
+M.ai is a conversational guide to Flora May dela Cruz&rsquo;s work,
+      writing, play, tools, and ideas. Ask anything &mdash; it searches across
+      the site and synthesizes an answer with citations.
+</p> <a href="/" class="mt-8 inline-flex items-center gap-2 text-accent underline">
+&larr; Return home
+</a> </div> <script>
     (function () {
       try {
         var params = new URLSearchParams(window.location.search || '');
@@ -647,15 +653,15 @@ Send feedback
         );
         sessionStorage.setItem('mai-open', 'true');
         document.documentElement.classList.add('mai-open');
+        // Pre-set the fullscreen layout class so the body never flashes the
+        // rail padding shift before the panel boots, and hide the no-JS
+        // fallback inline so it can NEVER coexist with the panel (P0).
+        document.documentElement.classList.add('mai-fullscreen-open');
+        var fb = document.getElementById('mai-route-fallback');
+        if (fb) fb.style.display = 'none';
       } catch (e) {}
     })();
-  </script> <div class="py-24 text-center"> <h1 class="font-serif italic text-5xl leading-none"> <span class="mai-wordmark">M<span class="mai-dot">.</span>ai</span> </h1> <p class="mx-auto mt-6 max-w-prose text-lg text-muted">
-M.ai is a conversational guide to Flora May dela Cruz&rsquo;s work,
-      writing, play, tools, and ideas. Ask anything &mdash; it searches across
-      the site and synthesizes an answer with citations.
-</p> <a href="/" class="mt-8 inline-flex items-center gap-2 text-accent underline">
-&larr; Return home
-</a> </div>  </main> <footer class="relative z-10 mt-24 border-t border-ink/10 bg-paper"> <div class="flex w-full flex-col items-start gap-4 px-6 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between md:gap-0 lg:px-10"> <span>© 2026 Flora May dela Cruz</span> <p class="italic md:hidden">
+  </script>  </main> <footer class="relative z-10 mt-24 border-t border-ink/10 bg-paper"> <div class="flex w-full flex-col items-start gap-4 px-6 py-8 text-sm text-muted md:flex-row md:items-center md:justify-between md:gap-0 lg:px-10"> <span>© 2026 Flora May dela Cruz</span> <p class="italic md:hidden">
 AI, like design, is only as useful as the intent we bring to it.
 </p> <div class="flex flex-wrap gap-x-4 gap-y-2"> <a href="https://linkedin.com/in/floramaydelacruz" class="hover:text-accent" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in new tab)</span></a> <a href="https://instagram.com/floramaydc" class="hover:text-accent" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in new tab)</span></a> <a href="https://github.com/floramaydc" class="hover:text-accent" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in new tab)</span></a> </div> </div> <div class="hidden md:block w-full px-6 pb-8 text-sm text-muted lg:px-10"> <p class="max-w-[64rem] italic">
 AI, like design, is only as useful as the intent we bring to it.
@@ -3190,6 +3196,9 @@ AI, like design, is only as useful as the intent we bring to it.
     }
     function close() {
       const onMaiRoute = isMaiRoute();
+      // Captured before any reset: a non-null value means we reached /mai by
+      // expanding from a real page that is still mounted in this document.
+      const prevPath = _prevPathBeforeFullscreen;
       document.documentElement.classList.remove('mai-no-scroll');
       document.documentElement.classList.remove('mai-open');
       try {
@@ -3215,7 +3224,16 @@ AI, like design, is only as useful as the intent we bring to it.
           _triggerEl.focus({ preventScroll: true });
         }
         if (onMaiRoute) {
-          window.location.replace('/');
+          if (prevPath) {
+            // In-tab expand: the page we expanded from is still mounted.
+            // Restore its URL and reveal it — no navigation.
+            _prevPathBeforeFullscreen = null;
+            try { history.replaceState({}, '', prevPath); }
+            catch (e) { window.location.replace('/'); }
+          } else {
+            // Direct /mai: no real page beneath the chat — go to real home.
+            window.location.replace('/');
+          }
         }
       }, 220);
     }
@@ -3320,7 +3338,10 @@ AI, like design, is only as useful as the intent we bring to it.
         sessionStorage.getItem(maiStorageKey('open')) === 'true' ||
         sessionStorage.getItem('mai-open') === 'true'
       ) {
-        open({ restoring: true });
+        // On the /mai route open straight to fullscreen so the rail never
+        // appears transiently beside the (invisible) route body. On every
+        // other page this restores the rail exactly as before.
+        open({ restoring: true, fullscreen: isMaiRoute() });
       }
 
       consumePendingOpen();
@@ -3355,22 +3376,48 @@ AI, like design, is only as useful as the intent we bring to it.
 
     function toggleFullscreenFromUI() {
       const goingFullscreen = !fullscreen;
-      try {
-        if (goingFullscreen && !isMaiRoute()) {
-          _prevPathBeforeFullscreen =
-            window.location.pathname + window.location.search + window.location.hash;
-          history.pushState(
-            { mai: 'fullscreen', prev: _prevPathBeforeFullscreen },
-            '',
-            MAI_PATH,
-          );
-        } else if (!goingFullscreen && isMaiRoute()) {
-          const target = _prevPathBeforeFullscreen || '/';
+      if (goingFullscreen) {
+        // Expanding from a real page: push /mai so it is linkable, and
+        // remember the page so collapse/close can return to it.
+        try {
+          if (!isMaiRoute()) {
+            _prevPathBeforeFullscreen =
+              window.location.pathname + window.location.search + window.location.hash;
+            history.pushState(
+              { mai: 'fullscreen', prev: _prevPathBeforeFullscreen },
+              '',
+              MAI_PATH,
+            );
+          }
+        } catch (e) {}
+        setFullscreen(true);
+        return;
+      }
+      // Collapsing.
+      if (isMaiRoute()) {
+        if (_prevPathBeforeFullscreen) {
+          // In-tab expand → collapse: the page we expanded from is still
+          // mounted. Restore its URL and drop to the rail over it.
+          const target = _prevPathBeforeFullscreen;
           _prevPathBeforeFullscreen = null;
-          history.pushState({ mai: 'collapsed' }, '', target);
+          try { history.pushState({ mai: 'collapsed' }, '', target); } catch (e) {}
+          setFullscreen(false);
+        } else {
+          // Direct /mai document: no real page beneath the chat. Navigate to
+          // real home and reopen as a rail there. The transcript persists
+          // across the in-tab nav, so the conversation continues over home.
+          try {
+            sessionStorage.setItem(
+              'mai:pending-open',
+              JSON.stringify({ source: 'mai_collapse_to_home' }),
+            );
+            sessionStorage.setItem('mai-open', 'true');
+          } catch (e) {}
+          window.location.assign('/');
         }
-      } catch (e) {}
-      setFullscreen(goingFullscreen);
+        return;
+      }
+      setFullscreen(false);
     }
 
     expandBtn.addEventListener('click', toggleFullscreenFromUI);
