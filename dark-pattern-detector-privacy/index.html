@@ -844,7 +844,13 @@ AI, like design, is only as useful as the intent we bring to it.
 
     function clearLegacyMaiState() {
       const legacyKeys = ['mai-transcript', 'mai-chips', 'mai-topics-hidden', 'mai-open'];
-      for (const key of legacyKeys) sessionStorage.removeItem(key);
+      for (const key of legacyKeys) {
+        sessionStorage.removeItem(key);
+        localStorage.removeItem(key);
+      }
+      localStorage.removeItem(maiStorageKey('transcript'));
+      localStorage.removeItem(maiStorageKey('chips'));
+      localStorage.removeItem(maiStorageKey('topics-hidden'));
     }
 
     // "Since last visit" tracking. The persistent key records when the
@@ -3223,6 +3229,9 @@ AI, like design, is only as useful as the intent we bring to it.
         clearLegacyMaiState();
         localStorage.setItem('mai:client-version', MAI_CLIENT_VERSION);
       }
+      localStorage.removeItem(maiStorageKey('transcript'));
+      localStorage.removeItem(maiStorageKey('chips'));
+      localStorage.removeItem(maiStorageKey('topics-hidden'));
       // Detect a real page refresh — if so, reset the conversation.
       // Otherwise hydrate the log + chips so the convo survives in-tab nav.
       const navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
@@ -3230,23 +3239,23 @@ AI, like design, is only as useful as the intent we bring to it.
         ? navEntry.type === 'reload'
         : (performance.navigation && performance.navigation.type === 1);
       if (isReload) {
-        localStorage.removeItem(maiStorageKey('transcript'));
-        localStorage.removeItem(maiStorageKey('chips'));
-        localStorage.removeItem(maiStorageKey('topics-hidden'));
+        sessionStorage.removeItem(maiStorageKey('transcript'));
+        sessionStorage.removeItem(maiStorageKey('chips'));
+        sessionStorage.removeItem(maiStorageKey('topics-hidden'));
         sessionStorage.removeItem(maiStorageKey('open'));
         sessionStorage.removeItem('mai-open');
       } else {
-        const t = localStorage.getItem(maiStorageKey('transcript'));
+        const t = sessionStorage.getItem(maiStorageKey('transcript'));
         if (t) {
           log.innerHTML = t;
           log.scrollTop = log.scrollHeight;
         }
-        const c = localStorage.getItem(maiStorageKey('chips'));
+        const c = sessionStorage.getItem(maiStorageKey('chips'));
         if (c) {
           chipsBar.innerHTML = c;
           rewireChipButtons();
         }
-        if (localStorage.getItem(maiStorageKey('topics-hidden')) === '1' && topicsEl) {
+        if (sessionStorage.getItem(maiStorageKey('topics-hidden')) === '1' && topicsEl) {
           topicsEl.hidden = true;
         }
       }
@@ -3350,9 +3359,9 @@ AI, like design, is only as useful as the intent we bring to it.
         // half-rendered placeholder. The final write at end-of-stream
         // catches it.
         if (log.querySelector('.mai-stream')) return;
-        localStorage.setItem(maiStorageKey('transcript'), log.innerHTML);
-        localStorage.setItem(maiStorageKey('chips'), chipsBar.innerHTML);
-        if (topicsEl) localStorage.setItem(maiStorageKey('topics-hidden'), topicsEl.hidden ? '1' : '0');
+        sessionStorage.setItem(maiStorageKey('transcript'), log.innerHTML);
+        sessionStorage.setItem(maiStorageKey('chips'), chipsBar.innerHTML);
+        if (topicsEl) sessionStorage.setItem(maiStorageKey('topics-hidden'), topicsEl.hidden ? '1' : '0');
       } catch (e) {}
     }
     function rewireChipButtons() {
