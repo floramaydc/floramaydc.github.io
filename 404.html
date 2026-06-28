@@ -851,7 +851,7 @@ Toybox is CC0. Writing &amp; work © Flora May dela Cruz.
           root.classList.remove('is-leaving');
         });
       })();
-    </script>  <div id="app-live-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>  <div id="cookie-banner" hidden role="dialog" aria-label="Cookie preferences" aria-modal="false" class="fixed bottom-0 inset-x-0 z-[45] border-t border-ink/10 bg-cream px-4 py-3 text-sm text-ink sm:flex sm:items-center sm:justify-between sm:gap-6 sm:px-6"> <p class="m-0 mb-3 sm:mb-0">
+    </script>  <div id="app-live-region" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>  <div id="cookie-banner" hidden style="display:none" role="dialog" aria-label="Cookie preferences" aria-modal="false" class="fixed bottom-0 inset-x-0 z-[45] border-t border-ink/10 bg-cream px-4 py-3 text-sm text-ink sm:flex sm:items-center sm:justify-between sm:gap-6 sm:px-6"> <p class="m-0 mb-3 sm:mb-0">
 This site uses Google Analytics to understand what content is useful. <a href="/privacy/" class="underline underline-offset-2 hover:text-accent">Privacy policy</a> </p> <div class="flex shrink-0 gap-2"> <button id="cookie-accept" type="button" class="rounded bg-ink px-3 py-1.5 text-xs font-medium text-paper hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-1">Accept</button> <button id="cookie-decline" type="button" class="rounded border border-ink/30 px-3 py-1.5 text-xs text-muted hover:border-ink/60 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-1">Decline</button> </div> </div> <script>
       (function () {
         var banner = document.getElementById('cookie-banner');
@@ -859,7 +859,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
         var declineBtn = document.getElementById('cookie-decline');
 
         function hideBanner() {
-          if (banner) banner.hidden = true;
+          if (banner) { banner.hidden = true; banner.style.display = 'none'; }
           document.documentElement.classList.remove('cookie-banner-open');
           document.documentElement.style.removeProperty('--cookie-banner-h');
         }
@@ -877,6 +877,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
         function showBanner() {
           if (!banner) return;
           banner.hidden = false;
+          banner.style.removeProperty('display');
           document.documentElement.classList.add('cookie-banner-open');
           requestAnimationFrame(function () {
             document.documentElement.style.setProperty('--cookie-banner-h', banner.offsetHeight + 'px');
