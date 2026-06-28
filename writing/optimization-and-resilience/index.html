@@ -211,10 +211,19 @@
             ad_personalization: 'denied',
           });
           // Restore prior decision synchronously on every page load.
+          // Non-GDPR visitors (outside EU/UK/EEA) get analytics auto-granted;
+          // EU/UK/EEA visitors default to denied until they accept.
           try {
             var _cv = localStorage.getItem('cookie-consent');
+            var _gdpr = /^(Europe|Atlantic\/(Azores|Madeira|Canary)|Arctic\/Longyearbyen)/.test(
+              (Intl.DateTimeFormat && Intl.DateTimeFormat().resolvedOptions().timeZone) || ''
+            );
             if (_cv === 'granted') {
               gtag('consent', 'update', { analytics_storage: 'granted' });
+            } else if (!_cv && !_gdpr) {
+              // Outside GDPR jurisdiction and no prior decision — auto-grant.
+              gtag('consent', 'update', { analytics_storage: 'granted' });
+              try { localStorage.setItem('cookie-consent', 'granted'); } catch (_e2) {}
             }
           } catch (_e) {}
           gtag('js', new Date());
@@ -893,6 +902,20 @@ This site uses Google Analytics to understand what content is useful. <a href="/
 
         // Never auto-show — only opens on explicit click (Cookie preferences link).
         // Consent defaults to denied; visitors opt in voluntarily.
+
+        // EU/UK/EEA visitors (GDPR): auto-show the banner on first visit so they
+        // can make an explicit choice. Everyone else gets analytics silently.
+        function isGdprTimezone() {
+          try {
+            var tz = (Intl.DateTimeFormat && Intl.DateTimeFormat().resolvedOptions().timeZone) || '';
+            return /^(Europe|Atlantic\/(Azores|Madeira|Canary)|Arctic\/Longyearbyen)/.test(tz);
+          } catch (_e) { return true; } // safe fallback
+        }
+        try {
+          if (!localStorage.getItem('cookie-consent') && isGdprTimezone()) showBanner();
+        } catch (_e) {
+          if (isGdprTimezone()) showBanner();
+        }
 
         if (acceptBtn) acceptBtn.addEventListener('click', function () { updateConsent('granted'); });
         if (declineBtn) declineBtn.addEventListener('click', function () { updateConsent('denied'); });
