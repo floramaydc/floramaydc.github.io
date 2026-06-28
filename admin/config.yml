@@ -1,0 +1,114 @@
+backend:
+  name: github
+  repo: floramaydc/site-source
+  branch: main
+  base_url: https://floramaydc-audit-api.vercel.app
+  auth_endpoint: api/oauth
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+publish_mode: simple
+
+site_url: https://floramaydc.com
+display_url: https://floramaydc.com
+
+collections:
+  - name: writing
+    label: Writing
+    folder: src/content/writing
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: title,    label: Title,   widget: string,
+          hint: "Sentence-case. See voice guidance at floramaydc.com/toybox/enterprise-reflow-playbook" }
+      - { name: summary,  label: Summary, widget: text,
+          hint: "One or two sentences. Lead with the reader's takeaway, not the topic." }
+      - { name: date,     label: Date,    widget: datetime, picker_utc: false, time_format: false, date_format: "YYYY-MM-DD" }
+      - { name: category, label: Category, widget: select, required: false,
+          options: ["Learnings", "Opinion", "Travel", "Craft notes", "Pale & Bright", "Appropriasian"] }
+      - { name: tags,     label: Tags,    widget: list, required: false }
+      - { name: cover,    label: "Cover image path",
+          widget: string,
+          hint: "Path under public/, e.g. images/writing/my-post/cover.svg" }
+      - { name: coverAlt, label: "Cover alt text", widget: string, required: false }
+      - { name: draft,    label: Draft,   widget: boolean, default: true,
+          hint: "Drafts are hidden in production. Untick to publish." }
+      - { name: body,     label: Body,    widget: markdown }
+
+  - name: toybox
+    label: Toybox
+    folder: src/content/toybox
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: title,    label: Title,   widget: string,
+          hint: "Memorable but practical. See the entry type rubric at floramaydc.com/toybox/toybox-entry-type-rubric" }
+      - { name: summary,  label: Summary, widget: text,
+          hint: "What the reader walks away with. See voice guidance: floramaydc.com/toybox/enterprise-reflow-playbook" }
+      - { name: category, label: Category, widget: select,
+          hint: "Definitions: floramaydc.com/toybox/toybox-entry-types-definitions",
+          options: ["playbook", "prompt", "template", "pattern", "tool", "prototype"] }
+      - { name: tags,     label: Tags,    widget: list, required: false }
+      - { name: updated,  label: Updated, widget: datetime, required: false,
+          picker_utc: false, time_format: false, date_format: "YYYY-MM-DD" }
+      - { name: author,   label: Author,  widget: string, required: false }
+      - { name: install,  label: "Install URL", widget: string, required: false,
+          pattern: ["^https?://", "Must be a valid URL"] }
+      - { name: installLabel, label: "Install button label", widget: string, required: false }
+      - { name: draft,    label: Draft,   widget: boolean, default: true,
+          hint: "Drafts are hidden in production. Untick to publish." }
+      - { name: body,     label: Body,    widget: markdown }
+
+  - name: play
+    label: Play
+    folder: src/content/play
+    create: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - { name: title,    label: Title,   widget: string }
+      - { name: summary,  label: Summary, widget: text,
+          hint: "One short sentence. What the piece is, and why it exists." }
+      - { name: order,    label: Order,   widget: number, required: false, value_type: int }
+      - { name: cover,    label: "Cover image path", widget: string, required: false }
+      - { name: coverAlt, label: "Cover alt text", widget: string, required: false }
+      - { name: year,     label: Year,    widget: string, required: false }
+      - { name: medium,   label: Medium,  widget: string, required: false }
+      - { name: external, label: "External link", widget: string, required: false,
+          pattern: ["^https?://", "Must be a valid URL"] }
+      - { name: body,     label: Body,    widget: markdown }
+
+  - name: work
+    label: Work
+    folder: src/content/work
+    create: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - { name: title,    label: Title,   widget: string,
+          hint: "Lead with the outcome or the shift, not the project name." }
+      - { name: summary,  label: Summary, widget: text,
+          hint: "What changed, for whom. See structure: floramaydc.com/toybox/enterprise-reflow-playbook" }
+      - { name: order,    label: Order,   widget: number, required: false, value_type: int }
+      - { name: tags,     label: Tags,    widget: list, required: false }
+      - { name: cover,    label: "Cover image path", widget: string, required: false }
+      - { name: coverAlt, label: "Cover alt text", widget: string, required: false }
+      - { name: client,   label: Client,  widget: string, required: false }
+      - { name: organization, label: Organization, widget: string, required: false }
+      - { name: role,     label: Role,    widget: string, required: false }
+      - { name: year,     label: Year,    widget: string, required: false }
+      - { name: team,     label: Team,    widget: string, required: false }
+      - { name: archive,  label: Archive, widget: boolean, required: false, default: false,
+          hint: "Older case studies routed under /work/archive/. Still public, just past chapter." }
+      - { name: wip,      label: "Work in progress", widget: boolean, required: false, default: true,
+          hint: "WIP entries are hidden in production. Untick to publish." }
+      - { name: hidden,   label: Hidden,  widget: boolean, required: false, default: false }
+      - { name: gallery,  label: "Gallery layout", widget: boolean, required: false, default: false }
+      - { name: body,     label: Body,    widget: markdown }
