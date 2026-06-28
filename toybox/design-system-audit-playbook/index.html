@@ -729,7 +729,13 @@ A fictional operations product audits 12 core routes and finds 3 button variants
 - [x] No screenshots showing real chrome, real data, or recognizable surfaces
 - [x] No internal-only workflows, tools, or terminology
 - [x] Every example is fictional or abstracted; numbers are illustrative
-- [x] A peer outside any employer could read this and learn nothing proprietary</template> <script type="module">function r(t,e={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:t,params:e}}))}catch{}}function l(t){const e=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(t)}"]`);return e?e.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function d(t,e){const o=t.querySelector(".action-status");o&&(o.textContent=e)}function i(t,e){const o=new Blob([e],{type:"text/markdown;charset=utf-8"}),n=URL.createObjectURL(o),a=document.createElement("a");a.href=n,a.download=t,document.body.appendChild(a),a.click(),document.body.removeChild(a),setTimeout(()=>URL.revokeObjectURL(n),1e3)}function p(t){const e=t.dataset.slug||"",o=t.dataset.filename||`${e}.md`;t.querySelector(".download-btn")?.addEventListener("click",()=>{const c=l(e);i(o,c),r("playbook_download_markdown",{slug:e,filename:o}),d(t,`Downloaded ${o}.`)}),t.querySelector(".copy-btn")?.addEventListener("click",async()=>{const c=l(e);try{await navigator.clipboard.writeText(c),r("playbook_copy_markdown",{slug:e}),d(t,"Markdown copied to clipboard.")}catch{r("playbook_copy_markdown_error",{slug:e,error:"clipboard_blocked"}),d(t,"Copy blocked by browser. Use the download instead.")}})}document.querySelectorAll(".playbook-actions").forEach(t=>p(t));</script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none" data-toybox-prose> <h2 id="purpose">Purpose</h2>
+- [x] A peer outside any employer could read this and learn nothing proprietary
+
+## Version history
+
+| Version | Date | Notes |
+|---------|------|-------|
+| 1.0 | 2026-05-31 | Initial release |</template> <script type="module">function r(t,e={}){try{window.dispatchEvent(new CustomEvent("site:track",{detail:{name:t,params:e}}))}catch{}}function l(t){const e=document.querySelector(`template.playbook-raw[data-for="${CSS.escape(t)}"]`);return e?e.innerHTML.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&"):""}function d(t,e){const o=t.querySelector(".action-status");o&&(o.textContent=e)}function i(t,e){const o=new Blob([e],{type:"text/markdown;charset=utf-8"}),n=URL.createObjectURL(o),a=document.createElement("a");a.href=n,a.download=t,document.body.appendChild(a),a.click(),document.body.removeChild(a),setTimeout(()=>URL.revokeObjectURL(n),1e3)}function p(t){const e=t.dataset.slug||"",o=t.dataset.filename||`${e}.md`;t.querySelector(".download-btn")?.addEventListener("click",()=>{const c=l(e);i(o,c),r("playbook_download_markdown",{slug:e,filename:o}),d(t,`Downloaded ${o}.`)}),t.querySelector(".copy-btn")?.addEventListener("click",async()=>{const c=l(e);try{await navigator.clipboard.writeText(c),r("playbook_copy_markdown",{slug:e}),d(t,"Markdown copied to clipboard.")}catch{r("playbook_copy_markdown_error",{slug:e,error:"clipboard_blocked"}),d(t,"Copy blocked by browser. Use the download instead.")}})}document.querySelectorAll(".playbook-actions").forEach(t=>p(t));</script> <div class="prose prose-lg dark:prose-invert mt-8 max-w-none" data-toybox-prose> <h2 id="purpose">Purpose</h2>
 <p>Design systems rarely fail all at once. They decay slowly: one-off tokens, nearly-identical components, and exceptions that never fold back into the system. This playbook gives you a repeatable audit loop so teams can find divergence early, decide what to fix now, and avoid redesigning the whole system every quarter.</p>
 <h2 id="when-to-use-it">When to use it</h2>
 <ul>
@@ -831,7 +837,24 @@ A fictional operations product audits 12 core routes and finds 3 button variants
 <li class="task-list-item"><input type="checkbox" checked disabled> No internal-only workflows, tools, or terminology</li>
 <li class="task-list-item"><input type="checkbox" checked disabled> Every example is fictional or abstracted; numbers are illustrative</li>
 <li class="task-list-item"><input type="checkbox" checked disabled> A peer outside any employer could read this and learn nothing proprietary</li>
-</ul> </div>  <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
+</ul>
+<h2 id="version-history">Version history</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Version</th><th>Date</th><th>Notes</th></tr></thead><tbody><tr><td>1.0</td><td>2026-05-31</td><td>Initial release</td></tr></tbody></table> </div>  <aside class="private-reply mt-10" aria-label="Reply privately to Flora"> <p class="private-reply__body">
 Have feedback? <a class="private-reply__link" href="mailto:floramaydelacruz@gmail.com?subject=Re%3A%20Design%20System%20Audit%20Playbook">Send Flora a note</a>.
 </p> </aside> <dialog id="reply-overlay" aria-labelledby="reply-overlay-title" class="reply-overlay" data-astro-cid-rjpe63gb> <form method="dialog" class="reply-overlay__form" id="reply-overlay-form" novalidate data-astro-cid-rjpe63gb> <header class="reply-overlay__header" data-astro-cid-rjpe63gb> <h2 id="reply-overlay-title" class="reply-overlay__title" data-astro-cid-rjpe63gb>Send Flora a private note</h2> <button type="button" class="reply-overlay__close" data-close aria-label="Close" data-astro-cid-rjpe63gb>×</button> </header> <p class="reply-overlay__context" data-astro-cid-rjpe63gb>
 About: <span class="reply-overlay__context-title" data-astro-cid-rjpe63gb>Design System Audit Playbook</span> </p> <div class="reply-overlay__field" data-astro-cid-rjpe63gb> <label class="reply-overlay__label" for="reply-message" data-astro-cid-rjpe63gb>
