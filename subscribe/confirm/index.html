@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Confirming your subscription — floramaydc.com</title>
+  <meta name="robots" content="noindex,nofollow">
+  <script>
+    (function () {
+      var token = new URLSearchParams(location.search).get('token');
+      if (token) {
+        location.replace(
+          'https://mai.floramaydc-mai.workers.dev/subscribe/confirm?token=' +
+          encodeURIComponent(token)
+        );
+      } else {
+        location.replace('/');
+      }
+    })();
+  </script>
+</head>
+<body style="font-family:system-ui,sans-serif;padding:3rem 2rem;color:#303636">
+  <p>Confirming your subscription…</p>
+</body>
+</html>
