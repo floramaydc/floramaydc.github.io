@@ -444,7 +444,13 @@
             trigger.hidden = true;
             return false;
           }
-          var rect = img.getBoundingClientRect();
+          // A tall image inside a scroll pane (e.g. the case-study ShellFrame)
+          // can opt to anchor the trigger to a stable container instead of the
+          // image's own (overflowing) box, so the button stays pinned to the
+          // visible frame rather than floating off the bottom of the scroll.
+          var anchorSel = img.getAttribute('data-lightbox-anchor');
+          var anchorEl = anchorSel ? img.closest(anchorSel) : null;
+          var rect = (anchorEl || img).getBoundingClientRect();
           var size = trigger.offsetWidth || 38;
           var inset = 12;
           var obscuredTopEdge = getObscuredTopEdge();
