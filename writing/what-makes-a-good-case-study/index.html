@@ -330,7 +330,12 @@
           node.dataset.lightboxEnhanced = 'true';
         }
 
+        function isPlaySection() {
+          return /^\/play(?:\/|$)/.test(window.location.pathname);
+        }
+
         function isEligibleImage(img) {
+          if (isPlaySection()) return false;
           if (!img || img.dataset.noLightbox === 'true') return false;
           if (!img.getAttribute('src') && !img.currentSrc) return false;
           if (img.closest('[data-no-lightbox], a, button, [role="button"], .site-lightbox__target, .site-lightbox')) return false;
