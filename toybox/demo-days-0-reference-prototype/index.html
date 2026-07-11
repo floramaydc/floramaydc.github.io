@@ -306,7 +306,204 @@
           } catch (e) {}
         }, { passive: true });
       })();
-    </script><title>Demo days 0 to 14 reference | Toybox by Flora May dela Cruz</title><script type="application/ld+json">[{"@context":"https://schema.org","@type":"CreativeWork","name":"Demo days 0 to 14 reference","headline":"Demo days 0 to 14 reference","description":"A live prototype reference that shows one stable interface evolving through Day 0, 1, 3, 7, 8, and 14 with a clear active-day indicator and progression cues.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"url":"https://floramaydc.com/toybox/demo-days-0-reference-prototype/","license":"https://creativecommons.org/publicdomain/zero/1.0/","dateModified":"2026-05-31T00:00:00.000Z","keywords":"prototype, demo-strategy, state-design, ux","genre":"Prototypes"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Toybox","item":"https://floramaydc.com/toybox/"},{"@type":"ListItem","position":2,"name":"Prototypes","item":"https://floramaydc.com/toybox/#prototype"},{"@type":"ListItem","position":3,"name":"Demo days 0 to 14 reference","item":"https://floramaydc.com/toybox/demo-days-0-reference-prototype/"}]}]</script><link rel="stylesheet" href="/assets/style.DQB2WG0V.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave" aria-hidden="true" data-thread> <svg class="top-wave__base" viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"> <defs>  <linearGradient id="hero-thread-grad" gradientUnits="userSpaceOnUse" x1="-400" y1="0" x2="-100" y2="0"> <stop offset="0%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <stop offset="25%" style="stop-color: var(--wave-g1)"></stop> <stop offset="50%" style="stop-color: var(--wave-g2)"></stop> <stop offset="75%" style="stop-color: var(--wave-g3)"></stop> <stop offset="100%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <animate attributeName="x1" values="-400;1700" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> <animate attributeName="x2" values="-100;2000" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> </linearGradient>  <filter id="hero-thread-glow" x="-10%" y="-50%" width="120%" height="200%"> <feGaussianBlur stdDeviation="1.4" result="b"></feGaussianBlur> <feMerge> <feMergeNode in="b"></feMergeNode> <feMergeNode in="SourceGraphic"></feMergeNode> </feMerge> </filter> </defs> <g fill="none" stroke="var(--wave-base)" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path>  <path d="M-20,192 C50,150 120,160 184,200 C250,240 320,240 388,210 C460,180 530,180 592,220 C660,260 730,260 796,230 C870,200 940,210 1000,242 C1070,275 1140,275 1204,250 C1280,225 1350,235 1408,265 C1480,295 1550,295 1620,282" stroke="url(#hero-thread-grad)" stroke-opacity="1" stroke-width="0.9" filter="url(#hero-thread-glow)" data-thread-morph></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <script>
+    </script><script>
+      (function () {
+        var enhanced = typeof WeakSet === 'function' ? new WeakSet() : null;
+        var dialog;
+        var dialogImg;
+        var captionEl;
+        var zoomValueEl;
+        var viewport;
+        var activeTrigger;
+        var enhanceQueued = false;
+        var zoom = 1;
+        var MIN_ZOOM = 1;
+        var MAX_ZOOM = 4;
+        var ZOOM_STEP = 0.5;
+
+        function isEnhanced(node) {
+          return enhanced ? enhanced.has(node) : node.dataset.lightboxEnhanced === 'true';
+        }
+
+        function markEnhanced(node) {
+          if (enhanced) enhanced.add(node);
+          node.dataset.lightboxEnhanced = 'true';
+        }
+
+        function isEligibleImage(img) {
+          if (!img || img.dataset.noLightbox === 'true') return false;
+          if (!img.getAttribute('src') && !img.currentSrc) return false;
+          if (img.closest('[data-no-lightbox], a, button, [role="button"], .site-lightbox__target, .site-lightbox')) return false;
+          var gatedWrap = img.closest('[data-caws-asset]');
+          if (gatedWrap && !gatedWrap.classList.contains('is-loaded')) return false;
+          var rect = img.getBoundingClientRect();
+          var width = rect.width || img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
+          var height = rect.height || img.naturalHeight || parseInt(img.getAttribute('height') || '0', 10);
+          if (width < 80 || height < 80) return false;
+          return true;
+        }
+
+        function getImageCaption(img) {
+          var figure = img.closest('figure');
+          var figcaption = figure && figure.querySelector('figcaption');
+          return (figcaption && figcaption.textContent ? figcaption.textContent : img.getAttribute('alt') || '').trim();
+        }
+
+        function getImageSource(img) {
+          return img.currentSrc || img.getAttribute('src') || '';
+        }
+
+        function ensureDialog() {
+          if (dialog) return dialog;
+          dialog = document.createElement('dialog');
+          dialog.className = 'site-lightbox';
+          dialog.setAttribute('aria-label', 'Image preview');
+          dialog.innerHTML = '' +
+            '<div class="site-lightbox__panel">' +
+              '<div class="site-lightbox__bar">' +
+                '<p class="site-lightbox__caption" id="site-lightbox-caption"></p>' +
+                '<div class="site-lightbox__controls" aria-label="Image zoom controls">' +
+                  '<button class="site-lightbox__control" type="button" data-lightbox-zoom="out" aria-label="Zoom out">-</button>' +
+                  '<button class="site-lightbox__control site-lightbox__zoom-value" type="button" data-lightbox-zoom="reset" aria-label="Reset zoom">100%</button>' +
+                  '<button class="site-lightbox__control" type="button" data-lightbox-zoom="in" aria-label="Zoom in">+</button>' +
+                  '<button class="site-lightbox__control" type="button" data-lightbox-close aria-label="Close image preview">x</button>' +
+                '</div>' +
+              '</div>' +
+              '<div class="site-lightbox__viewport" tabindex="0">' +
+                '<img class="site-lightbox__image" alt="" />' +
+              '</div>' +
+            '</div>';
+          document.body.appendChild(dialog);
+          dialogImg = dialog.querySelector('.site-lightbox__image');
+          captionEl = dialog.querySelector('.site-lightbox__caption');
+          zoomValueEl = dialog.querySelector('.site-lightbox__zoom-value');
+          viewport = dialog.querySelector('.site-lightbox__viewport');
+
+          dialog.addEventListener('click', function (event) {
+            if (event.target === dialog || event.target.hasAttribute('data-lightbox-close')) closeLightbox();
+          });
+          dialog.addEventListener('close', function () {
+            document.documentElement.classList.remove('site-lightbox-open');
+            if (activeTrigger && typeof activeTrigger.focus === 'function') activeTrigger.focus();
+            activeTrigger = null;
+          });
+          dialog.addEventListener('keydown', function (event) {
+            if (event.key === '+' || event.key === '=') {
+              event.preventDefault();
+              setZoom(zoom + ZOOM_STEP);
+            } else if (event.key === '-') {
+              event.preventDefault();
+              setZoom(zoom - ZOOM_STEP);
+            } else if (event.key === '0') {
+              event.preventDefault();
+              setZoom(1);
+            }
+          });
+          dialog.addEventListener('click', function (event) {
+            var control = event.target.closest('[data-lightbox-zoom]');
+            if (!control) return;
+            var action = control.getAttribute('data-lightbox-zoom');
+            if (action === 'in') setZoom(zoom + ZOOM_STEP);
+            else if (action === 'out') setZoom(zoom - ZOOM_STEP);
+            else setZoom(1);
+          });
+          viewport.addEventListener('wheel', function (event) {
+            if (!event.ctrlKey && !event.metaKey) return;
+            event.preventDefault();
+            setZoom(zoom + (event.deltaY < 0 ? ZOOM_STEP : -ZOOM_STEP));
+          }, { passive: false });
+          return dialog;
+        }
+
+        function setZoom(nextZoom) {
+          zoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, nextZoom));
+          if (dialogImg) dialogImg.style.setProperty('--site-lightbox-zoom', String(zoom));
+          if (zoomValueEl) zoomValueEl.textContent = Math.round(zoom * 100) + '%';
+          if (viewport) viewport.classList.toggle('is-zoomed', zoom > 1);
+        }
+
+        function closeLightbox() {
+          if (dialog && dialog.open) dialog.close();
+        }
+
+        function openLightbox(img, trigger) {
+          var src = getImageSource(img);
+          if (!src) return;
+          ensureDialog();
+          activeTrigger = trigger || null;
+          var caption = getImageCaption(img);
+          dialogImg.src = src;
+          dialogImg.alt = img.getAttribute('alt') || '';
+          captionEl.textContent = caption || 'Image preview';
+          captionEl.hidden = !caption;
+          setZoom(1);
+          document.documentElement.classList.add('site-lightbox-open');
+          if (typeof dialog.showModal === 'function') dialog.showModal();
+          else dialog.setAttribute('open', '');
+          viewport.focus({ preventScroll: true });
+        }
+
+        function enhanceImage(img) {
+          if (isEnhanced(img) || !isEligibleImage(img)) return;
+          markEnhanced(img);
+          var target = img.closest('picture') || img;
+          var wrapper = document.createElement('span');
+          wrapper.className = 'site-lightbox__target';
+          target.parentNode.insertBefore(wrapper, target);
+          wrapper.appendChild(target);
+
+          var trigger = document.createElement('button');
+          trigger.type = 'button';
+          trigger.className = 'site-lightbox__trigger';
+          trigger.setAttribute('aria-label', 'Expand image');
+          trigger.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4"></path><path d="M11 8v6"></path><path d="M8 11h6"></path></svg>';
+          wrapper.appendChild(trigger);
+          wrapper.addEventListener('dblclick', function (event) {
+            event.preventDefault();
+            openLightbox(img, trigger);
+          });
+          trigger.addEventListener('click', function () {
+            openLightbox(img, trigger);
+          });
+        }
+
+        function enhanceImages() {
+          var imgs = Array.prototype.slice.call(document.querySelectorAll('main img'));
+          imgs.forEach(enhanceImage);
+        }
+
+        function scheduleEnhance() {
+          if (enhanceQueued) return;
+          enhanceQueued = true;
+          window.requestAnimationFrame(function () {
+            enhanceQueued = false;
+            enhanceImages();
+          });
+        }
+
+        function observeNewImages() {
+          var main = document.querySelector('main');
+          if (!main || typeof MutationObserver !== 'function') return;
+          var observer = new MutationObserver(scheduleEnhance);
+          observer.observe(main, { childList: true, subtree: true });
+          main.addEventListener('load', function (event) {
+            if (event.target && event.target.tagName === 'IMG') scheduleEnhance();
+          }, true);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function () {
+            enhanceImages();
+            observeNewImages();
+          });
+        } else {
+          enhanceImages();
+          observeNewImages();
+        }
+        document.addEventListener('caws:unlocked', scheduleEnhance);
+        document.addEventListener('caws:body-injected', scheduleEnhance);
+      })();
+    </script><title>Demo days 0 to 14 reference | Toybox by Flora May dela Cruz</title><script type="application/ld+json">[{"@context":"https://schema.org","@type":"CreativeWork","name":"Demo days 0 to 14 reference","headline":"Demo days 0 to 14 reference","description":"A live prototype reference that shows one stable interface evolving through Day 0, 1, 3, 7, 8, and 14 with a clear active-day indicator and progression cues.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"url":"https://floramaydc.com/toybox/demo-days-0-reference-prototype/","license":"https://creativecommons.org/publicdomain/zero/1.0/","dateModified":"2026-05-31T00:00:00.000Z","keywords":"prototype, demo-strategy, state-design, ux","genre":"Prototypes"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Toybox","item":"https://floramaydc.com/toybox/"},{"@type":"ListItem","position":2,"name":"Prototypes","item":"https://floramaydc.com/toybox/#prototype"},{"@type":"ListItem","position":3,"name":"Demo days 0 to 14 reference","item":"https://floramaydc.com/toybox/demo-days-0-reference-prototype/"}]}]</script><link rel="stylesheet" href="/assets/style.CgdQpFHN.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave" aria-hidden="true" data-thread> <svg class="top-wave__base" viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"> <defs>  <linearGradient id="hero-thread-grad" gradientUnits="userSpaceOnUse" x1="-400" y1="0" x2="-100" y2="0"> <stop offset="0%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <stop offset="25%" style="stop-color: var(--wave-g1)"></stop> <stop offset="50%" style="stop-color: var(--wave-g2)"></stop> <stop offset="75%" style="stop-color: var(--wave-g3)"></stop> <stop offset="100%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <animate attributeName="x1" values="-400;1700" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> <animate attributeName="x2" values="-100;2000" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> </linearGradient>  <filter id="hero-thread-glow" x="-10%" y="-50%" width="120%" height="200%"> <feGaussianBlur stdDeviation="1.4" result="b"></feGaussianBlur> <feMerge> <feMergeNode in="b"></feMergeNode> <feMergeNode in="SourceGraphic"></feMergeNode> </feMerge> </filter> </defs> <g fill="none" stroke="var(--wave-base)" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path>  <path d="M-20,192 C50,150 120,160 184,200 C250,240 320,240 388,210 C460,180 530,180 592,220 C660,260 730,260 796,230 C870,200 940,210 1000,242 C1070,275 1140,275 1204,250 C1280,225 1350,235 1408,265 C1480,295 1550,295 1620,282" stroke="url(#hero-thread-grad)" stroke-opacity="1" stroke-width="0.9" filter="url(#hero-thread-glow)" data-thread-morph></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <script>
       (function () {
         try {
           var wave = document.querySelector('.top-wave[data-thread]');
