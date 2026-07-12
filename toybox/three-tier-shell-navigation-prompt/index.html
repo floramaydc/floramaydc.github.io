@@ -311,6 +311,10 @@
         var enhanced = typeof WeakSet === 'function' ? new WeakSet() : null;
         var dialog;
         var dialogImg;
+        var svgHost;
+        var svgEl;
+        var activeEl;
+        var svgToken = 0;
         var zoomValueEl;
         var viewport;
         var activeTrigger;
@@ -341,7 +345,7 @@
           if (!img || img.dataset.noLightbox === 'true') return false;
           if (!img.getAttribute('src') && !img.currentSrc) return false;
           if (img.closest('[data-no-lightbox], a, button, [role="button"], .site-lightbox')) return false;
-          var gatedWrap = img.closest('[data-caws-asset]');
+          var gatedWrap = img.closest('[data-access-asset]');
           if (gatedWrap && !gatedWrap.classList.contains('is-loaded')) return false;
           var rect = img.getBoundingClientRect();
           var width = rect.width || img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
@@ -362,14 +366,16 @@
           return !!(window.matchMedia && window.matchMedia('(pointer: coarse), (max-width: 640px)').matches);
         }
 
-        function getImageSource(img) {
-          // data-lightbox-src points at a crisp VECTOR (SVG) zoom source.
-          // Desktop engines re-rasterize SVG cleanly at any zoom, so prefer it.
-          // Mobile engines (notably WebKit/Safari) cap SVG rasterization and
-          // render it pixelated when enlarged, so on mobile fall back to the
-          // raster (webp) source, which scales predictably.
-          var zoomSrc = img.getAttribute('data-lightbox-src');
-          if (zoomSrc && !isMobileZoom()) return zoomSrc;
+        function getZoomSource(img) {
+          // Preferred zoom source. data-lightbox-src points at a crisp VECTOR
+          // (SVG) source that we render INLINE (see loadSvg) so it stays sharp
+          // at any zoom on every engine, including WebKit/Safari.
+          return img.getAttribute('data-lightbox-src') || img.currentSrc || img.getAttribute('src') || '';
+        }
+
+        function getRasterSource(img) {
+          // The element's own raster source — used as an instant placeholder
+          // and as the fallback if the inline-SVG fetch fails.
           return img.currentSrc || img.getAttribute('src') || '';
         }
 
@@ -390,10 +396,13 @@
               '</div>' +
               '<div class="site-lightbox__viewport" tabindex="0">' +
                 '<img class="site-lightbox__image" alt="" />' +
+                '<div class="site-lightbox__svg" hidden></div>' +
               '</div>' +
             '</div>';
           document.body.appendChild(dialog);
           dialogImg = dialog.querySelector('.site-lightbox__image');
+          svgHost = dialog.querySelector('.site-lightbox__svg');
+          activeEl = dialogImg;
           zoomValueEl = dialog.querySelector('.site-lightbox__zoom-value');
           viewport = dialog.querySelector('.site-lightbox__viewport');
 
@@ -500,43 +509,43 @@
         }
 
         function measureFitWidth() {
-          // Measure the width the image occupies at its fitted (zoom 1) size.
-          // Temporarily clear any explicit zoom sizing so the CSS fit rules
-          // apply, read the width, then restore. This gives a stable base to
-          // multiply by the zoom factor.
-          if (!dialogImg || !viewport) return 0;
-          var prevW = dialogImg.style.width;
-          var prevH = dialogImg.style.height;
+          // Measure the width the active media (raster <img> or inline <svg>)
+          // occupies at its fitted (zoom 1) size. Temporarily clear any explicit
+          // zoom sizing so the CSS fit rules apply, read the width, then restore.
+          var el = activeEl || dialogImg;
+          if (!el || !viewport) return 0;
+          var prevW = el.style.width;
+          var prevH = el.style.height;
           var wasZoomed = viewport.classList.contains('is-zoomed');
-          dialogImg.style.width = '';
-          dialogImg.style.height = '';
+          el.style.width = '';
+          el.style.height = '';
           viewport.classList.remove('is-zoomed');
-          var w = dialogImg.getBoundingClientRect().width;
+          var w = el.getBoundingClientRect().width;
           if (wasZoomed) viewport.classList.add('is-zoomed');
-          dialogImg.style.width = prevW;
-          dialogImg.style.height = prevH;
+          el.style.width = prevW;
+          el.style.height = prevH;
           return w;
         }
 
         function setZoom(nextZoom) {
           zoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, nextZoom));
           if (zoomValueEl) zoomValueEl.textContent = Math.round(zoom * 100) + '%';
-          if (!dialogImg) return;
-          // Zoom by changing the image's RENDERED width (not transform:scale).
-          // This forces the browser to re-rasterize from source at the zoomed
-          // size, so vector (SVG) images stay razor-sharp on every engine —
-          // WebKit/Safari caps SVG rasterization under transform:scale and
-          // stretches the texture, which looked pixelated.
+          var el = activeEl || dialogImg;
+          if (!el) return;
+          // Zoom by changing the RENDERED width (not transform:scale). For an
+          // inline <svg> this re-renders the vector at the zoomed size (crisp on
+          // every engine); for a raster <img> it re-samples from source. WebKit
+          // caps SVG rasterization under transform:scale, which looked pixelated.
           if (zoom <= 1) {
-            dialogImg.style.width = '';
-            dialogImg.style.height = '';
+            el.style.width = '';
+            el.style.height = '';
             if (viewport) viewport.classList.remove('is-zoomed');
           } else {
             var fitW = measureFitWidth();
             if (viewport) viewport.classList.add('is-zoomed');
             if (fitW > 0) {
-              dialogImg.style.width = Math.round(fitW * zoom) + 'px';
-              dialogImg.style.height = 'auto';
+              el.style.width = Math.round(fitW * zoom) + 'px';
+              el.style.height = 'auto';
             }
           }
         }
@@ -545,16 +554,89 @@
           if (dialog && dialog.open) dialog.close();
         }
 
+        function clearSvg() {
+          if (svgHost) {
+            svgHost.textContent = '';
+            svgHost.hidden = true;
+          }
+          svgEl = null;
+        }
+
+        function showRaster(src, alt) {
+          clearSvg();
+          dialogImg.hidden = false;
+          dialogImg.src = src;
+          dialogImg.alt = alt || '';
+          activeEl = dialogImg;
+          setZoom(1);
+        }
+
+        function sanitizeSvg(svg) {
+          // First-party assets, but strip anything active before inlining.
+          var bad = svg.querySelectorAll('script, foreignObject');
+          Array.prototype.forEach.call(bad, function (n) {
+            if (n.parentNode) n.parentNode.removeChild(n);
+          });
+          var nodes = svg.querySelectorAll('*');
+          Array.prototype.forEach.call(nodes, function (n) {
+            for (var i = n.attributes.length - 1; i >= 0; i--) {
+              var name = n.attributes[i].name;
+              if (/^on/i.test(name)) n.removeAttribute(name);
+            }
+          });
+          return svg;
+        }
+
+        function loadSvg(src, label, token) {
+          if (!window.fetch || !window.DOMParser) return;
+          window.fetch(src, { credentials: 'same-origin' }).then(function (res) {
+            if (!res.ok) throw new Error('svg fetch failed');
+            return res.text();
+          }).then(function (text) {
+            if (token !== svgToken || !svgHost) return;
+            var doc = new DOMParser().parseFromString(text, 'image/svg+xml');
+            var svg = doc.querySelector('svg');
+            if (!svg || doc.querySelector('parsererror')) throw new Error('bad svg');
+            sanitizeSvg(svg);
+            if (!svg.getAttribute('viewBox')) {
+              var vw = parseFloat(svg.getAttribute('width')) || 0;
+              var vh = parseFloat(svg.getAttribute('height')) || 0;
+              if (vw && vh) svg.setAttribute('viewBox', '0 0 ' + vw + ' ' + vh);
+            }
+            // Keep the intrinsic width/height attributes: they give the inline
+            // SVG a definite size for CSS `width:auto` + max-width/height fit
+            // (an SVG with only a viewBox has no CSS intrinsic size and would
+            // collapse to 0). The viewBox still drives crisp vector scaling when
+            // we override the rendered width during zoom.
+            svg.setAttribute('role', 'img');
+            if (label) svg.setAttribute('aria-label', label);
+            var imported = document.importNode(svg, true);
+            svgHost.textContent = '';
+            svgHost.appendChild(imported);
+            svgHost.hidden = false;
+            dialogImg.hidden = true;
+            svgEl = imported;
+            activeEl = svgEl;
+            setZoom(1);
+          }).catch(function () {
+            // Keep the raster placeholder already showing; nothing else to do.
+          });
+        }
+
         function openLightbox(img, trigger) {
-          var src = getImageSource(img);
-          if (!src) return;
+          var zoomSrc = getZoomSource(img);
+          if (!zoomSrc) return;
           ensureDialog();
           activeTrigger = trigger || null;
           var label = getImageLabel(img);
-          dialogImg.src = src;
-          dialogImg.alt = img.getAttribute('alt') || '';
+          var alt = img.getAttribute('alt') || '';
           dialog.setAttribute('aria-label', label || 'Image preview');
-          setZoom(1);
+          var token = ++svgToken;
+          var isSvg = /\.svg(\?|#|$)/i.test(zoomSrc);
+          // Always show a raster first (instant, no blank frame). For SVG
+          // sources, swap in a crisp inline <svg> once fetched.
+          showRaster(getRasterSource(img) || zoomSrc, alt);
+          if (isSvg) loadSvg(zoomSrc, label, token);
           document.documentElement.classList.add('site-lightbox-open');
           if (typeof dialog.showModal === 'function') dialog.showModal();
           else dialog.setAttribute('open', '');
@@ -648,10 +730,10 @@
           enhanceImages();
           observeNewImages();
         }
-        document.addEventListener('caws:unlocked', scheduleEnhance);
-        document.addEventListener('caws:body-injected', scheduleEnhance);
+        document.addEventListener('access:unlocked', scheduleEnhance);
+        document.addEventListener('access:body-injected', scheduleEnhance);
       })();
-    </script><title>Three-Tier Shell Navigation Prompt | Toybox by Flora May dela Cruz</title><script type="application/ld+json">[{"@context":"https://schema.org","@type":"CreativeWork","name":"Three-Tier Shell Navigation Prompt","headline":"Three-Tier Shell Navigation Prompt","description":"A copy-paste prompt that produces a complete app-rail + section-nav + content shell, including the mobile overlay pattern. Hand to Cursor, Copilot, or v0 when you need the chrome in an hour, not a sprint.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"url":"https://floramaydc.com/toybox/three-tier-shell-navigation-prompt/","license":"https://creativecommons.org/publicdomain/zero/1.0/","dateModified":"2026-05-23T00:00:00.000Z","keywords":"navigation, shell, ai-prompt, responsive","genre":"Prompts"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Toybox","item":"https://floramaydc.com/toybox/"},{"@type":"ListItem","position":2,"name":"Prompts","item":"https://floramaydc.com/toybox/#prompt"},{"@type":"ListItem","position":3,"name":"Three-Tier Shell Navigation Prompt","item":"https://floramaydc.com/toybox/three-tier-shell-navigation-prompt/"}]}]</script><link rel="stylesheet" href="/assets/style.B6FU3wnl.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave" aria-hidden="true" data-thread> <svg class="top-wave__base" viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"> <defs>  <linearGradient id="hero-thread-grad" gradientUnits="userSpaceOnUse" x1="-400" y1="0" x2="-100" y2="0"> <stop offset="0%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <stop offset="25%" style="stop-color: var(--wave-g1)"></stop> <stop offset="50%" style="stop-color: var(--wave-g2)"></stop> <stop offset="75%" style="stop-color: var(--wave-g3)"></stop> <stop offset="100%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <animate attributeName="x1" values="-400;1700" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> <animate attributeName="x2" values="-100;2000" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> </linearGradient>  <filter id="hero-thread-glow" x="-10%" y="-50%" width="120%" height="200%"> <feGaussianBlur stdDeviation="1.4" result="b"></feGaussianBlur> <feMerge> <feMergeNode in="b"></feMergeNode> <feMergeNode in="SourceGraphic"></feMergeNode> </feMerge> </filter> </defs> <g fill="none" stroke="var(--wave-base)" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path>  <path d="M-20,192 C50,150 120,160 184,200 C250,240 320,240 388,210 C460,180 530,180 592,220 C660,260 730,260 796,230 C870,200 940,210 1000,242 C1070,275 1140,275 1204,250 C1280,225 1350,235 1408,265 C1480,295 1550,295 1620,282" stroke="url(#hero-thread-grad)" stroke-opacity="1" stroke-width="0.9" filter="url(#hero-thread-glow)" data-thread-morph></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <script>
+    </script><title>Three-Tier Shell Navigation Prompt | Toybox by Flora May dela Cruz</title><script type="application/ld+json">[{"@context":"https://schema.org","@type":"CreativeWork","name":"Three-Tier Shell Navigation Prompt","headline":"Three-Tier Shell Navigation Prompt","description":"A copy-paste prompt that produces a complete app-rail + section-nav + content shell, including the mobile overlay pattern. Hand to Cursor, Copilot, or v0 when you need the chrome in an hour, not a sprint.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"url":"https://floramaydc.com/toybox/three-tier-shell-navigation-prompt/","license":"https://creativecommons.org/publicdomain/zero/1.0/","dateModified":"2026-05-23T00:00:00.000Z","keywords":"navigation, shell, ai-prompt, responsive","genre":"Prompts"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Toybox","item":"https://floramaydc.com/toybox/"},{"@type":"ListItem","position":2,"name":"Prompts","item":"https://floramaydc.com/toybox/#prompt"},{"@type":"ListItem","position":3,"name":"Three-Tier Shell Navigation Prompt","item":"https://floramaydc.com/toybox/three-tier-shell-navigation-prompt/"}]}]</script><link rel="stylesheet" href="/assets/style.P1ZaAz_Q.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave" aria-hidden="true" data-thread> <svg class="top-wave__base" viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"> <defs>  <linearGradient id="hero-thread-grad" gradientUnits="userSpaceOnUse" x1="-400" y1="0" x2="-100" y2="0"> <stop offset="0%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <stop offset="25%" style="stop-color: var(--wave-g1)"></stop> <stop offset="50%" style="stop-color: var(--wave-g2)"></stop> <stop offset="75%" style="stop-color: var(--wave-g3)"></stop> <stop offset="100%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <animate attributeName="x1" values="-400;1700" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> <animate attributeName="x2" values="-100;2000" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> </linearGradient>  <filter id="hero-thread-glow" x="-10%" y="-50%" width="120%" height="200%"> <feGaussianBlur stdDeviation="1.4" result="b"></feGaussianBlur> <feMerge> <feMergeNode in="b"></feMergeNode> <feMergeNode in="SourceGraphic"></feMergeNode> </feMerge> </filter> </defs> <g fill="none" stroke="var(--wave-base)" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path>  <path d="M-20,192 C50,150 120,160 184,200 C250,240 320,240 388,210 C460,180 530,180 592,220 C660,260 730,260 796,230 C870,200 940,210 1000,242 C1070,275 1140,275 1204,250 C1280,225 1350,235 1408,265 C1480,295 1550,295 1620,282" stroke="url(#hero-thread-grad)" stroke-opacity="1" stroke-width="0.9" filter="url(#hero-thread-glow)" data-thread-morph></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <script>
       (function () {
         try {
           var wave = document.querySelector('.top-wave[data-thread]');
