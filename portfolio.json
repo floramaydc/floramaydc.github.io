@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-08-31T23:07:27.810Z",
+  "builtAt": "2026-08-31T23:22:23.265Z",
   "source": "src/content (work + resume + toybox + writing + play) — generated, do not edit by hand",
   "profile": {
     "name": "Flora May dela Cruz",
@@ -14,7 +14,30 @@
       "Senior individual-contributor design leadership — strategy, pattern libraries, mentorship across teams"
     ],
     "contact": "The best path is LinkedIn at linkedin.com/in/floramaydelacruz. Email and Instagram links are at the bottom of the About page. She does not publish her phone number.",
-    "canonicalUrl": "https://floramaydc.com/about/"
+    "canonicalUrl": "https://floramaydc.com/about/",
+    "portfolio": {
+      "caseStudies": 6,
+      "tools": 6,
+      "prototypes": 2,
+      "playbooks": 11,
+      "toyboxTotal": 25,
+      "writing": 11,
+      "play": 4,
+      "topThemes": [
+        "accessibility",
+        "audit",
+        "interaction-design",
+        "ux",
+        "ai",
+        "design-systems",
+        "navigation",
+        "wcag",
+        "product-strategy",
+        "prototyping",
+        "components",
+        "dark-mode"
+      ]
+    }
   },
   "experience": [
     {
@@ -77,7 +100,11 @@
           "heading": "Summary",
           "text": "Modern software teams generate a tremendous amount of information while building software. Test results, code coverage metrics, build outputs, deployment logs, and quality checks all contribute to understanding whether code is ready to move forward. The challenge is rarely the lack of information. The challenge is turning that information into confidence. While working on AWS CodeCatalyst, I focused on the reporting experience that helped developers understand the health of their code and make informed decisions throughout the development lifecycle. Through usability testing, stakeholder feedback, and ongoing product discovery, we observed a recurring set of challenges. Developers needed clearer ways to discover reports, understand quality signals, and connect reporting insights back to the workflows generating them. As reporting capabilities expanded, expectations around visualization, interpretation, and actionability expanded as well. Rather than treating these as separate problems, we approached them as different parts of the same experience: helping developers find, understand, and act on code quality information."
         }
-      ]
+      ],
+      "related": {
+        "toybox": [],
+        "writing": []
+      }
     },
     {
       "id": "dspm",
@@ -110,7 +137,48 @@
           "heading": "Summary",
           "text": "Data Security Posture Management (DSPM) is Microsoft Purview's platform for helping organizations understand where they are most exposed, why those risks matter, and what actions can improve their security posture across data security and AI. It functions as a town square for Purview by bringing together signals, risks, actions, and partner experiences that would otherwise remain spread across the platform. I joined the broader initiative while leading the Reporting framework for Microsoft Purview. As the program evolved, my work expanded into parallel efforts across Risk Patterns, Remediations, policy actions, AI scenarios, and partner experiences. The structure I developed for Risk Patterns became one of the strongest directions in the work, and I eventually led the core DSPM experience that brought these efforts together. Over five months, I led the work required to turn an ambitious but unresolved product direction into a coherent platform experience. That included unifying two independently evolving DSPM experiences, working through more than twenty posture explorations, validating concepts through research, and establishing a shared model for communicating organizational risk across Microsoft Purview. The unified DSPM experience became generally available in April 2026."
         }
-      ]
+      ],
+      "related": {
+        "toybox": [
+          {
+            "id": "accessibility-annotation-playbook",
+            "title": "Accessibility Annotation Playbook",
+            "url": "https://floramaydc.com/toybox/accessibility-annotation-playbook/"
+          },
+          {
+            "id": "accessibility-audit-tool",
+            "title": "Accessibility Audit",
+            "url": "https://floramaydc.com/toybox/accessibility-audit-tool/"
+          },
+          {
+            "id": "accessibility-audit-bookmarklet",
+            "title": "Accessibility Audit bookmarklet",
+            "url": "https://floramaydc.com/toybox/accessibility-audit-bookmarklet/"
+          },
+          {
+            "id": "accessibility-audit-ops-playbook",
+            "title": "Accessibility Audit Ops Playbook",
+            "url": "https://floramaydc.com/toybox/accessibility-audit-ops-playbook/"
+          }
+        ],
+        "writing": [
+          {
+            "id": "ai-changed-how-i-think-about-design-artifacts",
+            "title": "AI changed how I think about design artifacts",
+            "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          },
+          {
+            "id": "ai-made-me-question-where-roles-begin-and-end",
+            "title": "AI made me question where roles begin and end",
+            "url": "https://floramaydc.com/writing/ai-made-me-question-where-roles-begin-and-end/"
+          },
+          {
+            "id": "using-md-files-as-design-memory",
+            "title": "Using .md files as design memory",
+            "url": "https://floramaydc.com/writing/using-md-files-as-design-memory/"
+          }
+        ]
+      }
     },
     {
       "id": "ebbc",
@@ -165,7 +233,11 @@
           "heading": "Reflections",
           "text": "There is great value in following a UCD approach, especially in reconciling the gap between the business and the users. As a designer, I learned to look at each design challenge from the lens of the users. For this particular project, I would have loved to learn more about the bookstore's business goals and identity. And if the redesign was implemented, it would be great to measure performance — is there an increase in new visitors? Incremental growth from online shopping? More traffic to the website? After conducting a variety of user research methods, I found a new appreciation for truly empathizing with users and using insights to implement a design."
         }
-      ]
+      ],
+      "related": {
+        "toybox": [],
+        "writing": []
+      }
     },
     {
       "id": "mindelf",
@@ -240,7 +312,11 @@
           "heading": "Reflections",
           "text": "- In this project, I learned the importance of rapid prototyping as a design workflow, especially for an early-stage startup. The benefits include quick turnaround time and cost-effectiveness. - I also learned that working closely with the product and development team yields a holistic product approach. What I could have done better - If I could do it again, I would create a journey map and a service blueprint to see the overall interaction. - I would have explored distinct personas rather than a generic approach to the key users."
         }
-      ]
+      ],
+      "related": {
+        "toybox": [],
+        "writing": []
+      }
     },
     {
       "id": "pacbot",
@@ -303,7 +379,17 @@
           "heading": "Reflections",
           "text": "The team created an impactful change in how users interact with the PacBot interface. Personally, I am very pleased with the outcome — not only because we made the customer happy, but because most enterprise products are challenging to design. The complexity of managing a gargantuan amount of data and the level of technicality is often used as an excuse for why these products do not have good usability compared to consumer products. When I onboarded to this project, my design principle was less is more . That's why the solutions did not involve a massive design overhaul, but leveraged existing pages to create a better navigational path. Going back to basics by introducing the ability to right-click (which should have been there in the first place) was its own feat, given the technical limitations. Lastly, on the research methods used: I would ideally start with qualitative interviews and then validate the words against the patterns. However, the problem here was discovered while reviewing the metrics. High page views and time spent do not immediately mean that a page is performing well. It depends on the purpose of the application and users' behavior. Users in PacBot are not encouraged to wander around — they are very intentional. That is why it is critical for them to go in and out as quickly as possible, but armed with the correct information to take action outside the interface. --- To learn more about PacBot and view some of the old designs, visit the T-Mobile PacBot GitHub page."
         }
-      ]
+      ],
+      "related": {
+        "toybox": [
+          {
+            "id": "accessibility-compliance-baseline-playbook",
+            "title": "The Accessibility Compliance Baseline Playbook",
+            "url": "https://floramaydc.com/toybox/accessibility-compliance-baseline-playbook/"
+          }
+        ],
+        "writing": []
+      }
     },
     {
       "id": "vera",
@@ -353,7 +439,27 @@
           "heading": "Reflections",
           "text": "IA is important in creating an outstanding user experience. In AI, it is very crucial to create a solid structure of IA, clear labels, and strategic use of categories. One of the most difficult challenges I observed was that neither the taggers were fashion-forward nor were the developers. As a result, the taggers would guess what these images were. On one occasion, a tagger classified a skort as a short. Unfortunately, with the limited capabilities of the computer vision algorithm, it was auto-tagged as a skirt. But which is correct? How do you classify an object that could be either? What about terminologies for lengths or types of neckline? Would it be a good approach to rely on terminologies alone? If the taggers decided to use external resources such as Google search, the terminologies used in the tagging tool were not standard. Fortunately, Google's taxonomy is public. It would be useful to benchmark against it while creating specific user stories for outliers. Having said all that, I realized how critical IA is in AI. Efforts should be exhausted improving it — otherwise it defeats the overall experience."
         }
-      ]
+      ],
+      "related": {
+        "toybox": [],
+        "writing": [
+          {
+            "id": "ai-changed-how-i-think-about-design-artifacts",
+            "title": "AI changed how I think about design artifacts",
+            "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          },
+          {
+            "id": "ai-made-me-question-where-roles-begin-and-end",
+            "title": "AI made me question where roles begin and end",
+            "url": "https://floramaydc.com/writing/ai-made-me-question-where-roles-begin-and-end/"
+          },
+          {
+            "id": "using-md-files-as-design-memory",
+            "title": "Using .md files as design memory",
+            "url": "https://floramaydc.com/writing/using-md-files-as-design-memory/"
+          }
+        ]
+      }
     }
   ],
   "skills": [
@@ -713,7 +819,17 @@
           "heading": "Generalized example",
           "text": "A fictional fleet-management dashboard introduces a vehicle status drawer — a right-side overlay that opens when an operator clicks a row in a vehicles table. The drawer shows the vehicle's current trip, last 24 hours of telemetry, and lets the operator dispatch a maintenance request. Layer 1 — Semantics. The drawer is a dialog (it manages focus, dismisses on Esc, sits over the page). The maintenance request button inside it is a button (it triggers an action; it does not navigate). The \"view full vehicle history\" text is a link (it navigates). Layer 2 — Name and role. Accessible name on the drawer: \"Vehicle 4471 status\" . The vehicle ID is the name; \"status\" provides role context. No visible heading needed because the drawer's heading already says exactly that string. The maintenance button's accessible name is \"Request maintenance for vehicle 4471\" — the vehicle ID is repeated so the action is unambiguous out of context. Layer 3 — Focus and keyboard. On open: focus moves to the drawer's close button (so dismiss is one keystroke away). Tab order: close → heading region → trip card → telemetry expand → maintenance button → full history link. Esc closes the drawer. Focus returns to the table row the operator clicked, not to the top of the table. Focus trap is scoped to the drawer. Layer 4 — State and updates. Six states: loading , loaded , error , stale (telemetry 5 min old), dispatched (maintenance request submitted), dispatch-failed . | State | Visual | Announcement | Politeness | Focus | |---|---|---|---|---| | loading | skeleton | \"Loading vehicle 4471 status\" | polite | unchanged | | loaded | full content | (silent — content is now navigable) | n/a | unchanged | | error | error region + retry | \"Could not load vehicle 4471 status. Retry available.\" | assertive | on retry | | stale | warning chip + content | \"Telemetry data is more than five minutes old.\" | polite | unchanged | | dispatched | success toast + button → \"Dispatched\" | \"Maintenance request dispatched for vehicle 4471.\" | polite | unchanged | | dispatch-failed | inline error + retry | \"Could not dispatch maintenance request. Retry available.\" | assertive | on retry button | Layer 5 — Reading and reach. Vehicle status icons are decorative (alt=\"\"); the same status is in text adjacent. Telemetry sparkline chart has a text summary above it (\"Speed averaged 47 km/h over the last hour\"). Touch targets meet 44×44. The drawer supports prefers-reduced-motion (no slide animation when set). Color-coded status is paired with a shape (circle / triangle / square). The annotation block above is what ships with the spec. A developer can implement this without one Slack message back to the designer. A11y review has a concrete artifact to approve. QA writes one test per row of the state matrix. --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer names, segment sizes, or identifiable details - [x] No internal metrics, thresholds, OKRs, or telemetry numbers - [x] No roadmap, ship dates, or future plans - [x] No architecture, service names, API shapes, or schema fields from real systems - [x] No screenshots showing real chrome, real data, or recognizable surfaces - [x] No internal-only workflows, tools, or terminology - [x] Every example is fictional or abstracted; numbers are illustrative - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          }
+        ],
+        "writing": []
+      }
     },
     {
       "id": "accessibility-audit-tool",
@@ -758,7 +874,17 @@
           "heading": "Version history",
           "text": "- 1.1 (2026-06-27) — Restored the bookmarklet install card for auditing staging, gated, or logged-in pages directly in your own browser. - 1.0 (2026-06-01) — Initial paste-a-URL WCAG audit with annotated report, element inventory, contrast findings, and exportable output."
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          }
+        ],
+        "writing": []
+      }
     },
     {
       "id": "accessibility-audit-bookmarklet",
@@ -804,7 +930,17 @@
           "heading": "Companion artifacts",
           "text": "- Accessibility Audit — the server-side web tool that produces the full annotated report. - Accessibility Audit Ops Playbook — how to run the audit and triage what it surfaces. - Component Audit bookmarklet — the component-inventory counterpart for the same authenticated surfaces."
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          }
+        ],
+        "writing": []
+      }
     },
     {
       "id": "accessibility-audit-ops-playbook",
@@ -876,7 +1012,17 @@
           "heading": "Generalized example",
           "text": "A fictional content workflow product runs this audit on each release candidate. Automated checks flag contrast regressions in two routes; manual testing finds focus return failures in one dialog flow. The team patches shared tokens and dialog primitives, then re-runs both lanes before closing findings. Over three cycles, repeat issues drop because fixes happen at system level. --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer names, segment sizes, or identifiable details - [x] No internal metrics, thresholds, OKRs, or telemetry numbers - [x] No roadmap, ship dates, or future plans - [x] No architecture, service names, API shapes, or schema fields from real systems - [x] No screenshots showing real chrome, real data, or recognizable surfaces - [x] No internal-only workflows, tools, or terminology - [x] Every example is fictional or abstracted; numbers are illustrative - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          }
+        ],
+        "writing": []
+      }
     },
     {
       "id": "audit-command-center-template",
@@ -948,7 +1094,23 @@
           "heading": "Generalized example",
           "text": "A fictional platform team runs this template every Monday. Design-system and dark-mode findings reveal a shared token issue, so they merge two tickets into one systemic fix. Accessibility findings identify a dialog focus-return bug in three routes; one primitive patch resolves all three. The command-center board shows closed evidence by Friday and carry-forward items with explicit owners. --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer names, segment sizes, or identifiable details - [x] No internal metrics, thresholds, OKRs, or telemetry numbers - [x] No roadmap, ship dates, or future plans - [x] No architecture, service names, API shapes, or schema fields from real systems - [x] No screenshots showing real chrome, real data, or recognizable surfaces - [x] No internal-only workflows, tools, or terminology - [x] Every example is fictional or abstracted; numbers are illustrative - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          }
+        ],
+        "writing": [
+          {
+            "id": "ai-changed-how-i-think-about-design-artifacts",
+            "title": "AI changed how I think about design artifacts",
+            "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          }
+        ]
+      }
     },
     {
       "id": "component-audit-tool",
@@ -986,7 +1148,11 @@
           "heading": "Try it when",
           "text": "- You need to inventory the components on a live page — what's there, what library it came from, confidence score - You want to check if a page uses Fluent UI, Material, or Carbon and whether they're implemented to spec - You're auditing design system adoption or drift across a product surface - You want to detect custom components that might be missing keyboard support or ARIA semantics - You're doing a component migration and need to know what's currently on the page before you start"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": []
+      }
     },
     {
       "id": "component-audit-bookmarklet",
@@ -1027,7 +1193,11 @@
           "heading": "Companion artifacts",
           "text": "- Component Audit — the server-side web tool that produces the full annotated report. - Design System Audit Playbook — how to triage findings: Inventory → Drift → Duplication → Risk → Action. - Accessibility Audit — sibling tool for WCAG checks on the same surface."
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": []
+      }
     },
     {
       "id": "dark-mode-spec-one-pager",
@@ -1094,7 +1264,11 @@
           "heading": "Companion artifacts",
           "text": "- The Accessibility Compliance Baseline Playbook for the contrast requirements this spec must verify against - The Subtraction Playbook — useful if your team is debating whether to ship dark mode as a separate codebase vs. additive (it should almost always be additive; document the refusal) - Accessibility Audit Ops Playbook for recurring contrast and interaction verification - Design System Audit Playbook for tracking token drift that often causes dark-mode regressions - Audit Command Center Template for triaging dark-mode issues alongside other quality findings --- Public-safe review (verified before publish) - [x] No employer or client product names or codenames - [x] No customer data - [x] No real component-library class hashes or pinned versions - [x] No real package names - [x] No real brand hex values — example colors illustrative only - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": []
+      }
     },
     {
       "id": "dark-pattern-detector",
@@ -1152,7 +1326,17 @@
           "heading": "Version history",
           "text": "- 1.0 (2026-06-27) — Reframed into a paste-URL, <span class=\"mai-wordmark\" M<span class=\"mai-dot\" .</span ai</span -powered scan that mirrors the Accessibility and Component audits. Added the deceptive.design taxonomy, evidence-first findings, and confirmed/advisory scoring. Kept the companion Chrome extension as the in-browser option."
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "ai-changed-how-i-think-about-design-artifacts",
+            "title": "AI changed how I think about design artifacts",
+            "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          }
+        ]
+      }
     },
     {
       "id": "demo-days-0-reference-prototype",
@@ -1191,7 +1375,17 @@
           "heading": "Companion artifacts",
           "text": "- Demo Days 0 to 14 Time-Machine Playbook for the full method and template - Secret Handshakes for Designers Playbook for hidden controls used to operate timeline demos - Fluent theme toggle for baseline design-system and theme behavior reference"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "ai-changed-how-i-think-about-design-artifacts",
+            "title": "AI changed how I think about design artifacts",
+            "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          }
+        ]
+      }
     },
     {
       "id": "demo-days-0-to-14-time-machine-playbook",
@@ -1262,7 +1456,22 @@
           "heading": "Generalized example",
           "text": "A fictional workflow automation dashboard uses this timeline: - Day 0 shows no active automations, clear setup prompts, and unknown trend cards - Day 1 introduces one configured workflow and one recommended next step - Day 3 shows repeated runs and first exception alerts - Day 7 highlights highest-friction step and targeted optimization actions - Day 8 reflects post-optimization improvements in flow stability - Day 14 presents routine operations with periodic tuning tasks All numbers are illustrative. The value is the sequence logic, not specific metrics. --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer names, segment sizes, or identifiable details - [x] No internal metrics, thresholds, OKRs, or telemetry numbers - [x] No roadmap, ship dates, or future plans - [x] No architecture, service names, API shapes, or schema fields from real systems - [x] No screenshots showing real chrome, real data, or recognizable surfaces - [x] No internal-only workflows, tools, or terminology - [x] Every example is fictional or abstracted; numbers are illustrative - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "ai-changed-how-i-think-about-design-artifacts",
+            "title": "AI changed how I think about design artifacts",
+            "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          },
+          {
+            "id": "ai-made-me-question-where-roles-begin-and-end",
+            "title": "AI made me question where roles begin and end",
+            "url": "https://floramaydc.com/writing/ai-made-me-question-where-roles-begin-and-end/"
+          }
+        ]
+      }
     },
     {
       "id": "design-system-audit-playbook",
@@ -1335,7 +1544,17 @@
           "heading": "Version history",
           "text": "| Version | Date | Notes | |---------|------|-------| | 1.0 | 2026-05-31 | Initial release |"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "ai-changed-how-i-think-about-design-artifacts",
+            "title": "AI changed how I think about design artifacts",
+            "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          }
+        ]
+      }
     },
     {
       "id": "component-inference",
@@ -1374,7 +1593,17 @@
           "heading": "Version history",
           "text": "| Version | Date | Notes | |---------|------|-------| | 1.0 | 2026-06-10 | Initial release |"
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          }
+        ],
+        "writing": []
+      }
     },
     {
       "id": "fluent-theme-toggle",
@@ -1422,7 +1651,23 @@
           "heading": "Companion artifacts",
           "text": "- Dark Mode Spec One-Pager for additive theme architecture and seam tracking - Design System Audit Playbook for consistency checks across tokens and components - Accessibility Audit Ops Playbook for recurring accessibility verification cadence"
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          }
+        ],
+        "writing": [
+          {
+            "id": "ai-changed-how-i-think-about-design-artifacts",
+            "title": "AI changed how I think about design artifacts",
+            "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          }
+        ]
+      }
     },
     {
       "id": "secret-handshakes-for-designers-playbook",
@@ -1489,7 +1734,22 @@
           "heading": "Generalized example",
           "text": "A fictional analytics prototype uses: - Cmd/Ctrl+Shift+P to open a small operator-only scenario panel - A compact day selector for Day 0/1/3/7/8/14 progression checks - A \"Reset prototype\" action that clears all session-scoped demo keys During review, the designer can answer \"What would a new user see?\" and \"What does this look like two weeks in?\" in seconds, without changing visible production-like UI chrome. --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer names, segment sizes, or identifiable details - [x] No internal metrics, thresholds, OKRs, or telemetry numbers - [x] No roadmap, ship dates, or future plans - [x] No architecture, service names, API shapes, or schema fields from real systems - [x] No screenshots showing real chrome, real data, or recognizable surfaces - [x] No internal-only workflows, tools, or terminology - [x] Every example is fictional or abstracted; numbers are illustrative - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "ai-changed-how-i-think-about-design-artifacts",
+            "title": "AI changed how I think about design artifacts",
+            "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          },
+          {
+            "id": "ai-made-me-question-where-roles-begin-and-end",
+            "title": "AI made me question where roles begin and end",
+            "url": "https://floramaydc.com/writing/ai-made-me-question-where-roles-begin-and-end/"
+          }
+        ]
+      }
     },
     {
       "id": "accessibility-compliance-baseline-playbook",
@@ -1568,7 +1828,22 @@
           "heading": "Generalized example",
           "text": "A fictional fleet-management dashboard . Application shell wired with: a skip link, a focusable <main , a single polite live region, and a route-to-title map. The compliance matrix is reviewed at the start of the project; ten SCs are enforced once (shell + tokens), six are flagged per-feature. The PR checklist is added to the team's pull-request template. Six months in, a new feature adds a \"schedule recall\" action. The PR checklist catches three issues the author hadn't thought about: the icon-only \"more actions\" menu has an aria-label but no tooltip, the success toast was about to spin up its own aria-live div instead of calling announce() , and the modal's Escape handler was missing because it was hand-rolled instead of using the dialog primitive. Fixed in fifteen minutes — instead of caught by an auditor four sprints later. That's the whole point of the baseline. Compliance scales when most of it is invisible infrastructure and the rest is an eight-line checklist. --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer names, segment sizes, or identifiable details - [x] No internal metrics, thresholds, OKRs, or telemetry numbers - [x] No roadmap, ship dates, or future plans - [x] No architecture, service names, API shapes, or schema fields from real systems - [x] No screenshots showing real chrome, real data, or recognizable surfaces - [x] No internal-only workflows, tools, or terminology - [x] Every example is fictional or abstracted; numbers are illustrative - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          },
+          {
+            "id": "pacbot",
+            "title": "Policy as Code (PacBot)",
+            "url": "https://floramaydc.com/work/pacbot/"
+          }
+        ],
+        "writing": []
+      }
     },
     {
       "id": "enterprise-reflow-playbook",
@@ -1668,7 +1943,17 @@
           "heading": "Version history",
           "text": "| Version | Date | What changed | |---|---:|---| | 1.0 | 2026-05-23 | Initial playbook: shell overflow, structural breakpoint, overlay nav, wrapping header actions, card grids, clamp() titles, breadcrumb collapse, table scroll containers, and viewport test list. | | 1.1 | 2026-06-27 | Added the reflow boundary for asset work and widened the default audit range to 1920–320. This playbook does not cover converting images or choosing formats, but it does require validating the rendered object after asset paths, formats, or wrappers change. |"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "building-complex-products-solutions-and-user-journeys",
+            "title": "Building complex products made me think differently about solutions and user journeys",
+            "url": "https://floramaydc.com/writing/building-complex-products-solutions-and-user-journeys/"
+          }
+        ]
+      }
     },
     {
       "id": "idempotent-bulk-action-pattern",
@@ -1739,7 +2024,22 @@
           "heading": "Companion artifacts",
           "text": "- The Sticky View State Playbook — the selection-clearing rule applies identically - The Accessibility Compliance Baseline Playbook — the disabled state and the persistent marker each need a non-color companion (text and an icon, respectively) --- Public-safe review (verified before publish) - [x] No employer or client product names or codenames - [x] No customer data, metrics, or thresholds drawn from real systems - [x] No real component-library or package names - [x] No real route paths or class hashes - [x] All examples invented; the threshold numbers (1.5s, 0.9s, 3s, 12px) are illustrative defaults - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "three-labels-six-surfaces",
+            "title": "Three labels, six surfaces",
+            "url": "https://floramaydc.com/writing/three-labels-six-surfaces/"
+          },
+          {
+            "id": "notes-from-the-reversible-queue",
+            "title": "Notes from the reversible queue",
+            "url": "https://floramaydc.com/writing/notes-from-the-reversible-queue/"
+          }
+        ]
+      }
     },
     {
       "id": "interactive-element-audit-playbook",
@@ -1800,7 +2100,33 @@
           "heading": "Version history",
           "text": "- 1.3 (2026-07-11) — Added the breadcrumb truncation nuance after dogfooding writing pages. Breadcrumbs may stay single-line with an ellipsized current item when the full page title remains available in the H1 and DOM. - 1.2 (2026-07-11) — Added the custom-surface contrast rule after dogfooding the Play book pages. Interactive and editorial accents must be sampled against their rendered book/card/overlay surface, not assumed safe because the global token passes somewhere else. - 1.1 (2026-07-10) — Updated after dogfooding the playbook on this site. Clarifies that link behavior should be global by interactive type, that body links need a persistent non-color cue but not necessarily a rest underline, and that exceptions such as social links are named modifiers that still follow the same state contract. - 1.0 (2026-06-29) — Initial publication. Six-test framework with consistency as the spine and the link rule as the flagship distinguishable test. Interpretation of ISO 9241-161; companion to the Accessibility Compliance Baseline Playbook."
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          }
+        ],
+        "writing": [
+          {
+            "id": "ai-changed-how-i-think-about-design-artifacts",
+            "title": "AI changed how I think about design artifacts",
+            "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          },
+          {
+            "id": "notes-from-the-reversible-queue",
+            "title": "Notes from the reversible queue",
+            "url": "https://floramaydc.com/writing/notes-from-the-reversible-queue/"
+          },
+          {
+            "id": "three-labels-six-surfaces",
+            "title": "Three labels, six surfaces",
+            "url": "https://floramaydc.com/writing/three-labels-six-surfaces/"
+          }
+        ]
+      }
     },
     {
       "id": "mobile-nav-scroll-lock-pattern",
@@ -1851,7 +2177,33 @@
           "heading": "Generalized example",
           "text": "A fictional project-management app has a right-side mobile drawer. Users open it while halfway down a task list. With overflow-only lock, close causes a jump and occasional freeze. After switching to fixed-body lock with top: -scrollY and restoring on close, the drawer opens and closes smoothly at every scroll depth, and focus returns to the hamburger button. --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer names, segment sizes, or identifiable details - [x] No internal metrics, thresholds, OKRs, or telemetry numbers - [x] No roadmap, ship dates, or future plans - [x] No architecture, service names, API shapes, or schema fields from real systems - [x] No screenshots showing real chrome, real data, or recognizable surfaces - [x] No internal-only workflows, tools, or terminology - [x] Every example is fictional or abstracted; numbers are illustrative - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          }
+        ],
+        "writing": [
+          {
+            "id": "building-complex-products-solutions-and-user-journeys",
+            "title": "Building complex products made me think differently about solutions and user journeys",
+            "url": "https://floramaydc.com/writing/building-complex-products-solutions-and-user-journeys/"
+          },
+          {
+            "id": "notes-from-the-reversible-queue",
+            "title": "Notes from the reversible queue",
+            "url": "https://floramaydc.com/writing/notes-from-the-reversible-queue/"
+          },
+          {
+            "id": "three-labels-six-surfaces",
+            "title": "Three labels, six surfaces",
+            "url": "https://floramaydc.com/writing/three-labels-six-surfaces/"
+          }
+        ]
+      }
     },
     {
       "id": "reversible-queue-playbook",
@@ -1902,7 +2254,22 @@
           "heading": "Generalized example",
           "text": "A fictional content-moderation review queue for a community platform. Moderators see flagged posts and decide whether to remove, hide, allow, or escalate. State machine. Each flagged post is an item. - Active — flagged, awaiting moderator decision - Completed — moderator decided (removed / hidden / allowed / escalated) - Snoozed — needs more context (e.g. \"let it sit for an hour, see if more reports come in\") — wakes at chosen time - Dismissed — moderator says the flag itself is invalid; the post stays and the flag is what's rejected, with a reason that feeds the auto-flagging model Primary CTA. Each card's primary button is the most likely resolution given the auto-classifier's confidence: - High-confidence harmful → Remove - Low-confidence borderline → Allow (the default, because over-moderation has a high cost in community platforms) - The CTA label is set per-card by the upstream classifier; the moderator always has the overflow to choose another action. Severity strip. Three levels — Severe (immediate harm), Moderate (policy violation), Low (borderline). Severity is paired with a shape (triangle / circle / square), so colorblind moderators read it identically. Severity sorts within the Active section: Severe at the top. Detail panel. Clicking a card opens a side panel with the full post, the reporter's stated reason, the auto-classifier's signals, and the moderator's action history on this user. When the moderator acts, the panel closes and the next active item slides into focus. Toast. \"Removed 3 posts. Undo \" — 8-second dwell, dismiss-on-outside-click, persistent in the recent-actions log accessible from the top bar. Undo restores all three posts to Active and unflags any classifier feedback that was sent. Dismiss with reason. When a moderator dismisses a flag, they pick a reason: not a violation , already handled , wrong post , false report . Those four categories go straight to the team owning the auto-flagger. After two weeks, the team can see \"47% of flags on posts with <signal pattern were dismissed as not a violation \" — that's the next tuning iteration. Filters. Severity, reporter type, post age, classifier confidence. Filters persist across state changes. A moderator who's filtering for Severe + last 6 hours keeps that filter as items flow through. Bulk. Moderators select multiple cards with checkboxes. Bulk Remove asks for a single reason applied to all. Bulk Undo restores all of them atomically. Empty state. \"All clear. Nice work.\" With a small chart showing today's pace and a link to the dismissed-flag analytics — because in moderation, what didn't need action is as informative as what did. --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer names, segment sizes, or identifiable details - [x] No internal metrics, thresholds, OKRs, or telemetry numbers - [x] No roadmap, ship dates, or future plans - [x] No architecture, service names, API shapes, or schema fields from real systems - [x] No screenshots showing real chrome, real data, or recognizable surfaces - [x] No internal-only workflows, tools, or terminology - [x] Every example is fictional or abstracted; numbers are illustrative - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "notes-from-the-reversible-queue",
+            "title": "Notes from the reversible queue",
+            "url": "https://floramaydc.com/writing/notes-from-the-reversible-queue/"
+          },
+          {
+            "id": "three-labels-six-surfaces",
+            "title": "Three labels, six surfaces",
+            "url": "https://floramaydc.com/writing/three-labels-six-surfaces/"
+          }
+        ]
+      }
     },
     {
       "id": "sticky-view-state-playbook",
@@ -1978,7 +2345,32 @@
           "heading": "Version history",
           "text": "| Version | Date | What changed | |---|---:|---| | 1.0 | 2026-05-23 | Initial playbook: sticky state buckets, keying convention, selection lifecycle, reset behavior, audit prompts, and fictional fleet-management example. | | 1.1 | 2026-06-27 | Added implementation gotchas from the site-wide persistence audit: reload must explicitly clear session keys, progressive reveal counts belong in sticky list state, URL/hash entry state should win over restored state, and storage-scope mismatches should be audited. |"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "ai-made-me-question-where-roles-begin-and-end",
+            "title": "AI made me question where roles begin and end",
+            "url": "https://floramaydc.com/writing/ai-made-me-question-where-roles-begin-and-end/"
+          },
+          {
+            "id": "building-complex-products-solutions-and-user-journeys",
+            "title": "Building complex products made me think differently about solutions and user journeys",
+            "url": "https://floramaydc.com/writing/building-complex-products-solutions-and-user-journeys/"
+          },
+          {
+            "id": "notes-from-the-reversible-queue",
+            "title": "Notes from the reversible queue",
+            "url": "https://floramaydc.com/writing/notes-from-the-reversible-queue/"
+          },
+          {
+            "id": "three-labels-six-surfaces",
+            "title": "Three labels, six surfaces",
+            "url": "https://floramaydc.com/writing/three-labels-six-surfaces/"
+          }
+        ]
+      }
     },
     {
       "id": "subtraction-playbook",
@@ -2037,7 +2429,27 @@
           "heading": "Generalized example",
           "text": "A fictional customer-support inbox tool , version 2. Inherited from a maximalist v1 that included a \"Team Inbox\" view — a shared dashboard showing every open ticket across every agent, with aggregate response-time scores per team, and a \"reassign all\" bulk action. 1. What v1 did The Team Inbox view aggregated every open ticket across the team into one dashboard. It exposed a team-level response-time score, a team-level resolution-rate score, and a \"reassign all\" bulk action that let a lead reassign a filtered subset of tickets to a different agent. The legitimate need: leads wanted a single place to see if their team was falling behind and a single mechanism to rebalance load. 2. What v2 refuses to do — flat statement There is no Team Inbox. Tickets belong to individual agents. There is no team-level score and no cross-agent bulk reassignment. 3. Canaries - A spec mentions \"team dashboard,\" \"shared queue,\" or \"rollup.\" - The interface acquires a checkbox toolbar that operates above an agent grouping. - A new metric is proposed at the team-or-higher level. - A lead asks for \"their\" view of the team's tickets — a sign the implicit hierarchy is sneaking back. 4. Trade-off Leads who used to glance at the team dashboard once a morning now have to look at three to five individual-agent views to get the same picture, or wait for the weekly summary email. The team-level \"reassign all\" capability is gone; reassignment is per-ticket. In exchange: agents own their queues with no ambiguity about whose responsibility a ticket is, response-time data is no longer averaged to incoherence across very different ticket types, and the lead's job shifts from queue management to coaching — which is what leads should have been doing the whole time. 5. Defense script We removed the Team Inbox because it produced a number — the team response-time score — that hid which agent was actually behind and which kinds of tickets were piling up. Aggregating across agents and across ticket types averaged the signal away. We didn't delete the data; we moved it to where the action is, on each agent's own queue and each ticket's own thread. Bulk reassignment was the most-requested feature of the old view, and it was also where the most damage happened — leads would rebalance based on the aggregate without understanding why one agent was slow, and the underlying problem would show up again the next week. Reassignment now happens per ticket, by the agent or the lead, with the context visible. If you find yourself wanting a Team Inbox, the right question is which specific agent is behind on which specific kind of ticket — and that question is already answered on each agent's individual view. Status line Owner: Design (Maya R.) · Last reviewed: 2026-04-12 · Status: Active That document, on one page, in the PRD folder, with the subject line \"What our inbox refuses to do,\" is the playbook. --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer names, segment sizes, or identifiable details - [x] No internal metrics, thresholds, OKRs, or telemetry numbers - [x] No roadmap, ship dates, or future plans - [x] No architecture, service names, API shapes, or schema fields from real systems - [x] No screenshots showing real chrome, real data, or recognizable surfaces - [x] No internal-only workflows, tools, or terminology - [x] Every example is fictional or abstracted; numbers are illustrative - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "the-feature-i-keep-refusing-to-ship",
+            "title": "The feature I keep refusing to ship",
+            "url": "https://floramaydc.com/writing/the-feature-i-keep-refusing-to-ship/"
+          },
+          {
+            "id": "building-complex-products-solutions-and-user-journeys",
+            "title": "Building complex products made me think differently about solutions and user journeys",
+            "url": "https://floramaydc.com/writing/building-complex-products-solutions-and-user-journeys/"
+          },
+          {
+            "id": "visibility-is-valuable-until-customers-need-to-move",
+            "title": "Visibility is valuable until customers need to move",
+            "url": "https://floramaydc.com/writing/visibility-is-valuable-until-customers-need-to-move/"
+          }
+        ]
+      }
     },
     {
       "id": "three-tier-shell-navigation-prompt",
@@ -2080,7 +2492,17 @@
           "heading": "Companion playbooks",
           "text": "This prompt produces the shell. To make it feel like a real app: - The Enterprise Reflow Playbook for the breakpoint and breadcrumb behavior the section nav doesn't cover - The Sticky View State Playbook for keeping section state across navigation - The Accessibility Compliance Baseline Playbook for everything the skip link and live region don't reach --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer or segment data - [x] No real route paths, package names, or component names - [x] No real brand hex values or class hashes - [x] All structural decisions stated generically and would apply to any enterprise app shell - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "building-complex-products-solutions-and-user-journeys",
+            "title": "Building complex products made me think differently about solutions and user journeys",
+            "url": "https://floramaydc.com/writing/building-complex-products-solutions-and-user-journeys/"
+          }
+        ]
+      }
     },
     {
       "id": "toybox-entry-types-definitions",
@@ -2114,7 +2536,22 @@
           "heading": "Note",
           "text": "These are intentionally concise public definitions. They explain what each entry type means, not the private methodology used to classify and combine them. --- Public-safe review (verified before publish) - [x] No employer or client product names, codenames, or org names - [x] No customer names, segment sizes, or identifiable details - [x] No internal metrics, thresholds, OKRs, or telemetry numbers - [x] No roadmap, ship dates, or future plans - [x] No architecture, service names, API shapes, or schema fields from real systems - [x] No screenshots showing real chrome, real data, or recognizable surfaces - [x] No internal-only workflows, tools, or terminology - [x] Every example is fictional or abstracted; numbers are illustrative - [x] A peer outside any employer could read this and learn nothing proprietary"
         }
-      ]
+      ],
+      "related": {
+        "work": [],
+        "writing": [
+          {
+            "id": "hello-toybox",
+            "title": "Hello, Toybox",
+            "url": "https://floramaydc.com/writing/hello-toybox/"
+          },
+          {
+            "id": "using-md-files-as-design-memory",
+            "title": "Using .md files as design memory",
+            "url": "https://floramaydc.com/writing/using-md-files-as-design-memory/"
+          }
+        ]
+      }
     }
   ],
   "writing": [
@@ -2174,7 +2611,28 @@
           "heading": "Why the playbooks are downloadable",
           "text": "The Toybox playbooks are not only articles to read. The downloadable .md files allow the guidance to leave the website and enter the work. That is the purpose behind the format. A visual framework can help people understand an idea. A Markdown file can help carry its rules into a coded prototype, an AI-assisted workflow, an implementation conversation, and the review that follows. The playbooks do not replace design judgment, Figma, engineering partnership, or accessibility expertise. They give recurring design knowledge a portable form. I began creating them from things I had to solve, explain, and check more than once. Making them available as .md files means another designer does not have to begin from an empty prompt or rely on an AI tool to invent the rules. They can start with an existing point of view, adapt it to their context, and keep the parts that should remain true close to the work."
         }
-      ]
+      ],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          },
+          {
+            "id": "vera",
+            "title": "Vera",
+            "url": "https://floramaydc.com/work/vera/"
+          }
+        ],
+        "toybox": [
+          {
+            "id": "toybox-entry-types-definitions",
+            "title": "Toybox Entry Types: Quick Definitions",
+            "url": "https://floramaydc.com/toybox/toybox-entry-types-definitions/"
+          }
+        ]
+      }
     },
     {
       "id": "what-makes-a-good-case-study",
@@ -2190,7 +2648,11 @@
         "portfolio",
         "ai-and-writing"
       ],
-      "narrative": []
+      "narrative": [],
+      "related": {
+        "work": [],
+        "toybox": []
+      }
     },
     {
       "id": "optimization-and-resilience",
@@ -2207,7 +2669,11 @@
         "immigration",
         "reflection"
       ],
-      "narrative": []
+      "narrative": [],
+      "related": {
+        "work": [],
+        "toybox": []
+      }
     },
     {
       "id": "ai-made-me-question-where-roles-begin-and-end",
@@ -2223,7 +2689,38 @@
         "specialization",
         "prototyping"
       ],
-      "narrative": []
+      "narrative": [],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          },
+          {
+            "id": "vera",
+            "title": "Vera",
+            "url": "https://floramaydc.com/work/vera/"
+          }
+        ],
+        "toybox": [
+          {
+            "id": "demo-days-0-to-14-time-machine-playbook",
+            "title": "Demo Days 0 to 14 Time-Machine Playbook",
+            "url": "https://floramaydc.com/toybox/demo-days-0-to-14-time-machine-playbook/"
+          },
+          {
+            "id": "secret-handshakes-for-designers-playbook",
+            "title": "Secret Handshakes for Designers Playbook",
+            "url": "https://floramaydc.com/toybox/secret-handshakes-for-designers-playbook/"
+          },
+          {
+            "id": "sticky-view-state-playbook",
+            "title": "The Sticky View State Playbook",
+            "url": "https://floramaydc.com/toybox/sticky-view-state-playbook/"
+          }
+        ]
+      }
     },
     {
       "id": "building-complex-products-solutions-and-user-journeys",
@@ -2239,7 +2736,32 @@
         "navigation",
         "complexity"
       ],
-      "narrative": []
+      "narrative": [],
+      "related": {
+        "work": [],
+        "toybox": [
+          {
+            "id": "enterprise-reflow-playbook",
+            "title": "The Enterprise Reflow Playbook",
+            "url": "https://floramaydc.com/toybox/enterprise-reflow-playbook/"
+          },
+          {
+            "id": "mobile-nav-scroll-lock-pattern",
+            "title": "The Mobile Drawer Scroll-Lock Pattern",
+            "url": "https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern/"
+          },
+          {
+            "id": "sticky-view-state-playbook",
+            "title": "The Sticky View State Playbook",
+            "url": "https://floramaydc.com/toybox/sticky-view-state-playbook/"
+          },
+          {
+            "id": "subtraction-playbook",
+            "title": "The Subtraction Playbook",
+            "url": "https://floramaydc.com/toybox/subtraction-playbook/"
+          }
+        ]
+      }
     },
     {
       "id": "visibility-is-valuable-until-customers-need-to-move",
@@ -2255,7 +2777,17 @@
         "trust",
         "agents"
       ],
-      "narrative": []
+      "narrative": [],
+      "related": {
+        "work": [],
+        "toybox": [
+          {
+            "id": "subtraction-playbook",
+            "title": "The Subtraction Playbook",
+            "url": "https://floramaydc.com/toybox/subtraction-playbook/"
+          }
+        ]
+      }
     },
     {
       "id": "ai-changed-how-i-think-about-design-artifacts",
@@ -2271,7 +2803,43 @@
         "design-artifacts",
         "ux"
       ],
-      "narrative": []
+      "narrative": [],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          },
+          {
+            "id": "vera",
+            "title": "Vera",
+            "url": "https://floramaydc.com/work/vera/"
+          }
+        ],
+        "toybox": [
+          {
+            "id": "design-system-audit-playbook",
+            "title": "Design System Audit Playbook",
+            "url": "https://floramaydc.com/toybox/design-system-audit-playbook/"
+          },
+          {
+            "id": "audit-command-center-template",
+            "title": "Audit Command Center Template",
+            "url": "https://floramaydc.com/toybox/audit-command-center-template/"
+          },
+          {
+            "id": "dark-pattern-detector",
+            "title": "Dark Pattern Detector",
+            "url": "https://floramaydc.com/toybox/dark-pattern-detector/"
+          },
+          {
+            "id": "demo-days-0-reference-prototype",
+            "title": "Demo days 0 to 14 reference",
+            "url": "https://floramaydc.com/toybox/demo-days-0-reference-prototype/"
+          }
+        ]
+      }
     },
     {
       "id": "three-labels-six-surfaces",
@@ -2286,7 +2854,32 @@
         "patterns",
         "bulk-actions"
       ],
-      "narrative": []
+      "narrative": [],
+      "related": {
+        "work": [],
+        "toybox": [
+          {
+            "id": "idempotent-bulk-action-pattern",
+            "title": "The Idempotent Bulk Action Pattern",
+            "url": "https://floramaydc.com/toybox/idempotent-bulk-action-pattern/"
+          },
+          {
+            "id": "interactive-element-audit-playbook",
+            "title": "The Interactive Element Audit Playbook",
+            "url": "https://floramaydc.com/toybox/interactive-element-audit-playbook/"
+          },
+          {
+            "id": "mobile-nav-scroll-lock-pattern",
+            "title": "The Mobile Drawer Scroll-Lock Pattern",
+            "url": "https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern/"
+          },
+          {
+            "id": "reversible-queue-playbook",
+            "title": "The Reversible Queue Playbook",
+            "url": "https://floramaydc.com/toybox/reversible-queue-playbook/"
+          }
+        ]
+      }
     },
     {
       "id": "the-feature-i-keep-refusing-to-ship",
@@ -2301,7 +2894,17 @@
         "decision-design",
         "senior-ic"
       ],
-      "narrative": []
+      "narrative": [],
+      "related": {
+        "work": [],
+        "toybox": [
+          {
+            "id": "subtraction-playbook",
+            "title": "The Subtraction Playbook",
+            "url": "https://floramaydc.com/toybox/subtraction-playbook/"
+          }
+        ]
+      }
     },
     {
       "id": "notes-from-the-reversible-queue",
@@ -2316,7 +2919,32 @@
         "state-models",
         "interaction-design"
       ],
-      "narrative": []
+      "narrative": [],
+      "related": {
+        "work": [],
+        "toybox": [
+          {
+            "id": "reversible-queue-playbook",
+            "title": "The Reversible Queue Playbook",
+            "url": "https://floramaydc.com/toybox/reversible-queue-playbook/"
+          },
+          {
+            "id": "idempotent-bulk-action-pattern",
+            "title": "The Idempotent Bulk Action Pattern",
+            "url": "https://floramaydc.com/toybox/idempotent-bulk-action-pattern/"
+          },
+          {
+            "id": "interactive-element-audit-playbook",
+            "title": "The Interactive Element Audit Playbook",
+            "url": "https://floramaydc.com/toybox/interactive-element-audit-playbook/"
+          },
+          {
+            "id": "mobile-nav-scroll-lock-pattern",
+            "title": "The Mobile Drawer Scroll-Lock Pattern",
+            "url": "https://floramaydc.com/toybox/mobile-nav-scroll-lock-pattern/"
+          }
+        ]
+      }
     },
     {
       "id": "hello-toybox",
@@ -2329,7 +2957,17 @@
         "meta",
         "toybox"
       ],
-      "narrative": []
+      "narrative": [],
+      "related": {
+        "work": [],
+        "toybox": [
+          {
+            "id": "toybox-entry-types-definitions",
+            "title": "Toybox Entry Types: Quick Definitions",
+            "url": "https://floramaydc.com/toybox/toybox-entry-types-definitions/"
+          }
+        ]
+      }
     }
   ],
   "play": [
