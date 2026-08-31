@@ -1,0 +1,650 @@
+{
+  "builtAt": "2026-08-31T21:25:09.502Z",
+  "source": "src/content (work + resume) — generated, do not edit by hand",
+  "profile": {
+    "name": "Flora May dela Cruz",
+    "title": "Senior Product Designer",
+    "summary": "Senior Product Designer with over a decade of experience at Microsoft, Best Buy, Amazon Web Services (via Projekt202), T-Mobile (via Piktorlabs), and IBM. Focus areas — enterprise UX, cloud, security, compliance, developer tools, and AI-assisted experiences.",
+    "framing": "Flora's own framing, from her About page: \"I'm focused on turning complex, technical problems into usable and trustworthy experiences. My work sits at the intersection of people, systems, and emerging technology.\" She believes design is a responsibility, especially as AI reshapes how people work, learn, and make decisions. Clarity, structure, empathy, and ethics are the throughline.",
+    "specialties": [
+      "Enterprise UX for security, compliance, and cloud infrastructure",
+      "AI-assisted experiences — designing the trust, the explanations, and the override paths around the model, not just the model's surface",
+      "Developer tooling and complex workflow design",
+      "Information density and clarity in data-heavy products",
+      "Senior individual-contributor design leadership — strategy, pattern libraries, mentorship across teams"
+    ],
+    "contact": "The best path is LinkedIn at linkedin.com/in/floramaydelacruz. Email and Instagram links are at the bottom of the About page. She does not publish her phone number.",
+    "canonicalUrl": "https://floramaydc.com/about/"
+  },
+  "experience": [
+    {
+      "heading": "Current role — Microsoft, Senior Product Designer",
+      "company": "Microsoft",
+      "role": "Senior Product Designer",
+      "text": "At Microsoft, Flora designs scalable security and compliance experiences that protect sensitive data across clouds. Her work focuses on turning complex, technical problems into usable and trustworthy experiences for IT administrators, security analysts, and compliance officers. She has contributed to AI-assisted investigation features that help analysts make sense of large volumes of activity data and run complex queries more confidently — published publicly on her site as the Copilot for Activity Explorer and DLP Alerts case study. She brings a senior-IC point of view to her team: when to add a feature, when to subtract one, when to refuse outright. That philosophy is what the Toybox on this site is built around."
+    },
+    {
+      "heading": "Best Buy — Senior Product Designer",
+      "company": "Best Buy",
+      "role": "Senior Product Designer",
+      "text": "At Best Buy, Flora worked on retail and customer-facing experiences at consumer scale. The role broadened her grounding in commerce, content, and merchandising patterns — areas she still draws on when reasoning about consumer-grade clarity inside enterprise products."
+    },
+    {
+      "heading": "Projekt202 (Amazon Web Services) — Product Designer",
+      "company": "Projekt202 (Amazon Web Services)",
+      "role": "Product Designer",
+      "text": "While at Projekt202, Flora was embedded with AWS on the early UX for Amazon CodeCatalyst, a developer experience platform. She focused on CI/CD workflows and test reporting — making it easier for developers to understand the state of their builds and act on failures. The AWS Code Catalyst case study on this site documents her work from that engagement."
+    },
+    {
+      "heading": "Piktorlabs (T-Mobile) — Product Designer",
+      "company": "Piktorlabs (T-Mobile)",
+      "role": "Product Designer",
+      "text": "At Piktorlabs, Flora was embedded with T-Mobile on PacBot, the company's in-house cloud compliance and security platform. She led the redesign of the violation review and self-service remediation flows. After the redesign, violation page views dropped by 50% and visits to the policy details page increased by 7% — engineers were spending less time confused and more time fixing the right things. The PacBot case study on this site has the full breakdown."
+    },
+    {
+      "heading": "IBM — Designer",
+      "company": "IBM",
+      "role": "Designer",
+      "text": "Earlier in her career, Flora worked at IBM, where she got her grounding in enterprise design systems, accessibility, and the kind of long-cycle, mission-critical software that shaped her later interest in cloud and security. The IBM experience is where the discipline of \"designing for the person who has to live inside this tool eight hours a day\" first took hold."
+    }
+  ],
+  "projects": [
+    {
+      "id": "aws-code-catalyst",
+      "slug": "aws-code-catalyst",
+      "url": "https://floramaydc.com/work/aws-code-catalyst/",
+      "title": "AWS CodeCatalyst",
+      "summary": "AWS CodeCatalyst generated mountains of test, build, and coverage data, but developers struggled to find and interpret it. I redesigned how reports were surfaced and visualized so teams could read the health of their code, not just its numbers.",
+      "label": "Developer tools",
+      "role": "Senior UX Designer (contract)",
+      "client": "Amazon Web Services (via Projekt202)",
+      "year": "2021–2022",
+      "type": "case-study",
+      "tags": [
+        "aws",
+        "developer-tools",
+        "ci-cd",
+        "enterprise",
+        "case-study"
+      ],
+      "gated": true,
+      "note": "Full case study is access-protected; request access at the URL.",
+      "archived": false,
+      "wip": false,
+      "sections": {},
+      "narrative": [
+        {
+          "heading": "Summary",
+          "text": "Modern software teams generate a tremendous amount of information while building software. Test results, code coverage metrics, build outputs, deployment logs, and quality checks all contribute to understanding whether code is ready to move forward. The challenge is rarely the lack of information. The challenge is turning that information into confidence. While working on AWS CodeCatalyst, I focused on the reporting experience that helped developers understand the health of their code and make informed decisions throughout the development lifecycle. Through usability testing, stakeholder feedback, and ongoing product discovery, we observed a recurring set of challenges. Developers needed clearer ways to discover reports, understand quality signals, and connect reporting insights back to the workflows generating them. As reporting capabilities expanded, expectations around visualization, interpretation, and actionability expanded as well. Rather than treating these as separate problems, we approached them as different parts of the same experience: helping developers find, understand, and act on code quality information."
+        }
+      ]
+    },
+    {
+      "id": "dspm",
+      "slug": "dspm",
+      "url": "https://floramaydc.com/work/dspm/",
+      "title": "Data Security Posture Management (DSPM)",
+      "summary": "Microsoft Purview's platform for understanding where organizations are most exposed to data and AI risk. I joined while leading the Reporting framework and went on to lead the core DSPM experience that unified these efforts into one coherent platform.",
+      "label": "Data security",
+      "role": "Lead Product Designer",
+      "organization": "Microsoft",
+      "year": "2025",
+      "team": "Product Design, Product Management, Engineering, Research, Content Design, Accessibility, and partner solution teams",
+      "type": "case-study",
+      "tags": [
+        "microsoft",
+        "purview",
+        "data-security",
+        "dspm",
+        "ai",
+        "posture"
+      ],
+      "gated": true,
+      "note": "Full case study is access-protected; request access at the URL.",
+      "archived": false,
+      "wip": false,
+      "sections": {},
+      "narrative": [
+        {
+          "heading": "Summary",
+          "text": "Data Security Posture Management (DSPM) is Microsoft Purview's platform for helping organizations understand where they are most exposed, why those risks matter, and what actions can improve their security posture across data security and AI. It functions as a town square for Purview by bringing together signals, risks, actions, and partner experiences that would otherwise remain spread across the platform. I joined the broader initiative while leading the Reporting framework for Microsoft Purview. As the program evolved, my work expanded into parallel efforts across Risk Patterns, Remediations, policy actions, AI scenarios, and partner experiences. The structure I developed for Risk Patterns became one of the strongest directions in the work, and I eventually led the core DSPM experience that brought these efforts together. Over five months, I led the work required to turn an ambitious but unresolved product direction into a coherent platform experience. That included unifying two independently evolving DSPM experiences, working through more than twenty posture explorations, validating concepts through research, and establishing a shared model for communicating organizational risk across Microsoft Purview. The unified DSPM experience became generally available in April 2026."
+        }
+      ]
+    },
+    {
+      "id": "ebbc",
+      "slug": "ebbc",
+      "url": "https://floramaydc.com/work/ebbc/",
+      "title": "Elliott Bay Book Company",
+      "summary": "Baseline testing showed 57% of users failed to complete key tasks on this independent Seattle bookstore's website. I ran a full user-centered study, from contextual interviews to card sorting, and reorganized the site around how customers actually think.",
+      "label": "Retail",
+      "role": "UX Researcher · UX Designer",
+      "organization": "Elliott Bay Book Company (school project)",
+      "year": "2017",
+      "team": "Two students",
+      "type": "case-study",
+      "tags": [
+        "ux-research",
+        "retail",
+        "user-centered-design",
+        "card-sorting",
+        "school-project"
+      ],
+      "gated": false,
+      "archived": true,
+      "wip": false,
+      "sections": {
+        "users": "Bookstore customers, event visitors, locals, tourists, and people trying to understand what Elliott Bay offered before visiting. Many customers valued the in-store experience more than the website. The redesign had to respect that: the site needed to make the bookstore's books, events, staff picks, and destination quality easier to find.",
+        "approach": "We followed a user-centered design process across the full redesign: competitive analysis, contextual interviews, baseline testing, card sorting, comparative paper prototypes, and visual design. The work moved from business and competitor context, to user behavior, to navigation structure, then into prototype comparison.",
+        "keyInsights": "Customers were not only buying books. They valued the bookstore as a place to spend time, attend events, get recommendations, and feel connected to Seattle. That changed the design direction: the website could not behave like a generic online shop. It had to help people understand the bookstore as a destination.",
+        "problem": "Baseline testing showed the existing site was hard to use: on average, 57% of participants failed to complete each task successfully. Participants struggled to find information, made search mistakes, and often preferred the in-store experience over the website.",
+        "objective": "Redesign the information architecture and key page experiences so customers could find books, events, and store information more easily.",
+        "solution": "Card sorting helped simplify the site structure into clearer categories: Books, Events, About, More. The redesign focused on clearer labels, better taxonomy, and navigation that reflected how customers grouped bookstore information.\n\nWe tested two high-fidelity visual directions and selected the cooler palette based on user preference.",
+        "results": "The final archive redesign focused on the home, books, and events pages, with the heaviest effort placed on information architecture. The home page used the bookstore interior as the first signal, while staff picks and events became more visible parts of the browsing experience.",
+        "reflection": "<ol class=\"deck-reflection-list\" <li <strong User-centered design is valuable because it reconciles what the business wants with what customers actually need to do.</strong </li <li <strong A website for a beloved physical place has to communicate the experience, not only the inventory.</strong </li <li <strong Research methods are most useful when they change the structure of the design, not just decorate the final interface.</strong </li </ol"
+      },
+      "narrative": [
+        {
+          "heading": "Overview",
+          "text": "Elliott Bay Book Company (EB) is an independent bookstore in Seattle. It continues to thrive despite the increasing growth of the buying and selling of electronic books. This is because of the unique experiences they offer to their customers — community events, an in-store coffee shop, and an interior that draws tourists as much as locals. This was a three-month school project. Our two-student team was tasked with conducting a variety of user research methods throughout a web design or redesign process. I significantly contributed to Competitive Analysis, Baseline Testing, Card Sorting, and Visual Design. What is User-Centered Design? UCD is a process that aims to achieve good user experience by giving extensive attention to usability goals, user characteristics, environment, tasks, and workflow of a product, service, or process at each stage of the design process."
+        },
+        {
+          "heading": "User research methods",
+          "text": "1 Competitive Analysis What was the purpose? We conducted a competitive analysis as preparatory research. The methodology lets you evaluate the strengths and weaknesses of competitors before you commit to a design direction. What actions were taken? - Selected two competitors with similar business DNA, target audience, popularity, and location in most-visited US cities. - Compared business performance using DemographicsNow. - Read reviews on Yelp and Google. - Compared the UI design, features, and best practices. - Evaluated strengths and weaknesses. Findings and recommendations - From a business standpoint, Strand Bookstore (SB) in New York generated more revenue, followed by EB, then The Last Bookstore (LB) in Los Angeles. - In terms of popularity, Strand was the most-visited bookstore. - SB and LB used clearer labels and taxonomy. EB needed better information architecture and more informative labels. - Book categories could be easily spotted in SB and LB. EB needed to create them. - Unlike SB and LB's events page with a calendar of events, EB populated its event page using books as a primary element — confusing. EB needed an event page where event information is instantly visible. What we would do differently. We would consider changing the variables in selecting competitors — perhaps bookstores located in the same city and established in the same timeframe. We remained curious about what motivated customers who would prefer to visit Twice Sold Tales over EB. 2 Contextual Interview What was the purpose? To validate our observations from the Competitive Analysis and to better understand customer behavior. Our objectives: - Know what type of people go to Elliott Bay Book Company. - Know how users use the EB website. Approach. Prepared interview questions using the AEIOU framework (Activities, Environments, Interactions, Objects, Users). Intercepted bookstore visitors on-site and reached out to students who wanted to participate. Recorded the interviews and took notes on the highlights. Findings. The four customers we interviewed on-site and the two students liked: - The ambiance of the bookstore - Their interactions with the staff - The bookstore as a place to hang out with friends - The memories they had in the bookstore The majority did not use the EB website — they preferred the in-store experience. Those who attempted using it found it frustrating and difficult to use. Come for the books, stay for the experience. It became obvious that customers enjoy visiting the bookstore not only because of the books but because of the experiences they offer. This led us to consider browsing travel websites. What if we redesigned EB's website not only as an online retail shop, but as a destination? Since customers loved the staff picks, how do we make staff picks more visible to increase sales? And since events are one of the main reasons people visit, how do we improve the usability of the event page to increase store traffic? 3 Baseline Testing What is it? The baseline test is a methodology used to evaluate the website's current performance by gathering quantitative and qualitative data. What we did: - Prepared a baseline test script, scenarios, and tasks. - Developed a Key Performance Indicator (KPI) plan. - Observed participants' interaction with the website. - Gathered and analyzed data. - Success rate : on average, 57% (3 out of 5 participants) failed in achieving a satisfactory result for completing each task. - Failed distribution : of the 3 who didn't achieve a satisfactory rating, 2–3 were unable to complete the task within the time limit, and 1–2 gave up entirely. - Error count : participants made mistakes when using the search bar to look for information — a major driver of the high failure rate. Given the high failure rate, I insisted we go back to our first impressions — redesign the information architecture, use clear labels, and improve the taxonomy. That led us to the card sorting activity. 4 Card Sorting Why? Card sorting generates a category tree or taxonomy to improve information architecture, workflows, menu structure, and navigation paths. How: - Created groups and cards using OptimalSort. - Asked 10 participants to group the cards. - Asked supplementary post-questions. - Gathered and analyzed data. Based on the collective results, categories arranged logically as Books, Events, About, More. - 90–100% of participants placed eight cards under Books (All Collections, Audiobooks, Bestsellers, Digital Books, First Editions, What's Popular, Staff Picks, What's New). - 100% chose Book Group Meetings, Calendar of Events, and Children's Events under Events. - Only Contact Us had clear consensus under About. Actions we considered: - Separate Books from other Media. Many participants felt there were too many cards under Books — Audiobooks, Digital books, CDs, DVDs would be cleaner in a separate Media category. - Add Programs to the navigation (Book Consignment, Book Donations, Maiden Voyage). - Rename and shorten labels: What's New → New Releases, What's Popular → Popular Now, Digital Books → eBooks, Calendar of Events → Calendar. - Place Gift Certificates strategically in a secondary navigation. Closed vs Open vs Hybrid card sort. We repeated this activity. The first attempt was a hybrid card sort that confused participants — everyone seemed to create a new category, making it difficult to analyze. We switched to a closed card sort so they could focus on grouping the cards. 5 Comparative Paper Prototype A paper prototype is a low-fidelity wireframe made with pen and paper, used to test user interfaces quickly and economically. We created two designs and compared them to test which was more usable. The original paper prototype demonstration is a video — not yet re-hosted in this archive. It was really fun. We found a new appreciation for using pen and paper in creating prototypes — ideas flow freely and the folding of papers became a nice trick for transitioning between pages. Personally, I always keep a pen and paper. Each time I have an aha-moment, I sketch my ideas."
+        },
+        {
+          "heading": "Iterative design",
+          "text": "User-Centered Design is iterative. A user insight becomes a design insight. We took everything from the research above and turned it into wireframes, then into two hi-fi visual directions to test which one users preferred. The existing site (before) For reference, this is what the existing EB site looked like before the redesign — the starting point for the baseline test. Home page We created two low-fidelity prototypes and combined them. We then moved to a mid-fidelity exploration before committing to the hi-fi direction. For the high-fidelity prototypes, we created two versions — one cool-toned, one warm-toned — and chose the one preferred by users. Books page To simplify the books category, Staff Picks was merged into Books. When we conducted the baseline test and card sort, most participants placed them under Books anyway. Staff Picks Staff Picks were a recurring theme in interviews and card sorting — customers loved them. We prototyped a dedicated experience before ultimately merging it into Books. Events page Events were crucial to EB. Their existing interface was confusing — confirmed by the high failure rate during the baseline test."
+        },
+        {
+          "heading": "Conclusion",
+          "text": "The design with a cooler tone was chosen as the final direction. Considering the time constraint, I was able to complete the redesign of the home, books, and events pages. A gargantuan effort was allocated for the redesign of the information architecture. Borrowing inspiration from travel and destination websites, the home page features a fullscreen image of the bookstore interior. We also incorporated staff picks as a global element of the header — visible across all three pages."
+        },
+        {
+          "heading": "Reflections",
+          "text": "There is great value in following a UCD approach, especially in reconciling the gap between the business and the users. As a designer, I learned to look at each design challenge from the lens of the users. For this particular project, I would have loved to learn more about the bookstore's business goals and identity. And if the redesign was implemented, it would be great to measure performance — is there an increase in new visitors? Incremental growth from online shopping? More traffic to the website? After conducting a variety of user research methods, I found a new appreciation for truly empathizing with users and using insights to implement a design."
+        }
+      ]
+    },
+    {
+      "id": "mindelf",
+      "slug": "mindelf",
+      "url": "https://floramaydc.com/work/mindelf/",
+      "title": "Mind Elf",
+      "summary": "Nearly a third of the 700,000 students who take Calculus 1 each year fail it. Mind Elf was our EdTech attempt to fix that with adaptive, gamified learning; it won the startup round at Startup Weekend EDU Seattle and advanced to the UW investor round.",
+      "label": "EdTech",
+      "role": "UX Lead (with branding contributions)",
+      "client": "Mind Elf (early-stage startup)",
+      "year": "2017–2018",
+      "team": "6 people — 2 Engineers, 2 Business Development, Product Owner, UX",
+      "type": "case-study",
+      "tags": [
+        "education",
+        "edtech",
+        "startup",
+        "rapid-prototyping",
+        "machine-learning"
+      ],
+      "gated": false,
+      "archived": true,
+      "wip": false,
+      "sections": {
+        "problem": "Calculus is a required course for STEM majors, yet 30% of the 700k students who take Calculus 1 annually fail the subject. The team explored how an education platform could help instructors understand student needs and make support feel closer to one-on-one tutoring.",
+        "users": "Calculus students and instructors. Students would provide learning data through practice, questions, classroom interaction, and homework. Instructors would use that data to understand performance and adapt support.",
+        "objective": "Create prototypes that helped students, instructors, investors, and stakeholders understand the product vision quickly.",
+        "keyInsights": "Mind Elf was built around three product principles: data-driven , adaptable , and integrated . The experience needed to collect learning signals, offer alternative explanations and tailored practice, and work across web, mobile, and tablet.",
+        "approach": "Because deadlines were back-to-back, the team used rapid prototyping to validate ideas across milestones. Each pitch or competition round became a learning moment: feedback from students, teachers, and stakeholders informed the next prototype iteration.",
+        "solution": "We used Figma prototypes to show the product vision across milestones, from the Boston student pitch to the investor round.",
+        "results": "The prototype helped the team communicate the product clearly during the investor round. It gave listeners a concrete way to envision the experience, even while the business model and product direction were still evolving.",
+        "reflection": "<ol class=\"deck-reflection-list\" <li <strong Rapid prototyping is useful in early-stage startup work because it turns an idea into something people can react to quickly.</strong </li <li <strong UX has to stay connected to business viability and technical feasibility, especially when the product is still being defined.</strong </li <li <strong For learning products, journey maps and service blueprints would have made the full student-instructor interaction clearer.</strong </li </ol"
+      },
+      "narrative": [
+        {
+          "heading": "Summary",
+          "text": "MindElf is an education technology solution that helps Calculus instructors get the best possible learning outcomes for their students — by enabling every student to receive instruction that is as effective as one-on-one tutoring. Kickstarted at Startup Weekend Seattle EDU, our project emerged as the startup-round winner and was then entered into the UW investment round. Although we halted the tool's development, this venture was instrumental in focusing on machine learning and using gamification strategies to engage students. It highlighted the importance of using gamification to facilitate mastery in Calculus — a principle that has significantly influenced my approach to product design. This was a seven-month project that kicked off during Startup Weekend EDU Seattle (SWEDU) in September 2017 and continued through the Business Plan Competition (BPC) investor round in April 2018. I joined the team in November 2017."
+        },
+        {
+          "heading": "My role and contributions",
+          "text": "We were a six-person team: 2 Engineers, 2 Business Development, a Product Owner, and UX. I owned the UX initiatives, with some contributions in branding. Our tasks: - Develop an education platform that helps Calculus instructors get the best possible outcome from their students. - Create prototypes that enable the team to convey these to potential users (students and teachers), investors, and other stakeholders."
+        },
+        {
+          "heading": "Background",
+          "text": "Calculus is a required course for all STEM majors. Out of 700k students who take Calculus 1 annually, 30% fail the subject. With the rapid increase in demand for STEM workers with a secondary degree, the Calculus problem is becoming more acute. Insights from the MAA National Study of College Calculus."
+        },
+        {
+          "heading": "How might we solve this acute problem?",
+          "text": "The software was built on three principles: - Data-driven — Collect data on each student's strengths and weaknesses during lectures, practice problems, homework, and quizzes, to create a dynamic picture of their knowledge profile. - Adaptable — Offer alternative explanations of the lecture material in video and written form. Offer each student a set of practice problems tailored to their needs, and match students with study partners and tutors. - Integrated — Available on web, mobile, and tablet, empowering students to study at home and on the go."
+        },
+        {
+          "heading": "What we needed to accomplish",
+          "text": "We moved fast. The six of us worked closely to develop the product roadmap, business model, branding, and platform — simultaneously — to meet our deadlines. We wanted to ensure everything was user-centered, but also mindful of business strategy. Pitch for student group from Boston (February 2018) - First version of the student app prototypes. Business Proposal Competition (March 2018) - Second version of the student app prototypes. - Website. Investor round (April 2018) - Improvements on the second version of the student app prototypes. - Improvements on the website."
+        },
+        {
+          "heading": "Process",
+          "text": "Since the deadlines were back-to-back, we knew we did not want to sacrifice the user experience. Fortunately, there were already preparatory and secondary research conducted during SWEDU, including competitive analysis. The team also put out a survey and interviewed instructors and students. We used these as the bases of the ideation process and decided to do rapid prototyping . What is rapid prototyping? According to an article on InVision App, rapid prototyping is a design workflow that consists of ideation, prototyping, and testing. It was very useful in validating ideas. We took each target milestone as an opportunity to discover and validate ideas. For instance, when we delivered the pitch with the student group from Boston, students gave us feedback regarding the business model and the first version of the prototypes. That feedback was used to iterate the updated versions."
+        },
+        {
+          "heading": "Aligning UX with business and technology",
+          "text": "We wanted to align UX goals with technology and business goals. From an operational and design standpoint, we strongly believed that knowing the functional specifications and business targets was crucial. So we considered three aspects: - Business — What is viable in the marketplace? - Technology — What is possible with technology? - User experience — What is desirable to users? For production prototypes, we used Figma."
+        },
+        {
+          "heading": "How the student's mobile application empowers the instructor",
+          "text": "Students provide the data using the mobile application — classroom interaction, practice problems, questions, and the like. As students input data, the web application provides instructors with descriptive and predictive analysis, as well as recommendations regarding the students' performance and needs."
+        },
+        {
+          "heading": "Afterthought",
+          "text": "The prototype was well-received by the judges during the investor round. It helped the team articulate our ideas by allowing the listener to envision the experience visually through the interactive prototype."
+        },
+        {
+          "heading": "Reflections",
+          "text": "- In this project, I learned the importance of rapid prototyping as a design workflow, especially for an early-stage startup. The benefits include quick turnaround time and cost-effectiveness. - I also learned that working closely with the product and development team yields a holistic product approach. What I could have done better - If I could do it again, I would create a journey map and a service blueprint to see the overall interaction. - I would have explored distinct personas rather than a generic approach to the key users."
+        }
+      ]
+    },
+    {
+      "id": "pacbot",
+      "slug": "pacbot",
+      "url": "https://floramaydc.com/work/pacbot/",
+      "title": "Policy as Code (PacBot)",
+      "summary": "T-Mobile's cloud compliance platform had grown into a 60-page tool where users couldn't find how to fix their violations. I led the research and redesign; afterward, violation page views dropped 50% and visits to the self-service instructions rose 7%.",
+      "label": "Cloud compliance",
+      "role": "Senior Product Designer",
+      "organization": "T-Mobile",
+      "year": "2020–2021",
+      "team": "Visual & Interaction Design Lead, Program Manager / Frontend Lead, UX Director",
+      "type": "case-study",
+      "tags": [
+        "t-mobile",
+        "cloud",
+        "compliance",
+        "enterprise",
+        "ux-research"
+      ],
+      "gated": false,
+      "archived": false,
+      "wip": false,
+      "sections": {
+        "users": "Expert and non-expert cloud users — application owners across T-Mobile, from those who knew the cloud deeply to those who didn't. PacBot's audience grew beyond cloud specialists. It became a tool for application owners who were accountable for the compliance state of the assets their teams created, even when they were not the people writing policies or configuring every AWS and Azure setting.",
+        "problem": "PacBot grew into T-Mobile's single source of truth for cloud compliance — but when a violation had no auto-fix , users had no guided path to the how-to instructions. They were hunting for information buried in subpages, in an enterprise tool with at least 60 pages — and new users faced a steep learning curve.",
+        "objective": "Our objective: create a simplified workflow for users to find self-service instructions for resolving violations.",
+        "approach": "<div class=\"deck-media-slide\" <div Reviewed PacBot's Matomo analytics and traced user paths — surfacing a spoking / pogo-sticking pattern and a 36-second page load. Then interviewed 5 users and watched them work: the app offered no way to right-click a link to open it in a new tab, forcing them back to the Violations page again and again. </div <figure Design Research Strategy used for PacBot </figure </div",
+        "keyInsights": "Users spent a minimum of 6 clicks to reach the how-to / self-service instructions — and were confused about which navigational path to follow. The information they needed was there, but buried: overwhelmed on the surface, the right detail sitting in subpages.",
+        "solution": "A right-hand drawer surfaces the policy's how-to resolution inline — cutting the path from 6 clicks to 3 without ever leaving the Violations page. A straightforward path to self-service instructions\n\nThe metadata in the violations list contained 23 values and was not in a logical order. We restructured the order after conducting a UX audit and interviewing users to learn which information was important to them. | Previous metadata (23) | New metadata in logical order (19) | |---|---| | Issue ID · Policy Name · Resource ID · Asset Type · Severity · Rule Category · Action [float] · Created on · Modified On · Account ID · Account Name · Description · Region · Status · Application · Environment · ~~App Name~~ · ~~RealDesc~~ · ~~Issue Threshold Date~~ · ~~App VP~~ · ~~App Director~~ · ~~App Project Lead~~ · ~~App Sr Director~~ | Issue ID · Resource ID · Policy Name · Severity · Description · Application Name · Application Tag · Request Exemption · App Project Lead · Account Name · Created on · Account ID · Asset Type · Region · Environment Tag · ~~Rule Category~~ · ~~App VP~~ · ~~App Director~~ · ~~App Sr Director~~ |\n\nLinks can now be right-clicked to open in a new tab or window — so users stop losing their place in the violations list. Right-click to open a link in a new tab or window",
+        "results": "Violation page views dropped 50% — from an average of 3,000 to 1,500. Visits to the Policy Details page (which holds the self-service instructions) rose 7% . Users were more productive : fewer actions, the same engagement.",
+        "reflection": "<ol class=\"deck-reflection-list\" <li <strong Good compliance tooling helps users move from detection to action with the right information at the right time.</strong </li <li <strong For an enterprise compliance tool to be successful, the experience has to serve both expert cloud users and application owners who are accountable for issues they may not know how to fix.</strong </li <li <strong Compliance is not only a question of compliant versus non-compliant. In practice, users need to understand risk, prioritize what to fix, and leave the tool with enough context to take action.</strong </li </ol <p class=\"deck-reflection-link\" <em To learn more about PacBot, visit the <a href=\"https://github.com/tmobile/pacbot\" target=\" blank\" rel=\"noopener noreferrer\" T-Mobile PacBot GitHub page</a .</em </p"
+      },
+      "narrative": [
+        {
+          "heading": "Summary",
+          "text": "T-Mobile's cloud compliance platform, PacBot , faced challenges in user experience due to its complex navigation and overloaded information. A study aimed to simplify workflows and enhance user engagement revealed the necessity of better navigational paths, information management, and application performance. Through streamlining violation metadata, introducing a right-click function, and redesigning the violations page to present upfront information, we enhanced the user experience significantly. Post-redesign, violation page views dropped by 50% and visits to the policy details page increased by 7%. The project highlighted the importance of user behavior analysis and the potential of minor UI adjustments in improving enterprise products."
+        },
+        {
+          "heading": "Challenge",
+          "text": "PacBot grew into T-Mobile's single source of truth for cloud compliance — but when a violation had no auto-fix , users had no guided path to the how-to instructions. They were hunting for information buried in subpages, in an enterprise tool with at least 60 pages — and new users faced a steep learning curve. A messy path from Violations page to How-to Resolutions When PacBot was first launched in 2017, the application provided detailed compliance reporting. As it matured and became the single source of truth for cloud users in T-Mobile, the need for an action-oriented platform became evident. In three years, more and more applications migrated to the cloud, and PacBot became an integral part of T-Mobile's cloud compliance. As its audience grew, PacBot became populated with application owners who were expert and non-expert cloud users. Moreover, the development of auto-fixes had eased the difficulty of resolving violations. However, there were thousands of violations that did not have an auto-fix. Some of these had to be fixed at the source or patched, requiring users to interact with AWS and Azure consoles, change network settings, or review the impact if patches were to be applied. The level of complexity in solving these violations was compounded by the influx of violations as new policies and rules rolled out monthly and multiple assets were created daily. Without guidance or step-by-step instructions, users were prevented from addressing open issues that impacted their compliance."
+        },
+        {
+          "heading": "Approach",
+          "text": "Quantitative Analysis This study started by reviewing PacBot's user engagement via Matomo Analytics. I extracted the data and analyzed page views, time spent, bounce rates, and exit rates. The Violations page had the second-highest page views and the most time spent next to the landing page. But when looking at the transitions, a spoking behavior in the application was noticeable. I started investigating by tracing users' paths. Subsequently, I audited how this was manifesting in the interface and recorded the time duration of these clicks. The pattern showed confused users who could not find the information they were looking for. It was also observed that the application's page load time took 36 seconds . Research questions: - If the page views and time spent are high, are these metrics a good measurement of user engagement? - If the users visit the Violations page in PacBot to find and resolve violations, do they find the information easily? - Why are the users getting confused at this step in the user flow? Design Research Strategy used for PacBot Qualitative Interviews To validate why users were going back and forth between two or more pages, the Product Manager from the customer side and I interviewed five users. We asked what they had been looking for, what motivated them to use PacBot, and what challenges they were experiencing. We also asked them to show us how they used PacBot so we could observe their interactions with the interface. As it turned out, the Violations page — and PacBot as a whole — did not offer the ability to right-click a link and open it in a new tab or window. This forced users to click into the next page even when they weren't intending to leave the Violations page. That being said, users found themselves going back to the Violations page repeatedly. In some cases, they would download a list of violations, then bounce between the Violations page, the Violations Details page, and back again. From analytics, it could be seen that some outliers did this for an hour, since they had to resolve violations for the applications they owned. Interestingly, none of the users we interviewed complained about the right-click, regardless of how tedious their browsing behavior looked from an observer's standpoint. They did, however, mention that they were hunting for information . One user new to PacBot said there was a steep learning curve to familiarize themselves with the interface. This enterprise tool has at least 60 pages."
+        },
+        {
+          "heading": "Key insights",
+          "text": "Navigational path - Users spend a minimum of 6 clicks to find the how-to / self-service instructions. - Users are confused about which navigational path to follow. Available information - Users are overwhelmed with the amount of information presented. - Some users know what information they are looking for; however, it is buried in subpages. Web application performance - Users were frustrated with the long generation time to load the Violations page. - Links did not behave in a conventional way, forcing users to follow cues such as forward and back arrows."
+        },
+        {
+          "heading": "Solution",
+          "text": "Internally, I worked with a Visual & Interaction Design Lead, a Program Manager / Frontend Lead, and the UX Director. We brainstormed solutions based on the insights and worked closely with the customer's Product Manager, Principal Architect, and other team members to get feedback and quickly iterate. How might we… …create a better navigational path from the Violations page to the self-service instructions? Solution A: Create a right-hand drawer that acts as a shortcut to the Policy Details page outlining the how-to resolution. With this, we reduced the clicks from 6 to 3 . …present the information upfront? Solution B: Organize the violations' metadata based on the users' search behavior. …improve the users' interactions with the application without making a major design change and with minimal effort to implement? Solution C: Without backend support, focus on UI changes such as ensuring links have right-click options to open in a new tab or window. --- Solution A · Simplifying the workflow The new workflow allows the user to interact with the list of violations without leaving the page. The most important information about the violation, asset, and policy can be accessed on the same page by clicking the active links. This opens a right-side panel containing summarized information. Should the user need the full view, links can now be opened in a new tab or window, allowing the user to continue going through the list of violations. Violations page redesign Low-fidelity design using Google Slides — inspired by Google Doc interaction design Final visual design of the Violations page Since users need to identify the asset that violates a policy, violation, asset, and policy details are all accessible via the Violations page. This experience makes it easier for the user to find information. For users who need the self-service instruction, they can find it by clicking the third 'Policy' tab, which opens the side panel. In addition to the step-by-step instructions, the ability to request an exemption is also available upfront on the Violations page. --- Solution B · Changing the logical order of table information --- Solution C · Enabling right-click to open a new tab or window PacBot was built using Angular with NodeJS. There was complexity in implementing right-click with options to open links in a new tab or new window. This significantly impacted users' behavior. While interestingly none of the users we interviewed complained about this, analytics showed that the back-and-forth between multiple pages resulted in many logged actions. Bonus · Email notification PacBot email alert Previously, users received email alerts of violations that took them to a list of violations without a corresponding filter. As part of the design solution, the call-to-action button from the email notification now takes the user to a pre-filtered list of violations specified. --- With these solutions, we developed an enhanced workflow that provides information upfront, reduced the overall generation time, and positively improved the experience of users when interacting with the PacBot interface."
+        },
+        {
+          "heading": "Results",
+          "text": "The redesign of the Violations page successfully eliminated the pogo-sticking behavior between the Violations page and the violation / policy / asset details pages. - Page views of the Violations page reduced by 50% — from an average of 3,000 to 1,500. - Visits to the Policy Details page (which contains the self-service instructions) increased by 7% . - Actions within the Violations page significantly decreased, while engagement (time spent) remained the same. In the post-mortem review, we found that users were more productive with the new interface — taking fewer actions while remaining equally engaged."
+        },
+        {
+          "heading": "Reflections",
+          "text": "The team created an impactful change in how users interact with the PacBot interface. Personally, I am very pleased with the outcome — not only because we made the customer happy, but because most enterprise products are challenging to design. The complexity of managing a gargantuan amount of data and the level of technicality is often used as an excuse for why these products do not have good usability compared to consumer products. When I onboarded to this project, my design principle was less is more . That's why the solutions did not involve a massive design overhaul, but leveraged existing pages to create a better navigational path. Going back to basics by introducing the ability to right-click (which should have been there in the first place) was its own feat, given the technical limitations. Lastly, on the research methods used: I would ideally start with qualitative interviews and then validate the words against the patterns. However, the problem here was discovered while reviewing the metrics. High page views and time spent do not immediately mean that a page is performing well. It depends on the purpose of the application and users' behavior. Users in PacBot are not encouraged to wander around — they are very intentional. That is why it is critical for them to go in and out as quickly as possible, but armed with the correct information to take action outside the interface. --- To learn more about PacBot and view some of the old designs, visit the T-Mobile PacBot GitHub page."
+        }
+      ]
+    },
+    {
+      "id": "vera",
+      "slug": "vera",
+      "url": "https://floramaydc.com/work/vera/",
+      "title": "Vera",
+      "summary": "Vera was an AI retail platform whose accuracy depended on how its images were tagged. I redesigned the backend tagging tool and made the case that the missing key was information architecture, not the model.",
+      "label": "Retail AI",
+      "role": "Product Designer · Researcher",
+      "client": "Confidential (retail/fashion startup)",
+      "year": "2019–2020",
+      "team": "Cross-functional with developers and stakeholders",
+      "type": "case-study",
+      "tags": [
+        "ai",
+        "retail",
+        "information-architecture",
+        "service-design",
+        "research"
+      ],
+      "gated": false,
+      "archived": true,
+      "wip": false,
+      "sections": {
+        "problem": "Vera used AI to connect fashion inspiration with store inventory, but the backend tagging workflow depended on people validating images against unclear labels and an unstructured taxonomy. If the tagging tool could not structure the information correctly, the AI solution could not be trusted as a complete experience.",
+        "users": "Backend taggers and internal teams responsible for reconciling fashion trends, image data, and store inventory. The experience had to work for people validating apparel attributes, not only for the developers building the computer vision model.",
+        "objective": "Understand why the tagging tool was producing unreliable apparel data and define a clearer information architecture for AI-assisted classification.",
+        "approach": "I tailored the work to a service design method: research, ideation, then prototyping. The research combined preparatory sessions, secondary research, improvised performance measurement, personas, journey maps, and rapid prototyping to understand where the tagging workflow was breaking down.",
+        "keyInsights": "The issue was not only image recognition. The tagging workflow had non-standard labels, missing categories, multi-step flows, unpredictable controls, and limited ways to classify apparel attributes. Poor information architecture made the data harder to validate, which weakened the AI experience built on top of it.",
+        "solution": "The direction was to strengthen the tagging tool's foundation before treating AI as the solution: standardize taxonomy, improve labels, add navigational cues, support visual inspection, and create clearer help for edge cases.",
+        "reflection": "<ol class=\"deck-reflection-list\" <li <strong AI products still depend on the structure, labels, and categories that people use to create the data.</strong </li <li <strong When the people validating the data are forced to guess, the model inherits that uncertainty.</strong </li <li <strong Information architecture is not just a usability layer in AI systems; it is part of the system's ability to produce trustworthy outcomes.</strong </li </ol"
+      },
+      "narrative": [
+        {
+          "heading": "Summary",
+          "text": "Vera is a retail platform that influences shoppers to find new fashion trends and inspiration from their preferred retail store. It uses Artificial Intelligence (AI) to provide style recommendations. The platform consists of two main applications: an in-store kiosk and a tagging tool. The tagging tool is a crucial component used to reconcile fashion trends with store inventory. To do this, the company developed an in-house AI solution. But like many projects, problems need to be identified, solutions are to be studied, products are to be designed, developed, tested, and measured — and the processes are repeated until a satisfactory result. Was this AI solution bulletproof? If not, what was the missing key? I was the product designer and researcher for the tagging tool, which was designed for backend support. This was a six-month project, and I owned the redesign with a heavy emphasis on research methods."
+        },
+        {
+          "heading": "Delimitation of this case study",
+          "text": "Since the platform is not yet widely available, this case study only focuses on the research conducted for the tagging tool and the exploratory solutions. I have also added fictional content to maintain confidentiality. The purpose of this case study is to walk you through the process that led me to discover the importance of information architecture in implementing an AI solution. The original page included a short video of the redesigned tagging tool — not yet re-hosted in this archive."
+        },
+        {
+          "heading": "Design approach",
+          "text": "I tailored my approach to a service design method: research, then ideation, then prototyping. Research - Preparatory research - Secondary research - Improvised performance measurement - Creating personas Ideation - User journey map of status quo - User journey map of future state Prototyping - Rapid prototyping 1 Preparatory research According to This Is Service Design Doing , preparatory research is your personal preparation before you start your actual research. I started with informal, quick co-creative sessions with team members, colleagues, and some stakeholders. The purpose: to learn about the platform and its features. What was the inspiration? Who was it created for? Broader topics included: - What does shopping feel like today? - How do consumers use social media? - What technology is used in the market? - Who are the competitors? I learned about the rationale of the retail stores who expressed interest in investing in this technology. As suspected, one of the driving forces was to increase sales by improving the customer's in-store experience. The secondary objective was to use social media to support that effort. I also learned about the industry, dynamics, key players, and interactions — all of which I carried into the next steps. I closed preparatory research with an informal discussion and presentation to the team. During this activity, I had the opportunity to see the existing tagging tool and to interview the developers who conceptualized it. One of the main concerns I noticed right away was the unstructured information architecture. 2 Secondary research To kick off the secondary research, I considered the findings from preparatory research — the apparel market (industry), shoppers (key players), social media (interactions/dynamics), and in-store experience (interactions/dynamics) — and created an outline of questions: - Apparel market : What is the global apparel market size? What are the projections for the USA region? Which apparel is on-demand? - Consumer behavior : What are their behaviors pre-purchase? What are their behaviors post-purchase? - Social media : How does it influence consumer behavior? What age demographic uses social media in purchasing decisions? What platform is most popular for clothing choices? - In-store experience : With the rise of mobile, does enhancing the in-store experience offer a good ROI? If stores are not going away completely, what improves store resilience? How do we make in-store shopping better? I identified the sources and evaluated whether they were reliable. To close out the activity, I created a summary with a visual presentation. (There was also research on the available technology, including how to train machine learning data, AI, and computer vision.) The results from preparatory and secondary research became reference points for creating a workflow and interactions that could make or break the UI. In both activities, I hypothesized that the lack of structure in the IA significantly caused the inaccuracy of training machine learning data. But these claims could not be substantiated without quantitative study. How do I measure the effectiveness of IA? I asked the following questions as a guide: - Is it clear? - Is it informative? - Is it usable? - Is it credible? 3 Improvised performance measurement Ideally, I wanted to conduct baseline testing to evaluate how users navigate the tagging tool. Unfortunately, there were many constraints — the research budget and the geographic location of the people responsible for validating the images (the \"taggers\"). So I created an improvised performance measurement. This is not exactly a standard user research method. Rather, it was a mathematical approach to evaluate the accuracy of the data set. Steps taken: - I requested a complete data set of validated images from the developers. The data captured by the tagging tool was in JSON format; I converted it to CSV and analyzed the accuracy by comparing the images recognized by the computer vision algorithm to the data manually inputted by taggers — using advanced spreadsheet skills and the mathematical computations of mean, median, mode. - I examined the web application — specifically the steps for validating and reporting images. I created tasks and scenarios to test the workflow, and I screen-recorded everything. High-level findings The first activity surfaced mismatches caused by non-standard labels, missing categories, and most importantly, the lack of structure in the information architecture. In the second activity, I observed: - Non-standard or non-conventional taxonomy and labels. - Multi-step, multi-page flows. - Unpredictable toggle behavior in Training Module and Social Task features. - Limited color selection. - Inability to identify other types of apparel. - Inability to detect layers of clothes. - Session time-out at 1 hour. Recommendations - Design a better information architecture; consider using the existing Google taxonomy. - Use fashion industry-standard terminology. - Scrape images should be 640 × 480 pixels minimum. - Initially, scrape images from the world wide web. - Add breadcrumbs, progress indicators, signposts. - Add a zooming interface. - Add a fashion guide / How-To / Help page. - Auto-save sessions. - Milestone submissions. - Visual cues and icons."
+        },
+        {
+          "heading": "Reflections",
+          "text": "IA is important in creating an outstanding user experience. In AI, it is very crucial to create a solid structure of IA, clear labels, and strategic use of categories. One of the most difficult challenges I observed was that neither the taggers were fashion-forward nor were the developers. As a result, the taggers would guess what these images were. On one occasion, a tagger classified a skort as a short. Unfortunately, with the limited capabilities of the computer vision algorithm, it was auto-tagged as a skirt. But which is correct? How do you classify an object that could be either? What about terminologies for lengths or types of neckline? Would it be a good approach to rely on terminologies alone? If the taggers decided to use external resources such as Google search, the terminologies used in the tagging tool were not standard. Fortunately, Google's taxonomy is public. It would be useful to benchmark against it while creating specific user stories for outliers. Having said all that, I realized how critical IA is in AI. Efforts should be exhausted improving it — otherwise it defeats the overall experience."
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "skill": "ai",
+      "projects": [
+        {
+          "slug": "dspm",
+          "title": "Data Security Posture Management (DSPM)",
+          "url": "https://floramaydc.com/work/dspm/"
+        },
+        {
+          "slug": "vera",
+          "title": "Vera",
+          "url": "https://floramaydc.com/work/vera/"
+        }
+      ]
+    },
+    {
+      "skill": "enterprise",
+      "projects": [
+        {
+          "slug": "aws-code-catalyst",
+          "title": "AWS CodeCatalyst",
+          "url": "https://floramaydc.com/work/aws-code-catalyst/"
+        },
+        {
+          "slug": "pacbot",
+          "title": "Policy as Code (PacBot)",
+          "url": "https://floramaydc.com/work/pacbot/"
+        }
+      ]
+    },
+    {
+      "skill": "retail",
+      "projects": [
+        {
+          "slug": "ebbc",
+          "title": "Elliott Bay Book Company",
+          "url": "https://floramaydc.com/work/ebbc/"
+        },
+        {
+          "slug": "vera",
+          "title": "Vera",
+          "url": "https://floramaydc.com/work/vera/"
+        }
+      ]
+    },
+    {
+      "skill": "ux-research",
+      "projects": [
+        {
+          "slug": "ebbc",
+          "title": "Elliott Bay Book Company",
+          "url": "https://floramaydc.com/work/ebbc/"
+        },
+        {
+          "slug": "pacbot",
+          "title": "Policy as Code (PacBot)",
+          "url": "https://floramaydc.com/work/pacbot/"
+        }
+      ]
+    },
+    {
+      "skill": "aws",
+      "projects": [
+        {
+          "slug": "aws-code-catalyst",
+          "title": "AWS CodeCatalyst",
+          "url": "https://floramaydc.com/work/aws-code-catalyst/"
+        }
+      ]
+    },
+    {
+      "skill": "card-sorting",
+      "projects": [
+        {
+          "slug": "ebbc",
+          "title": "Elliott Bay Book Company",
+          "url": "https://floramaydc.com/work/ebbc/"
+        }
+      ]
+    },
+    {
+      "skill": "case-study",
+      "projects": [
+        {
+          "slug": "aws-code-catalyst",
+          "title": "AWS CodeCatalyst",
+          "url": "https://floramaydc.com/work/aws-code-catalyst/"
+        }
+      ]
+    },
+    {
+      "skill": "ci-cd",
+      "projects": [
+        {
+          "slug": "aws-code-catalyst",
+          "title": "AWS CodeCatalyst",
+          "url": "https://floramaydc.com/work/aws-code-catalyst/"
+        }
+      ]
+    },
+    {
+      "skill": "cloud",
+      "projects": [
+        {
+          "slug": "pacbot",
+          "title": "Policy as Code (PacBot)",
+          "url": "https://floramaydc.com/work/pacbot/"
+        }
+      ]
+    },
+    {
+      "skill": "compliance",
+      "projects": [
+        {
+          "slug": "pacbot",
+          "title": "Policy as Code (PacBot)",
+          "url": "https://floramaydc.com/work/pacbot/"
+        }
+      ]
+    },
+    {
+      "skill": "data-security",
+      "projects": [
+        {
+          "slug": "dspm",
+          "title": "Data Security Posture Management (DSPM)",
+          "url": "https://floramaydc.com/work/dspm/"
+        }
+      ]
+    },
+    {
+      "skill": "developer-tools",
+      "projects": [
+        {
+          "slug": "aws-code-catalyst",
+          "title": "AWS CodeCatalyst",
+          "url": "https://floramaydc.com/work/aws-code-catalyst/"
+        }
+      ]
+    },
+    {
+      "skill": "dspm",
+      "projects": [
+        {
+          "slug": "dspm",
+          "title": "Data Security Posture Management (DSPM)",
+          "url": "https://floramaydc.com/work/dspm/"
+        }
+      ]
+    },
+    {
+      "skill": "edtech",
+      "projects": [
+        {
+          "slug": "mindelf",
+          "title": "Mind Elf",
+          "url": "https://floramaydc.com/work/mindelf/"
+        }
+      ]
+    },
+    {
+      "skill": "education",
+      "projects": [
+        {
+          "slug": "mindelf",
+          "title": "Mind Elf",
+          "url": "https://floramaydc.com/work/mindelf/"
+        }
+      ]
+    },
+    {
+      "skill": "information-architecture",
+      "projects": [
+        {
+          "slug": "vera",
+          "title": "Vera",
+          "url": "https://floramaydc.com/work/vera/"
+        }
+      ]
+    },
+    {
+      "skill": "machine-learning",
+      "projects": [
+        {
+          "slug": "mindelf",
+          "title": "Mind Elf",
+          "url": "https://floramaydc.com/work/mindelf/"
+        }
+      ]
+    },
+    {
+      "skill": "microsoft",
+      "projects": [
+        {
+          "slug": "dspm",
+          "title": "Data Security Posture Management (DSPM)",
+          "url": "https://floramaydc.com/work/dspm/"
+        }
+      ]
+    },
+    {
+      "skill": "posture",
+      "projects": [
+        {
+          "slug": "dspm",
+          "title": "Data Security Posture Management (DSPM)",
+          "url": "https://floramaydc.com/work/dspm/"
+        }
+      ]
+    },
+    {
+      "skill": "purview",
+      "projects": [
+        {
+          "slug": "dspm",
+          "title": "Data Security Posture Management (DSPM)",
+          "url": "https://floramaydc.com/work/dspm/"
+        }
+      ]
+    },
+    {
+      "skill": "rapid-prototyping",
+      "projects": [
+        {
+          "slug": "mindelf",
+          "title": "Mind Elf",
+          "url": "https://floramaydc.com/work/mindelf/"
+        }
+      ]
+    },
+    {
+      "skill": "research",
+      "projects": [
+        {
+          "slug": "vera",
+          "title": "Vera",
+          "url": "https://floramaydc.com/work/vera/"
+        }
+      ]
+    },
+    {
+      "skill": "school-project",
+      "projects": [
+        {
+          "slug": "ebbc",
+          "title": "Elliott Bay Book Company",
+          "url": "https://floramaydc.com/work/ebbc/"
+        }
+      ]
+    },
+    {
+      "skill": "service-design",
+      "projects": [
+        {
+          "slug": "vera",
+          "title": "Vera",
+          "url": "https://floramaydc.com/work/vera/"
+        }
+      ]
+    },
+    {
+      "skill": "startup",
+      "projects": [
+        {
+          "slug": "mindelf",
+          "title": "Mind Elf",
+          "url": "https://floramaydc.com/work/mindelf/"
+        }
+      ]
+    },
+    {
+      "skill": "t-mobile",
+      "projects": [
+        {
+          "slug": "pacbot",
+          "title": "Policy as Code (PacBot)",
+          "url": "https://floramaydc.com/work/pacbot/"
+        }
+      ]
+    },
+    {
+      "skill": "user-centered-design",
+      "projects": [
+        {
+          "slug": "ebbc",
+          "title": "Elliott Bay Book Company",
+          "url": "https://floramaydc.com/work/ebbc/"
+        }
+      ]
+    }
+  ]
+}
