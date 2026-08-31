@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-08-31T21:47:38.171Z",
+  "builtAt": "2026-08-31T22:17:28.859Z",
   "source": "src/content (work + resume) — generated, do not edit by hand",
   "profile": {
     "name": "Flora May dela Cruz",
@@ -97,7 +97,8 @@
         "data-security",
         "dspm",
         "ai",
-        "posture"
+        "posture",
+        "accessibility"
       ],
       "gated": true,
       "note": "Full case study is access-protected; request access at the URL.",
@@ -413,6 +414,16 @@
           "slug": "pacbot",
           "title": "Policy as Code (PacBot)",
           "url": "https://floramaydc.com/work/pacbot/"
+        }
+      ]
+    },
+    {
+      "skill": "accessibility",
+      "projects": [
+        {
+          "slug": "dspm",
+          "title": "Data Security Posture Management (DSPM)",
+          "url": "https://floramaydc.com/work/dspm/"
         }
       ]
     },
