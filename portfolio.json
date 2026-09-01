@@ -1,20 +1,41 @@
 {
-  "builtAt": "2026-09-01T00:03:59.452Z",
+  "builtAt": "2026-09-01T17:35:44.700Z",
   "source": "src/content (work + resume + toybox + writing + play) — generated, do not edit by hand",
   "profile": {
     "name": "Flora May dela Cruz",
-    "title": "Senior Product Designer",
-    "summary": "Senior Product Designer with over a decade of experience at Microsoft, Best Buy, Amazon Web Services (via Projekt202), T-Mobile (via Piktorlabs), and IBM. Focus areas — enterprise UX, cloud, security, compliance, developer tools, and AI-assisted experiences.",
-    "framing": "Flora's own framing, from her About page: \"I'm focused on turning complex, technical problems into usable and trustworthy experiences. My work sits at the intersection of people, systems, and emerging technology.\" She believes design is a responsibility, especially as AI reshapes how people work, learn, and make decisions. Clarity, structure, empathy, and ethics are the throughline.",
+    "title": "Principal Product Designer | Security, AI, & Developer Platforms",
+    "summary": "Product design leader working across enterprise security, AI, and developer platforms. I turn complex systems, workflows, and technical constraints into clear product experiences and scalable frameworks, with experience spanning Microsoft Security, AWS developer tools, cloud compliance, e-commerce, and enterprise technology.",
     "specialties": [
-      "Enterprise UX for security, compliance, and cloud infrastructure",
-      "AI-assisted experiences — designing the trust, the explanations, and the override paths around the model, not just the model's surface",
-      "Developer tooling and complex workflow design",
-      "Information density and clarity in data-heavy products",
-      "Senior individual-contributor design leadership — strategy, pattern libraries, mentorship across teams"
+      "Product Strategy",
+      "Systems Thinking",
+      "Experience Architecture",
+      "Interaction Design",
+      "Information Architecture",
+      "Accessibility",
+      "Cross-product Frameworks",
+      "Design Direction",
+      "Cross-functional Leadership",
+      "Stakeholder Alignment",
+      "Security",
+      "AI",
+      "Developer Platforms",
+      "Cloud",
+      "APIs",
+      "SDLC",
+      "Coded Prototyping",
+      "HTML",
+      "CSS",
+      "Figma",
+      "VS Code",
+      "Git",
+      "Claude Code",
+      "Codex",
+      "GitHub Copilot"
     ],
-    "contact": "The best path is LinkedIn at linkedin.com/in/floramaydelacruz. Email and Instagram links are at the bottom of the About page. She does not publish her phone number.",
-    "canonicalUrl": "https://floramaydc.com/about/",
+    "location": "Kirkland, WA",
+    "website": "https://floramaydc.com",
+    "linkedin": "https://www.linkedin.com/in/floramaydelacruz",
+    "canonicalUrl": "https://floramaydc.com/resume/",
     "portfolio": {
       "caseStudies": 6,
       "tools": 6,
@@ -41,34 +62,118 @@
   },
   "experience": [
     {
-      "heading": "Current role — Microsoft, Senior Product Designer",
       "company": "Microsoft",
-      "role": "Senior Product Designer",
-      "text": "At Microsoft, Flora designs scalable security and compliance experiences that protect sensitive data across clouds. Her work focuses on turning complex, technical problems into usable and trustworthy experiences for IT administrators, security analysts, and compliance officers. She has contributed to AI-assisted investigation features that help analysts make sense of large volumes of activity data and run complex queries more confidently — published publicly on her site as the Copilot for Activity Explorer and DLP Alerts case study. She brings a senior-IC point of view to her team: when to add a feature, when to subtract one, when to refuse outright. That philosophy is what the Toybox on this site is built around."
+      "role": "Senior Product Designer, Security",
+      "period": "2022–Present",
+      "highlights": [
+        "Lead end-to-end product design across Microsoft Purview, spanning enterprise security, data security posture management, information protection, AI-assisted workflows, and cross-product platform experiences.",
+        "Design AI-assisted security experiences including Copilot workflows, alert investigation, automated triage, recommendations, and agent-based experiences.",
+        "Establish reusable frameworks and patterns across Overview, Reports, Recommendations, posture visualization, and other cross-solution experiences.",
+        "Partner across product, engineering, research, content, accessibility, and design systems to shape technically complex products and influence direction beyond individual feature boundaries.",
+        "Led design for Data Security Posture Management experiences across posture, objectives, risk patterns, recommendations, reporting, and policy activation through general availability."
+      ],
+      "text": "Lead end-to-end product design across Microsoft Purview, spanning enterprise security, data security posture management, information protection, AI-assisted workflows, and cross-product platform experiences. Design AI-assisted security experiences including Copilot workflows, alert investigation, automated triage, recommendations, and agent-based experiences. Establish reusable frameworks and patterns across Overview, Reports, Recommendations, posture visualization, and other cross-solution experiences. Partner across product, engineering, research, content, accessibility, and design systems to shape technically complex products and influence direction beyond individual feature boundaries. Led design for Data Security Posture Management experiences across posture, objectives, risk patterns, recommendations, reporting, and policy activation through general availability."
     },
     {
-      "heading": "Best Buy — Senior Product Designer",
       "company": "Best Buy",
-      "role": "Senior Product Designer",
-      "text": "At Best Buy, Flora worked on retail and customer-facing experiences at consumer scale. The role broadened her grounding in commerce, content, and merchandising patterns — areas she still draws on when reasoning about consumer-grade clarity inside enterprise products."
+      "role": "Senior Experience Designer",
+      "period": "2022",
+      "highlights": [
+        "Designed mobile activation and trade-in experiences for Best Buy’s e-commerce platform, translating complex business requirements into accessible customer journeys."
+      ],
+      "text": "Designed mobile activation and trade-in experiences for Best Buy’s e-commerce platform, translating complex business requirements into accessible customer journeys."
     },
     {
-      "heading": "Projekt202 (Amazon Web Services) — Product Designer",
-      "company": "Projekt202 (Amazon Web Services)",
-      "role": "Product Designer",
-      "text": "While at Projekt202, Flora was embedded with AWS on the early UX for Amazon CodeCatalyst, a developer experience platform. She focused on CI/CD workflows and test reporting — making it easier for developers to understand the state of their builds and act on failures. The AWS Code Catalyst case study on this site documents her work from that engagement."
+      "company": "Projekt202 / AWS",
+      "role": "Senior Experience Designer",
+      "period": "2021–2022",
+      "highlights": [
+        "Designed developer experiences for AWS software-development tooling, with a focus on software testing and SDLC workflows.",
+        "Used requirements gathering, prototyping, usability testing, and cross-functional collaboration to refine technically complex experiences for developers."
+      ],
+      "text": "Designed developer experiences for AWS software-development tooling, with a focus on software testing and SDLC workflows. Used requirements gathering, prototyping, usability testing, and cross-functional collaboration to refine technically complex experiences for developers."
     },
     {
-      "heading": "Piktorlabs (T-Mobile) — Product Designer",
-      "company": "Piktorlabs (T-Mobile)",
-      "role": "Product Designer",
-      "text": "At Piktorlabs, Flora was embedded with T-Mobile on PacBot, the company's in-house cloud compliance and security platform. She led the redesign of the violation review and self-service remediation flows. After the redesign, violation page views dropped by 50% and visits to the policy details page increased by 7% — engineers were spending less time confused and more time fixing the right things. The PacBot case study on this site has the full breakdown."
+      "company": "Piktorlabs / T-Mobile",
+      "role": "UX Lead",
+      "period": "2018–2021",
+      "highlights": [
+        "Led UX for PacBot, T-Mobile’s open-source cloud security and compliance platform, spanning research, requirements, information architecture, interaction design, and frontend planning.",
+        "Provided UX direction across developer tools, APIs, secrets management, serverless platforms, and other enterprise technologies."
+      ],
+      "text": "Led UX for PacBot, T-Mobile’s open-source cloud security and compliance platform, spanning research, requirements, information architecture, interaction design, and frontend planning. Provided UX direction across developer tools, APIs, secrets management, serverless platforms, and other enterprise technologies."
     },
     {
-      "heading": "IBM — Designer",
       "company": "IBM",
-      "role": "Designer",
-      "text": "Earlier in her career, Flora worked at IBM, where she got her grounding in enterprise design systems, accessibility, and the kind of long-cycle, mission-critical software that shaped her later interest in cloud and security. The IBM experience is where the discipline of \"designing for the person who has to live inside this tool eight hours a day\" first took hold."
+      "role": "Country Operations Manager / IT Specialist",
+      "period": "2011–2016",
+      "highlights": [
+        "Managed a five-person operations team and led process improvements that increased field engineer productivity from 80% to 90%.",
+        "Led technical service programs, root-cause analysis, customer operations, and adoption initiatives, including programs that exceeded targets by 20%."
+      ],
+      "text": "Managed a five-person operations team and led process improvements that increased field engineer productivity from 80% to 90%. Led technical service programs, root-cause analysis, customer operations, and adoption initiatives, including programs that exceeded targets by 20%."
+    }
+  ],
+  "expertise": [
+    {
+      "category": "Product",
+      "items": [
+        "Product Strategy",
+        "Systems Thinking",
+        "Experience Architecture",
+        "Interaction Design",
+        "Information Architecture",
+        "Accessibility"
+      ]
+    },
+    {
+      "category": "Leadership",
+      "items": [
+        "Cross-product Frameworks",
+        "Design Direction",
+        "Cross-functional Leadership",
+        "Stakeholder Alignment"
+      ]
+    },
+    {
+      "category": "Domains",
+      "items": [
+        "Security",
+        "AI",
+        "Developer Platforms",
+        "Cloud",
+        "APIs",
+        "SDLC"
+      ]
+    },
+    {
+      "category": "Prototyping",
+      "items": [
+        "Coded Prototyping",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "category": "Tools",
+      "items": [
+        "Figma",
+        "VS Code",
+        "Git",
+        "Claude Code",
+        "Codex",
+        "GitHub Copilot"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "credential": "B.S. Electronics and Communications Engineering",
+      "institution": "Ateneo de Davao University"
+    },
+    {
+      "credential": "Certificate, Computer Science & Technology, UX Focus",
+      "institution": "Seattle Central College"
     }
   ],
   "projects": [
