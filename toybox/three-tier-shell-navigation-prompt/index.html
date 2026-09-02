@@ -3534,12 +3534,33 @@ This site uses Google Analytics to understand what content is useful. <a href="/
 
     // Stream a grounded answer from the worker into the given bubble.
     // Returns true on success, false on any failure (caller falls back).
+    function isLikelyJobPostingUrl(value) {
+      try {
+        const url = new URL(String(value || ''));
+        if (!/^https?:$/.test(url.protocol)) return false;
+        const host = url.hostname.toLowerCase();
+        const path = url.pathname.toLowerCase();
+        const hiringHost = /(^|\.)(?:jobs?|careers?|apply)\./.test(host);
+        const dedicatedAts = /(?:greenhouse\.io|lever\.co|myworkdayjobs\.com|smartrecruiters\.com|ashbyhq\.com|icims\.com|jobvite\.com)$/.test(host);
+        const jobMarketplace = /(?:linkedin\.com|indeed\.com|glassdoor\.com|ziprecruiter\.com|monster\.com)$/.test(host);
+        const jobPath = /\/(?:jobs?|careers?|positions?|opportunities|requisitions?)(?:\/|$)/.test(path);
+        const jobId = [...url.searchParams.keys()].some((key) =>
+          /^(?:pid|jk|job_?id|jobid|gh_jid|requisition_?id|requisitionid|position_?id|posting_?id)$/i.test(key),
+        );
+        const marketplaceJob = jobMarketplace && (jobPath || jobId || /\/viewjob(?:\/|$)/.test(path));
+        return dedicatedAts || marketplaceJob || (hiringHost && (jobPath || jobId)) || (jobPath && jobId);
+      } catch {
+        return false;
+      }
+    }
+
     function jobUrlFor(question) {
       const match = String(question || '').match(/https?:\/\/[^\s<>"']+/i);
       if (!match) return '';
+      const candidate = match[0].replace(/[),.;!?]+$/, '');
       const isResumePage = /^\/resume\/?$/i.test(window.location.pathname);
       const hasJobIntent = /\b(?:job|role|position|employer|match|fit)\b/i.test(String(question || ''));
-      return isResumePage || hasJobIntent || pendingJobMatch ? match[0].replace(/[),.;!?]+$/, '') : '';
+      return isLikelyJobPostingUrl(candidate) || isResumePage || hasJobIntent || pendingJobMatch ? candidate : '';
     }
 
     async function askWorker(question, top, bubble, shouldSpeak = false) {
