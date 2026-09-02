@@ -4474,7 +4474,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
         return;
       }
 
-      if (!looksSubstantive(clean) && isNavigationIntent(clean)) {
+      if (!jobUrl && !looksSubstantive(clean) && isNavigationIntent(clean)) {
         const reply = renderNavigationGuide(clean);
         addBubble('mai', reply);
         renderChips(getDynamicChips(clean));
@@ -4482,7 +4482,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
         return;
       }
 
-      if (!looksSubstantive(clean) && isFreshnessQuery(clean)) {
+      if (!jobUrl && !looksSubstantive(clean) && isFreshnessQuery(clean)) {
         const pendingId = addBubble(
           'mai',
           '<span class="mai-thinking text-muted">Looking for the latest updates<span class="mai-thinking-dots"><span></span><span></span><span></span></span></span>',
@@ -4576,7 +4576,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
 
       // 3) Any other non-search shape — honest, scripted reply.
       const intent = preIntent;
-      if (intent !== 'search') {
+      if (intent !== 'search' && !jobUrl) {
         const reply = intentReply(intent);
         addBubble('mai', reply);
         renderChips(getDynamicChips(clean));
@@ -4601,7 +4601,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
         // a fair shot at matching mis-spelled proper nouns.
         if (!_vocabReady) await settleWithin(loadVocab(), MAI_INDEX_TIMEOUT_MS, null);
         if (!_manifestReady) await settleWithin(loadManifest(), MAI_INDEX_TIMEOUT_MS, null);
-        if (_vocabReady) retrievalQuery = fuzzyCorrectQuery(clean, _vocabReady);
+        if (_vocabReady && !jobUrl) retrievalQuery = fuzzyCorrectQuery(clean, _vocabReady);
         const scored = applyContextBoost(rank(index, retrievalQuery), retrievalQuery, _manifestReady);
         const currentPageRows = currentPageSourceRows(retrievalQuery);
         // Send a wider context to the LLM — it can pick the relevant bits
