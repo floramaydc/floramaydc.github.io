@@ -733,7 +733,7 @@
         document.addEventListener('access:unlocked', scheduleEnhance);
         document.addEventListener('access:body-injected', scheduleEnhance);
       })();
-    </script><script type="module">(function(){var f="https://mai.floramaydc-mai.workers.dev",r=document.querySelector("[data-subscribe-form]");if(r){let e=function(c,o){n&&(n.textContent=c,n.hidden=!1,n.style.color=o==="error"?"rgb(var(--c-accent) / 1)":"rgb(var(--c-ink) / 1)")};var n=r.querySelector("[data-subscribe-status]"),a=r.querySelector('button[type="submit"]'),i=r.querySelector('input[name="email"]'),s=r.querySelector('input[name="website"]');r.addEventListener("submit",function(c){c.preventDefault();var o=(i&&i.value||"").trim();if(!o||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(o)){e("Please enter a valid email address.","error"),i&&i.focus();return}a&&(a.disabled=!0),e("One moment…","ok"),fetch(f+"/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:o,website:s?s.value:""})}).then(function(t){return t.json().catch(function(){return{}}).then(function(l){return{ok:t.ok,code:t.status,data:l}})}).then(function(t){t.code===429?e("That was a few too many tries — please try again in a little while.","error"):t.ok&&t.data&&t.data.status==="already_subscribed"?e("You're already on the list — thank you.","ok"):t.ok?(e("Almost there — check your inbox to confirm.","ok"),r.reset()):e("Something went wrong. Please try again.","error")}).catch(function(){e("Couldn’t reach the server. Please try again.","error")}).finally(function(){a&&(a.disabled=!1)})})}document.querySelectorAll("[data-cookie-prefs]").forEach(function(e){e.addEventListener("click",function(){typeof window.__openCookiePrefs=="function"&&window.__openCookiePrefs()})})})();</script><title>Component Audit | Toybox by Flora May dela Cruz</title><script type="application/ld+json">[{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Component Audit","applicationCategory":"WebApplication","operatingSystem":"Web","url":"https://floramaydc.com/toybox/component-audit-tool/","description":"Map any live page's UI components to Fluent UI, Material UI, Carbon, or Material Design — free component inventory for designers and developers auditing interface consistency.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-06-01T00:00:00.000Z","keywords":"components, audit, fluent, material, carbon, design systems, usability"},{"@context":"https://schema.org","@type":"CreativeWork","name":"Component Audit","headline":"Component Audit","description":"Map any live page's UI components to Fluent UI, Material UI, Carbon, or Material Design — free component inventory for designers and developers auditing interface consistency.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"url":"https://floramaydc.com/toybox/component-audit-tool/","license":"https://creativecommons.org/publicdomain/zero/1.0/","dateModified":"2026-06-01T00:00:00.000Z","keywords":"components, audit, fluent, material, carbon, design systems, usability","genre":"Tools"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Toybox","item":"https://floramaydc.com/toybox/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://floramaydc.com/toybox/#tool"},{"@type":"ListItem","position":3,"name":"Component Audit","item":"https://floramaydc.com/toybox/component-audit-tool/"}]}]</script><link rel="stylesheet" href="/assets/style.DHvkHra9.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave" aria-hidden="true" data-thread> <svg class="top-wave__base" viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"> <defs>  <linearGradient id="hero-thread-grad" gradientUnits="userSpaceOnUse" x1="-400" y1="0" x2="-100" y2="0"> <stop offset="0%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <stop offset="25%" style="stop-color: var(--wave-g1)"></stop> <stop offset="50%" style="stop-color: var(--wave-g2)"></stop> <stop offset="75%" style="stop-color: var(--wave-g3)"></stop> <stop offset="100%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <animate attributeName="x1" values="-400;1700" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> <animate attributeName="x2" values="-100;2000" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> </linearGradient>  <filter id="hero-thread-glow" x="-10%" y="-50%" width="120%" height="200%"> <feGaussianBlur stdDeviation="1.4" result="b"></feGaussianBlur> <feMerge> <feMergeNode in="b"></feMergeNode> <feMergeNode in="SourceGraphic"></feMergeNode> </feMerge> </filter> </defs> <g fill="none" stroke="var(--wave-base)" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path>  <path d="M-20,192 C50,150 120,160 184,200 C250,240 320,240 388,210 C460,180 530,180 592,220 C660,260 730,260 796,230 C870,200 940,210 1000,242 C1070,275 1140,275 1204,250 C1280,225 1350,235 1408,265 C1480,295 1550,295 1620,282" stroke="url(#hero-thread-grad)" stroke-opacity="1" stroke-width="0.9" filter="url(#hero-thread-glow)" data-thread-morph></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <script>
+    </script><script type="module">(function(){var f="https://mai.floramaydc-mai.workers.dev",r=document.querySelector("[data-subscribe-form]");if(r){let e=function(c,o){n&&(n.textContent=c,n.hidden=!1,n.style.color=o==="error"?"rgb(var(--c-accent) / 1)":"rgb(var(--c-ink) / 1)")};var n=r.querySelector("[data-subscribe-status]"),a=r.querySelector('button[type="submit"]'),i=r.querySelector('input[name="email"]'),s=r.querySelector('input[name="website"]');r.addEventListener("submit",function(c){c.preventDefault();var o=(i&&i.value||"").trim();if(!o||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(o)){e("Please enter a valid email address.","error"),i&&i.focus();return}a&&(a.disabled=!0),e("One moment…","ok"),fetch(f+"/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:o,website:s?s.value:""})}).then(function(t){return t.json().catch(function(){return{}}).then(function(l){return{ok:t.ok,code:t.status,data:l}})}).then(function(t){t.code===429?e("That was a few too many tries — please try again in a little while.","error"):t.ok&&t.data&&t.data.status==="already_subscribed"?e("You're already on the list — thank you.","ok"):t.ok?(e("Almost there — check your inbox to confirm.","ok"),r.reset()):e("Something went wrong. Please try again.","error")}).catch(function(){e("Couldn’t reach the server. Please try again.","error")}).finally(function(){a&&(a.disabled=!1)})})}document.querySelectorAll("[data-cookie-prefs]").forEach(function(e){e.addEventListener("click",function(){typeof window.__openCookiePrefs=="function"&&window.__openCookiePrefs()})})})();</script><title>Component Audit | Toybox by Flora May dela Cruz</title><script type="application/ld+json">[{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Component Audit","applicationCategory":"WebApplication","operatingSystem":"Web","url":"https://floramaydc.com/toybox/component-audit-tool/","description":"Map any live page's UI components to Fluent UI, Material UI, Carbon, or Material Design — free component inventory for designers and developers auditing interface consistency.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-06-01T00:00:00.000Z","keywords":"components, audit, fluent, material, carbon, design systems, usability"},{"@context":"https://schema.org","@type":"CreativeWork","name":"Component Audit","headline":"Component Audit","description":"Map any live page's UI components to Fluent UI, Material UI, Carbon, or Material Design — free component inventory for designers and developers auditing interface consistency.","author":{"@type":"Person","name":"Flora May dela Cruz","url":"https://floramaydc.com/about"},"url":"https://floramaydc.com/toybox/component-audit-tool/","license":"https://creativecommons.org/publicdomain/zero/1.0/","dateModified":"2026-06-01T00:00:00.000Z","keywords":"components, audit, fluent, material, carbon, design systems, usability","genre":"Tools"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Toybox","item":"https://floramaydc.com/toybox/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://floramaydc.com/toybox/#tool"},{"@type":"ListItem","position":3,"name":"Component Audit","item":"https://floramaydc.com/toybox/component-audit-tool/"}]}]</script><link rel="stylesheet" href="/assets/style.eXuAqKED.css"></head> <body class="bg-paper text-ink font-sans antialiased overflow-x-hidden">  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-paper focus:no-underline">Skip to main content</a>  <div class="top-wave" aria-hidden="true" data-thread> <svg class="top-wave__base" viewBox="0 0 1600 360" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"> <defs>  <linearGradient id="hero-thread-grad" gradientUnits="userSpaceOnUse" x1="-400" y1="0" x2="-100" y2="0"> <stop offset="0%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <stop offset="25%" style="stop-color: var(--wave-g1)"></stop> <stop offset="50%" style="stop-color: var(--wave-g2)"></stop> <stop offset="75%" style="stop-color: var(--wave-g3)"></stop> <stop offset="100%" style="stop-color: rgb(var(--c-ink)); stop-opacity: 0.20"></stop> <animate attributeName="x1" values="-400;1700" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> <animate attributeName="x2" values="-100;2000" dur="6s" repeatCount="indefinite" calcMode="linear" data-thread-shimmer></animate> </linearGradient>  <filter id="hero-thread-glow" x="-10%" y="-50%" width="120%" height="200%"> <feGaussianBlur stdDeviation="1.4" result="b"></feGaussianBlur> <feMerge> <feMergeNode in="b"></feMergeNode> <feMergeNode in="SourceGraphic"></feMergeNode> </feMerge> </filter> </defs> <g fill="none" stroke="var(--wave-base)" stroke-width="0.8" stroke-linecap="round"> <path d="M-20,80 C200,40 380,140 560,110 C740,80 900,180 1080,150 C1260,120 1440,200 1620,170"></path> <path d="M-20,108 C220,68 400,168 580,138 C760,108 920,208 1100,178 C1280,148 1460,228 1620,198"></path> <path d="M-20,136 C200,96 380,196 560,166 C740,136 900,236 1080,206 C1260,176 1440,256 1620,226"></path> <path d="M-20,164 C220,124 400,224 580,194 C760,164 920,264 1100,234 C1280,204 1460,284 1620,254"></path>  <path d="M-20,192 C50,150 120,160 184,200 C250,240 320,240 388,210 C460,180 530,180 592,220 C660,260 730,260 796,230 C870,200 940,210 1000,242 C1070,275 1140,275 1204,250 C1280,225 1350,235 1408,265 C1480,295 1550,295 1620,282" stroke="url(#hero-thread-grad)" stroke-opacity="1" stroke-width="0.9" filter="url(#hero-thread-glow)" data-thread-morph></path> <path d="M-20,220 C220,180 400,280 580,250 C760,220 920,320 1100,290 C1280,260 1440,340 1620,310"></path> <path d="M-20,248 C200,208 380,308 560,278 C740,248 900,348 1080,318 C1260,288 1440,368 1620,338"></path> <path d="M-20,276 C220,236 400,336 580,306 C760,276 920,376 1100,346 C1280,316 1460,396 1620,366"></path> <path d="M-20,304 C200,264 380,364 560,334 C740,304 900,404 1080,374 C1260,344 1440,424 1620,394"></path> <path d="M-20,332 C220,292 400,392 580,362 C760,332 920,432 1100,402 C1280,372 1460,452 1620,422"></path> </g> </svg> </div> <script>
       (function () {
         try {
           var wave = document.querySelector('.top-wave[data-thread]');
@@ -2998,6 +2998,72 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       return false;
     }
 
+    // ---------- Typed UI actions (plans/bidirectional-mai.md) ----------
+    // The action client (src/lib/mai-actions-client.mjs + the shared contract)
+    // loads lazily through window.__maiLoadActions (a processed <script> at
+    // the end of this component), so it adds nothing to first-load weight.
+    // Until it loads — or when the worker's MAI_ACTIONS_ENABLED flag is off —
+    // M.ai keeps the legacy plain-text path unchanged.
+    const MAI_ACTION_PENDING_NAV_KEY = maiStorageKey('action:pending-navigation');
+    const MAI_ACTIONS_LOAD_TIMEOUT_MS = 1500;
+    let pendingProposalId = null;
+    let _maiActions = null;
+    let _maiActionsPromise = null;
+
+    function loadMaiActions() {
+      if (_maiActions) return Promise.resolve(_maiActions);
+      if (!_maiActionsPromise) {
+        // Module scripts run before DOMContentLoaded; wait for the loader if
+        // this is called while the page is still parsing.
+        const ready = window.__maiLoadActions || document.readyState !== 'loading'
+          ? Promise.resolve()
+          : new Promise((resolve) => document.addEventListener('DOMContentLoaded', resolve, { once: true }));
+        _maiActionsPromise = ready
+          .then(() => (window.__maiLoadActions ? window.__maiLoadActions() : null))
+          .then((mod) => {
+            _maiActions = mod ? mod.createMaiActions(maiActionHost()) : null;
+            return _maiActions;
+          })
+          .catch(() => {
+            _maiActionsPromise = null;
+            return null;
+          });
+      }
+      return _maiActionsPromise;
+    }
+
+    // The only M.ai internals the action client may use.
+    function maiActionHost() {
+      return {
+        base,
+        workerUrl: MAI_WORKER_URL,
+        storageKey: maiStorageKey,
+        log,
+        input,
+        trimText,
+        escapeHtml,
+        safeJsonParse,
+        addBubble,
+        saveTranscript,
+        track,
+        setActionResult,
+        labelForActionTarget,
+        pathToName,
+        stripControlMarkers,
+        manifestEntries: () => manifestEntries(_manifestReady),
+        getLiveContextPacket,
+        getRecentConversation,
+        readWithTimeout: (reader) => readWithTimeout(reader, MAI_WORKER_IDLE_TIMEOUT_MS),
+        closePanel: () => close(),
+        speakIfEnabled: (text) => { if (speakReplies) speak(text); },
+      };
+    }
+
+    function resolveProposal(proposalId, approved, source) {
+      if (pendingProposalId === proposalId) pendingProposalId = null;
+      loadMaiActions().then((actions) => actions && actions.resolveProposal(proposalId, approved, source));
+    }
+
     // ---------- Message-to-Flora flow ----------
     // Multi-turn conversation that collects name -> email -> message and
     // POSTs to /api/contact (Vercel function → Resend), the same endpoint
@@ -3460,6 +3526,14 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       }));
       const pageContext = getLiveContextPacket();
       const conversation = getRecentConversation(10);
+      // Typed UI actions: report this page's named capabilities. The worker
+      // only uses them when its MAI_ACTIONS_ENABLED flag is on; otherwise it
+      // answers in plain text and nothing below changes.
+      const maiActions = await settleWithin(loadMaiActions(), MAI_ACTIONS_LOAD_TIMEOUT_MS, null);
+      let actionSnapshot = null;
+      if (maiActions) {
+        try { actionSnapshot = maiActions.snapshot(top); } catch { actionSnapshot = null; }
+      }
       let res;
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), MAI_WORKER_START_TIMEOUT_MS);
@@ -3474,6 +3548,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
             pageContext,
             conversation,
             jobUrl,
+            ...(actionSnapshot ? { actionProtocol: maiActions.protocolVersion, capabilities: actionSnapshot } : {}),
           }),
         });
       } catch {
@@ -3519,8 +3594,9 @@ This site uses Google Analytics to understand what content is useful. <a href="/
 
       if (bubble) bubble.innerHTML = '<span class="mai-stream"></span>';
       const target = bubble?.querySelector('.mai-stream');
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
+      // NDJSON = typed protocol (text_delta + action events); anything else
+      // is the legacy plain-text stream.
+      const typedStream = Boolean(actionSnapshot) && /application\/x-ndjson/i.test(res.headers.get('content-type') || '');
       let acc = '';
       let spokeEarly = false;
       // The model ends its reply with `[[NAV:n]]` (see personality.md).
@@ -3536,36 +3612,56 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       function stripTrailingMarker(s) {
         return s.replace(NAV_TRAILING_RE, '').replace(ACTION_TRAILING_RE, '');
       }
-      try {
-        while (true) {
-          const { done, value } = await readWithTimeout(reader, MAI_WORKER_IDLE_TIMEOUT_MS);
-          if (done) break;
-          acc += decoder.decode(value, { stream: true });
-          if (target) {
-            // Render incrementally through the safe allowlist renderer so
-            // emphasis/links/lists from the model show up properly while
-            // partial markup can't break out. Hide any in-flight nav marker
-            // (full or partial) so it never flashes visible.
-            const display = stripTrailingMarker(acc);
-            target.innerHTML = safeRenderModelHtml(display);
-            log.scrollTop = log.scrollHeight;
+      function renderStreamTick() {
+        if (target) {
+          // Render incrementally through the safe allowlist renderer so
+          // emphasis/links/lists from the model show up properly while
+          // partial markup can't break out. Hide any in-flight nav marker
+          // (full or partial) so it never flashes visible.
+          const display = stripTrailingMarker(acc);
+          target.innerHTML = safeRenderModelHtml(display);
+          log.scrollTop = log.scrollHeight;
 
-            if (shouldSpeak && !spokeEarly) {
-              const plain = display.replace(/\s+/g, ' ').trim();
-              const firstSentence = plain.match(/^(.{40,220}?[.!?])(?:\s|$)/);
-              if (firstSentence?.[1]) {
-                spokeEarly = true;
-                speak(firstSentence[1]);
-              }
+          if (shouldSpeak && !spokeEarly) {
+            const plain = display.replace(/\s+/g, ' ').trim();
+            const firstSentence = plain.match(/^(.{40,220}?[.!?])(?:\s|$)/);
+            if (firstSentence?.[1]) {
+              spokeEarly = true;
+              speak(firstSentence[1]);
             }
           }
         }
-      } catch {
-        try { await reader.cancel(); } catch {}
-        return false;
+      }
+      let typedResult = null;
+      if (typedStream) {
+        typedResult = await maiActions.readEventStream(res, {
+          onText(delta) {
+            acc += delta;
+            renderStreamTick();
+          },
+        });
+        // Same contract as the legacy path: a broken stream falls back.
+        if (typedResult.error) return false;
+      } else {
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        try {
+          while (true) {
+            const { done, value } = await readWithTimeout(reader, MAI_WORKER_IDLE_TIMEOUT_MS);
+            if (done) break;
+            acc += decoder.decode(value, { stream: true });
+            renderStreamTick();
+          }
+        } catch {
+          try { await reader.cancel(); } catch {}
+          return false;
+        }
       }
 
       if (!acc.trim()) return false;
+      // Typed mode never executes legacy [[ACTION:...]] markers; it only
+      // strips them. Proposals must arrive as validated typed events.
+      const proposal = typedStream ? maiActions.acceptStreamedProposal(typedResult, actionSnapshot) : null;
 
       // Stream done. Pull out the NAV marker (if any), strip it from the
       // visible answer, and decide whether to surface a navigation CTA.
@@ -3574,7 +3670,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       // `[[NAV: 2]]`, `[NAV:2]`, or wraps it in emphasis. We strip every
       // plausible form so nothing leaks into the rendered answer.
       let navIdx = null;
-      const action = parseActionMarker(acc);
+      const action = typedStream ? null : parseActionMarker(acc);
       const navPatterns = [
         /\[\[\s*NAV\s*:\s*(\d+)\s*\]\]/i,
         /\[\s*NAV\s*:\s*(\d+)\s*\]/i,
@@ -3628,6 +3724,9 @@ This site uses Google Analytics to understand what content is useful. <a href="/
           navOffer = { url, label };
         }
 
+        // A typed navigation proposal is the single navigation offer.
+        if (proposal && proposal.action === 'navigate') navOffer = null;
+
         if (navOffer) {
           pendingNav = navOffer;
           html += renderNavCta(navOffer.url, navOffer.label);
@@ -3641,6 +3740,16 @@ This site uses Google Analytics to understand what content is useful. <a href="/
           html += renderActionCta(action);
         } else {
           pendingUiAction = null;
+        }
+        if (proposal) {
+          // A typed "yes" answers the proposal, never the generic nav CTA
+          // (its buttons still work), so one reply can't trigger two things.
+          pendingNav = null;
+          pendingProposalId = proposal.proposalId;
+          html += maiActions.renderProposalCta(proposal);
+          track('mai_action_proposed', { type: proposal.action });
+        } else {
+          pendingProposalId = null;
         }
         bubble.innerHTML = html;
       }
@@ -3964,6 +4073,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
         _warmTimer = null;
         loadVocab();
         loadManifest();
+        loadMaiActions();
       }
 
       // Let first paint settle before warming retrieval assets.
@@ -4166,6 +4276,13 @@ This site uses Google Analytics to understand what content is useful. <a href="/
 
       consumePendingOpen();
 
+    } catch (e) {}
+
+    // Report a typed navigation that was approved on the previous page.
+    try {
+      if (sessionStorage.getItem(MAI_ACTION_PENDING_NAV_KEY)) {
+        loadMaiActions().then((actions) => actions && actions.resumePendingNavigation());
+      }
     } catch (e) {}
 
     // ---------- Expand / collapse ----------
@@ -4409,6 +4526,22 @@ This site uses Google Analytics to understand what content is useful. <a href="/
         }
         // Neither — treat as a new question. Drop the offer silently.
         pendingNav = null;
+      }
+
+      // Typed proposal: only an explicit yes runs it, an explicit no
+      // declines it; anything else leaves it unanswered (it expires).
+      if (pendingProposalId) {
+        const t = clean.toLowerCase();
+        const AFFIRM = /^(y|ya|ye|yes+|yea+h?|yep|yup|sure|ok(ay)?|please|do it|go|run it|do that|take me( there)?|sounds good|absolutely|definitely)[.! ]*$/;
+        const DENY = /^(no+|nope|nah|cancel|don'?t|stop|not now|later)[.! ]*$/;
+        if (AFFIRM.test(t) || DENY.test(t)) {
+          const proposalId = pendingProposalId;
+          addBubble('user', escapeHtml(raw));
+          input.value = '';
+          resolveProposal(proposalId, AFFIRM.test(t), AFFIRM.test(t) ? 'typed_confirm' : 'typed_decline');
+          return;
+        }
+        pendingProposalId = null;
       }
 
       if (pendingUiAction) {
@@ -4851,6 +4984,27 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       cta.remove();
       addBubble('mai', 'No problem — I will leave the page as-is.');
       saveTranscript();
+    });
+
+    log.addEventListener('click', (e) => {
+      const run = e.target.closest('[data-mai-proposal-run]');
+      const no = e.target.closest('[data-mai-proposal-no]');
+      if (!run && !no) return;
+      const cta = (run || no).closest('[data-mai-proposal-cta]');
+      const proposalId = cta?.getAttribute('data-proposal-id') || '';
+      if (!proposalId) return;
+      resolveProposal(proposalId, Boolean(run), run ? 'cta_button' : 'cta_decline');
+    });
+
+    // Escape inside a proposal declines it (no side effect).
+    log.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      const cta = e.target instanceof Element ? e.target.closest('[data-mai-proposal-cta]') : null;
+      const proposalId = cta?.getAttribute('data-proposal-id') || '';
+      if (!proposalId) return;
+      e.preventDefault();
+      e.stopPropagation();
+      resolveProposal(proposalId, false, 'escape_decline');
     });
 
     // Delegated handler for the "Or leave a message here" button rendered
@@ -5523,4 +5677,4 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       if (e.key === 'Escape' && !panel.hidden) close();
     });
   })();
-})();</script> </body></html>
+})();</script> <script type="module" src="/assets/MAi.astro_astro_type_script_index_0_lang.UftrkQqI.js"></script> </body></html>
