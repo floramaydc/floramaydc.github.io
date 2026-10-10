@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-10-10T20:55:44.102Z",
+  "builtAt": "2026-10-10T22:27:19.674Z",
   "source": "src/content (work + resume + toybox + writing + play) — generated, do not edit by hand",
   "profile": {
     "name": "Flora May dela Cruz",
@@ -17,7 +17,7 @@
       "prototypes": 2,
       "playbooks": 11,
       "toyboxTotal": 25,
-      "writing": 11,
+      "writing": 12,
       "play": 4,
       "topThemes": [
         "accessibility",
@@ -202,6 +202,11 @@
             "id": "ai-made-me-question-where-roles-begin-and-end",
             "title": "AI made me question where roles begin and end",
             "url": "https://floramaydc.com/writing/ai-made-me-question-where-roles-begin-and-end/"
+          },
+          {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
           },
           {
             "id": "using-md-files-as-design-memory",
@@ -859,7 +864,13 @@
             "url": "https://floramaydc.com/work/dspm/"
           }
         ],
-        "writing": []
+        "writing": [
+          {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
+          }
+        ]
       }
     },
     {
@@ -914,7 +925,13 @@
             "url": "https://floramaydc.com/work/dspm/"
           }
         ],
-        "writing": []
+        "writing": [
+          {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
+          }
+        ]
       }
     },
     {
@@ -970,7 +987,13 @@
             "url": "https://floramaydc.com/work/dspm/"
           }
         ],
-        "writing": []
+        "writing": [
+          {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
+          }
+        ]
       }
     },
     {
@@ -1052,7 +1075,13 @@
             "url": "https://floramaydc.com/work/dspm/"
           }
         ],
-        "writing": []
+        "writing": [
+          {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
+          }
+        ]
       }
     },
     {
@@ -1139,6 +1168,11 @@
             "id": "ai-changed-how-i-think-about-design-artifacts",
             "title": "AI changed how I think about design artifacts",
             "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          },
+          {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
           }
         ]
       }
@@ -1633,7 +1667,13 @@
             "url": "https://floramaydc.com/work/dspm/"
           }
         ],
-        "writing": []
+        "writing": [
+          {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
+          }
+        ]
       }
     },
     {
@@ -1696,6 +1736,11 @@
             "id": "ai-changed-how-i-think-about-design-artifacts",
             "title": "AI changed how I think about design artifacts",
             "url": "https://floramaydc.com/writing/ai-changed-how-i-think-about-design-artifacts/"
+          },
+          {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
           }
         ]
       }
@@ -1873,7 +1918,13 @@
             "url": "https://floramaydc.com/work/pacbot/"
           }
         ],
-        "writing": []
+        "writing": [
+          {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
+          }
+        ]
       }
     },
     {
@@ -2152,6 +2203,11 @@
             "url": "https://floramaydc.com/writing/notes-from-the-reversible-queue/"
           },
           {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
+          },
+          {
             "id": "three-labels-six-surfaces",
             "title": "Three labels, six surfaces",
             "url": "https://floramaydc.com/writing/three-labels-six-surfaces/"
@@ -2227,6 +2283,11 @@
             "id": "notes-from-the-reversible-queue",
             "title": "Notes from the reversible queue",
             "url": "https://floramaydc.com/writing/notes-from-the-reversible-queue/"
+          },
+          {
+            "id": "the-cost-of-accumulated-exceptions",
+            "title": "The cost of accumulated exceptions",
+            "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/"
           },
           {
             "id": "three-labels-six-surfaces",
@@ -2587,6 +2648,65 @@
   ],
   "writing": [
     {
+      "id": "the-cost-of-accumulated-exceptions",
+      "slug": "the-cost-of-accumulated-exceptions",
+      "url": "https://floramaydc.com/writing/the-cost-of-accumulated-exceptions/",
+      "title": "The cost of accumulated exceptions",
+      "summary": "What accessibility taught me about product drift, inherited complexity, and the compromises that become foundations.",
+      "date": "2026-10-10",
+      "category": "Learnings",
+      "tags": [
+        "accessibility",
+        "component-systems",
+        "product-drift",
+        "design-judgment",
+        "software-design"
+      ],
+      "body": "Most products don't become difficult because someone made a terrible decision. They become difficult because of years of reasonable ones. I didn't fully understand that until I started working on accessibility. Like many designers, I initially thought accessibility was another discipline to learn. It came with guidelines, reviews, annotations, and approvals. It was meticulous work, and I understood why some designers saw it as administrative overhead. When deadlines became tight, it was often one of the first things teams wanted to cut because it didn't immediately change what most users saw on the screen. What I didn't expect was that accessibility would teach me something much broader. It pushed me beyond Figma and into implementation. I spent more time understanding components, keyboard interactions, responsive behavior, and how developers translated designs into software. I wasn't just learning accessibility anymore. I was learning how products were actually built. Once I started seeing products that way, accessibility issues stopped looking like isolated bugs. More often, they pointed to something deeper. A backend couldn't support the preferred interaction. A legacy system behaved differently. A component had been customized because another service had different requirements. Looking at each decision individually, they usually made sense. The difficult part wasn't understanding those constraints. It was deciding when to accept them, especially when the pressure to ship left little room for alternatives. Those decisions required more than knowing what was technically possible. A designer's job isn't to ignore constraints or pretend they don't exist. It's to push back before accepting them. Sometimes compromise is necessary, but not before exploring what else is possible. Every compromise becomes part of the foundation the next team inherits, and enough reasonable compromises eventually become the product. A component gains another variation because one scenario requires it. A temporary workaround becomes permanent because changing it is too risky. An interaction evolves differently because another service can't support the preferred behavior. Each decision solves a problem, but together they can leave a product that behaves very differently from what anyone originally intended. Users never experience those conversations. They don't know which features were cut, which trade-offs were accepted, or which technical limitations shaped the release. They experience a product where similar components behave differently, familiar interactions require different steps, and complexity becomes part of the experience. Accessibility was where I could see that accumulation most clearly. A component that looked familiar could no longer be assumed to behave the same way because it had been customized, wrapped, or rebuilt. Previous accessibility work might no longer apply, which meant revisiting annotations and reviewing behavior that had already been addressed elsewhere. That experience eventually changed what I built. I started with an Accessibility Audit to reduce the repetitive work of accessibility documentation. Later, I built a Component Audit because I wanted to understand where products had drifted before another exception became permanent. Both tools came from wanting to spend less time repeating work and more time understanding what needed attention. Accessibility was my entry point into a broader lesson about building software. Products rarely become difficult because of one bad decision. They decay through years of reasonable ones. I don't think my work is about designing perfect interfaces or eliminating every constraint. It's about knowing when to push back, understanding which compromises are necessary, and helping untangle the complexity before it becomes the new normal.",
+      "links": [
+        {
+          "title": "Accessibility Audit",
+          "url": "https://floramaydc.com/toybox/accessibility-audit-tool/"
+        },
+        {
+          "title": "Component Audit",
+          "url": "https://floramaydc.com/toybox/component-audit-tool/"
+        }
+      ],
+      "narrative": [],
+      "related": {
+        "work": [
+          {
+            "id": "dspm",
+            "title": "Data Security Posture Management (DSPM)",
+            "url": "https://floramaydc.com/work/dspm/"
+          }
+        ],
+        "toybox": [
+          {
+            "id": "accessibility-annotation-playbook",
+            "title": "Accessibility Annotation Playbook",
+            "url": "https://floramaydc.com/toybox/accessibility-annotation-playbook/"
+          },
+          {
+            "id": "accessibility-audit-tool",
+            "title": "Accessibility Audit",
+            "url": "https://floramaydc.com/toybox/accessibility-audit-tool/"
+          },
+          {
+            "id": "accessibility-audit-bookmarklet",
+            "title": "Accessibility Audit bookmarklet",
+            "url": "https://floramaydc.com/toybox/accessibility-audit-bookmarklet/"
+          },
+          {
+            "id": "accessibility-audit-ops-playbook",
+            "title": "Accessibility Audit Ops Playbook",
+            "url": "https://floramaydc.com/toybox/accessibility-audit-ops-playbook/"
+          }
+        ]
+      }
+    },
+    {
       "id": "using-md-files-as-design-memory",
       "slug": "using-md-files-as-design-memory",
       "url": "https://floramaydc.com/writing/using-md-files-as-design-memory/",
@@ -2600,6 +2720,29 @@
         "coded-prototypes",
         "design-practice",
         "toybox"
+      ],
+      "body": "How designers can carry decisions, behaviors, and quality standards into coded prototypes and AI-assisted work. I began paying more attention to Markdown files while building a coded prototype. The prototype changed quickly. I moved between design decisions, implementation, AI conversations, and testing. Each time I returned, some part of the context had disappeared. I explained the same behavior again, corrected decisions that had already been made, and reminded the tool which rules should remain consistent. The interface was visible, but much of the thinking around it was not. Some of that thinking lived in Figma. Some lived in prompts, comments, and conversations. Other decisions were reflected in the code, although the code did not always explain why they had been made. A.md file gave that context somewhere else to live. More than coding documentation Markdown is a plain-text format commonly used for README files and technical documentation. It can contain headings, lists, tables, links, and code without requiring a particular application. Designers can use the same format to preserve design intent. A.md file might describe how a component behaves, what should happen after navigation, which states need to be designed, how focus should move, or what must be checked before a change ships. It can live beside a coded prototype, be pasted into an AI tool, or become part of a project's standing instructions. The file is not memory by itself. A tool still needs access to it and must be told to use it. Its value is that the context no longer depends on the designer remembering to repeat it in every prompt. Carrying design beyond the frame Figma remains useful for showing visual hierarchy, typography, component anatomy, interaction states, and the relationship between parts of an experience. But some foundational design decisions are difficult to represent in a static frame. Does a filter remain when someone opens a result and returns? Does the product remember that a banner was dismissed? Should a selection clear when a dialog closes, or only after the action succeeds? What happens when the viewport narrows or the text becomes longer? These behaviors may eventually be implemented through frontend state, browser storage, or a backend service. They are still design decisions because they determine whether the product respects what someone has already done. Consider product-growth patterns such as banners, prompts, and dialogs. A team may carefully design a message intended to encourage an action. If the system forgets that the person dismissed it or already made a decision, the same design becomes a repeated interruption. Designing the prompt is only part of the work. Designing what the product remembers is part of it too. Turning a decision into reusable context My Sticky View State Playbook separates state according to how long it should survive: md Persist during navigation - Active tab - View mode - Search query - Filters - Current selection Keep only in navigation history - Scroll position - Cursor position inside an editor Always begin fresh - Open dialogs - Popovers - Loading indicators - Animation progress - Hover and drag states This is more precise than asking an AI tool to \"preserve the state.\" It explains which state is meaningful, which is temporary, and which would feel strange if restored. The file can also preserve reasoning: md Clear selection after success Selection represents unfinished work. Closing or cancelling an action does not complete the work, so the selection remains. A successful action completes the task, so it clears. The interface shows the result of the decision. The Markdown file preserves the rule behind it. Making quality part of the instructions The same approach works for reflow and accessibility. \"Make it responsive\" does not explain what should happen to navigation, page actions, card grids, tables, or long content. A reflow playbook can define those expectations before the tool begins changing the layout. \"Make it accessible\" is similarly incomplete. My Accessibility Annotation Playbook organizes the work into five layers: md 1. Semantics 2. Name and role 3. Focus and keyboard 4. State and updates 5. Reading and reach Those layers ask questions a visual mockup may not answer. What is the correct element? What does assistive technology announce? Where does focus move after a dialog closes? How is an error communicated without relying only on color? Once these questions are written into a reusable file, accessibility becomes part of the task rather than a final request added after the prototype appears complete. A file can guide the work before implementation, help an AI tool identify missing decisions, give engineering a clearer contract, and provide checks for reviewing the result. How to use a Toybox.md file You do not need to read every playbook or create a documentation system first. Start with the problem in front of you. Choose the Toybox entry that is closest to it, then download the.md file or copy its Markdown. Bring it into the tool or project where you are working: md Read this playbook and adapt it to my prototype. Do not apply it blindly. Identify which rules fit, which do not, and which decisions still need my input. After making the changes, review the result against the playbook and list anything unresolved. You can paste the file into an AI conversation, keep it inside the prototype repository, include it in project instructions, use it as a design-review artifact, or hand it to engineering as part of the specification. For example: md Read sticky-view-state.md before changing navigation. Preserve filters and selection when someone opens an item and returns to the list. Do not restore dialogs or temporary loading states. Or: md Read accessibility-annotation.md. Create an annotation block for this drawer using the five-layer framework. Mark uncertain decisions as open questions instead of inventing answers. The playbook supplies a starting structure. The designer still decides how it applies to the product. Why the playbooks are downloadable The Toybox playbooks are not only articles to read. The downloadable.md files allow the guidance to leave the website and enter the work. That is the purpose behind the format. A visual framework can help people understand an idea. A Markdown file can help carry its rules into a coded prototype, an AI-assisted workflow, an implementation conversation, and the review that follows. The playbooks do not replace design judgment, Figma, engineering partnership, or accessibility expertise. They give recurring design knowledge a portable form. I began creating them from things I had to solve, explain, and check more than once. Making them available as.md files means another designer does not have to begin from an empty prompt or rely on an AI tool to invent the rules. They can start with an existing point of view, adapt it to their context, and keep the parts that should remain true close to the work.",
+      "links": [
+        {
+          "title": "Figma",
+          "url": "https://www.figma.com/"
+        },
+        {
+          "title": "Sticky View State Playbook",
+          "url": "https://floramaydc.com/toybox/sticky-view-state-playbook/"
+        },
+        {
+          "title": "reflow playbook",
+          "url": "https://floramaydc.com/toybox/enterprise-reflow-playbook/"
+        },
+        {
+          "title": "Accessibility Annotation Playbook",
+          "url": "https://floramaydc.com/toybox/accessibility-annotation-playbook/"
+        },
+        {
+          "title": "Toybox",
+          "url": "https://floramaydc.com/toybox/"
+        }
       ],
       "narrative": [
         {
@@ -2679,6 +2822,17 @@
         "portfolio",
         "ai-and-writing"
       ],
+      "body": "When I migrated my portfolio away from Squarespace, I assumed most of the work would be technical. There were pages to rebuild, content to move, and years of accumulated decisions hiding in places that only become obvious once you start taking things apart. What I wasn't expecting was how much time I would spend revisiting old projects, particularly the ones I thought I had already finished thinking about. AWS CodeCatalyst was one of them. The project itself never bothered me. The case study did. For years, I would occasionally reopen it, move sections around, rewrite a few paragraphs, and convince myself I had finally fixed whatever felt off about it. A few months later I would do it again. The frustrating part was that I couldn't clearly articulate what was wrong. The project was real, the work was real, and the decisions were real. Yet every version felt like it was describing the project rather than capturing it. Around the same time, I found myself revisiting PacBot. Not because I was planning to rewrite it, but because I was deciding what deserved to make the move to the new site. Whenever I experimented with a new version of CodeCatalyst, I found myself reopening PacBot. I wasn't returning to it because I thought it was perfect. If anything, there are plenty of things I would change today. Yet it had somehow become a benchmark, a reference point I was using without realizing it. The timing was interesting because AI had already become part of my writing process. For the first time, producing words was no longer the difficult part. I could generate alternatives, explore different structures, and rewrite sections in minutes. I thought this would make case studies easier. Instead, it made them stranger. Every version was reasonable. Every version told a coherent story. Every version explained the project. Yet none of them solved the thing that had been bothering me. Eventually I started wondering if the problem wasn't the writing at all. Design has a peculiar relationship with case studies. Developers are not usually expected to maintain detailed narratives explaining every system they build. Product managers are not routinely asked to publish polished retrospectives proving they know how to prioritize. Yet designers are expected to assemble artifacts that somehow demonstrate their value, process, thinking, and impact within a handful of pages. What makes this strange is that design is not invisible work. Users interact with the output of design every day, whether that's the interface itself, the information architecture behind it, the moments of friction, or the moments where something feels surprisingly effortless. Yet designers still find themselves explaining and defending their contribution in ways that other disciplines rarely do. I understand how we got here. Design has spent years trying to prove that it is more than aesthetics, taste, or making things look good. Case studies became one of the ways the profession learned to communicate its value. But somewhere along the way, I think we started confusing the artifact with the thing it was supposed to reveal. For years I assumed a good case study was one that documented the work well. Then I thought it was about storytelling, process, outcomes, or clarity. Every explanation seemed reasonable until I found a case study that violated it. I've read beautifully crafted case studies that left me with no sense of the person behind them. I've also read rougher ones that revealed more about how somebody thinks than any polished narrative ever could. The more I revisited my own work, the less interested I became in the screenshots, frameworks, and process diagrams. What kept drawing my attention was judgment: the decisions somebody chose to spend time explaining, the constraints they found important, the tradeoffs they wrestled with, and the assumptions they challenged along the way. The things it noticed still felt familiar to me years later. The priorities felt familiar. The questions it lingered on felt familiar. It felt less like a record of a project and more like a record of how I was thinking at the time. That realization also changed how I think about AI. The conversation often becomes a debate about authorship, but lately that question has started to feel less important to me. Every writer borrows from somewhere. What feels more important is whether the final piece still reflects choices that only that person would make. What did they notice? What did they care about? What did they decide was worth remembering? Maybe that's why I kept returning to CodeCatalyst. I kept asking whether the story was written well enough when what I really wanted to know was whether it reflected what I found meaningful about the project in the first place. I still think case studies are a strange requirement. There is an undeniable asymmetry to them that has never sat comfortably with me. If the industry stopped requiring them tomorrow, I suspect many designers would feel relieved. The funny thing is that I wouldn't stop maintaining a portfolio. In many ways, that's exactly what happened. I hadn't written a substantial case study in years. Instead, I spent my time building things. Small experiments, side projects, notes, tools, and whatever else happened to capture my attention. The portfolio remained, but it slowly became something different. Less a collection of case studies and more a place to put things that I found interesting. Not because I needed another portfolio section, but because I've always enjoyed having a small corner of the internet that belongs to me. Long before design portfolios, there were personal websites, school projects, random things I built for no practical reason other than wanting to see if I could. The habit existed before the profession found a name for it. Case studies, on the other hand, have always felt more complicated. I enjoy writing them. I think I'm reasonably good at writing them. Yet every time I sit down to create one, there is a part of me that resists the exercise. Maybe because they are often treated as proxies for skills they were never designed to measure. Maybe because they compress years of work into a narrative that inevitably leaves something out. Or maybe because once something becomes a requirement, it stops feeling entirely like your own. After spending far too much time rewriting old work, I think I've finally arrived at my own definition of a good case study. It isn't the most complete version of a project. It isn't the most polished. It isn't even the most persuasive. A good case study leaves me with a sense of how somebody sees the world. It reveals what they notice, what they value, and how they navigate uncertainty when the answer isn't obvious. The work explains what happened. The case study explains why it mattered.",
+      "links": [
+        {
+          "title": "AWS CodeCatalyst",
+          "url": "https://floramaydc.com/work/aws-code-catalyst/"
+        },
+        {
+          "title": "PacBot",
+          "url": "https://floramaydc.com/work/pacbot/"
+        }
+      ],
       "narrative": [],
       "related": {
         "work": [],
@@ -2700,6 +2854,8 @@
         "immigration",
         "reflection"
       ],
+      "body": "I've spent much of my life optimizing. Better schools. Better opportunities. Better jobs. Better outcomes. Optimization is seductive because it creates the illusion that life can be controlled through enough planning, effort, and good decisions. If you work hard enough, think carefully enough, and prepare thoroughly enough, the future should cooperate. For a long time, I believed that. There is nothing inherently wrong with optimization. Much of modern life rewards it. Education rewards it. Careers reward it. Technology increasingly promises it. The assumption is that with enough information and enough effort, uncertainty can eventually be reduced to something manageable. My experience has been different. When I first moved from the Philippines to the United States, staying was not really the plan. What I remember most from that period was looking for work. The applications, interviews, and rejections. The constant effort of explaining who I was to people who had never met me. In the country I left, there were people who believed leaving meant abandoning something. In the country I arrived in, belonging was not automatic either. I had to prove I could contribute, prove I was capable, and prove I deserved the opportunities I was pursuing. For a while, it felt as though I existed between two worlds. Too far from one place, not yet fully part of another. The strange thing is that I don't remember making a decision to stay. Looking back, the roots arrived before I realized I had planted them. There were job applications, friendships, opportunities, disappointments, and years of effort. The life was built gradually, long before I recognized it as one. At the time, I thought grit was carrying me through. In many ways, it was. The job search demanded it. Starting over demanded it. Building a career in a place where I had no history demanded it. What I understand now is that grit was not the foundation. It was the expression of something deeper. For years, I thought I was looking for belonging. Looking back, I think I was looking for confirmation. Confirmation that I had made the right decision. Confirmation that I deserved to be here. Confirmation that I was accepted. The problem with seeking confirmation from external systems is that they can only provide it temporarily. A company can hire you. A country can naturalize you. A community can welcome you. None of those things permanently settle the question. The answer has to exist before the confirmation arrives. I don't think I understood that at the time. In many ways, I spent years looking for evidence that I had made the right decisions. A new opportunity. A promotion. A milestone. A sense that I had finally arrived somewhere. The problem is that arrival turns out to be temporary. There is always another change, another transition, another uncertainty waiting around the corner. Lately, I've been thinking about this because uncertainty seems to have become a permanent feature of modern life. Organizations reorganize. Entire professions are questioning what AI means for their future. Every few months there seems to be a new prediction about which jobs will disappear, which skills will matter, and what people should do to stay relevant. The details are different, but the feeling is familiar. Beneath all of these conversations is the same hope that has accompanied every major transition in my life: the belief that if we can optimize enough, prepare enough, or make enough good decisions, we can eventually eliminate uncertainty. I no longer think that's possible. Sometimes I wonder whether I've spent too much of my life optimizing. Not because the effort was wasted, but because optimization assumes life is willing to cooperate. Much of my life hasn't. Some of the most meaningful things that happened to me arrived uninvited, unplanned, or entirely outside my control. Some of the most important experiences in my life would have looked irrational on paper. Moving countries. Changing careers. Starting over professionally. None of them were efficient decisions. At the time, I wasn't trying to build resilience. I was trying to solve the problem immediately in front of me. The resilience only became visible in hindsight. The older I get, the less interested I am in confidence. Confidence tends to disappear the moment circumstances change. A promotion can create it. A layoff can take it away. A good year can reinforce it. A difficult one can challenge it. What has proven more durable is the belief that even when things don't go according to plan, I will find a way forward. Perhaps that is why I find the current conversation about AI so interesting. Beneath the discussions about automation, productivity, and replacement is a more personal question. If the thing that currently defines our value changes, what remains? It is the same question that appears during a reorganization, a career transition, a move to a new country, or any other moment when familiar assumptions begin to disappear. My answer is different than it was ten years ago. I used to think belonging came from finding the right place. The right company. The right country. The right community. Somewhere along the way, I realized I belonged to myself. Ironically, that realization made uncertainty less frightening. Not because I became convinced everything would work out, but because I stopped believing that every unexpected change had the power to define me. The world celebrates optimization because its results are visible. Resilience is harder to see. Most of the time it looks inefficient. It looks like detours, rejected plans, and years spent building something whose value only becomes clear much later. Yet whenever life becomes uncertain, resilience is the thing people reach for. Not because it helps us control the future, but because it helps us continue through futures we never expected.",
+      "links": [],
       "narrative": [],
       "related": {
         "work": [],
@@ -2719,6 +2875,17 @@
         "design-practice",
         "specialization",
         "prototyping"
+      ],
+      "body": "One thing I did not expect from AI was how quickly it would make me question where roles begin and end. Not because jobs suddenly disappeared or because designers became engineers overnight, but because I keep seeing work move across boundaries that used to feel more defined. Designers are creating coded prototypes. PMs are building small tools. Developers are creating specs and mockups. Managers are experimenting with vibe coding. What once felt like occasional exceptions now feels increasingly normal, and I understand why. There is something powerful about reducing friction. A PM can test an idea sooner. A designer can explore behavior without waiting for engineering support. An engineer can quickly communicate an interaction instead of waiting for a dedicated design cycle. Work moves, people get unblocked, and ideas become cheaper to explore. I see the value in that. I do not want to be cynical about it because there is real momentum in being able to move from thought to artifact more quickly. At the same time, I do not think we should pretend the tradeoffs are small. Specialization existed for a reason. It created accountability, expertise, quality control, and a clearer sense of who is responsible for what. While reality was always messier than job descriptions suggest, those boundaries helped teams know when to move fast and when to bring in the right judgment. What complicates this further is that increased capability does not automatically produce better outcomes. I have seen developers prototype, PMs prototype, and designers move from Figma into coded prototypes. Some of these experiments are genuinely useful. Others feel cluttered, noisy, difficult to use, or strangely generic. What I found interesting is that the problems often look familiar. If the thinking was unclear in Figma, moving to code rarely fixed it. If hierarchy was confusing before, interactions rarely solved it. If systems thinking was missing earlier, the new medium often only made the problem more visible. This is what made me reconsider what AI is actually changing. Perhaps the interesting shift is not that roles are disappearing, but that strengths and weaknesses become easier to amplify. Creating artifacts has never simply been about producing screens, prototypes, code, documentation, or prompts. Those are outputs. The harder work has always been understanding systems, constraints, accessibility, tradeoffs, interactions, customer problems, and knowing when something should exist at all. I notice this in my own process too. Sometimes I prototype earlier because behavior communicates ideas better than static screens — that is where something like the Demo Days 0 to 14 Time-Machine Playbook earns its keep, because the artifact only helps if it can honestly show progression, not a single polished moment. Sometimes I start from systems and components rather than interfaces. Sometimes I use AI to explore directions faster. Sometimes I avoid it entirely because the work needs slower thinking first. None of this makes me feel like design is disappearing, but it does make me think expertise may look different than it used to. The craft becomes less about who can produce the artifact and more about who knows what the artifact is hiding — which is partly why I keep writing patterns like the Secret Handshakes for Designers Playbook: the tooling is cheap now, but the judgment about what to demo, in what state, to whom is not. Perhaps specialization is not disappearing. Perhaps it is moving. And perhaps the harder question is not where roles begin and end, but how we preserve expertise while making work more fluid.",
+      "links": [
+        {
+          "title": "Demo Days 0 to 14 Time-Machine Playbook",
+          "url": "https://floramaydc.com/toybox/demo-days-0-to-14-time-machine-playbook/"
+        },
+        {
+          "title": "Secret Handshakes for Designers Playbook",
+          "url": "https://floramaydc.com/toybox/secret-handshakes-for-designers-playbook/"
+        }
       ],
       "narrative": [],
       "related": {
@@ -2767,6 +2934,17 @@
         "navigation",
         "complexity"
       ],
+      "body": "One thing I continue to think about while working on complex products is how differently organizations and customers experience software. Organizations naturally create structure. Teams form around ownership, roadmaps form around capabilities, and products eventually become collections of solutions. This makes sense. Ownership creates accountability, helps teams scale, and creates clearer boundaries for investment and decision making. Customers rarely experience products this way. Customers experience problems, workflows, frustrations, and goals. They are usually trying to accomplish something, and in many cases, they do not necessarily care which product area, solution, feature, or team boundary they crossed along the way. The larger and more complex the system becomes, the more visible this tension becomes. I started noticing this while working on experiences that crossed multiple workflows, reports, controls, policies, and data sources. Sometimes what looked like a single customer goal on paper involved multiple experiences underneath it, each with their own assumptions, terminology, dependencies, and navigation patterns. At some point, I realized that what customers were trying to accomplish rarely resembled how the experiences themselves were organized. The customer journey did not resemble the navigation. The customer journey did not resemble solution boundaries. Instead, it felt more like nested systems where solving one problem naturally revealed another layer underneath. A workflow opened another workflow. One decision introduced new dependencies. Completing one task often required understanding systems that were never originally intended to feel connected. That observation changed how I think about user journeys. For a long time, I viewed journeys primarily as alignment artifacts. They were useful for research synthesis, storytelling, or helping teams align on flows. Increasingly, I think they are much more foundational than that. A good journey forces uncomfortable questions. Where does the customer actually begin? Where does complexity become visible? Where are customers required to understand organizational structure simply to accomplish a goal? Where do ownership boundaries accidentally become product boundaries? The places where these seams leak the most are usually the navigation shell and the cross-surface action — which is why I keep coming back to two specific artifacts. The Three-Tier Shell Navigation Prompt is about giving the chrome a structure that does not force customers to map team ownership onto the left rail. The Idempotent Bulk Action Pattern is about the moment a single customer goal — upgrade this, enroll that, apply baseline — gets surfaced from six different places by three different teams, and ships as five different buttons. Both are small artifacts. Both exist because the organizational seam is the part customers feel first. I do not think organizing around solutions is inherently wrong. Complex products require structure. But I increasingly wonder whether the more important challenge is ensuring customers do not need to understand the structure we created internally. That turns out to be much harder than simply creating another solution.",
+      "links": [
+        {
+          "title": "Three-Tier Shell Navigation Prompt",
+          "url": "https://floramaydc.com/toybox/three-tier-shell-navigation-prompt/"
+        },
+        {
+          "title": "Idempotent Bulk Action Pattern",
+          "url": "https://floramaydc.com/toybox/idempotent-bulk-action-pattern/"
+        }
+      ],
       "narrative": [],
       "related": {
         "work": [],
@@ -2808,6 +2986,17 @@
         "trust",
         "agents"
       ],
+      "body": "One thing I have spent a lot of time thinking about while working on security experiences is how products evolve from surfacing information toward helping customers take action. At first glance, this seems straightforward. If customers understand the problem, the natural next step is helping them fix it. In practice, it feels much more complicated. Many products begin with visibility because visibility itself creates value. Customers discover assets they did not know existed, understand relationships they previously could not see, or identify risks that were previously hidden. Simply surfacing this information can already create meaningful outcomes because customers cannot protect what they do not understand. What I find interesting is that visibility alone rarely feels sufficient for long. Eventually customers want to know what matters, what they should prioritize, and what they should do next. This naturally pushes experiences toward recommendations, remediation workflows, and increasingly, automation. What makes this progression difficult is that action depends heavily on trust. I remember repeatedly hearing questions around why experiences could not simply become one-click. If the product already understands the problem, why not automatically recommend the solution or even perform the action itself? The difficult part is that customers do not automatically trust recommendations simply because recommendations exist. Customers trust recommendations when they trust the underlying signals. When surfaced data feels incomplete, relationships feel inaccurate, inventory feels noisy, or findings feel disconnected from reality, customers become skeptical long before remediation enters the conversation. In many cases, the bigger nightmare is when recommendations stop feeling like recommendations and start feeling like vehicles for driving usage or pushing deeper adoption. Customers are not naive. They can immediately tell when a recommendation exists primarily to promote a feature, encourage expansion, or steer behavior rather than genuinely help solve a problem. That kind of recommendation does not build trust. It destroys it. In some cases, introducing recommendations too early can make this skepticism worse because the product begins asking customers to trust actions before trust itself has been established. This is partly why I keep coming back to the Subtraction Playbook — sometimes the most credible thing a product can do is refuse to recommend, refuse to score, refuse to nudge, until the underlying picture is honest enough to earn the right. One-click action also becomes difficult when the change is not truly reversible. Rollback cannot simply mean deleting a policy and assuming the environment is restored. A real rollback means returning the customer to a state where the action was never taken, including the downstream effects that action may have triggered. That kind of rollback mechanism is expensive, technically complex, and not always available in security products. It is also the reason I keep writing the same eight-second window into every queue I work on — the argument lives in the Reversible Queue Playbook, and it is the rule I defend hardest in review. Without genuine reversibility, every \"act\" button is a small contract the product cannot back. This is where the desire for one-click remediation often meets reality. Leadership may want the simplicity of a single action, but customers need confidence that the action is accurate, safe, explainable, and reversible. Without those conditions, one-click can feel less like convenience and more like risk. Security products face an additional challenge because customers are already cautious. These products frequently ask customers to change configurations, introduce restrictions, accept risk calculations, or make decisions using imperfect information. Skepticism in these environments is understandable. This is partly why I increasingly think visibility, recommendations, remediation, and automation are less like competing approaches and more like stages of maturity. Visibility helps customers understand. Recommendations help customers decide. Remediation helps customers move. Automation only becomes useful when customers trust enough to let go. What makes this more interesting now is the introduction of agents and increasingly action-oriented AI experiences. If systems can identify problems, evaluate options, recommend solutions, and execute actions with human oversight, the conversation shifts again. The challenge may no longer simply be surfacing information or even recommending actions. The harder challenge may be building enough trust that customers are willing to act at all.",
+      "links": [
+        {
+          "title": "Subtraction Playbook",
+          "url": "https://floramaydc.com/toybox/subtraction-playbook/"
+        },
+        {
+          "title": "Reversible Queue Playbook",
+          "url": "https://floramaydc.com/toybox/reversible-queue-playbook/"
+        }
+      ],
       "narrative": [],
       "related": {
         "work": [],
@@ -2833,6 +3022,37 @@
         "design-systems",
         "design-artifacts",
         "ux"
+      ],
+      "body": "As AI becomes more capable, I keep seeing the same questions surface in design circles. Should designers learn to code? Will design tools become obsolete? Will AI eventually create interfaces on its own? Those are useful questions, but I found myself more interested in a different one: what exactly are we creating when we create design artifacts? This question came from experimentation more than theory. I noticed that when I used AI with messy design files, the outcomes were messy. When I used AI with structured artifacts, clear components, thoughtful hierarchy, naming conventions, constraints, and systems thinking, the outcomes became significantly better. At first, this felt obvious. Of course a better input creates a better output. But the more I observed it, the more uncomfortable the implication became. For years, our design artifacts have primarily been optimized for humans. Humans are forgiving. Developers infer intent from imperfect files. PMs understand the product story behind the work. Designers remember what a frame was supposed to mean, even when the file itself is no longer clean. A stakeholder can look at a polished screen and understand the direction, even if the underlying file is chaotic. The visual artifact can still do its job because the human audience fills in the gaps. AI does not work this way. A design can look visually correct while containing very little usable structure. Detached components, broken Auto Layout, visual hacks, inconsistent spacing, and layers named Rectangle 42 may look like minor imperfections to a human reviewer. But to AI, these are not minor. They become source material. That changed how I think about design tools and design artifacts. The question is not simply whether AI can generate a screen. The more important question is whether our artifacts describe the system clearly enough for AI to participate meaningfully. This does not mean design disappears. It does not even mean Figma disappears. But it may mean the role of the design artifact is changing. It is no longer only a visual reference or a collaboration canvas. It is becoming a bridge between human intent, system constraints, design components, accessibility requirements, and implementation. This changed how I think about artifacts beyond screens. I realized that what I increasingly needed was not another static deliverable. I needed artifacts that could communicate intent, constraints, relationships, and behavior more explicitly. That realization is partly why I started building Toybox. Not because patterns, playbooks, prompts, and reusable artifacts are new. But because increasingly, these artifacts are consumed by both humans and machines. A good pattern is no longer simply documentation. It becomes input. A reusable playbook becomes something an engineer can implement, a PM can reason about, another designer can extend, and increasingly, something AI can interpret with far more reliability. That is the intent behind pieces like the Accessibility Annotation Playbook and the Idempotent Bulk Action Pattern. Ironically, this has made me design differently. Sometimes I start from the design system instead of drawing from scratch. Sometimes I sketch ideas before touching a design tool. Sometimes I create coded prototypes earlier because the behavior matters more than the static frame (for example, this Demo Days reference prototype). Sometimes AI generates the first pass, and my role becomes less about drawing every box and more about shaping the structure, constraints, and judgment behind the experience. The artifact itself feels less important than the intelligence behind it. Increasingly, our artifacts are not only documentation. They are becoming infrastructure. The question no longer feels like, \"Can AI create screens?\" The more interesting question may be, \"Can our artifacts describe systems clearly enough for humans and machines to work together?\"",
+      "links": [
+        {
+          "title": "accessibility requirements",
+          "url": "https://floramaydc.com/toybox/accessibility-compliance-baseline-playbook/"
+        },
+        {
+          "title": "Toybox",
+          "url": "https://floramaydc.com/toybox/"
+        },
+        {
+          "title": "patterns",
+          "url": "https://floramaydc.com/toybox/#patterns"
+        },
+        {
+          "title": "playbooks",
+          "url": "https://floramaydc.com/toybox/#playbooks"
+        },
+        {
+          "title": "Accessibility Annotation Playbook",
+          "url": "https://floramaydc.com/toybox/accessibility-annotation-playbook/"
+        },
+        {
+          "title": "Idempotent Bulk Action Pattern",
+          "url": "https://floramaydc.com/toybox/idempotent-bulk-action-pattern/"
+        },
+        {
+          "title": "Demo Days reference prototype",
+          "url": "https://floramaydc.com/toybox/prototypes/demo-days-0-reference/"
+        }
       ],
       "narrative": [],
       "related": {
@@ -2885,6 +3105,13 @@
         "patterns",
         "bulk-actions"
       ],
+      "body": "A pattern I keep ending up with, on enterprise after enterprise: an action that should run exactly once per item — upgrade, migrate, enroll, archive, apply baseline — surfaced from six different places. A toolbar. A card footer. A row inline action. A recommendation card. A side drawer. A detail page. From one entry point it's trivial. From six, it's where teams ship double-runs, ghost states, and bug reports that all open with \"I think I already did this.\" I used to design each surface in isolation, which is how the bug got in. Every team I joined had a different label per surface — Upgrade, Upgrade now, Upgrade selected, Re-upgrade, Upgrade again. Each one defensible on its own. Together, they made the product feel like five products glued at the seams. The rule I now apply is small enough to fit on a sticky note. Every trigger, on every surface, uses exactly one of three labels: - when nothing in the target set is done. - remaining when some are done, some aren't — and it operates on the not-done subset only. - Already <action verb past tense, disabled, when everything is done. That's the entire UX of the pattern. Upgrade / Upgrade remaining / Already upgraded. Migrate / Migrate remaining / Already migrated. The full state model, the per-surface enforcement table, and the multi-step dialog rules are in the Idempotent Bulk Action Pattern. The biggest unlock isn't the labels themselves. It's the cross-surface enforcement table — a small grid where every entry point names its disabled rule and its relabel rule. The act of filling in the table is how you catch the one surface that quietly accepts a double-run. Interestingly, that surface is almost always the recommendation card, because recommendations are the most likely to be implemented last and reviewed least. Three labels, six surfaces, one map of completed state. The whole thing fits on a page and pays itself back the first time someone clicks twice.",
+      "links": [
+        {
+          "title": "Idempotent Bulk Action Pattern",
+          "url": "https://floramaydc.com/toybox/idempotent-bulk-action-pattern/"
+        }
+      ],
       "narrative": [],
       "related": {
         "work": [],
@@ -2925,6 +3152,13 @@
         "decision-design",
         "senior-ic"
       ],
+      "body": "Most designer write-ups I read — including most of my own, for years — document what the team shipped. Screens, flows, before-and-afters. That's the easy half of the work. The harder half is documenting what the team refused to ship, and writing the refusal in a form that survives the next planning cycle. That part almost never gets written. So six months later a new PM joins, sees the gap where the feature isn't, and — reasonably, kindly, with good intentions — adds it back. The whole argument has to be re-run from memory by whichever designer happened to be in the original room. I've started writing these up. I call them Subtraction Playbooks — they're a flat five-paragraph structure: what the previous version did, what the new version refuses to do, the canaries that tell you the refusal is slipping, the trade-off accepted, and a paste-ready paragraph the next designer can read out loud in the meeting. That last part matters more than I expected. A principle is negotiable. A noun is auditable. \"Groups do not have aggregate scores\" survives a reorg. \"We prefer clarity over rollups\" does not. The full structure and a template are in the Subtraction Playbook. The shift in my own practice has been moving from what should we build to what should this product, specifically, refuse to be. Every product has a shadow — the set of features it could plausibly have but doesn't. Most of the leverage in a senior design role lives in shaping that shadow. The ICs who can name and defend it tend to be the ones who shape the product, not the ones who decorate it. A small move with disproportionate payoff: the next time you remove a feature, write the removal up as the headline. Not as a footnote in a release post.",
+      "links": [
+        {
+          "title": "Subtraction Playbook",
+          "url": "https://floramaydc.com/toybox/subtraction-playbook/"
+        }
+      ],
       "narrative": [],
       "related": {
         "work": [],
@@ -2949,6 +3183,13 @@
         "queues",
         "state-models",
         "interaction-design"
+      ],
+      "body": "Every enterprise product I've worked on eventually grows a queue — alerts to triage, recommendations to act on, leads to qualify, tickets to resolve. And every one of them, left alone, ends up with the same bugs. The user can't tell what they've already touched. The wrong action is destructive. \"Done\" means seven different things depending on who you ask. Items that leave the active list might as well have been deleted, because nobody knows how to find them again. I used to draw a fresh state model each time, like it was a new problem. It isn't. The same four states — Active, Snoozed, Completed, Dismissed — keep being the right shape, and the same one rule keeps being the one I have to defend in review: every state-change is reversible for at least eight seconds. That rule is the one engineers and PMs quietly try to cut for scope. We can ship without Undo and add it later. In my experience, \"later\" is never. And without Undo, the queue becomes a place users approach carefully — hovering, second-guessing, asking a teammate. With Undo, they move. The speed difference is not subtle. So I wrote it down: The Reversible Queue Playbook. The state machine, the four interaction rules, the card anatomy, and the Undo argument in a form I can hand to the next team without re-deriving it from scratch. The version I'm most proud of isn't a clever interaction. It's the rule that says the detail panel does not steal the queue. Click View details, the side panel opens, the queue stays visible. Resolve from the panel, the panel closes, focus moves to the next active item — not the one you just finished. Small change, and the entire feel of the surface shifts from a list you drill into to a stack you work through. That's the move I'd want to teach if I could only teach one.",
+      "links": [
+        {
+          "title": "The Reversible Queue Playbook",
+          "url": "https://floramaydc.com/toybox/reversible-queue-playbook/"
+        }
       ],
       "narrative": [],
       "related": {
@@ -2988,6 +3229,8 @@
         "meta",
         "toybox"
       ],
+      "body": "This is the first post since migrating. The Toybox is new, some parts are still taking shape, and not everything from the old site made the cut. The bet: tacit product knowledge — the small artifacts you reach for when you're trying to ship something — is more valuable when it's shared, versioned, and built on by other people. So I'm putting mine in the open. More soon.",
+      "links": [],
       "narrative": [],
       "related": {
         "work": [],
