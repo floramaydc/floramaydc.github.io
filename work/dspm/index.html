@@ -2826,6 +2826,64 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       return false;
     }
 
+    // ---------- Typed UI actions (plans/bidirectional-mai.md) ----------
+    const MAI_ACTION_PENDING_NAV_KEY = maiStorageKey('action:pending-navigation');
+    const MAI_ACTIONS_LOAD_TIMEOUT_MS = 1500;
+    let pendingProposalId = null;
+    let _maiActions = null;
+    let _maiActionsPromise = null;
+
+    function loadMaiActions() {
+      if (_maiActions) return Promise.resolve(_maiActions);
+      if (!_maiActionsPromise) {
+        const ready = window.__maiLoadActions || document.readyState !== 'loading'
+          ? Promise.resolve()
+          : new Promise((resolve) => document.addEventListener('DOMContentLoaded', resolve, { once: true }));
+        _maiActionsPromise = ready
+          .then(() => (window.__maiLoadActions ? window.__maiLoadActions() : null))
+          .then((mod) => {
+            _maiActions = mod ? mod.createMaiActions(maiActionHost()) : null;
+            return _maiActions;
+          })
+          .catch(() => {
+            _maiActionsPromise = null;
+            return null;
+          });
+      }
+      return _maiActionsPromise;
+    }
+
+    function maiActionHost() {
+      return {
+        base,
+        workerUrl: MAI_WORKER_URL,
+        storageKey: maiStorageKey,
+        log,
+        input,
+        trimText,
+        escapeHtml,
+        safeJsonParse,
+        addBubble,
+        saveTranscript,
+        track,
+        setActionResult,
+        labelForActionTarget,
+        pathToName,
+        stripControlMarkers,
+        manifestEntries: () => manifestEntries(_manifestReady),
+        getLiveContextPacket,
+        getRecentConversation,
+        readWithTimeout: (reader) => readWithTimeout(reader, MAI_WORKER_IDLE_TIMEOUT_MS),
+        closePanel: () => close(),
+        speakIfEnabled: (text) => { if (speakReplies) speak(text); },
+      };
+    }
+
+    function resolveProposal(proposalId, approved, source) {
+      if (pendingProposalId === proposalId) pendingProposalId = null;
+      loadMaiActions().then((actions) => actions && actions.resolveProposal(proposalId, approved, source));
+    }
+
     // ---------- Message-to-Flora flow ----------
     // Multi-turn conversation that collects name -> email -> message and
     // POSTs to /api/contact (Vercel function → Resend), the same endpoint
@@ -3288,6 +3346,11 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       }));
       const pageContext = getLiveContextPacket();
       const conversation = getRecentConversation(10);
+      const maiActions = await settleWithin(loadMaiActions(), MAI_ACTIONS_LOAD_TIMEOUT_MS, null);
+      let actionSnapshot = null;
+      if (maiActions) {
+        try { actionSnapshot = maiActions.snapshot(top); } catch { actionSnapshot = null; }
+      }
       let res;
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), MAI_WORKER_START_TIMEOUT_MS);
@@ -3302,6 +3365,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
             pageContext,
             conversation,
             jobUrl,
+            ...(actionSnapshot ? { actionProtocol: maiActions.protocolVersion, capabilities: actionSnapshot } : {}),
           }),
         });
       } catch {
@@ -3347,8 +3411,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
 
       if (bubble) bubble.innerHTML = '<span class="mai-stream"></span>';
       const target = bubble?.querySelector('.mai-stream');
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
+      const typedStream = Boolean(actionSnapshot) && /application\/x-ndjson/i.test(res.headers.get('content-type') || '');
       let acc = '';
       let spokeEarly = false;
       // The model ends its reply with `[[NAV:n]]` (see personality.md).
@@ -3364,36 +3427,48 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       function stripTrailingMarker(s) {
         return s.replace(NAV_TRAILING_RE, '').replace(ACTION_TRAILING_RE, '');
       }
-      try {
-        while (true) {
-          const { done, value } = await readWithTimeout(reader, MAI_WORKER_IDLE_TIMEOUT_MS);
-          if (done) break;
-          acc += decoder.decode(value, { stream: true });
-          if (target) {
-            // Render incrementally through the safe allowlist renderer so
-            // emphasis/links/lists from the model show up properly while
-            // partial markup can't break out. Hide any in-flight nav marker
-            // (full or partial) so it never flashes visible.
-            const display = stripTrailingMarker(acc);
-            target.innerHTML = safeRenderModelHtml(display);
-            log.scrollTop = log.scrollHeight;
-
-            if (shouldSpeak && !spokeEarly) {
-              const plain = display.replace(/\s+/g, ' ').trim();
-              const firstSentence = plain.match(/^(.{40,220}?[.!?])(?:\s|$)/);
-              if (firstSentence?.[1]) {
-                spokeEarly = true;
-                speak(firstSentence[1]);
-              }
+      function renderStreamTick() {
+        if (target) {
+          const display = stripTrailingMarker(acc);
+          target.innerHTML = safeRenderModelHtml(display);
+          log.scrollTop = log.scrollHeight;
+          if (shouldSpeak && !spokeEarly) {
+            const plain = display.replace(/\s+/g, ' ').trim();
+            const firstSentence = plain.match(/^(.{40,220}?[.!?])(?:\s|$)/);
+            if (firstSentence?.[1]) {
+              spokeEarly = true;
+              speak(firstSentence[1]);
             }
           }
         }
-      } catch {
-        try { await reader.cancel(); } catch {}
-        return false;
+      }
+      let typedResult = null;
+      if (typedStream) {
+        typedResult = await maiActions.readEventStream(res, {
+          onText(delta) {
+            acc += delta;
+            renderStreamTick();
+          },
+        });
+        if (typedResult.error) return false;
+      } else {
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        try {
+          while (true) {
+            const { done, value } = await readWithTimeout(reader, MAI_WORKER_IDLE_TIMEOUT_MS);
+            if (done) break;
+            acc += decoder.decode(value, { stream: true });
+            renderStreamTick();
+          }
+        } catch {
+          try { await reader.cancel(); } catch {}
+          return false;
+        }
       }
 
       if (!acc.trim()) return false;
+      const proposal = typedStream ? maiActions.acceptStreamedProposal(typedResult, actionSnapshot) : null;
 
       // Stream done. Pull out the NAV marker (if any), strip it from the
       // visible answer, and decide whether to surface a navigation CTA.
@@ -3402,7 +3477,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       // `[[NAV: 2]]`, `[NAV:2]`, or wraps it in emphasis. We strip every
       // plausible form so nothing leaks into the rendered answer.
       let navIdx = null;
-      const action = parseActionMarker(acc);
+      const action = typedStream ? null : parseActionMarker(acc);
       const navPatterns = [
         /\[\[\s*NAV\s*:\s*(\d+)\s*\]\]/i,
         /\[\s*NAV\s*:\s*(\d+)\s*\]/i,
@@ -3434,7 +3509,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       }
 
       if (bubble) {
-        let html = safeRenderModelHtml(acc) + (top.length ? renderSources(top) : '');
+        let html = safeRenderModelHtml(acc) + (!proposal && top.length ? renderSources(top) : '');
 
         // Single navigation CTA path: if navigation is available via either
         // [[NAV:n]] or [[ACTION:navigate|...]], show only the nav CTA.
@@ -3456,6 +3531,8 @@ This site uses Google Analytics to understand what content is useful. <a href="/
           navOffer = { url, label };
         }
 
+        if (proposal) navOffer = null;
+
         if (navOffer) {
           pendingNav = navOffer;
           html += renderNavCta(navOffer.url, navOffer.label);
@@ -3470,12 +3547,20 @@ This site uses Google Analytics to understand what content is useful. <a href="/
         } else {
           pendingUiAction = null;
         }
+        if (proposal) {
+          pendingNav = null;
+          pendingProposalId = proposal.proposalId;
+          html += maiActions.renderProposalCta(proposal);
+          track('mai_action_proposed', { type: proposal.action });
+        } else {
+          pendingProposalId = null;
+        }
         bubble.innerHTML = html;
       }
-      renderChips(getDynamicChips(question, top));
+      renderChips(proposal ? [] : getDynamicChips(question, top));
       if (shouldSpeak && !spokeEarly) speak(acc);
       saveTranscript();
-      return true;
+      return proposal ? 'proposal' : true;
     }
 
     // "Want me to take you there?" CTA appended beneath a streamed answer
@@ -3792,6 +3877,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
         _warmTimer = null;
         loadVocab();
         loadManifest();
+        loadMaiActions();
       }
 
       // Let first paint settle before warming retrieval assets.
@@ -3996,6 +4082,12 @@ This site uses Google Analytics to understand what content is useful. <a href="/
 
     } catch (e) {}
 
+    try {
+      if (sessionStorage.getItem(MAI_ACTION_PENDING_NAV_KEY)) {
+        loadMaiActions().then((actions) => actions && actions.resumePendingNavigation());
+      }
+    } catch (e) {}
+
     // ---------- Expand / collapse ----------
     // URL state: expanding to fullscreen pushes /mai so the experience is
     // linkable + shareable; collapsing pops back to the previous path. The
@@ -4098,7 +4190,10 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       });
     });
 
-    let _bubbleSeq = 0;
+    let _bubbleSeq = Array.from(log.querySelectorAll('[id^="mai-bubble-"]')).reduce((max, bubble) => {
+      const value = Number(String(bubble.id || '').replace('mai-bubble-', ''));
+      return Number.isInteger(value) ? Math.max(max, value) : max;
+    }, 0);
 
     // ---------- Transcript persistence ----------
     // Per the sticky-view-state playbook: in-tab nav preserves the
@@ -4237,6 +4332,20 @@ This site uses Google Analytics to understand what content is useful. <a href="/
         }
         // Neither — treat as a new question. Drop the offer silently.
         pendingNav = null;
+      }
+
+      if (pendingProposalId) {
+        const t = clean.toLowerCase();
+        const AFFIRM = /^(y|ya|ye|yes+|yea+h?|yep|yup|sure|ok(ay)?|please|do it|go|run it|do that|take me( there)?|sounds good|absolutely|definitely)[.! ]*$/;
+        const DENY = /^(no+|nope|nah|cancel|don'?t|stop|not now|later)[.! ]*$/;
+        if (AFFIRM.test(t) || DENY.test(t)) {
+          const proposalId = pendingProposalId;
+          addBubble('user', escapeHtml(raw));
+          input.value = '';
+          resolveProposal(proposalId, AFFIRM.test(t), AFFIRM.test(t) ? 'typed_confirm' : 'typed_decline');
+          return;
+        }
+        pendingProposalId = null;
       }
 
       if (pendingUiAction) {
@@ -4574,7 +4683,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
           const workerSources = useCompanionConversation ? [] : top;
           const ok = await askWorker(raw, workerSources, bubble, shouldSpeakThisTurn);
           if (ok) {
-            renderChips(getDynamicChips(clean, top));
+            renderChips(ok === 'proposal' ? [] : getDynamicChips(clean, top));
             return;
           }
           // Fell through \u2014 fall back to plain retrieval below.
@@ -4679,6 +4788,26 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       cta.remove();
       addBubble('mai', 'No problem — I will leave the page as-is.');
       saveTranscript();
+    });
+
+    log.addEventListener('click', (e) => {
+      const run = e.target.closest('[data-mai-proposal-run]');
+      const no = e.target.closest('[data-mai-proposal-no]');
+      if (!run && !no) return;
+      const cta = (run || no).closest('[data-mai-proposal-cta]');
+      const proposalId = cta?.getAttribute('data-proposal-id') || '';
+      if (!proposalId) return;
+      resolveProposal(proposalId, Boolean(run), run ? 'cta_button' : 'cta_decline');
+    });
+
+    log.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      const cta = e.target instanceof Element ? e.target.closest('[data-mai-proposal-cta]') : null;
+      const proposalId = cta?.getAttribute('data-proposal-id') || '';
+      if (!proposalId) return;
+      e.preventDefault();
+      e.stopPropagation();
+      resolveProposal(proposalId, false, 'escape_decline');
     });
 
     // Delegated handler for the "Or leave a message here" button rendered
@@ -5351,7 +5480,7 @@ This site uses Google Analytics to understand what content is useful. <a href="/
       if (e.key === 'Escape' && !panel.hidden) close();
     });
   })();
-})();</script> </body></html> <script>(function(){const caseStudySlug = "dspm";
+})();</script> <script type="module" src="/assets/MAi.astro_astro_type_script_index_0_lang.DhmDJ99q.js"></script> </body></html> <script>(function(){const caseStudySlug = "dspm";
 const caseStudyTitle = "Data Security Posture Management (DSPM)";
 const caseStudyYear = "2025";
 
